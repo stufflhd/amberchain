@@ -1,0 +1,190 @@
+{
+    "translation": {
+        "common": {
+            "loading": "Loading...",
+            "submit": "Submit",
+            "cancel": "Cancel",
+            "next": "Next",
+            "previous": "Previous",
+            "required": "Required"
+        },
+        "validation": {
+            "required": "This field is required",
+            "invalid": "Invalid format",
+            "invalidEmail": "Please enter a valid email address",
+            "invalidPhone": "Please enter a valid phone number",
+            "emailMismatch": "Email addresses do not match",
+            "weakPassword": "Password must be at least 8 characters with uppercase, lowercase, and number",
+            "invalidZipCode": "Please enter a valid zip code",
+            "mustAgreeToTerms": "You must agree to the Terms of Service",
+            "mustAgreeToPrivacy": "You must agree to the Privacy Policy"
+        },
+        "phoneField": {
+            "placeholder": "Phone number",
+            "searchCountry": "Search country...",
+            "loading": "Loading countries...",
+            "errorLoading": "Error loading countries",
+            "noCountryFound": "No country found",
+            "updating":"Loading..."
+        },
+        "navbar": {
+            "support": "Support",
+            "contact": "Contact Us",
+            "login": "Login"
+        },
+        "loginForm": {
+            "welcome": "Welcome back",
+            "subtitle": "Login to your AMBERCHAIN account",
+            "emailLabel": "Email",
+            "passwordLabel": "Password",
+            "forgotPassword": "Forgot your password?",
+            "loginButton": "Login",
+            "orContinueWith": "Or continue with",
+            "noAccount": "Don't have an account?",
+            "signUp": "Sign up",
+            "agreement_start": "By clicking login, you agree to our",
+            "agreement_terms": "Terms of Service",
+            "agreement_and": "and",
+            "agreement_privacy": "Privacy Policy",
+            "agreement_end": "."
+        },
+        "registerForm": {
+            "step1Title": "Personal Information",
+            "step2Title": "Company Information",
+            "step3Title": "Business Configuration",
+            "step4Title": "Terms & Conditions",
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "email": "Professional Email",
+            "emailConfirmation": "Confirm Email",
+            "password": "Password",
+            "phoneNumber": "Phone Number",
+            "companyLocation": "Company Location",
+            "companyName": "Company Name",
+            "address": "Address",
+            "zipCode": "Zip Code",
+            "businessProfile": "Select Your Business Profile",
+            "customBusinessType": "Specify Business Type",
+            "selectBusinessProfile": "Select a business profile...",
+            "searchBusinessProfile": "Search business profiles...",
+            "noBusinessProfileFound": "No business profile found",
+            "specifyBusinessType": "Please specify your business type",
+            "agreeToTerms": "I agree to the",
+            "termsOfService": "Terms of Service",
+            "agreeToPrivacy": "I agree to the",
+            "privacyPolicy": "Privacy Policy",
+            "previousStep": "Previous",
+            "nextStep": "Next",
+            "submit": "Create Account",
+            "submitting": "Creating...",
+            "stepDescription": "Step {{current}} of {{total}}",
+            "reviewAndAccept": "Please review and accept our"
+        },
+        "dialog": {
+            "agree": "I agree",
+            "cancel": "Cancel",
+            "readWarning": "Please scroll to the bottom to continue."
+        },
+        "terms": {
+            "title": "Terms & Conditions",
+            "sections": [
+                {
+                    "title": "Acceptance of Terms",
+                    "content": "By accessing and using this website, users agree to comply with and be bound by these Terms of Service. Users who do not agree with these terms should discontinue use of the website immediately."
+                },
+                {
+                    "title": "User Account Responsibilities",
+                    "content": "Users are responsible for maintaining the confidentiality of their account credentials. Any activities occurring under a user's account are the sole responsibility of the account holder. Users must notify the website administrators immediately of any unauthorized account access."
+                },
+                {
+                    "title": "Content Usage and Restrictions",
+                    "content": "The website and its original content are protected by intellectual property laws. Users may not reproduce, distribute, modify, create derivative works, or commercially exploit any content without explicit written permission from the website owners."
+                },
+                {
+                    "title": "Limitation of Liability",
+                    "content": "The website provides content 'as is' without any warranties. The website owners shall not be liable for direct, indirect, incidental, consequential, or punitive damages arising from user interactions with the platform."
+                },
+                {
+                    "title": "Governing Law",
+                    "content": "These terms are governed by the laws of the jurisdiction where the website is primarily operated, without regard to conflict of law principles."
+                }
+            ]
+        },
+        "privacy": {
+            "title": "Privacy Policy",
+            "sections": [
+                {
+                    "title": "Introduction",
+                    "content": "This Privacy Policy describes how we collect, use, and handle your personal information when you use our website and services. We are committed to protecting your privacy."
+                },
+                {
+                    "title": "Information We Collect",
+                    "content": "We may collect personal identification information (Name, email address, phone number, etc.) and non-personal identification information (browser name, type of computer, etc.) from Users in a variety of ways."
+                },
+                {
+                    "title": "How We Use Collected Information",
+                    "content": "We may use the information we collect to personalize user experience, to improve our site, to run a promotion, contest, survey or other site feature, and to send periodic emails."
+                },
+                {
+                    "title": "Data Security",
+                    "content": "We adopt appropriate data collection, storage and processing practices and security measures to protect against unauthorized access, alteration, disclosure or destruction of your personal information, username, password, transaction information and data stored on our Site."
+                },
+                {
+                    "title": "Sharing Your Personal Information",
+                    "content": "We do not sell, trade, or rent Users personal identification information to others. We may share generic aggregated demographic information not linked to any personal identification information regarding visitors and users with our business partners, trusted affiliates and advertisers."
+                }
+            ]
+        },
+        "dashboard": {
+            "title": "Dashboard"
+        },
+        "notFound": {
+            "title": "This page could not be found,",
+            "cta": "Return to home ?"
+        },
+        "loader": {
+            "title": "Loading, please wait..."
+        },
+        "clientTopNav": {
+            "account": "Account",
+            "notifications": "Notifications",
+            "exclusivity": "Exclusivity",
+            "support": "Support and User manuals",
+            "logout": "Logout"
+        },
+        "SuccessSignup": {
+            "title": "Account Created Successfully!",
+            "sub-title": "A verification link has been sent to your email to setup your account.",
+            "cta1": "Login to Dashboard",
+            "cta2": "Check Email",
+            "footerP1": "You're not alone.",
+            "footerP2": "logistics partners have already joined!"
+        },
+        "sidebar": {
+            "multimodal": "Multimodal",
+            "bookings": "Bookings",
+            "quotations": "Quotations",
+            "compareOptions": "Compare Options",
+            "instantQuote": "Instant Quote",
+            "book": "Book",
+            "smartHelpers": "Smart Helpers",
+            "readyLoad": "ReadyLoad",
+            "trokeTrace": "TrokeTrace",
+            "socForAll": "SOC For All",
+            "ireposition": "Ireposition",
+            "manageDocuments": "Manage Documents",
+            "tracking": "Tracking",
+            "depot": "Depot & Storage",
+            "freeTime": "Free Time & Penalties",
+            "customs": "Customs & Compliance",
+            "financeYourLog": "Finance Your Log",
+            "wallet": "Wallet",
+            "invoices": "Invoices",
+            "trackCommission": "Track Commission",
+            "outsourceYourLog": "Outsource Your Log",
+            "assignAgent": "Assign Agent",
+            "enhanceProfitability": "Enhance Profitability",
+            "insights": "Insights"
+        }
+    }
+}

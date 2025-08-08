@@ -1,0 +1,149 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import FormField from "@/components/form/FormField";
+import AgreementDialog from '../AgreementDialog';
+
+import {
+  Building2Icon,
+  TruckIcon,
+  StoreIcon,
+  UsersIcon,
+  BriefcaseIcon,
+  MoreHorizontalIcon,
+} from "lucide-react";
+
+const businessProfiles = [
+  { value: "manufacturer", label: "Manufacturer", icon: Building2Icon },
+  { value: "distributor", label: "Distributor", icon: TruckIcon },
+  { value: "retailer", label: "Retailer", icon: StoreIcon },
+  { value: "service_provider", label: "Service Provider", icon: UsersIcon },
+  { value: "consultant", label: "Consultant", icon: BriefcaseIcon },
+  { value: "others", label: "Others", icon: MoreHorizontalIcon },
+];
+
+export default function BusinessAndTermsStep({ data, errors, onUpdate }) {
+  const { t } = useTranslation();
+
+  const handleFieldChange = (payload) => {
+    onUpdate(payload.name, payload.value);
+  };
+
+  const handleBusinessProfileChange = (value) => {
+    onUpdate("businessProfile", value);
+    if (value !== "others") {
+      onUpdate("customBusinessType", "");
+    }
+  };
+
+  return (
+    <section className="space-y-6">
+      <h2 className="text-xl font-semibold text-center mb-6">Business Profile & Terms</h2>
+
+      {/* Business Profile Section */}
+      <div className="space-y-2 text-start">
+        <Label htmlFor="businessProfile">
+          Business Profile
+          <span className="text-destructive ml-1">*</span>
+        </Label>
+        <RadioGroup
+          value={data.businessProfile}
+          onValueChange={handleBusinessProfileChange}
+          className="grid grid-cols-2 md:grid-cols-3 gap-4"
+        >
+          {businessProfiles.map((item) => (
+            <Label
+              key={item.value}
+              htmlFor={`businessProfile-${item.value}`}
+              className="border-input has-[:checked]:border-primary flex flex-col items-start gap-4 rounded-md border p-4 cursor-pointer"
+            >
+              <div className="flex justify-between w-full">
+                <RadioGroupItem
+                  value={item.value}
+                  id={`businessProfile-${item.value}`}
+                  className="border-muted-foreground"
+                />
+                <item.icon className="h-5 w-5 text-muted-foreground" />
+              </div>
+              <span className="font-normal text-sm">{item.label}</span>
+            </Label>
+          ))}
+        </RadioGroup>
+        {errors.businessProfile && (
+          <p className="text-destructive mt-2 text-xs" role="alert">
+            {errors.businessProfile}
+          </p>
+        )}
+      </div>
+
+      {data.businessProfile === "others" && (
+        <FormField
+          label="Specify Business Type"
+          name="customBusinessType"
+          placeholder="e.g., Logistics Partner"
+          value={data.customBusinessType}
+          onChange={handleFieldChange}
+          error={errors.customBusinessType}
+          required
+        />
+      )}
+
+      {/* Terms and Privacy Section */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+        <div className={`border rounded-md p-4 flex items-start gap-3 ${errors.hasAgreedToTerms ? 'border-destructive' : 'border-input'}`}>
+          <Checkbox
+            id='terms'
+            checked={data.hasAgreedToTerms}
+            onCheckedChange={(checked) => onUpdate('hasAgreedToTerms', !!checked)}
+            className="mt-0.5"
+          />
+          <div className="grid gap-1.5">
+            <Label htmlFor='terms'>Terms of Service</Label>
+            <p className="text-xs text-muted-foreground">
+              Review and accept our{" "}
+              <AgreementDialog
+                title="Terms of Service"
+                sections={t('terms.sections', { returnObjects: true })}
+                onAgree={() => onUpdate('hasAgreedToTerms', true)}
+                onOpen={() => {
+                  if (data.hasAgreedToTerms) {
+                    onUpdate('hasAgreedToTerms', false);
+                  }
+                }}
+              />.
+            </p>
+            {errors.hasAgreedToTerms && <p className="text-destructive text-xs" role="alert">{errors.hasAgreedToTerms}</p>}
+          </div>
+        </div>
+
+        <div className={`border rounded-md p-4 flex items-start gap-3 ${errors.hasAgreedToPrivacy ? 'border-destructive' : 'border-input'}`}>
+          <Checkbox
+            id='privacy'
+            checked={data.hasAgreedToPrivacy}
+            onCheckedChange={(checked) => onUpdate('hasAgreedToPrivacy', !!checked)}
+            className="mt-0.5"
+          />
+          <div className="grid gap-1.5">
+            <Label htmlFor='privacy'>Privacy Policy</Label>
+            <p className="text-xs text-muted-foreground">
+              Review and accept our{" "}
+              <AgreementDialog
+                title="Privacy Policy"
+                sections={t('privacy.sections', { returnObjects: true })}
+                onAgree={() => onUpdate('hasAgreedToPrivacy', true)}
+                onOpen={() => {
+                  if (data.hasAgreedToPrivacy) {
+                    onUpdate('hasAgreedToPrivacy', false);
+                  }
+                }}
+              />.
+            </p>
+            {errors.hasAgreedToPrivacy && <p className="text-destructive text-xs" role="alert">{errors.hasAgreedToPrivacy}</p>}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

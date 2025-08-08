@@ -1,0 +1,190 @@
+{
+    "translation": {
+        "common": {
+            "loading": "Chargement...",
+            "submit": "Soumettre",
+            "cancel": "Annuler",
+            "next": "Suivant",
+            "previous": "Précédent",
+            "required": "Requis"
+        },
+        "validation": {
+            "required": "Ce champ est requis",
+            "invalid": "Format invalide",
+            "invalidEmail": "Veuillez entrer une adresse e-mail valide",
+            "invalidPhone": "Veuillez entrer un numéro de téléphone valide",
+            "emailMismatch": "Les adresses e-mail ne correspondent pas",
+            "weakPassword": "Le mot de passe doit comporter au moins 8 caractères avec majuscules, minuscules et chiffres",
+            "invalidZipCode": "Veuillez entrer un code postal valide",
+            "mustAgreeToTerms": "Vous devez accepter les Conditions d'utilisation",
+            "mustAgreeToPrivacy": "Vous devez accepter la Politique de confidentialité"
+        },
+        "phoneField": {
+            "placeholder": "Numéro de téléphone",
+            "searchCountry": "Rechercher un pays...",
+            "loading": "Chargement des pays...",
+            "errorLoading": "Erreur lors du chargement des pays",
+            "noCountryFound": "Aucun pays trouvé",
+            "updating":"Chargement..."
+        },
+        "navbar": {
+            "support": "Support",
+            "contact": "Nous contacter",
+            "login": "Connexion"
+        },
+        "loginForm": {
+            "welcome": "Bon retour",
+            "subtitle": "Connectez-vous à votre compte AMBERCHAIN",
+            "emailLabel": "E-mail",
+            "passwordLabel": "Mot de passe",
+            "forgotPassword": "Mot de passe oublié ?",
+            "loginButton": "Se connecter",
+            "orContinueWith": "Ou continuer avec",
+            "noAccount": "Vous n'avez pas de compte ?",
+            "signUp": "S'inscrire",
+            "agreement_start": "En cliquant sur se connecter, vous acceptez nos",
+            "agreement_terms": "Conditions d'utilisation",
+            "agreement_and": "et",
+            "agreement_privacy": "Politique de confidentialité",
+            "agreement_end": "."
+        },
+        "registerForm": {
+            "step1Title": "Informations personnelles",
+            "step2Title": "Informations sur l'entreprise",
+            "step3Title": "Configuration de l'entreprise",
+            "step4Title": "Conditions générales",
+            "firstName": "Prénom",
+            "lastName": "Nom",
+            "email": "E-mail professionnel",
+            "emailConfirmation": "Confirmer l'e-mail",
+            "password": "Mot de passe",
+            "phoneNumber": "Numéro de téléphone",
+            "companyLocation": "Localisation de l'entreprise",
+            "companyName": "Nom de l'entreprise",
+            "address": "Adresse",
+            "zipCode": "Code postal",
+            "businessProfile": "Sélectionnez votre profil professionnel",
+            "customBusinessType": "Spécifier le type d'activité",
+            "selectBusinessProfile": "Sélectionnez un profil professionnel...",
+            "searchBusinessProfile": "Rechercher des profils professionnels...",
+            "noBusinessProfileFound": "Aucun profil professionnel trouvé",
+            "specifyBusinessType": "Veuillez spécifier votre type d'activité",
+            "agreeToTerms": "J'accepte les",
+            "termsOfService": "Conditions d'utilisation",
+            "agreeToPrivacy": "J'accepte la",
+            "privacyPolicy": "Politique de confidentialité",
+            "previousStep": "Précédent",
+            "nextStep": "Suivant",
+            "submit": "Créer un compte",
+            "submitting": "Création en cours...",
+            "stepDescription": "Étape {{current}} sur {{total}}",
+            "reviewAndAccept": "Veuillez lire et accepter nos"
+        },
+        "dialog": {
+            "agree": "J'accepte",
+            "cancel": "Annuler",
+            "readWarning": "Veuillez faire défiler jusqu'en bas pour continuer."
+        },
+        "terms": {
+            "title": "Conditions générales",
+            "sections": [
+                {
+                    "title": "Acceptation des conditions",
+                    "content": "En accédant et en utilisant ce site Web, vous acceptez de vous conformer à ces Conditions d'utilisation. Si vous n'acceptez pas ces conditions, veuillez cesser immédiatement d'utiliser le site."
+                },
+                {
+                    "title": "Responsabilités du compte utilisateur",
+                    "content": "Les utilisateurs sont responsables de la confidentialité de leurs identifiants. Toute activité effectuée via un compte est de la seule responsabilité de son titulaire. Les utilisateurs doivent signaler immédiatement tout accès non autorisé."
+                },
+                {
+                    "title": "Utilisation du contenu et restrictions",
+                    "content": "Le site et son contenu sont protégés par les lois sur la propriété intellectuelle. Il est interdit de reproduire, distribuer, modifier, créer des œuvres dérivées ou exploiter commercialement le contenu sans autorisation écrite."
+                },
+                {
+                    "title": "Limitation de responsabilité",
+                    "content": "Le site est fourni 'tel quel' sans aucune garantie. Les propriétaires ne sont pas responsables des dommages directs, indirects, accessoires ou consécutifs liés à l'utilisation du site."
+                },
+                {
+                    "title": "Loi applicable",
+                    "content": "Ces conditions sont régies par les lois du pays où le site est principalement exploité, sans tenir compte des conflits de lois."
+                }
+            ]
+        },
+        "privacy": {
+            "title": "Politique de confidentialité",
+            "sections": [
+                {
+                    "title": "Introduction",
+                    "content": "Cette Politique de confidentialité décrit comment nous collectons, utilisons et protégeons vos données personnelles lorsque vous utilisez notre site et nos services."
+                },
+                {
+                    "title": "Informations collectées",
+                    "content": "Nous pouvons collecter des informations personnelles (nom, e-mail, numéro de téléphone, etc.) et non personnelles (navigateur, type d'appareil, etc.) de différentes manières."
+                },
+                {
+                    "title": "Utilisation des informations collectées",
+                    "content": "Les données peuvent être utilisées pour personnaliser l'expérience utilisateur, améliorer notre site, organiser des promotions ou envoyer des e-mails périodiques."
+                },
+                {
+                    "title": "Sécurité des données",
+                    "content": "Nous appliquons des mesures de sécurité appropriées pour protéger vos données contre l'accès non autorisé, la modification, la divulgation ou la destruction."
+                },
+                {
+                    "title": "Partage des informations personnelles",
+                    "content": "Nous ne vendons, louons ni ne partageons vos données personnelles. Des données agrégées et anonymes peuvent être partagées avec des partenaires ou annonceurs de confiance."
+                }
+            ]
+        },
+        "dashboard": {
+            "title": "Tableau de bord"
+        },
+        "notFound": {
+            "title": "Cette page est introuvable,",
+            "cta": "Retour à l'accueil ?"
+        },
+        "loader": {
+            "title": "Chargement, veuillez patienter..."
+        },
+        "clientTopNav": {
+            "account": "Compte",
+            "notifications": "Notifications",
+            "exclusivity": "Exclusivité",
+            "support": "Support et manuels utilisateurs",
+            "logout": "Déconnexion"
+        },
+        "SuccessSignup": {
+            "title": "Compte créé avec succès !",
+            "sub-title": "Un lien de vérification a été envoyé à votre e-mail pour configurer votre compte.",
+            "cta1": "Accéder au tableau de bord",
+            "cta2": "Vérifier l'e-mail",
+            "footerP1": "Vous n'êtes pas seul.",
+            "footerP2": "des partenaires logistiques nous ont déjà rejoints !"
+        },
+        "sidebar": {
+            "multimodal": "Multimodal",
+            "bookings": "Réservations",
+            "quotations": "Devis",
+            "compareOptions": "Comparer les options",
+            "instantQuote": "Devis instantané",
+            "book": "Réserver",
+            "smartHelpers": "Assistants intelligents",
+            "readyLoad": "ReadyLoad",
+            "trokeTrace": "TrokeTrace",
+            "socForAll": "SOC Pour Tous",
+            "ireposition": "Ireposition",
+            "manageDocuments": "Gérer les documents",
+            "tracking": "Suivi",
+            "depot": "Dépôt & Stockage",
+            "freeTime": "Franchise & Pénalités",
+            "customs": "Douanes & Conformité",
+            "financeYourLog": "Financez votre logistique",
+            "wallet": "Portefeuille",
+            "invoices": "Factures",
+            "trackCommission": "Suivi des commissions",
+            "outsourceYourLog": "Externaliser votre logistique",
+            "assignAgent": "Assigner un agent",
+            "enhanceProfitability": "Améliorer la rentabilité",
+            "insights": "Statistiques"
+        }
+    }
+}
