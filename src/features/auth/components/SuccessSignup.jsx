@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { AnimatedGridPattern } from '@/components/magicui/AnimatedGridPattern'
 import { cn } from '@/lib/utils'
 import { t } from "i18next"
-import { Navigate, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 
 export default function SuccessSignup() {

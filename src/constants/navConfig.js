@@ -20,6 +20,13 @@ export const getNavConfig = (t) => ({
     { label: t('clientTopNav.exclusivity'), path: "/exclusivity", icon: Flag },
     { label: t('clientTopNav.support'), path: "/support", icon: NotebookText },
     { label: t('clientTopNav.logout'), path: "/logout", icon: LogOut },
+  ],
+  clientDashNav:[
+    { label: t('dashNav.manage'), path: "/manage" },
+    { label: t('dashNav.services'), path: "/services" },
+    { label: t('dashNav.company'), path: "/company" },
+    { label: t('dashNav.integrations'), path: "/integrations" },
+    { label: t('dashNav.news'), path: "/news" },
   ]
 });
 

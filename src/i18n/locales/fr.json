@@ -1,12 +1,75 @@
 {
     "translation": {
+        "shipments": {
+            "cards": {
+                "totalValue": {
+                    "description": "Valeur totale des expéditions",
+                    "footerMain": "Tendance à la hausse ce mois-ci",
+                    "footerSub": "Basé sur les expéditions réservées et terminées"
+                },
+                "newBookings": {
+                    "description": "Nouvelles réservations",
+                    "footerMain": "Nouvelles réservations d'expédition reçues",
+                    "footerSub": "Cette période"
+                },
+                "activeShipments": {
+                    "description": "Expéditions actives",
+                    "footerMain": "Actif et en transit",
+                    "footerSub": "Basé sur les expéditions réservées et terminées"
+                },
+                "conversionRate": {
+                    "description": "Taux de conversion des devis",
+                    "footerMain": "Amélioration de la conversion",
+                    "footerSub": "Basé sur devis → réservations"
+                }
+            },
+            "table": {
+                "columns": {
+                    "selectAll": "Tout sélectionner",
+                    "selectRow": "Sélectionner la ligne",
+                    "shipmentId": "ID Expédition/Réservation",
+                    "copyId": "Copier l'ID",
+                    "viewDetails": "Voir les détails",
+                    "dailyShipments": "Expéditions quotidiennes"
+                },
+                "status": {
+                    "confirmed": "Confirmé",
+                    "pending": "En attente",
+                    "inTransit": "En transit",
+                    "delayed": "Retardé"
+                }
+            },
+            "shipmentDetails": {
+                "route": {
+                    "placeOfLoading": "Lieu de chargement",
+                    "portOfLoading": "Port de chargement",
+                    "portOfDischarge": "Port de déchargement",
+                    "placeOfDischarge": "Lieu de déchargement"
+                },
+                "summary": {
+                    "shipmentId": "ID d'expédition",
+                    "customer": "Client",
+                    "origin": "Origine",
+                    "destination": "Destination",
+                    "departure": "Départ",
+                    "eta": "ETA",
+                    "mode": "Mode",
+                    "status": "Statut",
+                    "alerts": "Alertes",
+                    "soc": "SOC"
+                }
+            }
+        },
         "common": {
             "loading": "Chargement...",
             "submit": "Soumettre",
             "cancel": "Annuler",
-            "next": "Suivant",
             "previous": "Précédent",
-            "required": "Requis"
+            "required": "Requis",
+            "back": "Retour",
+            "next": "Suivant",
+            "MapLoading":"Chargement de la map...",
+            "MapLoadError":"Les données ne sont pas disponibles pour cet envoi."
         },
         "validation": {
             "required": "Ce champ est requis",
@@ -14,10 +77,21 @@
             "invalidEmail": "Veuillez entrer une adresse e-mail valide",
             "invalidPhone": "Veuillez entrer un numéro de téléphone valide",
             "emailMismatch": "Les adresses e-mail ne correspondent pas",
-            "weakPassword": "Le mot de passe doit comporter au moins 8 caractères avec majuscules, minuscules et chiffres",
+            "weakPassword": "Le mot de passe doit comporter au moins 8 caractères et inclure des majuscules, des minuscules, un chiffre et un caractère spécial",
             "invalidZipCode": "Veuillez entrer un code postal valide",
             "mustAgreeToTerms": "Vous devez accepter les Conditions d'utilisation",
-            "mustAgreeToPrivacy": "Vous devez accepter la Politique de confidentialité"
+            "mustAgreeToPrivacy": "Vous devez accepter la Politique de confidentialité",
+            "emailRequired": "L'email est requis.",
+            "passwordRequired": "Le mot de passe est requis.",
+            "passwordComplexity": "Le mot de passe doit contenir au moins 6 caractères, une majuscule et un caractère spécial.",
+            "invalidFirstName": "Veuillez entrer un prénom valide.",
+            "invalidLastName": "Veuillez entrer un nom valide.",
+            "invalidCompanyName": "Veuillez entrer un nom d'entreprise valide.",
+            "invalidAddress": "Veuillez entrer une adresse valide.",
+            "selectBusinessProfile": "Veuillez sélectionner un profil professionnel.",
+            "invalidBusinessType": "Veuillez spécifier un type d'activité valide.",
+            "formErrors": "Veuillez corriger les erreurs sur toutes les étapes avant de terminer.",
+            "creatingAccount": "Création de votre compte en cours..."
         },
         "phoneField": {
             "placeholder": "Numéro de téléphone",
@@ -25,7 +99,7 @@
             "loading": "Chargement des pays...",
             "errorLoading": "Erreur lors du chargement des pays",
             "noCountryFound": "Aucun pays trouvé",
-            "updating":"Chargement..."
+            "updating": "Chargement..."
         },
         "navbar": {
             "support": "Support",
@@ -46,13 +120,19 @@
             "agreement_terms": "Conditions d'utilisation",
             "agreement_and": "et",
             "agreement_privacy": "Politique de confidentialité",
-            "agreement_end": "."
+            "agreement_end": ".",
+            "notifications": {
+                "loading": "Connexion en cours...",
+                "success": "Connexion réussie !",
+                "error": "Échec de la connexion"
+            }
         },
         "registerForm": {
             "step1Title": "Informations personnelles",
             "step2Title": "Informations sur l'entreprise",
             "step3Title": "Configuration de l'entreprise",
             "step4Title": "Conditions générales",
+            "userInfoTitle": "Informations utilisateur",
             "firstName": "Prénom",
             "lastName": "Nom",
             "email": "E-mail professionnel",
@@ -83,7 +163,12 @@
         "dialog": {
             "agree": "J'accepte",
             "cancel": "Annuler",
-            "readWarning": "Veuillez faire défiler jusqu'en bas pour continuer."
+            "readWarning": "Veuillez faire défiler jusqu'en bas pour continuer.",
+            "readTerms": "Lisez toutes les conditions avant d'accepter."
+        },
+        "agreement": {
+            "mustAgree": "Vous devez accepter nos",
+            "clickingAgree": "En cliquant, vous acceptez nos"
         },
         "terms": {
             "title": "Conditions générales",
@@ -185,6 +270,24 @@
             "assignAgent": "Assigner un agent",
             "enhanceProfitability": "Améliorer la rentabilité",
             "insights": "Statistiques"
+        },
+        "dashNav": {
+            "manage": "Gérer",
+            "services": "Services",
+            "company": "Entreprise",
+            "integrations": "Intégrations",
+            "news": "Actualités"
+        },
+        "and": "et",
+        "searchWord": "Rechercher...",
+        "businessProfiles": {
+            "manufacturer": "Fabricant",
+            "distributor": "Distributeur",
+            "retailer": "Détaillant",
+            "serviceProvider": "Prestataire de services",
+            "consultant": "Consultant",
+            "others": "Autres",
+            "logisticsPartnerExample": "ex: Partenaire logistique"
         }
     }
 }

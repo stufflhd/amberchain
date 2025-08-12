@@ -1,69 +1,58 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import FormField from "@/components/form/FormField";
 import PasswordField from "@/components/form/PasswordField";
 import PhoneNumberField from '@/components/form/PhoneNumberFiled';
+import { userInfoStepFields } from '@/constants/formFields';
 
 export default function UserInfoStep({ data, errors, onUpdate }) {
+  const { t } = useTranslation();
+  
   const handleChange = (payload) => {
     onUpdate(payload.name, payload.value);
   };
 
+  const renderField = (field) => {
+    const props = {
+      label: field.label(),
+      name: field.name,
+      type: field.type,
+      value: data[field.name],
+      onChange: handleChange,
+      error: errors[field.name],
+      required: field.required
+    };
+
+    if (field.name === 'password') {
+      return <PasswordField key={field.name} {...props} />;
+    }
+
+    if (field.name === 'phoneNumber') {
+      return (
+        <PhoneNumberField
+          key={field.name}
+          value={data.phoneNumber}
+          onChange={(e) => onUpdate("phoneNumber", e.target.value)}
+          required
+          error={errors.phoneNumber}
+          selectedCountry={data.phoneCountry || "US"}
+          onCountryChange={(countryCode) => onUpdate("phoneCountry", countryCode)}
+          onValidation={(err) => onUpdate("phoneNumberError", err)}
+        />
+      );
+    }
+
+    return <FormField key={field.name} {...props} />;
+  };
+
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-semibold text-center mb-6">User Information</h2>
+      <h2 className="text-xl font-semibold text-center mb-6">{t('registerForm.userInfoTitle')}</h2>
       <div className="grid grid-cols-2 gap-4">
-        <FormField
-          label="First Name"
-          name="firstName"
-          value={data.firstName}
-          onChange={handleChange}
-          error={errors.firstName}
-          required
-        />
-        <FormField
-          label="Last Name"
-          name="lastName"
-          value={data.lastName}
-          onChange={handleChange}
-          error={errors.lastName}
-          required
-        />
+        {renderField(userInfoStepFields[0])} {/* firstName */}
+        {renderField(userInfoStepFields[1])} {/* lastName */}
       </div>
-      <FormField
-        label="Email"
-        name="email"
-        type="email"
-        value={data.email}
-        onChange={handleChange}
-        error={errors.email}
-        required
-      />
-      <FormField
-        label="Confirm Email"
-        name="emailConfirmation"
-        type="email"
-        value={data.emailConfirmation}
-        onChange={handleChange}
-        error={errors.emailConfirmation}
-        required
-      />
-      <PasswordField
-        label="Password"
-        name="password"
-        value={data.password}
-        onChange={handleChange}
-        error={errors.password}
-        required
-      />
-      <PhoneNumberField
-        value={data.phoneNumber}
-        onChange={(e) => onUpdate("phoneNumber", e.target.value)}
-        required
-        error={errors.phoneNumber}
-        selectedCountry={data.phoneCountry || "US"}
-        onCountryChange={(countryCode) => onUpdate("phoneCountry", countryCode)}
-        onValidation={(err) => onUpdate("phoneNumberError", err)}
-      />
+      {userInfoStepFields.slice(2).map(renderField)} {/* remaining fields */}
     </div>
   );
 }

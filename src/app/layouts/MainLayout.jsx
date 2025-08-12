@@ -14,7 +14,7 @@ export default function MainLayout({ children }) {
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
           </div>
-         <Navbar />
+         <Navbar type='main'/>
         </header>
         <main>{children}</main>
       </SidebarInset>

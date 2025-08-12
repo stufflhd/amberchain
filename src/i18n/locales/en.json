@@ -1,12 +1,75 @@
 {
     "translation": {
+        "shipments": {
+            "cards": {
+                "totalValue": {
+                    "description": "Total Shipments Value",
+                    "footerMain": "Trending up this month",
+                    "footerSub": "Based on booked and completed shipments"
+                },
+                "newBookings": {
+                    "description": "New Bookings",
+                    "footerMain": "New shipment bookings received",
+                    "footerSub": "This period"
+                },
+                "activeShipments": {
+                    "description": "Active Shipments",
+                    "footerMain": "Active & in-transit",
+                    "footerSub": "Based on booked and completed shipments"
+                },
+                "conversionRate": {
+                    "description": "Quote Conversion Rate",
+                    "footerMain": "Improving conversion",
+                    "footerSub": "Based on quotes → bookings"
+                }
+            },
+            "table": {
+                "columns": {
+                    "selectAll": "Select all",
+                    "selectRow": "Select row",
+                    "shipmentId": "Shipment/Booking ID",
+                    "copyId": "Copy ID",
+                    "viewDetails": "View Details",
+                    "dailyShipments": "Daily Shipments"
+                },
+                "status": {
+                    "confirmed": "Confirmed",
+                    "pending": "Pending",
+                    "inTransit": "In Transit",
+                    "delayed": "Delayed"
+                }
+            },
+            "shipmentDetails": {
+                "route": {
+                    "placeOfLoading": "Place of Loading",
+                    "portOfLoading": "Port of Loading",
+                    "portOfDischarge": "Port of Discharge",
+                    "placeOfDischarge": "Place of Discharge"
+                },
+                "summary": {
+                    "shipmentId": "Shipment ID",
+                    "customer": "Customer",
+                    "origin": "Origin",
+                    "destination": "Destination",
+                    "departure": "Departure",
+                    "eta": "ETA",
+                    "mode": "Mode",
+                    "status": "Status",
+                    "alerts": "Alerts",
+                    "soc": "SOC"
+                }
+            }
+        },
         "common": {
             "loading": "Loading...",
             "submit": "Submit",
             "cancel": "Cancel",
             "next": "Next",
+            "back": "Back",
             "previous": "Previous",
-            "required": "Required"
+            "required": "Required",
+            "MapLoading":"Map loading...",
+            "MapLoadError":"Map data is not available for this shipment."
         },
         "validation": {
             "required": "This field is required",
@@ -14,10 +77,21 @@
             "invalidEmail": "Please enter a valid email address",
             "invalidPhone": "Please enter a valid phone number",
             "emailMismatch": "Email addresses do not match",
-            "weakPassword": "Password must be at least 8 characters with uppercase, lowercase, and number",
+            "weakPassword": "Password must be at least 8 characters and include uppercase, lowercase, number, and a special character",
             "invalidZipCode": "Please enter a valid zip code",
             "mustAgreeToTerms": "You must agree to the Terms of Service",
-            "mustAgreeToPrivacy": "You must agree to the Privacy Policy"
+            "mustAgreeToPrivacy": "You must agree to the Privacy Policy",
+            "emailRequired": "Email is required.",
+            "passwordRequired": "Password is required.",
+            "passwordComplexity": "Password must be 6+ chars, with an uppercase letter and a special character.",
+            "invalidFirstName": "Please enter a valid first name.",
+            "invalidLastName": "Please enter a valid last name.",
+            "invalidCompanyName": "Please enter a valid company name.",
+            "invalidAddress": "Please enter a valid address.",
+            "selectBusinessProfile": "Please select a business profile.",
+            "invalidBusinessType": "Please specify a valid business type.",
+            "formErrors": "Please correct the errors on all steps before completing.",
+            "creatingAccount": "Creating your account..."
         },
         "phoneField": {
             "placeholder": "Phone number",
@@ -25,7 +99,7 @@
             "loading": "Loading countries...",
             "errorLoading": "Error loading countries",
             "noCountryFound": "No country found",
-            "updating":"Loading..."
+            "updating": "Loading..."
         },
         "navbar": {
             "support": "Support",
@@ -46,13 +120,19 @@
             "agreement_terms": "Terms of Service",
             "agreement_and": "and",
             "agreement_privacy": "Privacy Policy",
-            "agreement_end": "."
+            "agreement_end": ".",
+            "notifications": {
+                "loading": "Logging in...",
+                "success": "Logged in successfully!",
+                "error": "Login failed"
+            }
         },
         "registerForm": {
             "step1Title": "Personal Information",
             "step2Title": "Company Information",
             "step3Title": "Business Configuration",
             "step4Title": "Terms & Conditions",
+            "userInfoTitle": "User Information",
             "firstName": "First Name",
             "lastName": "Last Name",
             "email": "Professional Email",
@@ -83,7 +163,12 @@
         "dialog": {
             "agree": "I agree",
             "cancel": "Cancel",
-            "readWarning": "Please scroll to the bottom to continue."
+            "readWarning": "Please scroll to the bottom to continue.",
+            "readTerms": "Read all terms before accepting."
+        },
+        "agreement": {
+            "mustAgree": "You must agree to our",
+            "clickingAgree": "By clicking login, you agree to our"
         },
         "terms": {
             "title": "Terms & Conditions",
@@ -185,6 +270,24 @@
             "assignAgent": "Assign Agent",
             "enhanceProfitability": "Enhance Profitability",
             "insights": "Insights"
+        },
+        "dashNav": {
+            "manage": "Manage",
+            "services": "Services",
+            "company": "Company",
+            "integrations": "Integrations",
+            "news": "News"
+        },
+        "and": "and",
+        "searchWord": "Search...",
+        "businessProfiles": {
+            "manufacturer": "Manufacturer",
+            "distributor": "Distributor",
+            "retailer": "Retailer",
+            "serviceProvider": "Service Provider",
+            "consultant": "Consultant",
+            "others": "Others",
+            "logisticsPartnerExample": "e.g., Logistics Partner"
         }
     }
 }

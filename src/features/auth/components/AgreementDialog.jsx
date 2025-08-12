@@ -1,5 +1,5 @@
 import { useId, useRef, useState } from "react"
-
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dialog"
 
 export default function AgreementDialog({ title, sections = [{ title: '', content: '' }], onAgree, onOpen, triggerClassName = '' }) {
+    const { t } = useTranslation();
     const [hasReadToBottom, setHasReadToBottom] = useState(false);
     const contentRef = useRef(null);
 
@@ -73,17 +74,17 @@ export default function AgreementDialog({ title, sections = [{ title: '', conten
                 <DialogFooter className="border-t px-6 py-4 sm:items-center">
                     {!hasReadToBottom && (
                         <span className="text-muted-foreground grow text-xs max-sm:text-center">
-                            Read all terms before accepting.
+                            {t('dialog.readTerms')}
                         </span>
                     )}
                     <DialogClose asChild>
                         <Button type="button" variant="outline">
-                            Cancel
+                            {t('dialog.cancel')}
                         </Button>
                     </DialogClose>
                     <DialogClose asChild>
                         <Button type="button" disabled={!hasReadToBottom} onClick={() => onAgree?.()}>
-                            I agree
+                            {t('dialog.agree')}
                         </Button>
                     </DialogClose>
                 </DialogFooter>

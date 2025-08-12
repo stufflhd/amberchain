@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useMutation } from '@tanstack/react-query';
 import { handleApiRequest } from '@/lib/handleApiRequest';
 import Stepper, { Step } from '@/components/magicui/Stepper';
@@ -26,23 +27,20 @@ const initialFormData = {
   hasAgreedToPrivacy: false,
 };
 
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/;
-const nameRegex = /^(?=.*[A-Za-z])[\sA-Za-z'.-]{2,}$/;
-const generalTextRegex = /^(?=.*[A-Za-z0-9])[\sA-Za-z0-9&@#',.\/()-]{2,}$/;
-const zipCodeRegex = /^[0-9]{5}(-[0-9]{4})?$/;
-const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
+import { userInfoStepFields, companyInfoStepFields } from '@/constants/formFields';
 
 /**
  * Main registration page component, orchestrating the multi-step signup form.
  */
 export default function RegisterPage() {
+  const { t } = useTranslation();
   useCountriesQuery();
 
   const [isSignUpComplete, setIsSignUpComplete] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
-
+  const backButtonText = t('common.back')
+  const nextButtonText = t('common.next')
   const mutation = useMutation({
     mutationFn: async (data) => {
       await new Promise(resolve => setTimeout(resolve, 1500));
@@ -67,26 +65,24 @@ export default function RegisterPage() {
 
     switch (step) {
       case 1:
-        if (!firstName.trim() || !nameRegex.test(firstName)) newErrors.firstName = "Please enter a valid first name.";
-        if (!lastName.trim() || !nameRegex.test(lastName)) newErrors.lastName = "Please enter a valid last name.";
-        if (!email.trim() || !emailRegex.test(email)) newErrors.email = "Please enter a valid email.";
-        if (email !== emailConfirmation) newErrors.emailConfirmation = "Emails do not match.";
-        if (!password.trim() || !passwordRegex.test(password)) newErrors.password = "Password must be 8+ chars with uppercase, lowercase, and a number.";
-        if (!phoneNumber.trim() || !phoneRegex.test(phoneNumber)) newErrors.phoneNumber = "Please enter a valid phone number.";
+        userInfoStepFields.forEach(field => {
+          const error = field.validation(formData[field.name], formData);
+          if (error) newErrors[field.name] = error;
+        });
         break;
       case 2:
-        if (!companyLocation.trim()) newErrors.companyLocation = "Please enter a valid location.";
-        if (!companyName.trim() || !generalTextRegex.test(companyName)) newErrors.companyName = "Please enter a valid company name.";
-        if (!address.trim() || !generalTextRegex.test(address)) newErrors.address = "Please enter a valid address.";
-        if (!zipCode.trim() || !zipCodeRegex.test(zipCode)) newErrors.zipCode = "Please enter a valid zip code.";
+        companyInfoStepFields.forEach(field => {
+          const error = field.validation(formData[field.name], formData);
+          if (error) newErrors[field.name] = error;
+        });
         break;
       case 3:
-        if (!businessProfile) newErrors.businessProfile = "Please select a business profile.";
+        if (!businessProfile) newErrors.businessProfile = t('validation.selectBusinessProfile');
         if (businessProfile === "others" && (!customBusinessType.trim() || !generalTextRegex.test(customBusinessType))) {
-          newErrors.customBusinessType = "Please specify a valid business type.";
+          newErrors.customBusinessType = t('validation.invalidBusinessType');
         }
-        if (!hasAgreedToTerms) newErrors.hasAgreedToTerms = "You must agree to the terms.";
-        if (!hasAgreedToPrivacy) newErrors.hasAgreedToPrivacy = "You must agree to the privacy policy.";
+        if (!hasAgreedToTerms) newErrors.hasAgreedToTerms = t('validation.mustAgreeToTerms');
+        if (!hasAgreedToPrivacy) newErrors.hasAgreedToPrivacy = t('validation.mustAgreeToPrivacy');
         break;
       default:
         break;
@@ -106,17 +102,25 @@ export default function RegisterPage() {
     const isStep3Valid = validateStep(3);
 
     if (!isStep1Valid || !isStep2Valid || !isStep3Valid) {
-      toast.error("Please correct the errors on all steps before completing.");
+      toast.error(t('validation.formErrors'));
       return;
     }
+
+    // console.log('Form data before submission:', {
+    //   ...formData,
+    //   isStep1Valid,
+    //   isStep2Valid,
+    //   isStep3Valid,
+    //   errors
+    // });
 
     try {
       await handleApiRequest(
         () => mutation.mutateAsync(formData),
         {
-          loading: 'Creating your account...',
-          success: 'Account created successfully!',
-          error: (err) => err?.message || 'Registration failed. Please try again.',
+          loading: t('validation.creatingAccount'),
+          success: t('SuccessSignup.title'),
+          error: (err) => err?.message || t('loginForm.notifications.error'),
         }
       );
       setIsSignUpComplete(true);
@@ -134,6 +138,8 @@ export default function RegisterPage() {
           onFinalStepCompleted={finishSignUp}
           onBeforeStepChange={handleBeforeStepChange}
           isFinalStepLoading={mutation.isPending}
+          backButtonText={backButtonText}
+          nextButtonText={nextButtonText}
         >
           <Step>
             <UserInfoStep data={formData} errors={errors} onUpdate={handleUpdate} />

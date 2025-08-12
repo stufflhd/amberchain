@@ -20,7 +20,7 @@ export function AppSidebar() {
 
     return (
         <Sidebar>
-            <SidebarHeader>
+            <SidebarHeader className={'h-16 justify-center'}>
                 <LogoLink />
             </SidebarHeader>
             <SidebarContent>

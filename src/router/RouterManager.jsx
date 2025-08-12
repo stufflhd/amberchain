@@ -8,7 +8,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import NotFoundPage from "@/features/errors/NotFoundPage";
 import AdminPage from "@/features/admin/AdminPage";
 import RequireRole from "./RequireRole";
-import Dashboard from "@/features/dashboard/Dashboard";
+import ShipmentsDashboard from "@/features/shipments/shipmentsDashboard";
 
 const router = createBrowserRouter([
     {
@@ -63,10 +63,10 @@ const router = createBrowserRouter([
                 ),
             },
             {
-                path: "test",
+                path: "shipments",
                 element: (
                     <MainLayout>
-                        <Dashboard />
+                        <ShipmentsDashboard />
                     </MainLayout>
                 ),
             },

@@ -16,12 +16,12 @@ import {
 } from "lucide-react";
 
 const businessProfiles = [
-  { value: "manufacturer", label: "Manufacturer", icon: Building2Icon },
-  { value: "distributor", label: "Distributor", icon: TruckIcon },
-  { value: "retailer", label: "Retailer", icon: StoreIcon },
-  { value: "service_provider", label: "Service Provider", icon: UsersIcon },
-  { value: "consultant", label: "Consultant", icon: BriefcaseIcon },
-  { value: "others", label: "Others", icon: MoreHorizontalIcon },
+  { value: "manufacturer", label: t => t('businessProfiles.manufacturer'), icon: Building2Icon },
+  { value: "distributor", label: t => t('businessProfiles.distributor'), icon: TruckIcon },
+  { value: "retailer", label: t => t('businessProfiles.retailer'), icon: StoreIcon },
+  { value: "service_provider", label: t => t('businessProfiles.serviceProvider'), icon: UsersIcon },
+  { value: "consultant", label: t => t('businessProfiles.consultant'), icon: BriefcaseIcon },
+  { value: "others", label: t => t('businessProfiles.others'), icon: MoreHorizontalIcon },
 ];
 
 export default function BusinessAndTermsStep({ data, errors, onUpdate }) {
@@ -40,12 +40,12 @@ export default function BusinessAndTermsStep({ data, errors, onUpdate }) {
 
   return (
     <section className="space-y-6">
-      <h2 className="text-xl font-semibold text-center mb-6">Business Profile & Terms</h2>
+      <h2 className="text-xl font-semibold text-center mb-6">{t('registerForm.step3Title')}</h2>
 
       {/* Business Profile Section */}
       <div className="space-y-2 text-start">
         <Label htmlFor="businessProfile">
-          Business Profile
+          {t('registerForm.businessProfile')}
           <span className="text-destructive ml-1">*</span>
         </Label>
         <RadioGroup
@@ -67,7 +67,7 @@ export default function BusinessAndTermsStep({ data, errors, onUpdate }) {
                 />
                 <item.icon className="h-5 w-5 text-muted-foreground" />
               </div>
-              <span className="font-normal text-sm">{item.label}</span>
+              <span className="font-normal text-sm">{item.label(t)}</span>
             </Label>
           ))}
         </RadioGroup>
@@ -80,9 +80,9 @@ export default function BusinessAndTermsStep({ data, errors, onUpdate }) {
 
       {data.businessProfile === "others" && (
         <FormField
-          label="Specify Business Type"
+          label={t('registerForm.customBusinessType')}
           name="customBusinessType"
-          placeholder="e.g., Logistics Partner"
+          placeholder={t('businessProfiles.logisticsPartnerExample')}
           value={data.customBusinessType}
           onChange={handleFieldChange}
           error={errors.customBusinessType}
@@ -100,11 +100,11 @@ export default function BusinessAndTermsStep({ data, errors, onUpdate }) {
             className="mt-0.5"
           />
           <div className="grid gap-1.5">
-            <Label htmlFor='terms'>Terms of Service</Label>
+            <Label htmlFor='terms'>{t('registerForm.termsOfService')}</Label>
             <p className="text-xs text-muted-foreground">
-              Review and accept our{" "}
+              {t('registerForm.reviewAndAccept')}{" "}
               <AgreementDialog
-                title="Terms of Service"
+                title={t('terms.title')}
                 sections={t('terms.sections', { returnObjects: true })}
                 onAgree={() => onUpdate('hasAgreedToTerms', true)}
                 onOpen={() => {
@@ -126,11 +126,11 @@ export default function BusinessAndTermsStep({ data, errors, onUpdate }) {
             className="mt-0.5"
           />
           <div className="grid gap-1.5">
-            <Label htmlFor='privacy'>Privacy Policy</Label>
+            <Label htmlFor='privacy'>{t('registerForm.privacyPolicy')}</Label>
             <p className="text-xs text-muted-foreground">
-              Review and accept our{" "}
+              {t('registerForm.reviewAndAccept')}{" "}
               <AgreementDialog
-                title="Privacy Policy"
+                title={t('privacy.title')}
                 sections={t('privacy.sections', { returnObjects: true })}
                 onAgree={() => onUpdate('hasAgreedToPrivacy', true)}
                 onOpen={() => {

@@ -94,8 +94,7 @@ export default function PhoneNumberField({
   };
 
   const handlePhoneChange = (e) => {
-    const newValue = e.target.value;
-    const validationError = validatePhoneNumber(newValue);
+    const validationError = validatePhoneNumber(e.target.value);
     if (onValidation) onValidation(validationError);
     if (onChange) onChange(e);
   };
@@ -105,7 +104,6 @@ export default function PhoneNumberField({
     if (onValidation) onValidation(validationError);
   };
 
-  // memoized items
   const countryItems = useMemo(() => {
     if (!countries || countries.length === 0) return null;
     return countries.map((country) => (

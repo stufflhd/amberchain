@@ -4,7 +4,7 @@ import Navbar from "../Navbar";
 export default function AuthLayout({ children }) {
   return (
     <div className="auth-layout bg-accent/70 min-h-screen">
-      <Navbar />
+      <Navbar type='auth'/>
       {children || <Outlet />}
     </div>
   );

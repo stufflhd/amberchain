@@ -51,7 +51,7 @@
   --popover-foreground: oklch(0.129 0.042 264.695);
   --primary: oklch(0.3517 0.1891 264.71);
   --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: rgb(254, 91, 2);
+  --secondary: oklch(68.099% 0.21172 40.31);
   --secondary-foreground: oklch(0.129 0.042 264.695);
   --muted: oklch(0.929 0.013 255.508);
   --muted-foreground: oklch(0.129 0.042 264.695);
@@ -74,6 +74,18 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+
+  --sb-size: 10px;
+  /* thickness */
+  --sb-radius: 8px;
+  /* rounded corners */
+  --sb-track: transparent;
+  /* track color */
+  --sb-thumb: rgb(225, 225, 225);
+  /* thumb color */
+  --sb-thumb-hover: rgb(215, 215, 215);
+  --sb-thumb-active: rgb(210, 210, 210);
+  --sb-corner: transparent;
 }
 
 .dark {
@@ -108,6 +120,10 @@
   --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+  --sb-track: #0e0e0e;
+  --sb-thumb: #555;
+  --sb-thumb-hover: #6b6b6b;
+  --sb-thumb-active: #7a7a7a;
 }
 
 @layer base {
@@ -160,11 +176,12 @@
     @apply w-full justify-start px-0 py-1 hover:bg-transparent;
   }
 
-  .BodyLoading{
+  .BodyLoading {
     @apply !cursor-wait;
   }
-  .BodyLoading *{
-    @apply  pointer-events-none;
+
+  .BodyLoading * {
+    @apply pointer-events-none;
   }
 }
 
@@ -308,4 +325,87 @@
   100% {
     transform: translate(100%, 100%);
   }
+}
+
+/* Firefox + CSS Scrollbars spec */
+/* * {
+  scrollbar-color: var(--sb-thumb) var(--sb-track);
+} */
+
+/* Chrome / Edge (Chromium) / Safari / Opera */
+*::-webkit-scrollbar {
+  width: var(--sb-size);
+  /* vertical */
+  height: var(--sb-size);
+  /* horizontal */
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--sb-track);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--sb-thumb);
+  border-radius: var(--sb-radius);
+  /* This border creates a “gap” between thumb and track */
+  border: 2px solid var(--sb-track);
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--sb-thumb-hover);
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: var(--sb-thumb-active);
+}
+
+*::-webkit-scrollbar-corner {
+  background: var(--sb-corner);
+}
+
+html {
+  scrollbar-gutter: stable both-edges;
+}
+
+/* Map */
+.maplibregl-ctrl.maplibregl-ctrl-attrib.maplibregl-compact {
+  @apply hidden;
+}
+
+/* Base style for all shipment markers */
+.shipment-marker {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Add a little bounce on hover for interactivity */
+.shipment-marker:hover {
+  transform: scale(1.1);
+}
+
+/* .marker-content {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 3px solid white;
+}
+
+.origin-marker .marker-content {
+    background-color: #22c55e;
+}
+
+.destination-marker .marker-content {
+    background-color: #ef4444;
+} */
+
+.route-layer {
+  @apply stroke-primary;
 }

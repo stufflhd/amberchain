@@ -8,6 +8,9 @@ import { useTranslation } from "react-i18next";
 import { useMutation } from '@tanstack/react-query';
 import { useForm, Controller } from 'react-hook-form';
 import { handleApiRequest } from '@/lib/handleApiRequest';
+import { useNavigate } from 'react-router-dom';
+
+import { loginFields } from '@/constants/formFields';
 
 export default function LoginForm() {
     const { t } = useTranslation();
@@ -15,13 +18,14 @@ export default function LoginForm() {
     const [agreedToPrivacy, setAgreedToPrivacy] = useState(true);
     const [showAgreementError, setShowAgreementError] = useState(false);
     const [manualAgreement, setManualAgreement] = useState(true);
+    const navigate = useNavigate();
 
     const { control, handleSubmit, formState: { isValid, isSubmitting } } = useForm({
         mode: 'onChange',
-        defaultValues: {
-            email: '',
-            password: ''
-        }
+        defaultValues: loginFields.reduce((acc, field) => ({
+            ...acc,
+            [field.name]: ''
+        }), {})
     });
 
     const mutation = useMutation({
@@ -42,13 +46,13 @@ export default function LoginForm() {
             await handleApiRequest(
                 () => mutation.mutateAsync(data),
                 {
-                    loading: 'Logging in...',
-                    success: 'Logged in successfully!',
-                    error: 'Login failed',
+                    loading: t('loginForm.notifications.loading'),
+                    success: t('loginForm.notifications.success'),
+                    error: t('loginForm.notifications.error'),
                 }
             );
         } catch (err) {
-            alert(err)
+            navigate('/shipments')
         }
     };
 
@@ -58,9 +62,9 @@ export default function LoginForm() {
         <div className="p-6 md:p-8">
             <form onSubmit={handleSubmit(onFormSubmit)} className="flex flex-col gap-6">
                 <div className="flex flex-col items-center text-center">
-                    <h1 className="text-2xl font-bold">Welcome back</h1>
+                    <h1 className="text-2xl font-bold">{t('loginForm.welcome')}</h1>
                     <p className="text-muted-foreground text-balance">
-                        Login to your AMBERCHAIN account
+                        {t('loginForm.subtitle')}
                     </p>
                 </div>
 
@@ -68,10 +72,10 @@ export default function LoginForm() {
                     name="email"
                     control={control}
                     rules={{
-                        required: "Email is required.",
+                        required: t('validation.emailRequired'),
                         pattern: {
                             value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                            message: "Please enter a valid email address."
+                            message: t('validation.invalidEmail')
                         }
                     }}
                     render={({ field, fieldState: { error } }) => (
@@ -91,10 +95,10 @@ export default function LoginForm() {
                 <div className="grid gap-1">
                     <div className="flex items-center">
                         <label className="text-foreground text-sm leading-4 font-medium">
-                            Password <span className="text-destructive ml-1 h-min leading-0">*</span>
+                            {t('loginForm.passwordLabel')} <span className="text-destructive ml-1 h-min leading-0">*</span>
                         </label>
                         <a href="#" className="ml-auto text-sm underline-offset-2 hover:underline">
-                            Forgot your password?
+                            {t('loginForm.forgotPassword')}
                         </a>
                     </div>
 
@@ -102,10 +106,10 @@ export default function LoginForm() {
                         name="password"
                         control={control}
                         rules={{
-                            required: "Password is required.",
+                            required: t('validation.passwordRequired'),
                             pattern: {
                                 value: /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{6,}$/,
-                                message: "Password must be 6+ chars, with an uppercase letter and a special character."
+                                message: t('validation.passwordComplexity')
                             }
                         }}
                         render={({ field, fieldState: { error } }) => (
@@ -127,13 +131,13 @@ export default function LoginForm() {
                     disabled={!isReadyToSubmit || isSubmitting}
                     className="w-full"
                 >
-                    {isSubmitting ? 'Logging in...' : 'Login'}
+                    {isSubmitting ? t('loginForm.notifications.loading') : t('loginForm.loginButton')}
                 </Button>
 
                 <div className="text-center text-sm">
-                    Don't have an account?{' '}
+                    {t('loginForm.noAccount')}{' '}
                     <a href="/auth/register" className="underline underline-offset-4">
-                        Sign up
+                        {t('loginForm.signUp')}
                     </a>
                 </div>
             </form>
@@ -150,7 +154,11 @@ export default function LoginForm() {
                     }}
                     className={`size-4 mr-2 ${showAgreementError && '!border !border-destructive'}`}
                 />
-                {!showAgreementError ? (<span>By clicking login, you agree to our&nbsp;</span>) : (<span className='text-destructive text-center text-xs flex'>You must agree to our&nbsp;</span>)}
+                {!showAgreementError ? (
+                    <span>{t('agreement.clickingAgree')}&nbsp;</span>
+                ) : (
+                    <span className='text-destructive text-center text-xs flex'>{t('agreement.mustAgree')}&nbsp;</span>
+                )}
                 <AgreementDialog
                     title={t('loginForm.agreement_terms')}
                     sections={t('terms.sections', { returnObjects: true })}
@@ -163,7 +171,7 @@ export default function LoginForm() {
                         }
                     }}
                 />
-                <span className={showAgreementError ? 'text-destructive' : ''}>&nbsp;and&nbsp;</span>
+                <span className={showAgreementError ? 'text-destructive' : ''}>&nbsp;{t('and')}&nbsp;</span>
                 <AgreementDialog
                     title={t('loginForm.agreement_privacy')}
                     sections={t('privacy.sections', { returnObjects: true })}
