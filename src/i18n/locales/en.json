@@ -68,8 +68,8 @@
             "back": "Back",
             "previous": "Previous",
             "required": "Required",
-            "MapLoading":"Map loading...",
-            "MapLoadError":"Map data is not available for this shipment."
+            "MapLoading": "Map loading...",
+            "MapLoadError": "Map data is not available for this shipment."
         },
         "validation": {
             "required": "This field is required",
@@ -278,8 +278,15 @@
             "integrations": "Integrations",
             "news": "News"
         },
+        "clientDashFilterNav": {
+            "view": "View",
+            "active-shipments": "Active Shipments",
+            "bookings": "Bookings",
+            "quote-requests": "Quote Requests"
+        },
         "and": "and",
         "searchWord": "Search...",
+        "searchWord2": "View Details",
         "businessProfiles": {
             "manufacturer": "Manufacturer",
             "distributor": "Distributor",

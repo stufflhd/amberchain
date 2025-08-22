@@ -13,11 +13,11 @@ import {
 import LogoLink from "@/components/nav/LogoLink";
 import { sidebarNav } from "@/constants/navConfig";
 import { useTranslation } from "react-i18next";
+import { NavLink } from "react-router-dom";
 
 export function AppSidebar() {
     const { t } = useTranslation();
     const navSections = sidebarNav(t);
-
     return (
         <Sidebar>
             <SidebarHeader className={'h-16 justify-center'}>
@@ -30,13 +30,18 @@ export function AppSidebar() {
                         <SidebarGroupContent>
                             <SidebarMenu>
                                 {section.items.map((item) => (
+
                                     <SidebarMenuItem key={item.label}>
-                                        <SidebarMenuButton asChild>
-                                            <a href={item.path} className="flex items-center gap-2">
-                                                {item.icon && <item.icon className="w-4 h-4" />}
-                                                <span>{item.label}</span>
-                                            </a>
-                                        </SidebarMenuButton>
+                                        <NavLink to={item.path}>
+                                            {({ isActive }) => (
+                                                <SidebarMenuButton asChild data-active={isActive}>
+                                                    <div className="flex items-center gap-2">
+                                                        {item.icon && <item.icon className="w-4 h-4" />}
+                                                        <span>{item.label}</span>
+                                                    </div>
+                                                </SidebarMenuButton>
+                                            )}
+                                        </NavLink>
                                     </SidebarMenuItem>
                                 ))}
                             </SidebarMenu>

@@ -364,47 +364,74 @@
   background: var(--sb-corner);
 }
 
-html {
+/* html {
   scrollbar-gutter: stable both-edges;
-}
+} */
 
 /* Map */
 .maplibregl-ctrl.maplibregl-ctrl-attrib.maplibregl-compact {
   @apply hidden;
 }
 
-/* Base style for all shipment markers */
 .shipment-marker {
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 }
 
-/* Add a little bounce on hover for interactivity */
 .shipment-marker:hover {
   transform: scale(1.1);
 }
 
-/* .marker-content {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: bold;
-    color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 3px solid white;
-}
+/* Dashbrd Icon trnastion */
+@theme {
+  --animate-swing: swing 1.2s ease-in-out;
 
-.origin-marker .marker-content {
-    background-color: #22c55e;
-}
+  @keyframes swing {
+    0% {
+      transform: rotate(0deg);
+      animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
 
-.destination-marker .marker-content {
-    background-color: #ef4444;
-} */
+    12% {
+      transform: rotate(28deg);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    25% {
+      transform: rotate(-22deg);
+      animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    37% {
+      transform: rotate(16deg);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    50% {
+      transform: rotate(-12deg);
+      animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    62% {
+      transform: rotate(8deg);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    75% {
+      transform: rotate(-5deg);
+      animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+
+    87% {
+      transform: rotate(2deg);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+}
 
 .route-layer {
   @apply stroke-primary;

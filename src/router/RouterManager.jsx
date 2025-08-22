@@ -1,19 +1,30 @@
+import { lazy, Suspense } from "react";
+import { createBrowserRouter, Navigate } from "react-router-dom";
+
 import AuthLayout from "@/app/layouts/AuthLayout";
 import MainLayout from "@/app/layouts/MainLayout";
 import RootLayout from "@/app/layouts/RootLayout";
-import LoginPage from "@/features/auth/pages/LoginPage";
-import RegisterPage from "@/features/auth/pages/RegisterPage";
-import { createBrowserRouter, Navigate } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
-import NotFoundPage from "@/features/errors/NotFoundPage";
-import AdminPage from "@/features/admin/AdminPage";
 import RequireRole from "./RequireRole";
-import ShipmentsDashboard from "@/features/shipments/shipmentsDashboard";
+import PageLoader from "@/components/PageisLoading";
+import NotFoundPage from "@/features/errors/NotFoundPage";
+import ActiveShipmentsDashboard from "@/features/shipments/ActiveShipmentsDashboard";
+
+const LoginPage = lazy(() => import("@/features/auth/pages/LoginPage"));
+const RegisterPage = lazy(() => import("@/features/auth/pages/RegisterPage"));
+const AdminPage = lazy(() => import("@/features/admin/AdminPage"));
+const ShipmentsDashboard = lazy(() => import("@/features/shipments/shipmentsDashboard"));
+const ClientsDashboard = lazy(() => import("@/features/Clients/ClientsDashboard"));
+
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <RootLayout />,
+        element: (
+            <Suspense fallback={<PageLoader />}>
+                <RootLayout />
+            </Suspense>
+        ),
         children: [
             {
                 path: "auth",
@@ -67,6 +78,30 @@ const router = createBrowserRouter([
                 element: (
                     <MainLayout>
                         <ShipmentsDashboard />
+                    </MainLayout>
+                ),
+            },
+            {
+                path: "active-shipments",
+                element: (
+                    <MainLayout>
+                        <ActiveShipmentsDashboard />
+                    </MainLayout>
+                ),
+            },
+            {
+                path: "dashboard",
+                element: (
+                    <MainLayout>
+                        <ClientsDashboard />
+                    </MainLayout>
+                ),
+            },
+            {
+                path: "dashboard-view",
+                element: (
+                    <MainLayout>
+                        <ClientsDashboard />
                     </MainLayout>
                 ),
             },

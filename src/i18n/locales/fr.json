@@ -68,8 +68,8 @@
             "required": "Requis",
             "back": "Retour",
             "next": "Suivant",
-            "MapLoading":"Chargement de la map...",
-            "MapLoadError":"Les données ne sont pas disponibles pour cet envoi."
+            "MapLoading": "Chargement de la map...",
+            "MapLoadError": "Les données ne sont pas disponibles pour cet envoi."
         },
         "validation": {
             "required": "Ce champ est requis",
@@ -278,8 +278,15 @@
             "integrations": "Intégrations",
             "news": "Actualités"
         },
+        "clientDashFilterNav": {
+            "view": "Vue",
+            "active-shipments": "Expéditions Actives",
+            "bookings": "Réservations",
+            "quote-requests": "Demandes de Devis"
+        },
         "and": "et",
         "searchWord": "Rechercher...",
+        "searchWord2": "Voir les détails",
         "businessProfiles": {
             "manufacturer": "Fabricant",
             "distributor": "Distributeur",

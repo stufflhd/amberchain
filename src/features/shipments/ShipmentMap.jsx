@@ -59,7 +59,7 @@ function fitMapToRoute(map, geometry, padding = 50) {
     map.fitBounds(bounds, { padding, maxZoom: 8, duration: 1000 });
 }
 
-export default function ShipmentMap({ origin, destination, mode = 'Sea' }) {
+export default function ShipmentMap({ origin, destination, mode = 'Sea', mapHeight = '400px' }) {
     const mapContainer = useRef(null);
     const mapRef = useRef(null);
 
@@ -106,7 +106,7 @@ export default function ShipmentMap({ origin, destination, mode = 'Sea' }) {
             <div
                 className="map-container overflow-hidden rounded-lg"
                 ref={mapContainer}
-                style={{ width: "100%", height: "400px" }}
+                style={{ width: "100%", height: mapHeight }}
                 aria-label={`Shipment route map showing ${mode.toLowerCase()} route`}
             />
         </div>

@@ -27,6 +27,12 @@ export const getNavConfig = (t) => ({
     { label: t('dashNav.company'), path: "/company" },
     { label: t('dashNav.integrations'), path: "/integrations" },
     { label: t('dashNav.news'), path: "/news" },
+  ],
+  clientDashFilterNav:[
+    { label: t('clientDashFilterNav.view'), path: "/dashboard-view" },
+    { label: t('clientDashFilterNav.active-shipments'), path: "/active-shipments" },
+    { label: t('clientDashFilterNav.bookings'), path: "/bookings" },
+    { label: t('clientDashFilterNav.quote-requests'), path: "/quote-requests" },
   ]
 });
 
@@ -40,7 +46,7 @@ export const sidebarNav = (t) => [
   {
     label: "My Shipments",
     items: [
-      { label: t("sidebar.multimodal"), path: "/dashboard/shipments/multimodal", icon: Package },
+      { label: t("sidebar.multimodal"), path: "/active-shipments", icon: Package },
       { label: t("sidebar.bookings"), path: "/dashboard/shipments/bookings", icon: ClipboardList },
       { label: t("sidebar.quotations"), path: "/dashboard/shipments/quotations", icon: BookOpen },
     ]

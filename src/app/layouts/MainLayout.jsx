@@ -16,7 +16,7 @@ export default function MainLayout({ children }) {
           </div>
          <Navbar type='main'/>
         </header>
-        <main>{children}</main>
+        <main className="h-full">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );

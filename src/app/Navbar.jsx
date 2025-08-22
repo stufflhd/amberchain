@@ -21,6 +21,7 @@ export default function Navbar({ type }) {
     const isMobile = useIsMobile();
     const { t } = useTranslation();
     const navConfig = getNavConfig(t);
+
     return (
         <header className={`top-0 left-0 z-50 w-full ${type === 'auth' && 'fixed'} `}>
             <nav className="flex h-16 items-center justify-between gap-4 px-4 md:px-6">

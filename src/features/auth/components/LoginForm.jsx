@@ -52,7 +52,7 @@ export default function LoginForm() {
                 }
             );
         } catch (err) {
-            navigate('/shipments')
+            navigate('/dashboard')
         }
     };
 
