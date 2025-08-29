@@ -57,7 +57,6 @@ export const formFields = {
         validation: (value) => !value.trim() || !phoneRegex.test(value) ? t('validation.invalidPhone') : null
     },
 
-    // Company Info Fields
     companyName: {
         name: "companyName",
         label: () => t('registerForm.companyName'),
@@ -91,13 +90,11 @@ export const formFields = {
     },
 };
 
-// Login form specific fields
 export const loginFields = [
     formFields.email,
     formFields.password
 ];
 
-// Registration step fields
 export const userInfoStepFields = [
     formFields.firstName,
     formFields.lastName,

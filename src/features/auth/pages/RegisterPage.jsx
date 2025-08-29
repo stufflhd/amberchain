@@ -106,14 +106,6 @@ export default function RegisterPage() {
       return;
     }
 
-    // console.log('Form data before submission:', {
-    //   ...formData,
-    //   isStep1Valid,
-    //   isStep2Valid,
-    //   isStep3Valid,
-    //   errors
-    // });
-
     try {
       await handleApiRequest(
         () => mutation.mutateAsync(formData),

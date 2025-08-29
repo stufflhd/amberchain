@@ -1,62 +1,17 @@
-import React, { useId } from "react";
+import React from 'react';
 
 const WarehouseIcon = ({ className = "" }) => {
-    const id = useId();
-    const g1 = `${id}-color-1`;
-    const g2 = `${id}-color-2`;
-    const g3 = `${id}-color-3`;
+    const primaryC = 'var(--primary)';
+    const secondaryC = 'var(--secondary)';
 
     return (
-        <svg
-            className={className}
-            viewBox="0 0 256 256"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
-            width="24px"
-            height="24px"
-        >
-            <defs>
-                <linearGradient id={g1} x1="12" y1="2.858" x2="12" y2="10.417" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stopColor="#ffffff" />
-                    <stop offset="1" stopColor="#cfd9ff" />
-                </linearGradient>
-                <linearGradient id={g2} x1="12" y1="3" x2="12" y2="21" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stopColor="#809afb" />
-                    <stop offset="1" stopColor="#07269b" />
-                </linearGradient>
-                <linearGradient id={g3} x1="16.5" y1="2.858" x2="16.5" y2="20.953" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stopColor="#ffffff" />
-                    <stop offset="1" stopColor="#cfd9ff" />
-                </linearGradient>
-            </defs>
-
-            <g
-                fill="none"
-                fillRule="nonzero"
-                stroke="none"
-                strokeWidth="1"
-                strokeLinecap="butt"
-                strokeLinejoin="miter"
-                strokeMiterlimit="10"
-                strokeDasharray=""
-                strokeDashoffset="0"
-                fontFamily="none"
-                fontWeight="none"
-                fontSize="none"
-                textAnchor="none"
-                style={{ mixBlendMode: "normal" }}
-            >
-                <g transform="scale(10.66667,10.66667)">
-                    <rect x="8" y="3" width="8" height="6" fill={`url(#${g1})`} />
-                    <path
-                        d="M19,3h-4c-0.552,0 -1,0.448 -1,1v2c0,0.552 -0.448,1 -1,1h-2c-0.552,0 -1,-0.448 -1,-1v-2c0,-0.552 -0.448,-1 -1,-1h-4c-1.105,0 -2,0.895 -2,2v14c0,1.105 0.895,2 2,2h14c1.105,0 2,-0.895 2,-2v-14c0,-1.105 -0.895,-2 -2,-2zM18,19h-3c-0.552,0 -1,-0.448 -1,-1c0,-0.552 0.448,-1 1,-1h3c0.552,0 1,0.448 1,1c0,0.552 -0.448,1 -1,1z"
-                        fill={`url(#${g2})`}
-                    />
-                    <path
-                        d="M15,19h3c0.552,0 1,-0.448 1,-1v0c0,-0.552 -0.448,-1 -1,-1h-3c-0.552,0 -1,0.448 -1,1v0c0,0.552 0.448,1 1,1z"
-                        fill={`url(#${g3})`}
-                    />
-                </g>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" height="64" viewBox="0 0 64 64" width="64" className={className}>
+            <g clipRule="evenodd" fillRule="evenodd">
+                <path
+                    d="m7 9.52786c1.69392-3.38784 5.1565-5.52786 8.9443-5.52786h32.1114c3.7878 0 7.2504 2.14003 8.9443 5.52787l4.7889 9.57773c.1388.2777.2111.5839.2111.8944v28c0 6.6274-5.3726 12-12 12h-36c-6.62742 0-12-5.3726-12-12v-28c0-.3105.07229-.6167.21115-.8944zm8.9443-1.52786c-2.2727 0-4.3502 1.28401-5.3666 3.3167l-3.34163 6.6833h22.76393v-10zm18.0557 0v10h2v-1c0-1.1046.8954-2 2-2h14c1.1046 0 2 .8954 2 2v1h2.7639l-3.3416-6.6833c-1.0164-2.03268-3.0939-3.3167-5.3666-3.3167zm20 14v11.26c0 2.7982-3.4923 4.0728-5.2947 1.9324l-3.7053-4.4-3.7053 4.4c-1.8024 2.1404-5.2947.8658-5.2947-1.9324v-11.26h-30v26c0 4.4183 3.58172 8 8 8h36c4.4183 0 8-3.5817 8-8v-26zm-4 8.5201v-11.5201h-10v11.5201l3.4702-4.1209c.38-.4512.9398-.7117 1.5298-.7117s1.1498.2605 1.5298.7117z"
+                    fill={primaryC}
+                />
+                <path d="m10 44c0-2.2091 1.7909-4 4-4h16c2.2091 0 4 1.7909 4 4v4c0 2.2091-1.7909 4-4 4h-16c-2.2091 0-4-1.7909-4-4zm20 0h-16v4h16z" fill={secondaryC} />
             </g>
         </svg>
     );

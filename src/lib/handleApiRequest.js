@@ -1,7 +1,6 @@
 import { toast } from 'sonner';
 import useLoadingStore from '@/store/useLoadingStore';
 
-// Handles an API request promise, showing loading, success, and error toasts.
 export async function handleApiRequest(promiseFn, messages = {}) {
     const setIsLoadingGlobally = useLoadingStore.getState().setIsLoadingGlobally;
     const toastId = toast.loading(messages.loading || 'Loading...');

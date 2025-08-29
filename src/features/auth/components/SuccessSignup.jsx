@@ -53,7 +53,7 @@ export default function SuccessSignup() {
                             <Button className="flex-1" asChild>
                                 <a href="/auth/login">{t("SuccessSignup.cta1")}</a>
                             </Button>
-                            <Button className="flex-1" variant="outline" asChild>
+                            <Button className="flex-1 rounded-md" variant="outline" asChild>
                                 <a href="https://mail.google.com" target="_blank" rel="noopener noreferrer">{t("SuccessSignup.cta2")}</a>
                             </Button>
                         </div>

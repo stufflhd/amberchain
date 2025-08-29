@@ -21,18 +21,32 @@ export const getNavConfig = (t) => ({
     { label: t('clientTopNav.support'), path: "/support", icon: NotebookText },
     { label: t('clientTopNav.logout'), path: "/logout", icon: LogOut },
   ],
-  clientDashNav:[
+  clientDashNav: [
     { label: t('dashNav.manage'), path: "/manage" },
     { label: t('dashNav.services'), path: "/services" },
     { label: t('dashNav.company'), path: "/company" },
     { label: t('dashNav.integrations'), path: "/integrations" },
     { label: t('dashNav.news'), path: "/news" },
   ],
-  clientDashFilterNav:[
+  clientDashFilterNav: [
     { label: t('clientDashFilterNav.view'), path: "/dashboard-view" },
     { label: t('clientDashFilterNav.active-shipments'), path: "/active-shipments" },
     { label: t('clientDashFilterNav.bookings'), path: "/bookings" },
     { label: t('clientDashFilterNav.quote-requests'), path: "/quote-requests" },
+  ],
+  cargoNav: [
+    { label: t("cargoNav.deliveryOrder"), path: "/delivery-order" },
+    { label: t("cargoNav.releaseCargo"), path: "/release-cargo" },
+    { label: t("shipmentSupport.claimCargo"), path: "/claim-about-cargo" },
+    { label: t("cargoNav.requestUpdate"), path: "/request-update" },
+    { label: t("cargoNav.docsview"), path: "/docs-view" },
+  ],
+  shipmentSupport: [
+    { label: t("shipmentSupport.reportDelay"), path: "/report-delay" },
+    { label: t("shipmentSupport.ratingComment"), path: "/rating-and-comment" },
+    { label: t("shipmentSupport.claimEquipment"), path: "/claim-about-equipment" },
+    { label: t("shipmentSupport.emission"), path: "/emission" },
+    { label: t("shipmentSupport.reportIssue"), path: "/report-issue" },
   ]
 });
 

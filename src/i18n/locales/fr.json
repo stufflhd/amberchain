@@ -30,7 +30,15 @@
                     "shipmentId": "ID Expédition/Réservation",
                     "copyId": "Copier l'ID",
                     "viewDetails": "Voir les détails",
-                    "dailyShipments": "Expéditions quotidiennes"
+                    "dailyShipments": "Expéditions quotidiennes",
+                    "docNumberEBiz": "Numéro de Document",
+                    "firstMile": "Premier Kilomètre",
+                    "lastMile": "Dernier Kilomètre",
+                    "task": "Tâche",
+                    "fulfillmentCenter": "Centre de distribution",
+                    "sortationHub": "Centre de tri",
+                    "origin": "ORIGINE",
+                    "destination": "DESTINATION"
                 },
                 "status": {
                     "confirmed": "Confirmé",
@@ -69,7 +77,10 @@
             "back": "Retour",
             "next": "Suivant",
             "MapLoading": "Chargement de la map...",
-            "MapLoadError": "Les données ne sont pas disponibles pour cet envoi."
+            "MapLoadError": "Les données ne sont pas disponibles pour cet envoi.",
+            "all": "Tout",
+            "openMenu": "Ouvrir le menu",
+            "selected": "sélectionné"
         },
         "validation": {
             "required": "Ce champ est requis",
@@ -295,6 +306,79 @@
             "consultant": "Consultant",
             "others": "Autres",
             "logisticsPartnerExample": "ex: Partenaire logistique"
+        },
+        "pageTitles": {
+            "home": "Accueil",
+            "login": "Connexion",
+            "register": "Inscription",
+            "admin": "Panneau Admin",
+            "shipments": "Expéditions",
+            "active-shipments": "Expéditions Actives",
+            "dashboard": "Tableau de bord",
+            "dashboard-view": "Vue Tableau de bord",
+            "notFound": "Page introuvable",
+            "multimodal": "Présentation des expéditions multimodales",
+            "bookings": "Réservations",
+            "quotations": "Devis",
+            "compare-options": "Comparer les Options",
+            "instant-quote": "Devis Instantané",
+            "book": "Réserver une Expédition",
+            "smart-helpers": "Assistants Intelligents",
+            "readyload": "ReadyLoad",
+            "troketrace": "TrokeTrace",
+            "soc-for-all": "SOC Pour Tous",
+            "ireposition": "IReposition",
+            "manage-documents": "Gérer les Documents",
+            "tracking": "Suivi",
+            "depot-storage": "Dépôt & Stockage",
+            "free-time-penalties": "Temps Libre & Pénalités",
+            "customs-compliance": "Douane & Conformité",
+            "finance-your-log": "Financer Votre Logistique",
+            "wallet": "Portefeuille",
+            "invoices": "Factures",
+            "track-commission": "Suivi des Commissions",
+            "outsource-your-log": "Externaliser Votre Logistique",
+            "assign-agent": "Assigner un Agent",
+            "enhance-profitability": "Améliorer la Rentabilité",
+            "insights": "Aperçus"
+        },
+        "cargoNav": {
+            "deliveryOrder": "Bon de livraison",
+            "releaseCargo": "Libération du cargo",
+            "requestUpdate": "Demande de mise à jour",
+            "docsview": "Voir les documents"
+        },
+        "shipmentSupport": {
+            "reportDelay": "Signaler un retard",
+            "ratingComment": "Évaluation et commentaire",
+            "claimEquipment": "Réclamation sur l'équipement",
+            "emission": "Émission",
+            "claimCargo": "Réclamation sur la cargaison",
+            "reportIssue": "Signaler un problème"
+        },
+        "search": {
+            "loading": "Chargement...",
+            "noResults": "Aucun résultat trouvé.",
+            "startTyping": "Commencez à taper pour rechercher un envoi.",
+            "resultsFor": "Affichage des résultats pour :",
+            "clear": "Effacer la recherche",
+            "pageTitle": "Résultats de recherche pour \"{{searchTerm}}\"",
+            "shipmentResultsTitle": "Résultats d'expéditions ({{count}})",
+            "bookingResultsTitle": "Résultats de réservations ({{count}})",
+            "bookingComponentPlaceholder": "Le composant de réservation n'est pas encore implémenté.",
+            "foundCount": "{{count}} réservation(s) trouvée(s).",
+            "noResultsFor": "Nous n'avons rien trouvé correspondant à \"{{searchTerm}}\"."
+        },
+        "filters": {
+            "status": "Statut",
+            "mode": "Mode"
+        },
+        "modes": {
+            "sea": "MER",
+            "air": "AIR",
+            "road": "ROUTE",
+            "rail": "RAIL",
+            "ebusiness": "E-BUSINESS"
         }
     }
 }

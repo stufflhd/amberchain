@@ -42,7 +42,6 @@ export default function BusinessAndTermsStep({ data, errors, onUpdate }) {
     <section className="space-y-6">
       <h2 className="text-xl font-semibold text-center mb-6">{t('registerForm.step3Title')}</h2>
 
-      {/* Business Profile Section */}
       <div className="space-y-2 text-start">
         <Label htmlFor="businessProfile">
           {t('registerForm.businessProfile')}
@@ -90,7 +89,6 @@ export default function BusinessAndTermsStep({ data, errors, onUpdate }) {
         />
       )}
 
-      {/* Terms and Privacy Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
         <div className={`border rounded-md p-4 flex items-start gap-3 ${errors.hasAgreedToTerms ? 'border-destructive' : 'border-input'}`}>
           <Checkbox

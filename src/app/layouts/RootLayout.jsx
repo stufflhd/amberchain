@@ -17,7 +17,7 @@ export default function RootLayout() {
     return (
         <>
             <Outlet />
-            <Toaster />
+            <Toaster richColors/>
         </>
     );
 }

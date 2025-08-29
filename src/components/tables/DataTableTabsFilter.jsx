@@ -1,41 +1,50 @@
-import * as React from "react"
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import * as React from "react";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 export default function DataTableTabsFilter({
   table,
   columnId,
   options = [],
-  defaultValue = "all",
   includeAll = true,
   allLabel = "All",
   className = "*:data-[slot=toggle-group-item]:!px-4",
+  onTabChange, 
 }) {
-  const [value, setValue] = React.useState(defaultValue)
+  const column = table.getColumn(columnId);
+  const currentFilterValue = column?.getFilterValue() || "all";
 
-  React.useEffect(() => {
-    const col = table.getColumn(columnId)
-    if (!col) return
-    if (value === "all") {
-      col.setFilterValue(undefined)
+  const handleValueChange = (newValue) => {
+    if (!newValue) return;
+
+    if (newValue === "all") {
+      column?.setFilterValue(undefined);
     } else {
-      col.setFilterValue(String(value))
+      column?.setFilterValue(newValue);
     }
-  }, [value, table, columnId])
+
+    if (onTabChange) {
+      onTabChange(newValue);
+    }
+  };
 
   return (
     <ToggleGroup
-      type="single"
-      value={value}
-      onValueChange={(v) => v && setValue(v)}
+      type="single" 
+      value={currentFilterValue} 
+      onValueChange={handleValueChange}
       variant="outline"
       className={className}
     >
       {includeAll && <ToggleGroupItem value="all">{allLabel}</ToggleGroupItem>}
       {options.map((opt) => (
-        <ToggleGroupItem key={opt.value} value={String(opt.value)} className={'flex-none whitespace-nowrap w-max'}>
+        <ToggleGroupItem
+          key={opt.value}
+          value={String(opt.value)}
+          className={"flex-none whitespace-nowrap w-max"}
+        >
           {opt.label ?? opt.value}
         </ToggleGroupItem>
       ))}
     </ToggleGroup>
-  )
+  );
 }

@@ -1,4 +1,3 @@
-// src/components/ShipmentDetailsDialog.jsx
 import React from 'react';
 import {
   Dialog,
@@ -9,7 +8,6 @@ import { ShipmentMap } from "./ShipmentMap";
 import { Separator } from "@/components/ui/separator";
 import { Package, User, MapPin, Calendar, Ship, AlertCircle, Anchor, Warehouse } from "lucide-react";
 
-// Helper component for the new "Summary" section
 const SummaryItem = ({ icon, label, value }) => (
     <div className="text-sm">
         <div className="flex items-center text-muted-foreground">
@@ -20,7 +18,6 @@ const SummaryItem = ({ icon, label, value }) => (
     </div>
 );
 
-// Helper component for the new "Route Stepper"
 const RouteStep = ({ icon, title, subtitle, isLast = false }) => (
     <div className="flex">
         <div className="flex flex-col items-center mr-4">
@@ -43,7 +40,6 @@ export function ShipmentDetailsDialog({ shipment, onClose }) {
   
   if (!isOpen) return null;
 
-  // The route data for the stepper. You should get this from your real shipment object.
   const routeSteps = shipment.route || [
     { name: "Rotterdam, Netherlands", type: "Place of Loading", icon: <Warehouse /> },
     { name: "Port of Rotterdam", type: "Port of Loading", icon: <Anchor /> },
@@ -55,12 +51,10 @@ export function ShipmentDetailsDialog({ shipment, onClose }) {
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="w-full !max-w-6xl p-0 border-0 overflow-hidden" style={{ height: '600px' }}>
         <div className="relative w-full h-full">
-          {/* Map as the background layer */}
           {shipment.origin && shipment.destination && (
             <ShipmentMap origin={shipment.origin} destination={shipment.destination} />
           )}
 
-          {/* Details panel overlaid on the left */}
           <div className="absolute top-0 left-0 h-full w-[400px] bg-background/80 backdrop-blur-sm shadow-2xl flex flex-col">
             <div className="p-6 space-y-4 flex-shrink-0">
                 <div className="flex justify-between items-start">
@@ -74,9 +68,7 @@ export function ShipmentDetailsDialog({ shipment, onClose }) {
 
             <Separator />
 
-            {/* Scrollable content area */}
             <div className="flex-grow overflow-y-auto p-6 space-y-6">
-                {/* Route Stepper */}
                 <div>
                     <h3 className="text-lg font-semibold mb-4">Route</h3>
                     {routeSteps.map((step, index) => (
@@ -92,7 +84,6 @@ export function ShipmentDetailsDialog({ shipment, onClose }) {
 
                 <Separator />
                 
-                {/* Summary Grid */}
                 <div>
                     <h3 className="text-lg font-semibold mb-4">Summary</h3>
                     <div className="grid grid-cols-2 gap-x-4 gap-y-6">

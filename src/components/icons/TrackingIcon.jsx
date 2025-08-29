@@ -1,60 +1,20 @@
-import React, { useId } from "react";
+import React from 'react';
 
 const TrackingIcon = ({ className = "" }) => {
-    const id = useId();
-    const g1 = `${id}-color-1`;
-    const g2 = `${id}-color-2`;
-    const g3 = `${id}-color-3`;
+    const primaryC = 'var(--primary)';
+    const secondaryC = 'var(--secondary)';
 
     return (
-        <svg
-            className={className}
-            viewBox="0 0 256 256"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
-            width="24px"
-            height="24px"
-        >
-            <defs>
-                <linearGradient id={g1} x1="12" y1="4.004" x2="12" y2="29.5" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stopColor="#ffffff" />
-                    <stop offset="0.5" stopColor="#6b88f9" />
-                    <stop offset="1" stopColor="#07269b" />
-                </linearGradient>
-                <linearGradient id={g2} x1="12" y1="3" x2="12" y2="15.981" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stopColor="#6b88f9" />
-                    <stop offset="1" stopColor="#07269b" />
-                </linearGradient>
-                <linearGradient id={g3} x1="12" y1="6" x2="12" y2="10" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stopColor="#ffffff" />
-                    <stop offset="1" stopColor="#bdc8f0" />
-                </linearGradient>
-            </defs>
-
-            <g
-                fill="none"
-                fillRule="nonzero"
-                stroke="none"
-                strokeWidth="1"
-                strokeLinecap="butt"
-                strokeLinejoin="miter"
-                strokeMiterlimit="10"
-                strokeDasharray=""
-                strokeDashoffset="0"
-                fontFamily="none"
-                fontWeight="none"
-                fontSize="none"
-                textAnchor="none"
-                style={{ mixBlendMode: "normal" }}
-            >
-                <g transform="scale(10.66667,10.66667)">
-                    <ellipse cx="12" cy="16.5" rx="10" ry="4.5" fill={`url(#${g1})`} />
-                    <path
-                        d="M17,8c0,3.03 -2.74,6.15 -4.26,7.67c-0.42,0.42 -1.05,0.41 -1.48,0c-1.57,-1.5 -4.26,-4.64 -4.26,-7.67c0,-2.76 2.24,-5 5,-5c2.76,0 5,2.24 5,5z"
-                        fill={`url(#${g2})`}
-                    />
-                    <circle cx="12" cy="8" r="2" fill={`url(#${g3})`} />
-                </g>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" height="64" viewBox="0 0 64 64" width="64" className={className}>
+            <g clipRule="evenodd" fillRule="evenodd">
+                <path
+                    d="m34.6751 13.3624c-.2204.109-.4459.2037-.6751.2841v37.3648c0 1.9382-2.0351 3.2023-3.7726 2.3435l-11.3248-5.5982c-.5675-.2805-1.2377-.2805-1.8052 0l-6.4223 3.1747c-3.95538 1.9553-8.6751-.8703-8.6751-5.33v-30.7034c0-2.2676 1.2957-4.327 3.32486-5.33003l10.00004-4.94327c1.6847-.8328 3.6655-.8328 5.3502 0l10.4223 5.15202c.5675.28058 1.2377.28058 1.8052 0l10.4223-5.15202c1.6847-.8328 3.6655-.8328 5.3502 0l10 4.94327c2.0292 1.00303 3.3249 3.06243 3.3249 5.33003v16.3403c0 1.1046-.8954 2-2 2s-2-.8954-2-2v-16.3403c0-.7282-.4163-1.4075-1.0974-1.7442l-10-4.9433c-.5675-.28053-1.2377-.28053-1.8052 0zm-14.6751 30.5243v-35.13381l9.3249 4.60951c.2204.109.4459.2037.6751.2841v35.1338l-9.3249-4.6095c-.2204-.109-.4459-.2037-.6751-.2841zm-4-35.13381v35.13381c-.2292.0804-.4547.1751-.6751.2841l-6.42232 3.1747c-1.3638.6742-2.90258-.3243-2.90258-1.7442v-30.7034c0-.7282.41632-1.4075 1.09743-1.7442z"
+                    fill={primaryC}
+                />
+                <path
+                    d="m49.7213 31.2517c-.6041-.3356-1.3385-.3356-1.9426 0l-11.25 6.25c-.6349.3527-1.0287 1.022-1.0287 1.7483v12.5c0 .7263.3938 1.3956 1.0287 1.7483l11.25 6.25c.6041.3356 1.3385.3356 1.9426 0l11.25-6.25c.6349-.3527 1.0287-1.022 1.0287-1.7483v-12.5c0-.7263-.3938-1.3956-1.0287-1.7483zm-8.103 7.9983 7.1317-3.9621 7.1317 3.9621-7.1317 3.9621zm9.1317 7.4268 7.25-4.0278v7.9242l-7.25 4.0278zm-4 0v7.9242l-7.25-4.0278v-7.9242z"
+                    fill={secondaryC}
+                />
             </g>
         </svg>
     );

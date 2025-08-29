@@ -8,7 +8,7 @@ import WarehouseIcon from "@/components/icons/WarehouseIcon";
 export const widgetsConfig = [
     [
         { to: '/wallet', icon: WalletIcon, title: 'Wallet' },
-        { to: '/alerts', icon: AlertIcon, title: 'Alerts' },
+        // { to: '/alerts', icon: AlertIcon, title: 'Alerts' },
     ],
     [
         { to: '/tasks', icon: ChecklistIcon, title: 'Outstanding Tasks' },

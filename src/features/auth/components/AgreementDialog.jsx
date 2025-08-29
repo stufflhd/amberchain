@@ -78,7 +78,7 @@ export default function AgreementDialog({ title, sections = [{ title: '', conten
                         </span>
                     )}
                     <DialogClose asChild>
-                        <Button type="button" variant="outline">
+                        <Button type="button" variant="outline" className={'rounded-md'}>
                             {t('dialog.cancel')}
                         </Button>
                     </DialogClose>

@@ -35,7 +35,6 @@ export default function MobileNav({ user }) {
 
                 <SheetDescription asChild>
                     <div className="flex flex-1 flex-col justify-between">
-                        {/* Navigation Items */}
                         <NavigationMenu className="flex-1">
                             <div className="flex flex-col gap-4 p-4">
                                 <NavigationItems isMobile />

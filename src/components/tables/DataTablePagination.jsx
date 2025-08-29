@@ -13,15 +13,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select"
+import { useTranslation } from "react-i18next";
 
 export function DataTablePagination({
   table,
 }) {
+  const { t } = useTranslation();
   return (
-    <div className="flex items-center justify-between px-2">
+    <div className="flex items-center justify-between">
       <div className="text-muted-foreground flex-1 text-sm">
         {table.getFilteredSelectedRowModel().rows.length} of{" "}
-        {table.getFilteredRowModel().rows.length} row(s) selected.
+        {table.getFilteredRowModel().rows.length} row(s)  {t("common.selected")}.
       </div>
       <div className="flex items-center">
         <div className="flex items-center space-x-2">

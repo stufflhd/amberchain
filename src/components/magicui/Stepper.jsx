@@ -4,9 +4,7 @@ import { Button } from "../ui/button";
 import { Loader } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 
-/**
- * A multi-step form component that manages step transitions and validation.
- */
+
 export default function Stepper({
     children,
     initialStep = 1,
@@ -90,7 +88,6 @@ export default function Stepper({
     );
 }
 
-// Manages the height and animation of the step content area.
 function StepContentWrapper({ currentStep, direction, children }) {
     const [parentHeight, setParentHeight] = useState(0);
 
@@ -113,7 +110,6 @@ function StepContentWrapper({ currentStep, direction, children }) {
     );
 }
 
-// Handles the sliding animation for each step.
 function SlideTransition({ children, direction, onHeightReady }) {
     const containerRef = useRef(null);
     useLayoutEffect(() => {
@@ -144,12 +140,10 @@ function SlideTransition({ children, direction, onHeightReady }) {
     );
 }
 
-// Wrapper for step content.
 export function Step({ children }) {
     return <div className="p-1">{children}</div>;
 }
 
-// Renders the circular step indicator.
 function StepIndicator({ step, currentStep }) {
     const status = currentStep === step ? "active" : currentStep < step ? "inactive" : "complete";
     return (
@@ -169,7 +163,6 @@ function StepIndicator({ step, currentStep }) {
     );
 }
 
-// Renders the line connecting step indicators.
 function StepConnector({ isComplete }) {
     return (
         <div className="relative mx-2 h-0.5 flex-1 rounded bg-muted">
@@ -183,7 +176,6 @@ function StepConnector({ isComplete }) {
     );
 }
 
-// Renders the animated checkmark icon.
 function CheckIcon(props) {
     return (
         <svg {...props} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">

@@ -50,12 +50,10 @@ export default function PhoneNumberField({
 
   const { data: countries = [], isLoading, isError } = useCountriesQuery();
 
-  // Refs for measurement: hidden off-screen list and visible list
   const hiddenListRef = useRef(null);
   const visibleListRef = useRef(null);
   const [listSize, setListSize] = useState({ width: null, height: null });
 
-  // defer the full list render so the popover can paint quickly
   useEffect(() => {
     if (open) {
       setShowList(false);
@@ -66,7 +64,6 @@ export default function PhoneNumberField({
     }
   }, [open]);
 
-  // measure either hidden or visible CommandList after it renders
   useLayoutEffect(() => {
     const measure = () => {
       const el = hiddenListRef.current || visibleListRef.current;
@@ -76,7 +73,6 @@ export default function PhoneNumberField({
       }
     };
 
-    // measure on countries change or when the hidden/visible list mounts
     const raf = requestAnimationFrame(() => {
       measure();
     });
@@ -162,7 +158,6 @@ export default function PhoneNumberField({
     }
   }
 
-  // loader wrapper style: use measured size when available; else fallback to sensible defaults
   const fallbackMinHeight = 280;
   const loaderWrapperStyle = {
     width: listSize.width ? `${listSize.width}px` : "100%",
@@ -225,7 +220,6 @@ export default function PhoneNumberField({
             <Command>
               <CommandInput placeholder={t("phoneField.searchCountry")} />
 
-              {/* Hidden, off-screen CommandList for measuring (renders only when countries loaded and not yet measured) */}
               {countries.length > 0 && !listSize.width && (
                 <div style={{ position: "absolute", left: -9999, top: 0, visibility: "hidden", pointerEvents: "none" }}>
                   <CommandList ref={hiddenListRef}>
@@ -235,10 +229,8 @@ export default function PhoneNumberField({
                 </div>
               )}
 
-              {/* wrapper that keeps width/height stable using measured size or fallback */}
               <div style={loaderWrapperStyle} className="overflow-hidden">
                 {(!showList || isLoading) ? (
-                  // Opening loader — uses measured dims or fallback
                   <div className="flex items-center justify-center p-4 w-full h-full">
                     <LoaderCircleIcon className="animate-spin" size={20} />
                     <span className="ml-2 text-sm">{t("phoneField.loading")}</span>
@@ -248,7 +240,6 @@ export default function PhoneNumberField({
                     <CommandEmpty>{t("phoneField.errorLoading")}</CommandEmpty>
                   </CommandList>
                 ) : (
-                  // Real list (visible)
                   <CommandList ref={visibleListRef}>
                     <CommandEmpty>{t("phoneField.noCountryFound")}</CommandEmpty>
                     <CommandGroup>{countryItems}</CommandGroup>
@@ -257,7 +248,6 @@ export default function PhoneNumberField({
               </div>
             </Command>
 
-            {/* selecting overlay sits on top of the content and matches same box */}
             {selecting && (
               <div
                 className="absolute inset-0 z-50 flex items-center justify-center bg-background/60"

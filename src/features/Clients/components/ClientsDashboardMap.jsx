@@ -2,25 +2,22 @@ import { cn } from "@/lib/utils";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { Link } from "react-router-dom";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
-import MapSkeleton from "@/features/shipments/components/MapSkeleton";
-import MapLoadError from '@/features/shipments/components/MapLoadError';
+import MapSkeleton from "@/features/shipments/components/map/MapSkeleton";
+import MapLoadError from '@/features/shipments/components/map/MapLoadError';
 import { getNavConfig } from "@/constants/navConfig";
 import { useTranslation } from "react-i18next";
-const ShipmentMapComponent = lazy(() => import('../../shipments/ShipmentMap'));
+const ShipmentMapComponent = lazy(() => import('../../shipments/components/map/ShipmentMap'));
 export default function ClientsDashboardMap({ className }) {
 
-    // height of the map
     const [mapHeight, setMapHeight] = useState(0)
     const mapContRef = useRef(null)
     useEffect(() => {
         setMapHeight(mapContRef.current.clientHeight)
     })
 
-    // Links
     const { t } = useTranslation();
     const links = getNavConfig(t).clientDashFilterNav;
 
-    // Map
     const shipment = {
         "route": [
             {
@@ -88,9 +85,8 @@ export default function ClientsDashboardMap({ className }) {
                 }
             </ToggleGroup>
 
-            {/* Map */}
             <section className="w-full h-full" ref={mapContRef}>
-                {!hasMapData ? (
+                {hasMapData ? (
                     showMap ? (
                         <Suspense fallback={<MapSkeleton className={'h-full'} />}>
                             <ShipmentMapComponent

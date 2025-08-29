@@ -8,14 +8,13 @@ import ProtectedRoute from "./ProtectedRoute";
 import RequireRole from "./RequireRole";
 import PageLoader from "@/components/PageisLoading";
 import NotFoundPage from "@/features/errors/NotFoundPage";
-import ActiveShipmentsDashboard from "@/features/shipments/ActiveShipmentsDashboard";
+import ActiveShipmentsOverview from "@/features/shipments/ActiveShipmentsOverview";
+import SearchResultsPage from "@/features/search/SearchResultsPage";
 
 const LoginPage = lazy(() => import("@/features/auth/pages/LoginPage"));
 const RegisterPage = lazy(() => import("@/features/auth/pages/RegisterPage"));
 const AdminPage = lazy(() => import("@/features/admin/AdminPage"));
-const ShipmentsDashboard = lazy(() => import("@/features/shipments/shipmentsDashboard"));
 const ClientsDashboard = lazy(() => import("@/features/Clients/ClientsDashboard"));
-
 
 const router = createBrowserRouter([
     {
@@ -28,9 +27,9 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "auth",
-                element: <AuthLayout />,
+                element: <AuthLayout title="pageTitles.login" />,
                 errorElement: (
-                    <AuthLayout>
+                    <AuthLayout title="pageTitles.notFound">
                         <NotFoundPage />
                     </AuthLayout>
                 ),
@@ -45,9 +44,9 @@ const router = createBrowserRouter([
                 element: <ProtectedRoute />,
                 children: [
                     {
-                        element: <MainLayout />,
+                        element: <MainLayout title="pageTitles.home" />,
                         errorElement: (
-                            <MainLayout>
+                            <MainLayout title="pageTitles.notFound">
                                 <NotFoundPage />
                             </MainLayout>
                         ),
@@ -68,31 +67,31 @@ const router = createBrowserRouter([
             {
                 path: "*",
                 element: (
-                    <AuthLayout>
+                    <AuthLayout title="pageTitles.notFound">
                         <NotFoundPage />
                     </AuthLayout>
                 ),
             },
             {
-                path: "shipments",
+                path: "search",
                 element: (
-                    <MainLayout>
-                        <ShipmentsDashboard />
+                    <MainLayout title="pageTitles.searchResults">
+                        <SearchResultsPage />
                     </MainLayout>
                 ),
             },
             {
                 path: "active-shipments",
                 element: (
-                    <MainLayout>
-                        <ActiveShipmentsDashboard />
+                    <MainLayout title="pageTitles.active-shipments">
+                        <ActiveShipmentsOverview />
                     </MainLayout>
                 ),
             },
             {
                 path: "dashboard",
                 element: (
-                    <MainLayout>
+                    <MainLayout title="pageTitles.dashboard">
                         <ClientsDashboard />
                     </MainLayout>
                 ),
@@ -100,7 +99,7 @@ const router = createBrowserRouter([
             {
                 path: "dashboard-view",
                 element: (
-                    <MainLayout>
+                    <MainLayout title="pageTitles.dashboard-view">
                         <ClientsDashboard />
                     </MainLayout>
                 ),

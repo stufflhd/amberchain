@@ -1,6 +1,11 @@
 {
     "translation": {
         "shipments": {
+            "status": {
+                "active": "Active",
+                "finished": "Finished",
+                "delayed": "Delayed"
+            },
             "cards": {
                 "totalValue": {
                     "description": "Total Shipments Value",
@@ -25,39 +30,52 @@
             },
             "table": {
                 "columns": {
-                    "selectAll": "Select all",
-                    "selectRow": "Select row",
-                    "shipmentId": "Shipment/Booking ID",
-                    "copyId": "Copy ID",
-                    "viewDetails": "View Details",
-                    "dailyShipments": "Daily Shipments"
+                    "shipmentId": "Shipment ID",
+                    "documentNumber": "Document Number",
+                    "por": "POR",
+                    "pol": "POL",
+                    "pod": "POD",
+                    "finalPod": "Final POD",
+                    "etd": "ETD",
+                    "eta": "ETA",
+                    "status": "Shipment Status",
+                    "carrier": "Carrier / Forwarder",
+                    "smartTool": "Smart Tool",
+                    "terminal": "Terminal",
+                    "docNumberEBiz": "Document Number",
+                    "firstMile": "First Mile",
+                    "lastMile": "Last Mile",
+                    "task": "Task",
+                    "fulfillmentCenter": "Fulfillment center",
+                    "sortationHub": "Sortation Hub",
+                    "origin": "ORIGIN",
+                    "destination": "DESTINATION"
                 },
-                "status": {
-                    "confirmed": "Confirmed",
-                    "pending": "Pending",
-                    "inTransit": "In Transit",
-                    "delayed": "Delayed"
+                "actions": {
+                    "viewDetails": "View Details",
+                    "reportIssue": "Report Issue",
+                    "manageDocs": "Manage Documents"
                 }
             },
             "shipmentDetails": {
-                "route": {
-                    "placeOfLoading": "Place of Loading",
-                    "portOfLoading": "Port of Loading",
-                    "portOfDischarge": "Port of Discharge",
-                    "placeOfDischarge": "Place of Discharge"
-                },
-                "summary": {
-                    "shipmentId": "Shipment ID",
-                    "customer": "Customer",
-                    "origin": "Origin",
-                    "destination": "Destination",
-                    "departure": "Departure",
-                    "eta": "ETA",
-                    "mode": "Mode",
-                    "status": "Status",
-                    "alerts": "Alerts",
-                    "soc": "SOC"
-                }
+                "shipmentTitle": "Shipment: {{shipmentNumber}}",
+                "containerCount": "{{count}} CONTAINERS",
+                "etd": "ETD",
+                "lastUpdate": "Last Update",
+                "viewDetails": "View Details",
+                "vesselVehicle": "Vessel/Vehicle",
+                "voyage": "Voyage",
+                "eta": "ETA",
+                "transshipment": "Transshipment",
+                "timeline": "Timeline",
+                "shipmentMap": "Shipment Map",
+                "noImages": "No images available",
+                "imageAlt": "Shipment Image {{index}}",
+                "participants": "Participants",
+                "addParticipant": "Participants",
+                "noParticipants": "No participants assigned.",
+                "containerDetailsTitle": "Container Details for Shipment {{shipmentNumber}}",
+                "noContainerDetails": "No container details available for this shipment."
             }
         },
         "common": {
@@ -69,7 +87,10 @@
             "previous": "Previous",
             "required": "Required",
             "MapLoading": "Map loading...",
-            "MapLoadError": "Map data is not available for this shipment."
+            "MapLoadError": "Map data is not available for this shipment.",
+            "all": "All",
+            "openMenu": "Open menu",
+            "selected":"selected"
         },
         "validation": {
             "required": "This field is required",
@@ -295,6 +316,79 @@
             "consultant": "Consultant",
             "others": "Others",
             "logisticsPartnerExample": "e.g., Logistics Partner"
+        },
+        "pageTitles": {
+            "home": "Home",
+            "login": "Login",
+            "register": "Register",
+            "admin": "Admin Panel",
+            "shipments": "Shipments",
+            "active-shipments": "Active Shipments",
+            "dashboard": "Dashboard",
+            "dashboard-view": "Dashboard View",
+            "notFound": "Page Not Found",
+            "multimodal": "Multimodal Shipments Overview",
+            "bookings": "Bookings",
+            "quotations": "Quotations",
+            "compare-options": "Compare Options",
+            "instant-quote": "Instant Quote",
+            "book": "Book Shipment",
+            "smart-helpers": "Smart Helpers",
+            "readyload": "ReadyLoad",
+            "troketrace": "TrokeTrace",
+            "soc-for-all": "SOC For All",
+            "ireposition": "IReposition",
+            "manage-documents": "Manage Documents",
+            "tracking": "Tracking",
+            "depot-storage": "Depot & Storage",
+            "free-time-penalties": "Free Time & Penalties",
+            "customs-compliance": "Customs & Compliance",
+            "finance-your-log": "Finance Your Log",
+            "wallet": "Wallet",
+            "invoices": "Invoices",
+            "track-commission": "Track Commission",
+            "outsource-your-log": "Outsource Your Log",
+            "assign-agent": "Assign Agent",
+            "enhance-profitability": "Enhance Profitability",
+            "insights": "Insights"
+        },
+        "cargoNav": {
+            "deliveryOrder": "Delivery Order",
+            "releaseCargo": "Release Cargo",
+            "requestUpdate": "Request Update",
+            "docsview": "Documents View"
+        },
+        "shipmentSupport": {
+            "reportDelay": "Report Delay",
+            "ratingComment": "Rating & Comment",
+            "claimEquipment": "Claim About Equipment",
+            "emission": "Emission",
+            "claimCargo": "Claim About Cargo",
+            "reportIssue": "Report Issue"
+        },
+        "search": {
+            "loading": "Loading...",
+            "noResults": "No results found.",
+            "startTyping": "Start typing to search for a shipment.",
+            "resultsFor": "Showing results for:",
+            "clear": "Clear search",
+            "pageTitle": "Search Results for \"{{searchTerm}}\"",
+            "shipmentResultsTitle": "Shipment Results ({{count}})",
+            "bookingResultsTitle": "Booking Results ({{count}})",
+            "bookingComponentPlaceholder": "Booking component is not implemented yet.",
+            "foundCount": "Found {{count}} booking(s).",
+            "noResultsFor": "We couldn't find anything matching \"{{searchTerm}}\"."
+        },
+        "filters": {
+            "status": "Status",
+            "mode": "Mode"
+        },
+        "modes": {
+            "sea": "SEA",
+            "air": "AIR",
+            "road": "ROAD",
+            "rail": "RAIL",
+            "ebusiness": "E-BUSINESS"
         }
     }
 }
