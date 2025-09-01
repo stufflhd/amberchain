@@ -13,7 +13,7 @@ export default function ClientsDashboardMap({ className }) {
     const mapContRef = useRef(null)
     useEffect(() => {
         setMapHeight(mapContRef.current.clientHeight)
-    })
+    },[]);
 
     const { t } = useTranslation();
     const links = getNavConfig(t).clientDashFilterNav;
@@ -70,7 +70,7 @@ export default function ClientsDashboardMap({ className }) {
 
     return (
         <section className={`${cn(className)}`}>
-            <div className="overflow-hidden overflow-x-auto py-[2px]">
+            <div className="overflow-hidden overflow-x-auto py-1 pb-1.5">
                 <ToggleGroup
                     type="single"
                     value={links[0].path}
@@ -87,7 +87,7 @@ export default function ClientsDashboardMap({ className }) {
                 </ToggleGroup>
             </div>
 
-            <section className="w-full md:h-full h-96 mt-4" ref={mapContRef}>
+            <section className="w-full h-full 2xl:h-[92%]" ref={mapContRef}>
                 {hasMapData ? (
                     showMap ? (
                         <Suspense fallback={<MapSkeleton className={'h-full'} />}>

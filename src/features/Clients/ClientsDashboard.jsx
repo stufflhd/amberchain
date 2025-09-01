@@ -20,7 +20,7 @@ export default function ClientsDashboard() {
                 <DashboardSearch />
             </div>
             <section className='flex flex-col md:grid grid-cols-12 h-full gap-8' ref={sectionRef}>
-                <ClientsDashboardMap className='md:col-span-7 2xl:col-span-8 flex-col gap-4' />
+                <ClientsDashboardMap className='md:col-span-7 2xl:col-span-8 flex flex-col gap-4' />
                 <ClientsDashboardWidgets maxHeight={height} className='md:col-span-5 2xl:col-span-4' />
             </section>
         </>

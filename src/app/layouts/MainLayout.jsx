@@ -21,7 +21,7 @@ export default function MainLayout({ children, title = 'AMBERCHAINS' }) {
           </div>
           <Navbar type='main' />
         </header>
-        <div className="flex flex-1 flex-col gap-8">
+        <div className="flex flex-1 flex-col gap-8 h-fit">
           {children}
         </div>
       </SidebarInset>
