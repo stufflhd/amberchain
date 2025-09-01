@@ -6,8 +6,7 @@ import DataTableBulkActions from './DataTableBulkActions';
 
 export default function DataTableToolbar({ table, tabsFilter, dropdownFilters, searchTerm, onClearSearch, bulkActions }) {
     return (
-        <div className="flex items-center justify-between gap-4 flex-wrap mb-4">
-            <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex items-center justify-between gap-2 sm:gap-4 flex-wrap sm:flex-nowrap">
                 {tabsFilter?.columnId && (
                     <DataTableTabsFilter
                         table={table}
@@ -26,11 +25,8 @@ export default function DataTableToolbar({ table, tabsFilter, dropdownFilters, s
                         />
                     )
                 )}
-            </div>
-            <div className='flex items-center gap-2 w-fit'>
                 <DataTableBulkActions table={table} actions={bulkActions} />
                 <DataTableSearchStatus searchTerm={searchTerm} onClear={onClearSearch} />
-            </div>
         </div>
     );
 }

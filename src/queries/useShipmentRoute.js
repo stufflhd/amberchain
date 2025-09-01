@@ -2,10 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import * as turf from '@turf/turf';
 
 const ORS_API_KEY = import.meta.env.VITE_ORS_API_KEY;
-const SEAROUTES_API_KEY = import.meta.env.VITE_SEAROUTES_API_KEY;
+const ORS_BASE_URL = import.meta.env.VITE_ORS_BASE_URL;
 
-const ORS_BASE_URL = "https://api.openrouteservice.org/v2/directions";
-const SEAROUTES_BASE_URL = "https://api.searoutes.com/route/v2/sea";
+const SEAROUTES_API_KEY = import.meta.env.VITE_SEAROUTES_API_KEY;
+const SEAROUTES_BASE_URL = import.meta.env.VITE_SEAROUTES_BASE_URL;
 
 // Creates a curved line for flights (Air)
 const createCircleRoute = (origin, destination) => {
@@ -67,7 +67,6 @@ const fetchSeaRoute = async (origin, destination) => {
 
 // which route to get based on the shipment `mode`
 const fetchShipmentRoute = (origin, destination, mode) => {
-    console.log(`Fetching route for mode: ${mode}`);
     switch (mode) {
         case 'Sea':
             return fetchSeaRoute(origin, destination);

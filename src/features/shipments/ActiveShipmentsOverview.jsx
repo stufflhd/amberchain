@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import DashNav from "@/components/dashboard/DashNav";
 import { DataTable } from "@/components/tables/DataTable";
 import { getColumns } from "./columns";
-import ShipmentDetails from "./ShipmentDetails.jsx.jsx";
+import ShipmentDetails from "./ShipmentDetails.jsx";
 import { useMemo, useState } from "react";
 import DashboardSearch from "@/components/dashboard/DashboardSearch";
 import { useShipmentsQuery } from "@/queries/useShipmentsQuery";
@@ -43,7 +43,6 @@ export default function ActiveShipmentsOverview({ data: propData }) {
             label: "Log selected IDs",
             onSelect: (selectedRows) => {
                 const selectedIds = selectedRows.map(row => row.original.id);
-                console.log("Selected Shipment IDs:", selectedIds);
                 alert(`Logged ${selectedIds.length} shipment IDs to the console.`);
             },
         },
@@ -51,7 +50,6 @@ export default function ActiveShipmentsOverview({ data: propData }) {
             label: "Export selected",
             onSelect: (selectedRows) => {
                 const data = selectedRows.map(row => row.original);
-                console.log("Exporting data:", data);
                 alert(`Exported ${data.length} shipments. Check the console for data.`);
             },
         },

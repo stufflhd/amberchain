@@ -8,9 +8,9 @@ export default function DashNav({ DashTitle = '' }) {
     const { t } = useTranslation();
     const navConfig = getNavConfig(t);
     return (
-        <header className='flex justify-between items-center'>
+        <header className='flex flex-col lg:flex-row justify-between lg:items-center'>
             <h1 className='large text-primary'>{DashTitle}</h1>
-            <NavigationMenu>
+            <NavigationMenu className={'-ml-2 lg:ml-0 hidden lg:flex'}>
                 <NavigationItems navConfig={navConfig.clientDashNav} />
             </NavigationMenu>
         </header>

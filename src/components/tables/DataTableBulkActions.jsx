@@ -19,8 +19,8 @@ export default function DataTableBulkActions({ table, actions = [] }) {
     };
 
     return (
-        <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground">
+        <div className="flex items-center gap-2 ml-auto">
+            <span className="text-sm text-muted-foreground whitespace-nowrap">
                 {numSelected} {t("common.selected")}
             </span>
             <DropdownMenu>

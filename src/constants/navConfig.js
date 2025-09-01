@@ -1,5 +1,10 @@
 import {
-  Home, Package, ClipboardList, BookOpen, FileText, Compass, FileClock, Send, ShieldCheck, Wallet, Receipt, TrendingUp, Users, LayoutDashboard, Truck, UserPlus, LineChart, FolderKanban, Handshake, ScanSearch, Bell, BoltIcon, Flag, LogOut, NotebookText
+  Home, Package, ClipboardList, BookOpen, FileText, Compass, FileClock, Send, ShieldCheck, Wallet, Receipt, TrendingUp, Users, LayoutDashboard, Truck, UserPlus, LineChart, FolderKanban, Handshake, ScanSearch, Bell, BoltIcon, Flag, LogOut, NotebookText,
+  Newspaper,
+  Workflow,
+  Store,
+  Wrench,
+  SquareKanban
 } from "lucide-react";
 export const getNavConfig = (t) => ({
   client: [
@@ -22,11 +27,31 @@ export const getNavConfig = (t) => ({
     { label: t('clientTopNav.logout'), path: "/logout", icon: LogOut },
   ],
   clientDashNav: [
-    { label: t('dashNav.manage'), path: "/manage" },
-    { label: t('dashNav.services'), path: "/services" },
-    { label: t('dashNav.company'), path: "/company" },
-    { label: t('dashNav.integrations'), path: "/integrations" },
-    { label: t('dashNav.news'), path: "/news" },
+    {
+      label: t('dashNav.manage'),
+      path: "/manage",
+      icon: SquareKanban
+    },
+    {
+      label: t('dashNav.services'),
+      path: "/services",
+      icon: Wrench
+    },
+    {
+      label: t('dashNav.company'),
+      path: "/company",
+      icon: Store
+    },
+    {
+      label: t('dashNav.integrations'),
+      path: "/integrations",
+      icon: Workflow
+    },
+    {
+      label: t('dashNav.news'),
+      path: "/news",
+      icon: Newspaper
+    }
   ],
   clientDashFilterNav: [
     { label: t('clientDashFilterNav.view'), path: "/dashboard-view" },

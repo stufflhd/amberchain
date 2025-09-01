@@ -60,7 +60,7 @@ export default function DashboardSearch() {
 
     return (
         <div className="relative flex justify-end" ref={searchContainerRef}>
-            <div className="relative w-xs">
+            <div className="relative w-full md:w-xs">
                 <Input
                     value={localSearchTerm}
                     onChange={(e) => setLocalSearchTerm(e.target.value)}

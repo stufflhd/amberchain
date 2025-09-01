@@ -69,23 +69,25 @@ export default function ClientsDashboardMap({ className }) {
     }, []);
 
     return (
-        <section className={`col-span-8 flex flex-col gap-4 ${cn(className)}`}>
-            <ToggleGroup
-                type="single"
-                value={links[0].path}
-                variant="outline"
-                className="grid grid-cols-4 *:data-[slot=toggle-group-item]:px-0"
-            >
-                {
-                    links.map((el) => (
-                        <ToggleGroupItem value={el.path} key={el.path}>
-                            <Link to={el.path} className="w-full px-2">{t(el.label)}</Link>
-                        </ToggleGroupItem>
-                    ))
-                }
-            </ToggleGroup>
+        <section className={`${cn(className)}`}>
+            <div className="overflow-hidden overflow-x-auto py-[2px]">
+                <ToggleGroup
+                    type="single"
+                    value={links[0].path}
+                    variant="outline"
+                    className="grid grid-cols-4 *:data-[slot=toggle-group-item]:px-0 w-max"
+                >
+                    {
+                        links.map((el) => (
+                            <ToggleGroupItem value={el.path} key={el.path}>
+                                <Link to={el.path} className="w-full px-2">{t(el.label)}</Link>
+                            </ToggleGroupItem>
+                        ))
+                    }
+                </ToggleGroup>
+            </div>
 
-            <section className="w-full h-full" ref={mapContRef}>
+            <section className="w-full md:h-full h-96 mt-4" ref={mapContRef}>
                 {hasMapData ? (
                     showMap ? (
                         <Suspense fallback={<MapSkeleton className={'h-full'} />}>

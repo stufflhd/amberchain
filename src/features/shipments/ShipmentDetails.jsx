@@ -22,15 +22,15 @@ function ShipmentDetails({ shipment }) {
   const timelineItems = useMemo(() => generateTimelineItems(shipment, stepsData), [shipment]);
 
   return (
-    <article className="p-4 space-y-8 dashContentMax">
+    <article className="p-2 sm:p-4 space-y-4 sm:space-y-8 dashContentMax">
       <header className="flex items-start gap-8">
-        <div className="w-1/2 space-y-4 pr-8">
+        <div className="w-fit sm:w-1/2 sm:space-y-4 pr-8">
           <div className="flex justify-between gap-4 items-center">
             <h2 className="large font-semibold">{t('shipments.shipmentDetails.shipmentTitle', { shipmentNumber: shipment.number })}</h2>
             <ShipmentStatusBadge status={shipment.status} />
           </div>
-          <div className="flex justify-between gap-4 items-center">
-            <p className="flex gap-4 text-sm">
+          <div className="flex justify-between gap-4 items-end sm:items-center">
+            <p className="flex sm:gap-4 text-sm flex-col sm:flex-row">
               <span>{t('shipments.shipmentDetails.containerCount', { count: shipment.containerCount })}</span>
               <span><b>{t('shipments.shipmentDetails.etd')}</b> {formatDisplayDate(shipment.etd)}</span>
               <span><b>{t('shipments.shipmentDetails.lastUpdate')}</b> {formatDisplayDate(shipment.lastUpdated)}</span>
@@ -38,7 +38,7 @@ function ShipmentDetails({ shipment }) {
             <ContainerDetailsDialog shipment={shipment} />
           </div>
         </div>
-        <div className="w-1/2 ml-auto flex justify-end gap-8 items-start">
+        <div className="w-fit sm:w-1/2 sm:ml-auto flex justify-end gap-8 items-start">
           <div className="w-1/2 border-l px-8 border-primary text-sm">
             <p><b>{t('shipments.shipmentDetails.vesselVehicle')}</b> {shipment.vesselName}</p>
             <p><b>{t('shipments.shipmentDetails.voyage')}</b> {shipment.voyage}</p>
@@ -52,11 +52,11 @@ function ShipmentDetails({ shipment }) {
       </header>
 
       <section className="flex gap-8">
-        <div className="w-1/3 space-y-4">
+        <div className="w-fit sm:w-1/3 sm:space-y-4">
           <h3 className="large">{t('shipments.shipmentDetails.timeline')}</h3>
           <AmbTimeline items={timelineItems} />
         </div>
-        <div className="w-2/3 space-y-4">
+        <div className="w-fit sm:w-2/3 space-y-4">
           <h3 className="large">{t('shipments.shipmentDetails.shipmentMap')}</h3>
           <ShipmentMapWrapper
             origin={shipment.originCoord}

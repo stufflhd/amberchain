@@ -48,7 +48,7 @@ export default function Stepper({
     const isButtonLoading = isStepChanging || isFinalStepLoading;
 
     return (
-        <div className="flex min-h-full flex-1 flex-col items-center justify-center p-4 sm:aspect-[4/3] md:aspect-[2/1]" {...rest}>
+        <div className="flex flex-1 flex-col items-center justify-center p-4 !pt-24 sm:aspect-[4/3] md:aspect-[2/1]" {...rest}>
             <Card className="mx-auto w-full max-w-2xl rounded-4xl shadow-xl p-6">
                 <CardHeader>
                     <div className="flex w-full items-center p-4 px-0">
@@ -63,7 +63,7 @@ export default function Stepper({
                         })}
                     </div>
                 </CardHeader>
-                <CardContent className={'!px-5'}>
+                <CardContent className={'!px-0 md:!px-5'}>
                     <StepContentWrapper currentStep={currentStep} direction={direction}>
                         {stepsArray[currentStep - 1]}
                     </StepContentWrapper>

@@ -8,7 +8,7 @@ export default function DataTableTabsFilter({
   includeAll = true,
   allLabel = "All",
   className = "*:data-[slot=toggle-group-item]:!px-4",
-  onTabChange, 
+  onTabChange,
 }) {
   const column = table.getColumn(columnId);
   const currentFilterValue = column?.getFilterValue() || "all";
@@ -28,23 +28,25 @@ export default function DataTableTabsFilter({
   };
 
   return (
-    <ToggleGroup
-      type="single" 
-      value={currentFilterValue} 
-      onValueChange={handleValueChange}
-      variant="outline"
-      className={className}
-    >
-      {includeAll && <ToggleGroupItem value="all">{allLabel}</ToggleGroupItem>}
-      {options.map((opt) => (
-        <ToggleGroupItem
-          key={opt.value}
-          value={String(opt.value)}
-          className={"flex-none whitespace-nowrap w-max"}
-        >
-          {opt.label ?? opt.value}
-        </ToggleGroupItem>
-      ))}
-    </ToggleGroup>
+    <div className="overflow-hidden overflow-x-auto py-[2px]">
+      <ToggleGroup
+        type="single"
+        value={currentFilterValue}
+        onValueChange={handleValueChange}
+        variant="outline"
+        className={className}
+      >
+        {includeAll && <ToggleGroupItem value="all">{allLabel}</ToggleGroupItem>}
+        {options.map((opt) => (
+          <ToggleGroupItem
+            key={opt.value}
+            value={String(opt.value)}
+            className={"flex-none whitespace-nowrap w-max"}
+          >
+            {opt.label ?? opt.value}
+          </ToggleGroupItem>
+        ))}
+      </ToggleGroup>
+    </div>
   );
 }

@@ -16,12 +16,12 @@ export default function ClientsDashboard() {
     return (
         <>
             <div className='gap-4 flex flex-col'>
-                <DashNav DashTitle='Welcome Back !  You have the Conn'/>
+                <DashNav DashTitle='Welcome Back ! &nbsp; You have the Conn'/>
                 <DashboardSearch />
             </div>
-            <section className='grid grid-cols-12 h-full gap-8' ref={sectionRef}>
-                <ClientsDashboardMap />
-                <ClientsDashboardWidgets maxHeight={height} />
+            <section className='flex flex-col md:grid grid-cols-12 h-full gap-8' ref={sectionRef}>
+                <ClientsDashboardMap className='md:col-span-7 2xl:col-span-8 flex-col gap-4' />
+                <ClientsDashboardWidgets maxHeight={height} className='md:col-span-5 2xl:col-span-4' />
             </section>
         </>
     )
