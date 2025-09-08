@@ -1,0 +1,93 @@
+export const participants = [
+    {
+        id: "P1",
+        name: "John Doe",
+        avatarUrl: "https://i.pravatar.cc/40?img=34",
+        profile: "Manager",
+        company: "Acme Corp",
+        user: "johndoe",
+        businessProfile: "Logistics",
+        party: "Shipper",
+        email: "john.doe@acme.com",
+        phone: "+1234567890",
+        authorisations: ["view_shipments", "edit_shipments"]
+    },
+    {
+        id: "P2",
+        name: "Jane Smith",
+        avatarUrl: "https://i.pravatar.cc/40?img=65",
+        profile: "Coordinator",
+        company: "Beta Ltd",
+        user: "janesmith",
+        businessProfile: "Operations",
+        party: "Consignee",
+        email: "jane.smith@beta.com",
+        phone: "+1987654321",
+        authorisations: ["view_shipments"]
+    },
+    {
+        id: "P3",
+        name: "Peter Jones",
+        avatarUrl: "https://i.pravatar.cc/40?img=13",
+        profile: "Supervisor",
+        company: "Gamma Inc",
+        user: "peterjones",
+        businessProfile: "Warehouse",
+        party: "Carrier",
+        email: "peter.jones@gamma.com",
+        phone: "+1122334455",
+        authorisations: ["view_shipments", "assign_tasks"]
+    },
+    {
+        id: "P4",
+        name: "Mary Jane",
+        avatarUrl: "https://i.pravatar.cc/40?img=18",
+        profile: "Agent",
+        company: "Delta AG",
+        user: "maryjane",
+        businessProfile: "Customs",
+        party: "Agent",
+        email: "mary.jane@delta.com",
+        phone: "+1222333444",
+        authorisations: ["view_shipments"]
+    },
+    {
+        id: "P5",
+        name: "Dirk Nowitzki",
+        avatarUrl: "https://i.pravatar.cc/40?img=1",
+        profile: "Driver",
+        company: "Omega Logistics",
+        user: "dirknowitzki",
+        businessProfile: "Transport",
+        party: "Carrier",
+        email: "dirk.nowitzki@omega.com",
+        phone: "+1555666777",
+        authorisations: ["view_shipments"]
+    },
+    {
+        id: "P6",
+        name: "Alex Ray",
+        avatarUrl: "https://i.pravatar.cc/40?img=25",
+        profile: "Warehouse Staff",
+        company: "Gamma Inc",
+        user: "alexray",
+        businessProfile: "Warehouse",
+        party: "Warehouse",
+        email: "alex.ray@gamma.com",
+        phone: "+1444555666",
+        authorisations: ["view_shipments"]
+    },
+    {
+        id: "P7",
+        name: "Customer Support",
+        avatarUrl: "https://i.pravatar.cc/40?img=5",
+        profile: "Support",
+        company: "DHL",
+        user: "supportdhl",
+        businessProfile: "Customer Service",
+        party: "Support",
+        email: "support@dhl.com",
+        phone: "+1888999000",
+        authorisations: ["view_shipments", "respond_queries"]
+    }
+];

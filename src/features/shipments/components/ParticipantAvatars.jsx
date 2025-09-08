@@ -1,17 +1,23 @@
+
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { participants as allParticipants } from "@/constants/participants";
+
 
 export default function ParticipantAvatars({ participants }) {
     const { t } = useTranslation();
+    const participantObjs = participants
+        .map(pid => allParticipants.find(p => p.id === pid))
+        .filter(Boolean);
     const maxVisible = 4;
-    const visibleParticipants = participants.slice(0, maxVisible);
-    const hiddenCount = participants.length - maxVisible;
+    const visibleParticipants = participantObjs.slice(0, maxVisible);
+    const hiddenCount = participantObjs.length - maxVisible;
 
     return (
         <div className="w-4/12 flex flex-col items-center mt-12 space-y-4">
             <h3 className="large">{t('shipments.shipmentDetails.participants')}</h3>
-            {participants && participants.length > 0 ? (
+            {participantObjs && participantObjs.length > 0 ? (
                 <>
                     <div className="bg-muted flex items-center rounded-full p-0.5">
                         <div className="flex -space-x-3">

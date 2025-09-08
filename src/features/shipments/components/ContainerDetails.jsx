@@ -92,7 +92,7 @@ const ContainerDetails = memo(({ container, className }) => {
         </div>
     );
 });
- 
+
 ContainerDetails.displayName = 'ContainerDetails';
 
 export default ContainerDetails;

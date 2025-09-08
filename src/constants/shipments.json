@@ -20,13 +20,62 @@
     "smart_tool": "Used",
     "task": null,
     "transshipmentPorts": "None",
-    "originCoord": [32.4018,-6.3158],
-    "destinationCoord": [24.2617,55.6117],
-    "images": ["https://images.unsplash.com/photo-1578575437130_5278ce682623"],
-    "participants": [{"name": "John Doe","avatarUrl": "https://i.pravatar.cc/40?img=34"},{"name": "Jane Smith","avatarUrl": "https://i.pravatar.cc/40?img=65"}],
-    "route": [{"name": "Booking","type": "Milestone","completedSteps": ["booking_confirmed"]},{"name": "Chellalat","type": "Place of Loading","completedSteps": ["arrived_at_pickup","loaded"]},{"name": "MED VI airport","type": "Port of Loading","completedSteps": ["booked_on_flight","flight_departed"]},{"name": "In The Air","type": "Transit","completedSteps": []},{"name": "Sheikh Khalifa Airport","type": "Port of Discharge","completedSteps": []}],
-    "containerIds": ["MNBU1325141"],
-    "notes":[""]
+    "originCoord": [
+      32.4018,
+      -6.3158
+    ],
+    "destinationCoord": [
+      24.2617,
+      55.6117
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1578575437130_5278ce682623"
+    ],
+    "participants": [
+      "P1",
+      "P2"
+    ],
+    "route": [
+      {
+        "name": "Booking",
+        "type": "Milestone",
+        "completedSteps": [
+          "booking_confirmed"
+        ]
+      },
+      {
+        "name": "Chellalat",
+        "type": "Place of Loading",
+        "completedSteps": [
+          "arrived_at_pickup",
+          "loaded"
+        ]
+      },
+      {
+        "name": "MED VI airport",
+        "type": "Port of Loading",
+        "completedSteps": [
+          "booked_on_flight",
+          "flight_departed"
+        ]
+      },
+      {
+        "name": "In The Air",
+        "type": "Transit",
+        "completedSteps": []
+      },
+      {
+        "name": "Sheikh Khalifa Airport",
+        "type": "Port of Discharge",
+        "completedSteps": []
+      }
+    ],
+    "containerIds": [
+      "MNBU1325141"
+    ],
+    "notes": [
+      ""
+    ]
   },
   {
     "id": "S2354683",
@@ -49,13 +98,58 @@
     "smart_tool": "Not Used",
     "task": null,
     "transshipmentPorts": "None",
-    "originCoord": [4.4777,51.9244],
-    "destinationCoord": [21.0122,52.2297],
-    "images": ["https://images.unsplash.com/photo-1504383633899-a17806f7e9ad","https://images.unsplash.com/photo-1561118303-3686864b417b","https://images.unsplash.com/photo-1575089797771-a6e87e4bfba0"],
-    "participants": [{"name": "Peter Jones","avatarUrl": "https://i.pravatar.cc/40?img=13"}],
-    "route": [{"name": "Booking","type": "Milestone","completedSteps": ["booking_confirmed"]},{"name": "Rotterdam","type": "Place of Loading","completedSteps": ["loaded", "gate_in_rail_terminal", "loaded_on_train"]},{"name": "On The Rails","type": "Transit","completedSteps": ["train_departed"]},{"name": "Warsaw","type": "Port of Discharge","completedSteps": []}],
-    "containerIds": ["DBEU1325141"],
-    "notes":[""]
+    "originCoord": [
+      4.4777,
+      51.9244
+    ],
+    "destinationCoord": [
+      21.0122,
+      52.2297
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1504383633899-a17806f7e9ad",
+      "https://images.unsplash.com/photo-1561118303-3686864b417b",
+      "https://images.unsplash.com/photo-1575089797771-a6e87e4bfba0"
+    ],
+    "participants": [
+      "P3"
+    ],
+    "route": [
+      {
+        "name": "Booking",
+        "type": "Milestone",
+        "completedSteps": [
+          "booking_confirmed"
+        ]
+      },
+      {
+        "name": "Rotterdam",
+        "type": "Place of Loading",
+        "completedSteps": [
+          "loaded",
+          "gate_in_rail_terminal",
+          "loaded_on_train"
+        ]
+      },
+      {
+        "name": "On The Rails",
+        "type": "Transit",
+        "completedSteps": [
+          "train_departed"
+        ]
+      },
+      {
+        "name": "Warsaw",
+        "type": "Port of Discharge",
+        "completedSteps": []
+      }
+    ],
+    "containerIds": [
+      "DBEU1325141"
+    ],
+    "notes": [
+      ""
+    ]
   },
   {
     "id": "S2354684",
@@ -78,13 +172,63 @@
     "smart_tool": "Used",
     "task": null,
     "transshipmentPorts": "None",
-    "originCoord": [-5.5520,35.8450],
-    "destinationCoord": [4.4777,51.9244],
-    "images": ["https://images.unsplash.com/photo-1504383633899-a17806f7e9ad"],
-    "participants": [{"name": "Mary Jane","avatarUrl": "https://i.pravatar.cc/40?img=18"},{"name": "Dirk Nowitzki","avatarUrl": "https://i.pravatar.cc/40?img=1"},{"name": "Alex Ray","avatarUrl": "https://i.pravatar.cc/40?img=25"},{"name": "Alex Ray","avatarUrl": "https://i.pravatar.cc/40?img=33"},{"name": "Alex Ray","avatarUrl": "https://i.pravatar.cc/40?img=25"},{"name": "Alex Ray","avatarUrl": "https://i.pravatar.cc/40?img=25"}],
-    "route": [{"name": "Booking","type": "Milestone","completedSteps": ["booking_confirmed"]},{"name": "Tangier Med","type": "Port of Loading","completedSteps": ["gate_in_pol","loaded_on_vessel","vessel_departed"]},{"name": "At Sea","type": "Transit","completedSteps": ["in_sea_transit"]},{"name": "Rotterdam","type": "Port of Discharge","completedSteps": []}],
-    "containerIds": ["MNBU1325142", "MNBU1325143", "R2464BCR"],
-    "notes":[""]
+    "originCoord": [
+      -5.5520,
+      35.8450
+    ],
+    "destinationCoord": [
+      4.4777,
+      51.9244
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1504383633899-a17806f7e9ad"
+    ],
+    "participants": [
+      "P4",
+      "P5",
+      "P6",
+      "P6",
+      "P6",
+      "P6"
+    ],
+    "route": [
+      {
+        "name": "Booking",
+        "type": "Milestone",
+        "completedSteps": [
+          "booking_confirmed"
+        ]
+      },
+      {
+        "name": "Tangier Med",
+        "type": "Port of Loading",
+        "completedSteps": [
+          "gate_in_pol",
+          "loaded_on_vessel",
+          "vessel_departed"
+        ]
+      },
+      {
+        "name": "At Sea",
+        "type": "Transit",
+        "completedSteps": [
+          "in_sea_transit"
+        ]
+      },
+      {
+        "name": "Rotterdam",
+        "type": "Port of Discharge",
+        "completedSteps": []
+      }
+    ],
+    "containerIds": [
+      "MNBU1325142",
+      "MNBU1325143",
+      "R2464BCR"
+    ],
+    "notes": [
+      ""
+    ]
   },
   {
     "id": "S2354685",
@@ -107,13 +251,56 @@
     "smart_tool": "Not Used",
     "task": null,
     "transshipmentPorts": "None",
-    "originCoord": [-115.1764,36.1699],
-    "destinationCoord": [-118.2450,34.0530],
+    "originCoord": [
+      -115.1764,
+      36.1699
+    ],
+    "destinationCoord": [
+      -118.2450,
+      34.0530
+    ],
     "images": [],
     "participants": [],
-    "route": [{"name": "Booking","type": "Milestone","completedSteps": ["booking_confirmed"]},{"name": "Las Vegas Depot","type": "Place of Loading","completedSteps": ["arrived_at_pickup","loaded","departed_origin"]},{"name": "Los Angeles Hub","type": "Place of Discharge","completedSteps": ["arrived_at_destination"]},{"name": "California, 23 St","type": "Final Destination","completedSteps": ["out_for_delivery","delivered","pod_confirmed"]}],
-    "containerIds": ["MNBU1325144"],
-    "notes":["STOPS NO"]
+    "route": [
+      {
+        "name": "Booking",
+        "type": "Milestone",
+        "completedSteps": [
+          "booking_confirmed"
+        ]
+      },
+      {
+        "name": "Las Vegas Depot",
+        "type": "Place of Loading",
+        "completedSteps": [
+          "arrived_at_pickup",
+          "loaded",
+          "departed_origin"
+        ]
+      },
+      {
+        "name": "Los Angeles Hub",
+        "type": "Place of Discharge",
+        "completedSteps": [
+          "arrived_at_destination"
+        ]
+      },
+      {
+        "name": "California, 23 St",
+        "type": "Final Destination",
+        "completedSteps": [
+          "out_for_delivery",
+          "delivered",
+          "pod_confirmed"
+        ]
+      }
+    ],
+    "containerIds": [
+      "MNBU1325144"
+    ],
+    "notes": [
+      "STOPS NO"
+    ]
   },
   {
     "id": "S2354687",
@@ -136,12 +323,54 @@
     "smart_tool": "Used",
     "task": null,
     "transshipmentPorts": "None",
-    "originCoord": [114.0579,22.5431],
-    "destinationCoord": [2.3522,48.8566],
-    "images": ["https://images.unsplash.com/photo-1586528116311-38ddf048d159"],
-    "participants": [{"name": "Customer Support","avatarUrl": "https://i.pravatar.cc/40?img=5"}],
-    "route": [{"name": "Order Placed","type": "Milestone","completedSteps": ["booking_confirmed"]},{"name": "Fulfillment Center","type": "Origin","completedSteps": ["package_labeled","courier_assigned"]},{"name": "Transit","type": "Transit","completedSteps": ["out_for_delivery"]},{"name": "Final Delivery","type": "Destination","completedSteps": []}],
-    "containerIds": ["PKG-987654321"],
-    "notes":[""]
+    "originCoord": [
+      114.0579,
+      22.5431
+    ],
+    "destinationCoord": [
+      2.3522,
+      48.8566
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1586528116311-38ddf048d159"
+    ],
+    "participants": [
+      "P7"
+    ],
+    "route": [
+      {
+        "name": "Order Placed",
+        "type": "Milestone",
+        "completedSteps": [
+          "booking_confirmed"
+        ]
+      },
+      {
+        "name": "Fulfillment Center",
+        "type": "Origin",
+        "completedSteps": [
+          "package_labeled",
+          "courier_assigned"
+        ]
+      },
+      {
+        "name": "Transit",
+        "type": "Transit",
+        "completedSteps": [
+          "out_for_delivery"
+        ]
+      },
+      {
+        "name": "Final Delivery",
+        "type": "Destination",
+        "completedSteps": []
+      }
+    ],
+    "containerIds": [
+      "PKG-987654321"
+    ],
+    "notes": [
+      ""
+    ]
   }
 ]

@@ -40,7 +40,7 @@ export const generateTimelineItems = (shipment, stepsData) => {
             if (i === 0) {
 
                 return (
-                    <Badge key={stepValue} variant={'outline'} className={'text-md bg-background/70 px-4 [&_svg]:!size-3'}>
+                    <Badge key={stepValue} variant={'outline'} className={'text-sm bg-background/70 px-4 [&_svg]:!size-3'}>
                         {getStepIcon(stepDetail?.icon || 'Package')}
                         {stepDetail ? stepDetail.label : stepValue}
                     </Badge>
