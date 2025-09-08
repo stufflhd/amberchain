@@ -1,0 +1,145 @@
+[
+    {
+        "id": "MNBU1325141",
+        "type": "40' Reefer High",
+        "status": "STUFFED",
+        "timestamp": "2025-06-08T04:06:00Z",
+        "location": "Oued Ghlala",
+        "seal": "SEAL-78399",
+        "truckId": "TR-12345",
+        "driverNumber": null,
+        "setPoint": "-18°C",
+        "blInfo": "(MBL/HBL FOR LCL)",
+        "otherInfo": "Troketrace/ReadyLoad/SOC/IREPOSITION",
+        "commodityDetails": {
+            "commodity": "Frozen Strawberry",
+            "package": "1820 (Box for LCL)",
+            "cargoWeight": "20000 KG/lb",
+            "dimensions": null,
+            "barcode": null
+        },
+        "allowedActions": [
+            "track_live",
+            "plan_delivery"
+        ]
+    },
+    {
+        "id": "MNBU1325142",
+        "type": "40' Reefer High",
+        "status": "EMPTY",
+        "timestamp": "2025-06-08T04:06:00Z",
+        "location": "Tangier Depot",
+        "seal": null,
+        "truckId": null,
+        "driverNumber": null,
+        "setPoint": "Initial Set Point",
+        "blInfo": null,
+        "otherInfo": null,
+        "commodityDetails": null,
+        "allowedActions": [
+            "plan_pickup"
+        ]
+    },
+    {
+        "id": "MNBU1325143",
+        "type": "40' Reefer High",
+        "status": "UNSTUFFED",
+        "timestamp": "2025-06-08T04:06:00Z",
+        "location": "Amsterdam",
+        "seal": "SEAL-78399",
+        "truckId": "TR-AMS-112",
+        "driverNumber": null,
+        "setPoint": "-18°C",
+        "blInfo": null,
+        "otherInfo": null,
+        "commodityDetails": null,
+        "allowedActions": [
+            "set_point"
+        ]
+    },
+    {
+        "id": "MNBU1325144",
+        "type": "40' Reefer High",
+        "status": "RETURNED",
+        "timestamp": "2025-06-08T04:06:00Z",
+        "location": "Rotterdam",
+        "seal": "SEAL-78399",
+        "truckId": "TR-RTM-456",
+        "driverNumber": null,
+        "setPoint": null,
+        "blInfo": null,
+        "otherInfo": null,
+        "commodityDetails": null,
+        "allowedActions": []
+    },
+    {
+        "id": "R2464BCR",
+        "type": "Reefer",
+        "status": "Awaiting Stuffing",
+        "timestamp": "2025-06-08T04:06:00Z",
+        "location": "Tetouan",
+        "seal": null,
+        "truckId": "TR-TET-007",
+        "driverNumber": "DN-9876",
+        "setPoint": "-20°C",
+        "blInfo": null,
+        "otherInfo": null,
+        "commodityDetails": {
+            "commodity": "Frozen Strawberry",
+            "package": "1820",
+            "cargoWeight": "20000 KG/lb",
+            "dimensions": null,
+            "barcode": null
+        },
+        "allowedActions": [
+            "set_point"
+        ]
+    },
+    {
+        "id": "DBEU1325141",
+        "type": "40' Dry Van",
+        "status": "LOADED ON TRAIN",
+        "timestamp": "2025-07-10T09:15:00Z",
+        "location": "Rotterdam Rail Yard",
+        "seal": "SEAL-DB-555",
+        "truckId": null,
+        "driverNumber": null,
+        "setPoint": null,
+        "blInfo": null,
+        "otherInfo": "On DB Cargo Train 9501",
+        "commodityDetails": {
+            "commodity": "Automotive Parts",
+            "package": "50 Pallets",
+            "cargoWeight": "18500 KG",
+            "dimensions": null,
+            "barcode": null
+        },
+        "allowedActions": [
+            "track_live"
+        ]
+    },
+    {
+        "id": "PKG-987654321",
+        "type": "Small Parcel",
+        "status": "OUT FOR DELIVERY",
+        "timestamp": "2025-07-20T09:00:00Z",
+        "location": "In transit to Paris",
+        "seal": null,
+        "truckId": "DHL-VAN-456",
+        "driverNumber": "DRV-PAR-112",
+        "setPoint": null,
+        "blInfo": null,
+        "otherInfo": "Signature required upon delivery.",
+        "commodityDetails": {
+            "commodity": "Electronics",
+            "package": "1 Box",
+            "cargoWeight": "2 KG",
+            "dimensions": "30x20x10 cm",
+            "barcode": "987654321XYZ"
+        },
+        "allowedActions": [
+            "track_live",
+            "plan_delivery"
+        ]
+    }
+]

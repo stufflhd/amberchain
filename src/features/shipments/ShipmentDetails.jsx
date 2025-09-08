@@ -1,62 +1,44 @@
-import React, { memo, useMemo } from "react";
+import React, { memo, useMemo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
 import AmbTimeline from "@/components/Timeline";
-import ContainerDetailsDialog from "./components/ContainerDetailsDialog";
 import ShipmentStatusBadge from "./components/ShipmentStatusBadge";
 import ImageCarousel from "./components/ImageCarousel";
 import ParticipantAvatars from "./components/ParticipantAvatars";
-
-import { stepsData } from "../../constants/steps";
+import ShipmentInfoHeader from "./components/ShipmentInfoHeader";
+import ContainerDetailsDialog from "./components/ContainerDetailsDialog";
 import { getNavConfig } from "@/constants/navConfig";
-import { generateTimelineItems, formatDisplayDate } from "./utils/shipmentsUtils";
+import { generateTimelineItems } from "./utils/shipmentsUtils";
 import { Button } from "@/components/ui/button";
 import ShipmentMapWrapper from "./components/map/ShipmentMapWrapper";
+import containersData from "../../constants/containers";
+import { stepsData } from "../../constants/steps";
 
 function ShipmentDetails({ shipment }) {
   const { t } = useTranslation();
+  const [containers, setContainers] = useState([]);
+
+  useEffect(() => {
+    const relevantContainers = containersData.filter(c => shipment.containerIds.includes(c.id));
+    setContainers(relevantContainers);
+  }, [shipment.containerIds]);
+
   const cargoNav = getNavConfig(t).cargoNav;
   const shipmentSupportNav = getNavConfig(t).shipmentSupport;
-
   const timelineItems = useMemo(() => generateTimelineItems(shipment, stepsData), [shipment]);
 
   return (
     <article className="p-2 sm:p-4 space-y-4 sm:space-y-8 dashContentMax">
-      <header className="flex items-start gap-8">
-        <div className="w-fit sm:w-1/2 sm:space-y-4 pr-8">
-          <div className="flex justify-between gap-4 items-center">
-            <h2 className="large font-semibold">{t('shipments.shipmentDetails.shipmentTitle', { shipmentNumber: shipment.number })}</h2>
-            <ShipmentStatusBadge status={shipment.status} />
-          </div>
-          <div className="flex justify-between gap-4 items-end sm:items-center">
-            <p className="flex sm:gap-4 text-sm flex-col sm:flex-row">
-              <span>{t('shipments.shipmentDetails.containerCount', { count: shipment.containerCount })}</span>
-              <span><b>{t('shipments.shipmentDetails.etd')}</b> {formatDisplayDate(shipment.etd)}</span>
-              <span><b>{t('shipments.shipmentDetails.lastUpdate')}</b> {formatDisplayDate(shipment.lastUpdated)}</span>
-            </p>
-            <ContainerDetailsDialog shipment={shipment} />
-          </div>
-        </div>
-        <div className="w-fit sm:w-1/2 sm:ml-auto flex justify-end gap-8 items-start">
-          <div className="w-1/2 border-l px-8 border-primary text-sm">
-            <p><b>{t('shipments.shipmentDetails.vesselVehicle')}</b> {shipment.vesselName}</p>
-            <p><b>{t('shipments.shipmentDetails.voyage')}</b> {shipment.voyage}</p>
-          </div>
-          <div className="w-1/2 border-l px-8 border-primary text-sm">
-            <p><b>{t('shipments.shipmentDetails.eta')}</b> {formatDisplayDate(shipment.eta)}</p>
-            <p><b>{t('shipments.shipmentDetails.transshipment')}</b> {shipment.transshipmentPorts}</p>
-            {shipment.delay !== "No delay" && <small className="text-secondary font-semibold">{shipment.delay}</small>}
-          </div>
-        </div>
-      </header>
-
-      <section className="flex gap-8">
-        <div className="w-fit sm:w-1/3 sm:space-y-4">
+      <ShipmentInfoHeader
+        shipment={shipment}
+        containerCount={containers.length}
+      />
+      <section className="flex flex-col sm:flex-row gap-8">
+        <div className="w-full sm:w-1/3 sm:space-y-4">
           <h3 className="large">{t('shipments.shipmentDetails.timeline')}</h3>
           <AmbTimeline items={timelineItems} />
         </div>
-        <div className="w-fit sm:w-2/3 space-y-4">
+        <div className="w-full sm:w-2/3 space-y-4">
           <h3 className="large">{t('shipments.shipmentDetails.shipmentMap')}</h3>
           <ShipmentMapWrapper
             origin={shipment.originCoord}
@@ -66,8 +48,8 @@ function ShipmentDetails({ shipment }) {
           />
           <div className="flex gap-2 flex-wrap">
             {cargoNav.map((link) => (
-              <Link key={link.path} className="cursor-pointer" to={link.path}>
-                <Button variant={'outline'} className="cursor-pointer flex-wrap break-words">
+              <Link key={link.path} to={link.path}>
+                <Button variant={'outline'} className="flex-wrap break-words">
                   {link.label}
                 </Button>
               </Link>
@@ -76,8 +58,8 @@ function ShipmentDetails({ shipment }) {
           <div className="flex items-stretch gap-8">
             <div className="w-3/12 flex flex-col gap-2 justify-between">
               {shipmentSupportNav.map((link) => (
-                <Link key={link.path} className="cursor-pointer w-full" to={link.path}>
-                  <Button variant={'outline'} className="cursor-pointer w-full whitespace-break-spaces h-max">
+                <Link key={link.path} className="w-full" to={link.path}>
+                  <Button variant={'outline'} className="w-full whitespace-break-spaces h-max">
                     {link.label}
                   </Button>
                 </Link>

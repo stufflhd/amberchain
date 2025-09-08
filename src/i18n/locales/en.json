@@ -1,6 +1,35 @@
 {
     "translation": {
         "shipments": {
+            "shipmentDetails": {
+                "shipmentTitle": "Shipment: {{shipmentNumber}}",
+                "containerCount": "{{count}} CONTAINERS",
+                "etd": "ETD",
+                "lastUpdate": "Last Update",
+                "viewDetails": "View Details",
+                "vessel": "Vessel Name",
+                "flight": "Airline name",
+                "flightNumber": "Flight n°",
+                "truck": "Truck",
+                "tripNumber": "Trip Number",
+                "railCarrier": "Rail Carrier",
+                "railCarrierNumber": "Rail Carrier Number",
+                "vehicle": "Vehicle",
+                "reference": "Reference",
+                "voyage": "Voyage",
+                "eta": "ETA",
+                "transshipment": "Transshipment",
+                "timeline": "Timeline",
+                "shipmentMap": "Shipment Map",
+                "noImages": "No images available",
+                "imageAlt": "Shipment Image {{index}}",
+                "participants": "Participants",
+                "addParticipant": "Participants",
+                "noParticipants": "No participants assigned.",
+                "containerDetailsTitle": "Container Details for Shipment {{shipmentNumber}}",
+                "noContainerDetails": "No container details available for this shipment.",
+                "tansitRailTerminal": "Tansit Rail Terminal"
+            },
             "status": {
                 "active": "Active",
                 "finished": "Finished",
@@ -56,27 +85,50 @@
                     "reportIssue": "Report Issue",
                     "manageDocs": "Manage Documents"
                 }
-            },
-            "shipmentDetails": {
-                "shipmentTitle": "Shipment: {{shipmentNumber}}",
-                "containerCount": "{{count}} CONTAINERS",
-                "etd": "ETD",
-                "lastUpdate": "Last Update",
-                "viewDetails": "View Details",
-                "vesselVehicle": "Vessel/Vehicle",
-                "voyage": "Voyage",
-                "eta": "ETA",
-                "transshipment": "Transshipment",
-                "timeline": "Timeline",
-                "shipmentMap": "Shipment Map",
-                "noImages": "No images available",
-                "imageAlt": "Shipment Image {{index}}",
-                "participants": "Participants",
-                "addParticipant": "Participants",
-                "noParticipants": "No participants assigned.",
-                "containerDetailsTitle": "Container Details for Shipment {{shipmentNumber}}",
-                "noContainerDetails": "No container details available for this shipment."
             }
+        },
+        "containers": {
+            "location": "Location",
+            "seal": "Seal",
+            "truckId": "Truck ID",
+            "driverNumber": "Driver Number",
+            "setPoint": "Set Point",
+            "otherInfo": "Other Info",
+            "commodityDetails": "Commodity Details",
+            "commodity": "Commodity",
+            "package": "Package",
+            "cargoWeight": "Cargo Weight",
+            "dimensions": "Dimensions",
+            "barcode": "Barcode"
+        },
+        "actions": {
+            "trackLive": "Track Live",
+            "planDelivery": "Plan Delivery",
+            "planPickup": "Plan Pick-up",
+            "setPoint": "Set Point"
+        },
+        "steps": {
+            "booking_confirmed": "Booking Confirmed",
+            "arrived_at_pickup": "Arrived at Pickup",
+            "loaded": "Loaded",
+            "departed_origin": "Departed Origin",
+            "booked_on_flight": "Booked on Flight",
+            "flight_departed": "Flight Departed",
+            "gate_in_rail_terminal": "Gate-in at Rail Terminal",
+            "loaded_on_train": "Loaded on Train",
+            "train_departed": "Train Departed",
+            "gate_in_pol": "Gate-in at POL",
+            "loaded_on_vessel": "Loaded on Vessel",
+            "vessel_departed": "Vessel Departed",
+            "in_sea_transit": "In Sea Transit",
+            "vessel_arrived": "Vessel Arrived",
+            "discharged": "Discharged",
+            "arrived_at_destination": "Arrived at Destination",
+            "out_for_delivery": "Out for Delivery",
+            "delivered": "Delivered",
+            "pod_confirmed": "POD Confirmed",
+            "package_labeled": "Package Labeled",
+            "courier_assigned": "Courier Assigned"
         },
         "common": {
             "loading": "Loading...",
@@ -90,7 +142,7 @@
             "MapLoadError": "Map data is not available for this shipment.",
             "all": "All",
             "openMenu": "Open menu",
-            "selected":"selected"
+            "selected": "selected"
         },
         "validation": {
             "required": "This field is required",

@@ -18,5 +18,5 @@ export const searchAll = async ({ searchTerm = '' }) => {
 
 export const fetchAllShipments = async () => {
     await new Promise(resolve => setTimeout(resolve, 300));
-    return shipmentsData;
+    return shipmentsData.filter((item) => { return item.status === 'active' });
 };

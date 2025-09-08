@@ -1,66 +1,98 @@
-import React from 'react';
+import React, { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from "@/components/ui/button";
 import ContainerIcon from '@/components/icons/ContainerIcon';
+import { formatDisplayDate } from '../utils/shipmentsUtils';
+import { cn } from '@/lib/utils';
 
-const itemClass = 'flex flex-row items-center gap-2 px-4 border-l border-primary';
-
-export default function ContainerDetails({ container }) {
-    if (!container) return null;
+const detailItemClass = 'flex flex-col px-4 border-l border-primary justify-between';
 
 
-    const MainInfo = () => (
-        <div className="flex flex-wrap space-y-4 z-50 relative !mb-0">
-            <div className={itemClass}>
-                <p className="font-bold">{container.id}</p>
-                <p className="text-muted-foreground">{container.type}</p>
-            </div>
+const DataPoint = memo(({ label, value }) => {
+    if (!value) return null;
+    return (
+        <div className={detailItemClass}>
+            <small className="text-muted-foreground">{label}</small>
+            <p>{value}</p>
+        </div>
+    );
+});
+DataPoint.displayName = 'DataPoint';
 
-            <p className={itemClass}>{container.location}</p>
+const MainInfo = memo(({ container, t }) => (
+    <div className="flex flex-wrap gap-y-4 gap-x-2 z-10 relative">
+        <div className={detailItemClass}>
+            <small className="text-muted-foreground">{container.type}</small>
+            <p className="font-bold text-lg">{container.id}</p>
+        </div>
+        <div className={detailItemClass}>
+            <small className="text-muted-foreground">{container.status}</small>
+            <p className="">{formatDisplayDate(container.timestamp)}</p>
+        </div>
+        <DataPoint label={t('containers.location')} value={container.location} />
+        <DataPoint label={t('containers.seal')} value={container.seal} />
+        <DataPoint label={t('containers.truckId')} value={container.truckId} />
+        <DataPoint label={t('containers.driverNumber')} value={container.driverNumber} />
+        <DataPoint label={t('containers.setPoint')} value={container.setPoint} />
+        <DataPoint label="BL Info" value={container.blInfo} />
+        <DataPoint label={t('containers.otherInfo')} value={container.otherInfo} />
+    </div>
+));
+MainInfo.displayName = 'MainInfo';
 
-            <div className={itemClass}>
-                <p>
-                    <span className="font-semibold">{container.status}</span> {container.timestamp}
-                </p>
-                {container.blInfo && <p className="text-muted-foreground">{container.blInfo}</p>}
-            </div>
-
-            <div className={itemClass}>
-                {container.seal && <p>SEAL: {container.seal}</p>}
-                {container.truckId && <p>Truck Id: {container.truckId}</p>}
-                {container.setPoint && !container.details && <p>Set Point: {container.setPoint}</p>}
-                {container.otherInfo && <p className="text-muted-foreground break-all">{container.otherInfo}</p>}
-            </div>
-
-            <div className={`${itemClass} !border-0 w-full !px-0`}>
-                {container.actions?.map((action, index) => (
-                    <Button key={index} variant="outline" size="sm">
-                        {action}
-                    </Button>
-                ))}
+const CommodityDetails = memo(({ details, t }) => {
+    if (!details) return null;
+    return (
+        <div className="z-10 relative mt-4 pt-4 border-t">
+            <h4 className="font-semibold mb-2">{t('containers.commodityDetails')}</h4>
+            <div className="flex flex-wrap gap-y-4 gap-x-2">
+                <DataPoint label={t('containers.commodity')} value={details.commodity} />
+                <DataPoint label={t('containers.package')} value={details.package} />
+                <DataPoint label={t('containers.cargoWeight')} value={details.cargoWeight} />
+                <DataPoint label={t('containers.dimensions')} value={details.dimensions} />
+                <DataPoint label={t('containers.barcode')} value={details.barcode} />
             </div>
         </div>
     );
+});
+CommodityDetails.displayName = 'CommodityDetails';
 
-    const CommodityDetails = () => (
-        container.details ? (
-            <>
-                <div className='h-[.1px] w-full bg-primary relative z-50 mt-8' />
-                <div className="flex gap-4 [&_p]:whitespace-nowrap flex-wrap z-50 relative !mb-0">
-                    <p className={`${itemClass}`}><strong>Commodity:</strong> {container.details.commodity}</p>
-                    <p className={`${itemClass}`}><strong>Package:</strong> {container.details.package}</p>
-                    <p className={`${itemClass}`}><strong>Cargo Weight:</strong> {container.details.cargoWeight}</p>
-                    <p className={`${itemClass}`}><strong>Set Point:</strong> {container.details.setPoint}</p>
-                </div>
-            </>
-        ) : null
-    );
+const Actions = memo(({ allowedActions, t }) => {
+    const labels = React.useMemo(() => ({
+        track_live: t('actions.trackLive'),
+        plan_delivery: t('actions.planDelivery'),
+        plan_pickup: t('actions.planPickup'),
+        set_point: t('actions.setPoint'),
+    }), [t]);
+
+    if (!allowedActions || allowedActions.length === 0) return null;
 
     return (
-        <>
-            <MainInfo />
-            <CommodityDetails />
-            <ContainerIcon className="blur-[2px] absolute bottom-0 right-0 w-[70%] h-auto translate-x-[15%] opacity-20" />
-
-        </>
+        <div className="z-10 relative mt-4 [&_button]:mb-[1px] flex items-center gap-2">
+            {allowedActions.map((actionKey) => (
+                <Button key={actionKey} variant="outline" size="sm">
+                    {labels[actionKey] || actionKey}
+                </Button>
+            ))}
+        </div>
     );
-}
+});
+Actions.displayName = 'Actions';
+
+const ContainerDetails = memo(({ container, className }) => {
+    const { t } = useTranslation();
+
+    if (!container) return null;
+
+    return (
+        <div className={cn("", className)}>
+            <MainInfo container={container} t={t} />
+            <CommodityDetails details={container.commodityDetails} t={t} />
+            <Actions allowedActions={container.allowedActions} t={t} />
+        </div>
+    );
+});
+ 
+ContainerDetails.displayName = 'ContainerDetails';
+
+export default ContainerDetails;

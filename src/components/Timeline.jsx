@@ -28,10 +28,10 @@ const AmbTimeline = ({ items }) => {
                         ></div>
                     </div>
                     <div className="w-full min-h-24 space-y-2 pb-8">
-                        <div className="head h-6 flex items-center justify-start">
+                        <div className="head h-6 flex items-center justify-start mb-4">
                             <b>{item.title}</b>
                         </div>
-                        <div className="content flex flex-col gap-1">{item.content}</div>
+                        <div className="content flex flex-col gap-2 pl-4">{item.content}</div>
                     </div>
                 </div>
             ))}

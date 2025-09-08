@@ -43,6 +43,7 @@ export default function ActiveShipmentsOverview({ data: propData }) {
             label: "Log selected IDs",
             onSelect: (selectedRows) => {
                 const selectedIds = selectedRows.map(row => row.original.id);
+                console.log("Selected shipment IDs:", selectedIds);
                 alert(`Logged ${selectedIds.length} shipment IDs to the console.`);
             },
         },
@@ -50,6 +51,7 @@ export default function ActiveShipmentsOverview({ data: propData }) {
             label: "Export selected",
             onSelect: (selectedRows) => {
                 const data = selectedRows.map(row => row.original);
+                console.log("Exported data:", data);
                 alert(`Exported ${data.length} shipments. Check the console for data.`);
             },
         },

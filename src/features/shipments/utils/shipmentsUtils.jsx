@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Badge } from "@/components/ui/badge";
 import * as icons from "lucide-react";
 import SuccessIcon from "@/components/icons/SuccessIcon";
@@ -29,24 +29,34 @@ export const getStatusConfig = (t) => ({
 export const generateTimelineItems = (shipment, stepsData) => {
     if (!shipment?.route) return [];
 
-    return shipment.route.map(routeStep => {
+    return shipment.route.map((routeStep) => {
         const isCompleted = routeStep.completedSteps && routeStep.completedSteps.length > 0;
         if (!isCompleted) {
             return { label: routeStep.name, title: null, content: null, completed: false };
         }
 
-        const stepsWithDetails = routeStep.completedSteps.map(stepValue => {
+        const stepsWithDetails = routeStep.completedSteps.map((stepValue, i) => {
             const stepDetail = stepsData.find(s => s.value === stepValue);
-            return (
-                <Badge key={stepValue} variant={'outline'} className={'text-md bg-background/70 px-4'}>
-                    {getStepIcon(stepDetail?.icon || 'Package')}
-                    {stepDetail ? stepDetail.label : stepValue}
-                </Badge>
-            );
+            if (i === 0) {
+
+                return (
+                    <Badge key={stepValue} variant={'outline'} className={'text-md bg-background/70 px-4 [&_svg]:!size-3'}>
+                        {getStepIcon(stepDetail?.icon || 'Package')}
+                        {stepDetail ? stepDetail.label : stepValue}
+                    </Badge>
+                )
+            } else {
+                return (
+                    <small key={stepValue} className='text-sm flex [&_svg]:size-3 items-center'>
+                        {getStepIcon(stepDetail?.icon || 'Package')}
+                        {stepDetail ? stepDetail.label : stepValue}
+                    </small>
+                )
+            }
         });
 
         const title = stepsWithDetails.length > 0 ? stepsWithDetails[0] : null;
-        const content = stepsWithDetails.length > 1 ? <div className="flex flex-col gap-2 mt-2">{stepsWithDetails.slice(1)}</div> : null;
+        const content = stepsWithDetails.length > 1 ? stepsWithDetails.slice(1) : null;
 
         return { label: routeStep.name, title, content, completed: true };
     });
