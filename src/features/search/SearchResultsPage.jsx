@@ -7,7 +7,7 @@ import { useSearchQuery } from "@/queries/useSearchQuery";
 import { AlertTriangle, Book, Ship } from "lucide-react";
 import SearchResultsSkeleton from "@/components/SearchResultsSkeleton";
 import ActiveShipmentsOverview from "@/features/shipments/ActiveShipmentsOverview";
-
+import BookingsOverview from "@/features/bookings/BookingsOverview";
 const BookingsPlaceholder = ({ results }) => {
     const { t } = useTranslation();
     return (
@@ -69,7 +69,11 @@ export default function SearchResultsPage() {
 
                 {bookingResults.length > 0 && (
                     <section>
-                        <BookingsPlaceholder results={bookingResults} />
+                        <div className="flex items-center gap-4 mb-4">
+                            <Book className="h-8 w-8 text-primary" />
+                            <h2 className="text-2xl font-bold tracking-tight">{t('search.bookingResultsTitle', { count: bookingResults.length })}</h2>
+                        </div>
+                        <BookingsOverview data={bookingResults} />
                     </section>
                 )}
             </div>

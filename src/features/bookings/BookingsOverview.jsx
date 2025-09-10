@@ -1,18 +1,17 @@
 import { useTranslation } from "react-i18next";
-import DashNav from "@/components/dashboard/DashNav";
 import { DataTable } from "@/components/tables/DataTable";
 import { getColumns } from "./columns";
-import ShipmentDetails from "./ShipmentDetails.jsx";
+import BookingDetails from "./BookingDetails.jsx";
 import { useMemo, useState } from "react";
-import DashboardSearch from "@/components/dashboard/DashboardSearch";
-import { useShipmentsQuery } from "@/queries/useShipmentsQuery";
+import { useBookingsQuery } from "@/queries/useBookingsQuery";
+import DashNav from "@/components/dashboard/DashNav.jsx";
+import DashboardSearch from "@/components/dashboard/DashboardSearch.jsx";
 
-export default function ActiveShipmentsOverview({ data: propData }) {
-
+export default function BookingsOverview({ data: propData }) {
     const { t } = useTranslation();
     const [columnFilters, setColumnFilters] = useState([]);
 
-    const { data: fetchedData, isLoading: isFetching } = useShipmentsQuery({
+    const { data: fetchedData, isLoading: isFetching } = useBookingsQuery({
         enabled: !propData,
     });
 
@@ -35,34 +34,16 @@ export default function ActiveShipmentsOverview({ data: propData }) {
     ];
 
     const statusFilterOptions = [
-        { value: "active", label: t('shipments.status.active') },
-        { value: "finished", label: t('shipments.status.finished') },
-    ];
-
-    const shipmentBulkActions = [
-        {
-            label: "Log selected IDs",
-            onSelect: (selectedRows) => {
-                const selectedIds = selectedRows.map(row => row.original.id);
-                console.log("Selected shipment IDs:", selectedIds);
-                alert(`Logged ${selectedIds.length} shipment IDs to the console.`);
-            },
-        },
-        {
-            label: "Export selected",
-            onSelect: (selectedRows) => {
-                const data = selectedRows.map(row => row.original);
-                console.log("Exported data:", data);
-                alert(`Exported ${data.length} shipments. Check the console for data.`);
-            },
-        },
+        { value: "Confirmed", label: t('bookings.status.confirmed') },
+        { value: "Pending", label: t('bookings.status.pending') },
+        { value: "Cancelled", label: t('bookings.status.cancelled') },
     ];
 
     return (
         <>
             {!propData && (
                 <div className="gap-4 flex flex-col">
-                    <DashNav DashTitle={t('pageTitles.multimodal')} />
+                    <DashNav DashTitle={t('pageTitles.bookings')} />
                     <DashboardSearch />
                 </div>
             )}
@@ -72,7 +53,7 @@ export default function ActiveShipmentsOverview({ data: propData }) {
                     data={tableData || []}
                     isLoading={isLoading}
                     expandable={true}
-                    renderExpandedRow={(shipmentObj) => <ShipmentDetails shipment={shipmentObj} />}
+                    renderExpandedRow={(bookingObj) => <BookingDetails booking={bookingObj} />}
                     columnFilters={columnFilters}
                     setColumnFilters={setColumnFilters}
                     tabsFilter={{
@@ -88,7 +69,6 @@ export default function ActiveShipmentsOverview({ data: propData }) {
                         },
                     ]}
                     initialColumnVisibility={{ mode: false }}
-                    bulkActions={shipmentBulkActions}
                 />
             </div>
         </>

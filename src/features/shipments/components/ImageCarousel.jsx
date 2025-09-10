@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
-// Displays a carousel of shipment images
 export default function ImageCarousel({ images }) {
     const { t } = useTranslation();
 

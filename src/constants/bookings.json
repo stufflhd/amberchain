@@ -1,0 +1,527 @@
+[
+  {
+    "id": "B52354684",
+    "number": "BR24PTM-00000067",
+    "status": "Confirmed",
+    "mode": "Sea",
+    "readinessDate": "2024-10-20T02:00:00",
+    "por": "Casablanca, Morocco",
+    "origin": "Tangier Med",
+    "destination": "Rotterdam",
+    "finalPod": "Rotterdam, Netherlands",
+    "etd": "2024-10-25T18:00:00",
+    "eta": "2024-11-02T10:00:00",
+    "carrier": "COSCON",
+    "smartTool": "Used",
+    "terminal": "Port",
+    "task": "Pending",
+    "originCoord": [
+      -5.5520,
+      35.8450
+    ],
+    "destinationCoord": [
+      4.4777,
+      51.9244
+    ],
+    "timeline": [
+      {
+        "step": "New",
+        "status": "completed"
+      },
+      {
+        "step": "Pending",
+        "status": "completed"
+      },
+      {
+        "step": "Confirmed",
+        "status": "active"
+      },
+      {
+        "step": "Delayed",
+        "status": "pending"
+      },
+      {
+        "step": "Cancelled",
+        "status": "pending"
+      }
+    ],
+    "route": [
+      "POR - CASABLANCA",
+      "POL - TANGIER MED",
+      "POD - ROTTERDAM"
+    ],
+    "details": {
+      "info": {
+        "container": "40-40HQ-GENERAL",
+        "serviceAgreement": "SA24-00000167",
+        "creationDate": "2024-10-16T14:38:00",
+        "por": "CASABLANCA PORT (MOROCCO)",
+        "pol": "TANGIER MED (MOROCCO)",
+        "pod": "NOUAKCHOTT (MAURITANIA)",
+        "numberOfContainers": 2,
+        "cutoffDate": "2024-10-21T02:00:00",
+        "shippingInstructionsDeadline": "2024-10-22T17:00:00",
+        "evgmDeadline": "2024-10-23T12:00:00",
+        "gateInDeadline": "2024-10-24T00:00:00"
+      },
+      "shipping": {
+        "shippingLine": "COSCO Shipping Lines",
+        "service": "MED-EU Express",
+        "vesselName": "COSCO PRIDE",
+        "terminalOrigin": "Eurogate Tangier",
+        "terminalDestination": "Rotterdam World Gateway",
+        "etd": "2024-10-25T18:00:00",
+        "eta": "2024-11-02T10:00:00",
+        "commodity": "Vegetable Products",
+        "grossWeight": "22000KG"
+      },
+      "general": {
+        "servicesRequested": "Need pre-shipment inspection service\nNeed customs clearance\nNeed certification",
+        "comment": "Product: Vegetable Products\nWeight per container: 20000KG",
+        "additionalInfo": "Ventilation: 15, Humidity: 85",
+        "terms": "Port-To-Port rate (FIOS/FIFO excluding local fees).\nSubject to:\n- Local fees in POL and POD"
+      }
+    },
+    "participantIds": [
+      "P1",
+      "P4",
+      "P6"
+    ],
+    "equipmentIds": [
+      "EQ1",
+      "EQ2"
+    ],
+    "actions": [
+      {
+        "id": "convertToShipment",
+        "label": "bookings.actions.convertToShipment",
+        "enabled": true
+      },
+      {
+        "id": "edit",
+        "label": "common.edit",
+        "enabled": true
+      },
+      {
+        "id": "generatePdf",
+        "label": "common.generatePdf",
+        "enabled": true
+      },
+      {
+        "id": "cancel",
+        "label": "common.cancel",
+        "enabled": true
+      }
+    ]
+  },
+  {
+    "id": "B52354683",
+    "number": "BR24PTM-00000066",
+    "status": "Cancelled",
+    "mode": "Rail",
+    "readinessDate": "2025-07-02T09:00:00",
+    "por": "Marrakech",
+    "origin": "Tangier Med Rail",
+    "destination": "Hamburg Rail Hub",
+    "finalPod": "Zhengzhu, China",
+    "etd": "2025-07-04T20:22:00",
+    "eta": "2025-07-12T08:00:00",
+    "carrier": "ONCF",
+    "smartTool": "Not Used",
+    "terminal": "RAIL",
+    "task": "Completed",
+    "originCoord": [
+      -5.5520,
+      35.8450
+    ],
+    "destinationCoord": [
+      9.9937,
+      53.5511
+    ],
+    "timeline": [
+      {
+        "step": "New",
+        "status": "completed"
+      },
+      {
+        "step": "Pending",
+        "status": "completed"
+      },
+      {
+        "step": "Confirmed",
+        "status": "completed"
+      },
+      {
+        "step": "Delayed",
+        "status": "completed"
+      },
+      {
+        "step": "Cancelled",
+        "status": "active"
+      }
+    ],
+    "route": [
+      "POR - MARRAKECH",
+      "ROR - TANGIER MED",
+      "RRD - HAMBURG"
+    ],
+    "details": {
+      "info": {
+        "container": "Rail Wagon Set",
+        "serviceAgreement": "RAIL-EU-005",
+        "creationDate": "2025-06-28T11:00:00",
+        "por": "Marrakech Rail Station",
+        "pol": "",
+        "pod": "",
+        "numberOfContainers": 5,
+        "cutoffDate": "",
+        "shippingInstructionsDeadline": "",
+        "evgmDeadline": "",
+        "gateInDeadline": ""
+      },
+      "shipping": {
+        "shippingLine": "DB Schenker",
+        "service": "Eurasia Rail",
+        "vesselName": "Train 45B",
+        "terminalOrigin": "Tangier Rail",
+        "terminalDestination": "Hamburg Billwerder",
+        "etd": "2025-07-04T20:22:00",
+        "eta": "2025-07-12T08:00:00",
+        "commodity": "Automotive Parts",
+        "grossWeight": "18000KG"
+      },
+      "general": {
+        "servicesRequested": "Customs clearance in Hamburg",
+        "comment": "High-value auto parts, handle with care.",
+        "additionalInfo": "",
+        "terms": "All-in rate, door-to-door."
+      }
+    },
+    "participantIds": [
+      "P2",
+      "P3"
+    ],
+    "equipmentIds": [
+      "EQ3"
+    ],
+    "actions": [
+      {
+        "id": "edit",
+        "label": "common.edit",
+        "enabled": false
+      },
+      {
+        "id": "generatePdf",
+        "label": "common.generatePdf",
+        "enabled": true
+      }
+    ]
+  },
+  {
+    "id": "B52354682",
+    "number": "BR24PTM-00000065",
+    "status": "Pending",
+    "mode": "Air",
+    "readinessDate": "2025-07-03T12:00:00",
+    "por": "Chellalat",
+    "origin": "MED VI airport (CMN)",
+    "destination": "Sheikh Khalifa Airport (DXB)",
+    "finalPod": "Dubai, 25 Borj Khalifa",
+    "etd": "2025-07-04T20:22:00",
+    "eta": "2025-07-05T08:00:00",
+    "carrier": "RAM",
+    "smartTool": "Used",
+    "terminal": "AIRPORT",
+    "task": "Pending",
+    "originCoord": [
+      -7.5898,
+      33.5731
+    ],
+    "destinationCoord": [
+      55.2708,
+      25.2048
+    ],
+    "timeline": [
+      {
+        "step": "New",
+        "status": "completed"
+      },
+      {
+        "step": "Pending",
+        "status": "active"
+      },
+      {
+        "step": "Confirmed",
+        "status": "pending"
+      },
+      {
+        "step": "Delayed",
+        "status": "pending"
+      },
+      {
+        "step": "Cancelled",
+        "status": "pending"
+      }
+    ],
+    "route": [
+      "POR - CHELLALAT",
+      "AOD - MED VI",
+      "AOA - SHEIKH KHALIFA"
+    ],
+    "details": {
+      "info": {
+        "container": "2x ULD",
+        "serviceAgreement": "AIR-FRT-112",
+        "creationDate": "2025-07-01T10:00:00",
+        "por": "Chellalat Facility",
+        "pol": "",
+        "pod": "",
+        "numberOfContainers": 2,
+        "cutoffDate": "2025-07-04T12:00:00",
+        "shippingInstructionsDeadline": "",
+        "evgmDeadline": "",
+        "gateInDeadline": ""
+      },
+      "shipping": {
+        "shippingLine": "Royal Air Maroc Cargo",
+        "service": "Direct Flight",
+        "vesselName": "Flight AT246",
+        "terminalOrigin": "CMN Cargo Terminal",
+        "terminalDestination": "DXB Terminal 2",
+        "etd": "2025-07-04T20:22:00",
+        "eta": "2025-07-05T08:00:00",
+        "commodity": "Pharmaceuticals",
+        "grossWeight": "500KG"
+      },
+      "general": {
+        "servicesRequested": "Temperature controlled handling",
+        "comment": "Must maintain 2-8°C",
+        "additionalInfo": "",
+        "terms": "Airport-to-airport."
+      }
+    },
+    "participantIds": [
+      "P1",
+      "P7"
+    ],
+    "equipmentIds": [],
+    "actions": [
+      {
+        "id": "edit",
+        "label": "common.edit",
+        "enabled": true
+      },
+      {
+        "id": "generatePdf",
+        "label": "common.generatePdf",
+        "enabled": true
+      },
+      {
+        "id": "cancel",
+        "label": "common.cancel",
+        "enabled": true
+      }
+    ]
+  },
+  {
+    "id": "B52354685",
+    "number": "BR24PTM-00000068",
+    "status": "Confirmed",
+    "mode": "Road",
+    "readinessDate": "2025-07-04T08:00:00",
+    "por": "Sharebroke, 13 Land green",
+    "origin": "New York Cf Depot",
+    "destination": "Amazon California Hub",
+    "finalPod": "California, 23 St",
+    "etd": "2025-07-05T10:00:00",
+    "eta": "2025-07-08T16:00:00",
+    "carrier": "AMAZON",
+    "smartTool": "Not Used",
+    "terminal": "HUB",
+    "task": "Completed",
+    "originCoord": [
+      -74.0060,
+      40.7128
+    ],
+    "destinationCoord": [
+      -118.2437,
+      34.0522
+    ],
+    "timeline": [
+      {
+        "step": "New",
+        "status": "completed"
+      },
+      {
+        "step": "Pending",
+        "status": "completed"
+      },
+      {
+        "step": "Confirmed",
+        "status": "active"
+      },
+      {
+        "step": "Delayed",
+        "status": "pending"
+      },
+      {
+        "step": "Cancelled",
+        "status": "pending"
+      }
+    ],
+    "route": [
+      "POR - SHAREBROKE",
+      "Consolidation - NY DEPOT",
+      "Deconsolidation - CA HUB"
+    ],
+    "details": {
+      "info": {
+        "container": "1x 53' Dry Van",
+        "serviceAgreement": "AMZN-FTL-001",
+        "creationDate": "2025-07-02T15:20:00",
+        "por": "Sharebroke, NY",
+        "pol": "",
+        "pod": "",
+        "numberOfContainers": 1,
+        "cutoffDate": "",
+        "shippingInstructionsDeadline": "",
+        "evgmDeadline": "",
+        "gateInDeadline": ""
+      },
+      "shipping": {
+        "shippingLine": "Amazon Freight",
+        "service": "FTL",
+        "vesselName": "Truck #554B",
+        "terminalOrigin": "JFK2 Depot",
+        "terminalDestination": "LAX5 Hub",
+        "etd": "2025-07-05T10:00:00",
+        "eta": "2025-07-08T16:00:00",
+        "commodity": "General Merchandise",
+        "grossWeight": "40000 lbs"
+      },
+      "general": {
+        "servicesRequested": "Team drivers for expedited transit",
+        "comment": "",
+        "additionalInfo": "",
+        "terms": "Live load / unload."
+      }
+    },
+    "participantIds": [
+      "P5"
+    ],
+    "equipmentIds": [],
+    "actions": [
+      {
+        "id": "convertToShipment",
+        "label": "bookings.actions.convertToShipment",
+        "enabled": true
+      },
+      {
+        "id": "edit",
+        "label": "common.edit",
+        "enabled": true
+      }
+    ]
+  },
+  {
+    "id": "B52354687",
+    "number": "BR24PTM-00000070",
+    "status": "New",
+    "mode": "E-BUSINESS",
+    "readinessDate": "2025-07-14T10:00:00",
+    "por": "Shenzhen Fulfillment Center",
+    "origin": "Shenzhen Sortation Hub",
+    "destination": "Paris Last Mile Depot",
+    "finalPod": "123 Rue de Rivoli, Paris",
+    "etd": "2025-07-15T11:00:00",
+    "eta": "2025-07-20T16:00:00",
+    "carrier": "DHL",
+    "smartTool": "Used",
+    "terminal": "COURIER",
+    "task": "Pending",
+    "originCoord": [
+      114.0579,
+      22.5431
+    ],
+    "destinationCoord": [
+      2.3522,
+      48.8566
+    ],
+    "timeline": [
+      {
+        "step": "New",
+        "status": "active"
+      },
+      {
+        "step": "Pending",
+        "status": "pending"
+      },
+      {
+        "step": "Confirmed",
+        "status": "pending"
+      },
+      {
+        "step": "Delayed",
+        "status": "pending"
+      },
+      {
+        "step": "Cancelled",
+        "status": "pending"
+      }
+    ],
+    "route": [
+      "Fulfillment Center",
+      "First Mile",
+      "Sortation Hub",
+      "Last Mile"
+    ],
+    "details": {
+      "info": {
+        "container": "Parcel Group",
+        "serviceAgreement": "DHL-ECOM-GLOBAL",
+        "creationDate": "2025-07-13T09:00:00",
+        "por": "Shenzhen Center",
+        "pol": "",
+        "pod": "",
+        "numberOfContainers": 250,
+        "cutoffDate": "",
+        "shippingInstructionsDeadline": "",
+        "evgmDeadline": "",
+        "gateInDeadline": ""
+      },
+      "shipping": {
+        "shippingLine": "DHL Express",
+        "service": "Global Express",
+        "vesselName": "Flight DHL55",
+        "terminalOrigin": "SZX Hub",
+        "terminalDestination": "CDG Hub",
+        "etd": "2025-07-15T11:00:00",
+        "eta": "2025-07-20T16:00:00",
+        "commodity": "Consumer Electronics",
+        "grossWeight": "1500KG"
+      },
+      "general": {
+        "servicesRequested": "DDP (Delivered Duty Paid)",
+        "comment": "Fragile items included.",
+        "additionalInfo": "",
+        "terms": "All-in per parcel."
+      }
+    },
+    "participantIds": [
+      "P7"
+    ],
+    "equipmentIds": [],
+    "actions": [
+      {
+        "id": "edit",
+        "label": "common.edit",
+        "enabled": true
+      },
+      {
+        "id": "cancel",
+        "label": "common.cancel",
+        "enabled": true
+      }
+    ]
+  }
+]

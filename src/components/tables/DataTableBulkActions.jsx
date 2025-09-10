@@ -4,7 +4,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from 'lucide-react';
 
-export default function DataTableBulkActions({ table, actions = [] }) {
+export default function DataTableBulkActions({ table, actions = [], actionTitle }) {
     const { t } = useTranslation();
     const selectedRows = table.getFilteredSelectedRowModel().rows;
     const numSelected = selectedRows.length;
@@ -19,14 +19,14 @@ export default function DataTableBulkActions({ table, actions = [] }) {
     };
 
     return (
-        <div className="flex items-center gap-2 ml-auto">
+        <div className="dataTableBulkActions flex items-center gap-2 ml-auto">
             <span className="text-sm text-muted-foreground whitespace-nowrap">
                 {numSelected} {t("common.selected")}
             </span>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant="outline" size="sm">
-                        Actions
+                        {actionTitle ? t(actionTitle) : t("common.actions")}
                         <ChevronDown className="ml-2 h-4 w-4" />
                     </Button>
                 </DropdownMenuTrigger>

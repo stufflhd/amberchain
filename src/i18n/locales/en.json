@@ -131,6 +131,8 @@
             "courier_assigned": "Courier Assigned"
         },
         "common": {
+            "actions": "Actions",
+            "addParticipants": "Add Participant(s)",
             "loading": "Loading...",
             "submit": "Submit",
             "cancel": "Cancel",
@@ -142,7 +144,15 @@
             "MapLoadError": "Map data is not available for this shipment.",
             "all": "All",
             "openMenu": "Open menu",
-            "selected": "selected"
+            "edit": "Edit",
+            "generatePdf": "Generate PDF",
+            "comingSoon": "Coming Soon...",
+            "selected": "selected(s)",
+            "delete": "Delete",
+            "confirm": "Confirm",
+            "close": "Close",
+            "copy": "Copy",
+            "copied": "Copied!"
         },
         "validation": {
             "required": "This field is required",
@@ -402,7 +412,8 @@
             "outsource-your-log": "Outsource Your Log",
             "assign-agent": "Assign Agent",
             "enhance-profitability": "Enhance Profitability",
-            "insights": "Insights"
+            "insights": "Insights",
+            "bookings-view": "Bookings Overview"
         },
         "cargoNav": {
             "deliveryOrder": "Delivery Order",
@@ -425,6 +436,7 @@
             "resultsFor": "Showing results for:",
             "clear": "Clear search",
             "pageTitle": "Search Results for \"{{searchTerm}}\"",
+            "placeholder": "Search for participants...",
             "shipmentResultsTitle": "Shipment Results ({{count}})",
             "bookingResultsTitle": "Booking Results ({{count}})",
             "bookingComponentPlaceholder": "Booking component is not implemented yet.",
@@ -441,6 +453,139 @@
             "road": "ROAD",
             "rail": "RAIL",
             "ebusiness": "E-BUSINESS"
+        },
+        "bookings": {
+            "pageTitle": "Bookings",
+            "status": {
+                "confirmed": "Confirmed",
+                "pending": "Pending",
+                "cancelled": "Cancelled",
+                "new": "New",
+                "delayed": "Delayed"
+            },
+            "table": {
+                "columns": {
+                    "bookingId": "Booking ID",
+                    "readinessDate": "Readiness Date",
+                    "por": "POR",
+                    "origin": "ORIGIN",
+                    "destination": "DESTINATION",
+                    "finalPod": "Final POD",
+                    "etd": "ETD",
+                    "eta": "ETA",
+                    "status": "Booking Status",
+                    "carrier": "Carrier / Forwarder",
+                    "smartTool": "Smart Tool",
+                    "terminal": "Terminal",
+                    "task": "Task",
+                    "firstMile": "First Mile",
+                    "sortationHub": "Sortation Hub"
+                }
+            },
+            "details": {
+                "equipments": "Equipments",
+                "participants": "Participants",
+                "noParticipants": "No participants assigned.",
+                "noEquipment": "No equipment details available.",
+                "info": {
+                    "container": "Container",
+                    "serviceAgreement": "Service agreement",
+                    "readinessDate": "Readiness date",
+                    "creationDate": "Creation date",
+                    "por": "POR",
+                    "pol": "POL",
+                    "pod": "POD",
+                    "numberOfContainers": "Number of containers",
+                    "cutoffDate": "Cut off date",
+                    "shippingInstructionsDeadline": "Shipping instructions deadline",
+                    "evgmDeadline": "eVGM deadline",
+                    "gateInDeadline": "Gate-In deadline"
+                },
+                "shipping": {
+                    "shippingLine": "Shipping Line",
+                    "service": "Service",
+                    "vesselName": "Vessel Name",
+                    "terminalOrigin": "Terminal Origin",
+                    "terminalDestination": "Terminal Destination",
+                    "etd": "ETD",
+                    "eta": "ETA",
+                    "commodity": "Commodity",
+                    "grossWeight": "Gross Weight"
+                },
+                "general": {
+                    "title": "General Info",
+                    "servicesRequested": "Services requested",
+                    "comment": "Comment",
+                    "additionalInfo": "Additional information",
+                    "terms": "Terms / Additional charges"
+                },
+                "tabs": {
+                    "details": "Details",
+                    "equipment": "Equipment",
+                    "documents": "Documents",
+                    "evgm": "eVGM",
+                    "shippingInst": "Shipping Inst",
+                    "payment": "Payment"
+                }
+            },
+            "equipment": {
+                "containerNo": "Container №",
+                "size": "Size",
+                "type": "Type",
+                "status": "Status"
+            },
+            "actions": {
+                "convertToShipment": "Convert to"
+            }
+        },
+        "participants": {
+            "search": {
+                "placeholder": "Search for participants..."
+            },
+            "table": {
+                "profileId": "Profile ID",
+                "company": "Company",
+                "userName": "User Name",
+                "businessProfile": "Business Profile",
+                "party": "Party",
+                "email": "Email",
+                "phone": "Phone",
+                "authorisations": "Authorisations"
+            },
+            "authorisations": {
+                "view_shipments": "View Shipments",
+                "respond_queries": "Respond to Queries",
+                "assign_tasks": "Assign Tasks",
+                "edit_shipments": "Edit Shipments",
+                "manage_participants": "Manage Participants",
+                "view_analytics": "View Analytics",
+                "manage_documents": "Manage Documents"
+            },
+            "management": {
+                "title": "Manage Participants",
+                "addParticipant": "Add Participant",
+                "editParticipant": "Edit Participant",
+                "removeParticipant": "Remove Participant",
+                "confirmRemove": "Are you sure you want to remove this participant?",
+                "selectParticipant": "Select Participant",
+                "selectRole": "Select Role",
+                "editPermissions": "Edit Permissions",
+                "updatePermissions": "Update Permissions",
+                "managePermissions": "Manage Permissions",
+                "selectPermissions": "Select the permissions you want to assign to the selected participant(s)",
+                "setPermissions": "Set Permissions",
+                "selectInitialPermissions": "Select initial permissions for participant(s)",
+                "addWithPermissions": "Add with permissions",
+                "participantsSelectedCount": "{{count}} participant(s) selected",
+                "success": "Success!",
+                "successMessage": "Participant(s) successfully added",
+                "addError": "Failed to add participants. Please try again.",
+                "saveChanges": "Save Changes",
+                "participantsSelected": "{{count}} participants selected",
+                "deleteConfirmation": "Are you sure you want to delete {{count, plural, =1 {this participant} other {# participants}}}?",
+                "permissionsUpdated": "Permissions updated successfully.",
+                "updateError": "Failed to update permissions. Please try again."
+            }
         }
     }
 }

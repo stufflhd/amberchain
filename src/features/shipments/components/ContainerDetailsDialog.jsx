@@ -5,6 +5,8 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/
 import ContainerDetails from "./ContainerDetails";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import ContainerIcon from "@/components/icons/ContainerIcon";
+import { ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const ContainerDetailsDialog = memo(({ shipment, containers }) => {
     const { t } = useTranslation();
@@ -45,24 +47,38 @@ const ContainerDetailsDialog = memo(({ shipment, containers }) => {
 
                 {hasContainers ? (
                     <>
-                        <div className="overflow-hidden overflow-x-auto py-[2px] mb-4">
-                            <ToggleGroup
-                                type="single"
-                                value={activeContainerId}
-                                className="w-full !shadow-none"
-                                onValueChange={handleValueChange}
-                                variant="outline"
-                            >
-                                {containers.map(container => (
-                                    <ToggleGroupItem
-                                        key={container.id}
-                                        value={container.id}
-                                        className={"flex-none whitespace-nowrap w-max mt-0"}
-                                    >
-                                        {container.id}
-                                    </ToggleGroupItem>
-                                ))}
-                            </ToggleGroup>
+                        <div className="flex justify-between z-50">
+                            <div className="overflow-hidden overflow-x-auto py-[2px] mb-4">
+                                <ToggleGroup
+                                    type="single"
+                                    value={activeContainerId}
+                                    className="w-full !shadow-none"
+                                    onValueChange={handleValueChange}
+                                    variant="outline"
+                                >
+                                    {containers.map(container => (
+                                        <ToggleGroupItem
+                                            key={container.id}
+                                            value={container.id}
+                                            className={"flex-none whitespace-nowrap w-max mt-0"}
+                                        >
+                                            {container.id}
+                                        </ToggleGroupItem>
+                                    ))}
+                                </ToggleGroup>
+                            </div>
+
+                            {
+                                shipment.mode === 'Sea' || shipment.mode == 'E-BUSINESS'
+                                    ? (
+                                        <Link to='containers'>
+                                            <Button variant={'outline'} className={'cursor-pointer'}>
+                                                View Full list
+                                                <ExternalLink />
+                                            </Button>
+                                        </Link>
+                                    ) : null
+                            }
                         </div>
 
                         {activeContainer ? (

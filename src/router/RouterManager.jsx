@@ -1,6 +1,5 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
-
 import AuthLayout from "@/app/layouts/AuthLayout";
 import MainLayout from "@/app/layouts/MainLayout";
 import RootLayout from "@/app/layouts/RootLayout";
@@ -10,6 +9,8 @@ import PageLoader from "@/components/PageisLoading";
 import NotFoundPage from "@/features/errors/NotFoundPage";
 import ActiveShipmentsOverview from "@/features/shipments/ActiveShipmentsOverview";
 import SearchResultsPage from "@/features/search/SearchResultsPage";
+import BookingsOverview from "@/features/bookings/BookingsOverview";
+import AuthRedirect from "@/app/AuthRedirect";
 
 const LoginPage = lazy(() => import("@/features/auth/pages/LoginPage"));
 const RegisterPage = lazy(() => import("@/features/auth/pages/RegisterPage"));
@@ -25,6 +26,14 @@ const router = createBrowserRouter([
             </Suspense>
         ),
         children: [
+            {
+                index: true,
+                element: (
+                    <Suspense fallback={<PageLoader />}>
+                        <AuthRedirect />
+                    </Suspense>
+                ),
+            },
             {
                 path: "auth",
                 element: <AuthLayout title="pageTitles.login" />,
@@ -51,7 +60,6 @@ const router = createBrowserRouter([
                             </MainLayout>
                         ),
                         children: [
-                            { index: true, element: <div>Dashboard placeholder</div> },
                             {
                                 path: "admin",
                                 element: (
@@ -101,6 +109,14 @@ const router = createBrowserRouter([
                 element: (
                     <MainLayout title="pageTitles.dashboard-view">
                         <ClientsDashboard />
+                    </MainLayout>
+                ),
+            },
+            {
+                path: "bookings",
+                element: (
+                    <MainLayout title="pageTitles.bookings-view">
+                        <BookingsOverview />
                     </MainLayout>
                 ),
             },

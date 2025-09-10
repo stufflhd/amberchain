@@ -58,7 +58,7 @@ export default function ShipmentInfoHeader({ shipment, containerCount }) {
                     {shipment.delay !== "No delay" && <small className="text-secondary font-semibold">{shipment.delay}</small>}
                     {
                         shipment.notes.map((note)=>(
-                            <small>{note}</small>
+                            <small key={note}>{note}</small>
                         ))
                     }
                 </div>

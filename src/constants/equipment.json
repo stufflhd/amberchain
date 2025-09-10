@@ -1,0 +1,41 @@
+[
+    {
+        "id": "EQ1",
+        "bookingId": "B52354684",
+        "containerNo": "AMBU40HQGEN",
+        "size": "40HQ",
+        "type": "GENERAL",
+        "tare": "3800 KG",
+        "sealNo": "SEAL12345",
+        "status": "Assigned",
+        "truckProvider": "TransCo",
+        "stuffingDate": "2024-10-12T10:00:00",
+        "truckSealingWindow": "14:00 - 16:00"
+    },
+    {
+        "id": "EQ2",
+        "bookingId": "B52354684",
+        "containerNo": "AMBU20DV",
+        "size": "20DV",
+        "type": "GENERAL",
+        "tare": "2200 KG",
+        "sealNo": "SEAL67890",
+        "status": "Pending",
+        "truckProvider": null,
+        "stuffingDate": null,
+        "truckSealingWindow": null
+    },
+    {
+        "id": "EQ3",
+        "bookingId": "B52354683",
+        "containerNo": "RAILWAGON77",
+        "size": "N/A",
+        "type": "WAGON",
+        "tare": "15000 KG",
+        "sealNo": "RAILSEAL01",
+        "status": "Loaded",
+        "truckProvider": "Rail Freight Inc.",
+        "stuffingDate": "2025-07-03T14:00:00",
+        "truckSealingWindow": "N/A"
+    }
+]

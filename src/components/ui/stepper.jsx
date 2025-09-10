@@ -5,7 +5,6 @@ import { Slot } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
-// Contexts
 const StepperContext = createContext(undefined)
 const StepItemContext = createContext(undefined)
 
@@ -125,7 +124,6 @@ function StepperTrigger({
         "focus-visible:border-ring focus-visible:ring-ring/50 inline-flex items-center gap-3 rounded-full outline-none focus-visible:z-10 focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50",
         className
       )}
-      // onClick={() => setActiveStep(step)}
       disabled={isDisabled}
       {...props}>
       {children}
@@ -173,7 +171,6 @@ function StepperIndicator({
   );
 }
 
-// StepperTitle
 function StepperTitle({
   className,
   ...props
@@ -186,7 +183,6 @@ function StepperTitle({
   );
 }
 
-// StepperDescription
 function StepperDescription({
   className,
   ...props
@@ -199,7 +195,6 @@ function StepperDescription({
   );
 }
 
-// StepperSeparator
 function StepperSeparator({
   className,
   ...props

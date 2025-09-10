@@ -121,18 +121,28 @@
             "courier_assigned": "Transporteur assigné"
         },
         "common": {
+            "actions": "Actions",
+            "addParticipants": "Ajouter Participant(s)",
             "loading": "Chargement...",
             "submit": "Soumettre",
-            "cancel": "Annuler",
             "previous": "Précédent",
             "required": "Requis",
             "back": "Retour",
             "next": "Suivant",
             "MapLoading": "Chargement de la map...",
             "MapLoadError": "Les données ne sont pas disponibles pour cet envoi.",
-            "all": "Tout",
             "openMenu": "Ouvrir le menu",
-            "selected": "sélectionné"
+            "all": "Tous",
+            "edit": "Modifier",
+            "generatePdf": "Générer PDF",
+            "cancel": "Annuler",
+            "comingSoon": "Bientôt disponible...",
+            "selected": "sélectionné(s)",
+            "delete": "Supprimer",
+            "confirm": "Confirmer",
+            "close": "Fermer",
+            "copy": "Copier",
+            "copied": "Copié !"
         },
         "validation": {
             "required": "Ce champ est requis",
@@ -392,7 +402,8 @@
             "outsource-your-log": "Externaliser Votre Logistique",
             "assign-agent": "Assigner un Agent",
             "enhance-profitability": "Améliorer la Rentabilité",
-            "insights": "Aperçus"
+            "insights": "Aperçus",
+            "bookings-view": "Vue Réservations"
         },
         "cargoNav": {
             "deliveryOrder": "Bon de livraison",
@@ -431,6 +442,139 @@
             "road": "ROUTE",
             "rail": "RAIL",
             "ebusiness": "E-BUSINESS"
+        },
+        "bookings": {
+            "pageTitle": "Réservations",
+            "status": {
+                "confirmed": "Confirmé",
+                "pending": "En attente",
+                "cancelled": "Annulé",
+                "new": "Nouveau",
+                "delayed": "Retardé"
+            },
+            "table": {
+                "columns": {
+                    "bookingId": "ID Réservation",
+                    "readinessDate": "Date de disponibilité",
+                    "por": "POR",
+                    "origin": "ORIGINE",
+                    "destination": "DESTINATION",
+                    "finalPod": "POD Final",
+                    "etd": "ETD",
+                    "eta": "ETA",
+                    "status": "Statut Réservation",
+                    "carrier": "Transporteur / Transitaire",
+                    "smartTool": "Outil Intelligent",
+                    "terminal": "Terminal",
+                    "task": "Tâche",
+                    "firstMile": "Premier Kilomètre",
+                    "sortationHub": "Hub de Tri"
+                }
+            },
+            "details": {
+                "equipments": "Équipements",
+                "participants": "Participants",
+                "noParticipants": "Aucun participant assigné.",
+                "noEquipment": "Aucun détail d'équipement disponible.",
+                "info": {
+                    "container": "Conteneur",
+                    "serviceAgreement": "Contrat de service",
+                    "readinessDate": "Date de disponibilité",
+                    "creationDate": "Date de création",
+                    "por": "POR",
+                    "pol": "POL",
+                    "pod": "POD",
+                    "numberOfContainers": "Nombre de conteneurs",
+                    "cutoffDate": "Date limite",
+                    "shippingInstructionsDeadline": "Date limite instructions d'expédition",
+                    "evgmDeadline": "Date limite eVGM",
+                    "gateInDeadline": "Date limite d'entrée"
+                },
+                "shipping": {
+                    "shippingLine": "Compagnie Maritime",
+                    "service": "Service",
+                    "vesselName": "Nom du navire",
+                    "terminalOrigin": "Terminal d'origine",
+                    "terminalDestination": "Terminal de destination",
+                    "etd": "ETD",
+                    "eta": "ETA",
+                    "commodity": "Marchandise",
+                    "grossWeight": "Poids Brut"
+                },
+                "general": {
+                    "title": "Infos Générales",
+                    "servicesRequested": "Services demandés",
+                    "comment": "Commentaire",
+                    "additionalInfo": "Informations additionnelles",
+                    "terms": "Termes / Frais additionnels"
+                },
+                "tabs": {
+                    "details": "Détails",
+                    "equipment": "Équipement",
+                    "documents": "Documents",
+                    "evgm": "eVGM",
+                    "shippingInst": "Instructions d'Exp.",
+                    "payment": "Paiement"
+                }
+            },
+            "equipment": {
+                "containerNo": "N° Conteneur",
+                "size": "Taille",
+                "type": "Type",
+                "status": "Statut"
+            },
+            "actions": {
+                "convertToShipment": "Convertir en"
+            }
+        },
+        "participants": {
+            "search": {
+                "placeholder": "Rechercher des participants..."
+            },
+            "table": {
+                "profileId": "ID Profil",
+                "company": "Société",
+                "userName": "Nom d'utilisateur",
+                "businessProfile": "Profil d'entreprise",
+                "party": "Partie",
+                "email": "Email",
+                "phone": "Téléphone",
+                "authorisations": "Autorisations"
+            },
+            "authorisations": {
+                "view_shipments": "Voir les Expéditions",
+                "respond_queries": "Répondre aux Questions",
+                "assign_tasks": "Assigner des Tâches",
+                "edit_shipments": "Modifier les Expéditions",
+                "manage_participants": "Gérer les Participants",
+                "view_analytics": "Voir les Analyses",
+                "manage_documents": "Gérer les Documents"
+            },
+            "management": {
+                "title": "Gérer les participants",
+                "addParticipant": "Ajouter un participant",
+                "editParticipant": "Modifier le participant",
+                "removeParticipant": "Supprimer le participant",
+                "confirmRemove": "Êtes-vous sûr de vouloir supprimer ce participant ?",
+                "selectParticipant": "Sélectionner un participant",
+                "selectRole": "Sélectionner un rôle",
+                "editPermissions": "Modifier les permissions",
+                "updatePermissions": "Mettre à jour les permissions",
+                "managePermissions": "Gérer les permissions",
+                "selectPermissions": "Sélectionnez les permissions que vous souhaitez attribuer au(x) participant(s) sélectionné(s)",
+                "setPermissions": "Définir les permissions",
+                "selectInitialPermissions": "Sélectionner les permissions initiales pour le(s) participant(s)",
+                "addWithPermissions": "Ajouter avec les permissions",
+                "participantsSelectedCount": "{{count}} participant(s) sélectionné(s)",
+                "success": "Succès !",
+                "successMessage": "Participant(s) ajouté(s) avec succès",
+                "addError": "Échec de l'ajout des participants. Veuillez réessayer.",
+                "saveChanges": "Enregistrer les modifications",
+                "participantsSelected": "{{count}} participants sélectionnés",
+                "deleteConfirmation": "Êtes-vous sûr de vouloir supprimer {{count, plural, =1 {ce participant} other {ces # participants}}} ?",
+                "permissionsUpdated": "Permissions updated successfully.",
+                "updateError": "Failed to update permissions. Please try again."
+            }
         }
     }
 }

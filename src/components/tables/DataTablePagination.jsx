@@ -20,7 +20,7 @@ export function DataTablePagination({
 }) {
   const { t } = useTranslation();
   return (
-    <div className="flex items-center justify-start sm:justify-between flex-col sm:flex-row">
+    <div className="dataTablePagination flex items-center justify-start sm:justify-between flex-col sm:flex-row">
       <div className="text-muted-foreground w-full sm:w-fit sm:flex-1 text-sm">
         {table.getFilteredSelectedRowModel().rows.length} of{" "}
         {table.getFilteredRowModel().rows.length} row(s)  {t("common.selected")}.

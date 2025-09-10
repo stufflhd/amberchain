@@ -1,23 +1,23 @@
-
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 import { participants as allParticipants } from "@/constants/participants";
+import { cn } from "@/lib/utils";
+import ParticipantsManager from "@/features/participants";
 
-
-export default function ParticipantAvatars({ participants }) {
+export default function ParticipantAvatars({ participants, className = '' }) {
     const { t } = useTranslation();
     const participantObjs = participants
         .map(pid => allParticipants.find(p => p.id === pid))
         .filter(Boolean);
+
     const maxVisible = 4;
     const visibleParticipants = participantObjs.slice(0, maxVisible);
     const hiddenCount = participantObjs.length - maxVisible;
 
     return (
-        <div className="w-4/12 flex flex-col items-center mt-12 space-y-4">
+        <div className={cn("w-4/12 flex flex-col items-center mt-12 space-y-4", className)}>
             <h3 className="large">{t('shipments.shipmentDetails.participants')}</h3>
-            {participantObjs && participantObjs.length > 0 ? (
+            {participantObjs.length > 0 ? (
                 <>
                     <div className="bg-muted flex items-center rounded-full p-0.5">
                         <div className="flex -space-x-3">
@@ -41,9 +41,7 @@ export default function ParticipantAvatars({ participants }) {
                             </Button>
                         )}
                     </div>
-                    <Button variant={'outline'} className="cursor-pointer">
-                        <Plus className="size-3 mr-1" /> {t('shipments.shipmentDetails.addParticipant')}
-                    </Button>
+                    <ParticipantsManager participants={participants} />
                 </>
             ) : (
                 <p className="text-sm text-muted-foreground">{t('shipments.shipmentDetails.noParticipants')}</p>

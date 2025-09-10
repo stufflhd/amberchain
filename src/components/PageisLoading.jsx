@@ -5,7 +5,7 @@ const PageLoader = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="h-screen flex items-center justify-center z-40 relative">
+    <div className="h-screen flex items-center justify-center z-40 relative bg-background">
       <div className="flex flex-col items-center gap-8">
         <div className="loadingPBoxes">
           <div className="loadingPBox loadingPBox1">

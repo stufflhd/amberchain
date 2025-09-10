@@ -68,8 +68,9 @@ const fetchSeaRoute = async (origin, destination) => {
 // which route to get based on the shipment `mode`
 const fetchShipmentRoute = (origin, destination, mode) => {
     switch (mode) {
+        // case 'Sea':
+        //     return fetchSeaRoute(origin, destination);
         case 'Sea':
-            return fetchSeaRoute(origin, destination);
         case 'Road':
         case 'Rail':
             return fetchLandRoute(origin, destination);
@@ -77,7 +78,6 @@ const fetchShipmentRoute = (origin, destination, mode) => {
         case 'E-BUSINESS':
             return Promise.resolve(createCircleRoute(origin, destination));
         default:
-            // If the mode is unknown, don't show a route
             return Promise.resolve(null);
     }
 };

@@ -70,7 +70,7 @@ const Actions = memo(({ allowedActions, t }) => {
     return (
         <div className="z-10 relative mt-4 [&_button]:mb-[1px] flex items-center gap-2">
             {allowedActions.map((actionKey) => (
-                <Button key={actionKey} variant="outline" size="sm">
+                <Button key={actionKey} variant="outline" size="sm" className={'rounded-full'}>
                     {labels[actionKey] || actionKey}
                 </Button>
             ))}

@@ -2,8 +2,8 @@ import { cn } from "@/lib/utils";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { Link } from "react-router-dom";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
-import MapSkeleton from "@/features/shipments/components/map/MapSkeleton";
-import MapLoadError from '@/features/shipments/components/map/MapLoadError';
+import MapSkeleton from "@/components/map/MapSkeleton";
+import MapLoadError from '@/components/map/MapLoadError';
 import { getNavConfig } from "@/constants/navConfig";
 import { useTranslation } from "react-i18next";
 const ShipmentMapComponent = lazy(() => import('../../shipments/components/map/ShipmentMap'));

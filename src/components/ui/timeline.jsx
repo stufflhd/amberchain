@@ -3,7 +3,6 @@ import { Slot } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
-// Context
 const TimelineContext = React.createContext(undefined)
 
 const useTimeline = () => {
@@ -47,7 +46,6 @@ function Timeline({
   );
 }
 
-// TimelineContent
 function TimelineContent({
   className,
   ...props
@@ -78,7 +76,6 @@ function TimelineDate({
   );
 }
 
-// TimelineHeader
 function TimelineHeader({
   className,
   ...props
@@ -125,7 +122,6 @@ function TimelineItem({
   );
 }
 
-// TimelineSeparator
 function TimelineSeparator({
   className,
   ...props
@@ -142,7 +138,6 @@ function TimelineSeparator({
   );
 }
 
-// TimelineTitle
 function TimelineTitle({
   className,
   ...props

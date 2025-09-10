@@ -4,13 +4,13 @@ import { useTranslation } from "react-i18next";
 import AmbTimeline from "@/components/Timeline";
 import ShipmentStatusBadge from "./components/ShipmentStatusBadge";
 import ImageCarousel from "./components/ImageCarousel";
-import ParticipantAvatars from "./components/ParticipantAvatars";
+import ParticipantAvatars from "../participants/ParticipantAvatars";
 import ShipmentInfoHeader from "./components/ShipmentInfoHeader";
 import ContainerDetailsDialog from "./components/ContainerDetailsDialog";
 import { getNavConfig } from "@/constants/navConfig";
 import { generateTimelineItems } from "./utils/shipmentsUtils";
 import { Button } from "@/components/ui/button";
-import ShipmentMapWrapper from "./components/map/ShipmentMapWrapper";
+import ShipmentMapWrapper from "../../components/map/ShipmentMapWrapper";
 import containersData from "../../constants/containers";
 import { stepsData } from "../../constants/steps";
 
@@ -28,7 +28,7 @@ function ShipmentDetails({ shipment }) {
   const timelineItems = useMemo(() => generateTimelineItems(shipment, stepsData), [shipment]);
 
   return (
-    <article className="p-2 sm:p-4 space-y-4 sm:space-y-8 dashContentMax">
+    <article className="p-2 sm:p-6 space-y-4 sm:space-y-8 dashContentMax">
       <ShipmentInfoHeader
         shipment={shipment}
         containerCount={containers.length}

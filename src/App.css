@@ -138,9 +138,9 @@
     text-rendering: optimizeLegibility;
   }
 
-  html {
+  /* html {
     scrollbar-gutter: stable both-edges;
-  }
+  } */
 
   body {
     @apply bg-background text-foreground;
@@ -452,8 +452,13 @@
 }
 
 .dashContentMax {
-  max-width: calc(100% - 13rem) !important;
-  width: calc(100% - 13rem) !important;
+  max-width: calc(100% - 25rem) !important;
+  width: calc(100% - 25rem) !important;
+}
+
+.dashContentMax2 {
+  max-width: calc(100% - 19.5rem) !important;
+  width: calc(100% - 19.5rem) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

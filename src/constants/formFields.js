@@ -8,7 +8,6 @@ export const zipCodeRegex = /^[0-9]{5}(-[0-9]{4})?$/;
 export const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
 
 export const formFields = {
-    // User Info Fields
     firstName: {
         name: "firstName",
         label: () => t('registerForm.firstName'),

@@ -196,7 +196,7 @@ export default function PixelCard({
             const dx = pixel.x - relativeX;
             const dy = pixel.y - relativeY;
             const distance = Math.sqrt(dx * dx + dy * dy);
-            const delay = reducedMotion ? 0 : distance * 0.3; // Faster ripple effect
+            const delay = reducedMotion ? 0 : distance * 0.3;
             pixel.updateDelay(delay);
         });
     };

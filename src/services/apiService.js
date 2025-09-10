@@ -1,5 +1,7 @@
 import shipmentsData from '@/constants/shipments.json';
+import bookingsData from '@/constants/bookings.json';
 
+// --- Shipments ---
 const searchShipments = (searchTerm) => {
     if (!searchTerm) return [];
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
@@ -10,13 +12,31 @@ const searchShipments = (searchTerm) => {
     }).map(shipment => ({ ...shipment, type: 'shipment' }));
 };
 
+export const fetchAllShipments = async () => {
+    await new Promise(resolve => setTimeout(resolve, 300));
+    return shipmentsData.filter((item) => item.status === 'active');
+};
+
+// --- Bookings ---
+const searchBookings = (searchTerm) => {
+    if (!searchTerm) return [];
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
+    return bookingsData.filter(booking => {
+        return Object.values(booking).some(value =>
+            String(value).toLowerCase().includes(lowerCaseSearchTerm)
+        );
+    }).map(booking => ({ ...booking, type: 'booking' }));
+};
+
+export const fetchAllBookings = async () => {
+    await new Promise(resolve => setTimeout(resolve, 300));
+    return bookingsData;
+};
+
+// --- Combined Search ---
 export const searchAll = async ({ searchTerm = '' }) => {
     await new Promise(resolve => setTimeout(resolve, 500));
     const shipmentResults = searchShipments(searchTerm);
-    return [...shipmentResults];
-};
-
-export const fetchAllShipments = async () => {
-    await new Promise(resolve => setTimeout(resolve, 300));
-    return shipmentsData.filter((item) => { return item.status === 'active' });
+    const bookingResults = searchBookings(searchTerm);
+    return [...shipmentResults, ...bookingResults];
 };

@@ -25,6 +25,10 @@ export function DataTable({
     searchTerm,
     onClearSearch,
     bulkActions,
+    allowSearchFiltering = false,
+    globalFilter,
+    setGlobalFilter,
+    actionTitle,
 }) {
     const [sorting, setSorting] = useState([]);
     const [rowSelection, setRowSelection] = useState({});
@@ -34,11 +38,13 @@ export function DataTable({
     const table = useReactTable({
         data,
         columns,
+        autoResetPageIndex: false,
         state: {
             sorting,
             rowSelection,
             columnFilters,
             columnVisibility,
+            globalFilter,
             ...(expandable && { expanded }),
         },
         getCoreRowModel: getCoreRowModel(),
@@ -54,13 +60,17 @@ export function DataTable({
     });
 
     useEffect(() => {
+        table.setPageIndex(0);
+    }, [columnFilters, sorting]);
+
+    useEffect(() => {
         if (searchTerm && data.length === 1) {
             setExpanded({ "0": true });
         } else {
             setExpanded({});
         }
     }, [data, searchTerm]);
-    
+
     const handleRowClick = (row) => {
         const newExpandedState = {};
         if (!row.getIsExpanded()) {
@@ -77,7 +87,11 @@ export function DataTable({
                 dropdownFilters={dropdownFilters}
                 searchTerm={searchTerm}
                 onClearSearch={onClearSearch}
-                bulkActions={bulkActions} 
+                bulkActions={bulkActions}
+                allowSearchFiltering={allowSearchFiltering}
+                globalFilter={globalFilter}
+                setGlobalFilter={setGlobalFilter}
+                actionTitle={actionTitle}
             />
             <DataTableBody
                 table={table}
