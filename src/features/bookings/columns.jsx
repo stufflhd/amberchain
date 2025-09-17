@@ -1,8 +1,8 @@
-import { DataTableColumnHeader } from "@/components/tables/DataTableColumnHeader";
 import { Checkbox } from "@/components/ui/checkbox";
 import { formatDisplayDate } from "./utils/bookingsUtils";
 import { BookingStatusBadge } from "./utils/bookingsUtils";
 import i18n from "@/i18n";
+import { DataTableColumnHeader } from "@/components/tables/dataTableColumnHeader";
 
 const getDynamicHeader = (mode, t) => {
     switch (mode) {

@@ -1,9 +1,9 @@
 import { Button } from '@/components/ui/button';
 import { Checkbox } from "@/components/ui/checkbox";
-import { DataTableColumnHeader } from "@/components/tables/DataTableColumnHeader";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from 'lucide-react';
 import { PERMISSION_LABELS } from '@/constants/permissions';
+import { DataTableColumnHeader } from '@/components/tables/dataTableColumnHeader';
 
 const baseColumns = (t) => [
     {
