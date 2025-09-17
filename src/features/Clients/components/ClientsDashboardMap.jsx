@@ -6,7 +6,7 @@ import MapSkeleton from "@/components/map/MapSkeleton";
 import MapLoadError from '@/components/map/MapLoadError';
 import { getNavConfig } from "@/constants/navConfig";
 import { useTranslation } from "react-i18next";
-const ShipmentMapComponent = lazy(() => import('../../shipments/components/map/ShipmentMap'));
+const ShipmentMapComponent = lazy(() => import('../../../components/map/ShipmentMap'));
 export default function ClientsDashboardMap({ className }) {
 
     const [mapHeight, setMapHeight] = useState(0)
