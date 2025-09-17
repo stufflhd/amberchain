@@ -89,7 +89,8 @@
             "package": "Colis",
             "cargoWeight": "Poids du Cargo",
             "dimensions": "Dimensions",
-            "barcode": "Code-barres"
+            "barcode": "Code-barres",
+            "viewFullList": "Voir la liste complète"
         },
         "actions": {
             "trackLive": "Suivi en direct",
@@ -403,7 +404,8 @@
             "assign-agent": "Assigner un Agent",
             "enhance-profitability": "Améliorer la Rentabilité",
             "insights": "Aperçus",
-            "bookings-view": "Vue Réservations"
+            "bookings-view": "Vue Réservations",
+            "containers-view": "Vue Conteneurs"
         },
         "cargoNav": {
             "deliveryOrder": "Bon de livraison",

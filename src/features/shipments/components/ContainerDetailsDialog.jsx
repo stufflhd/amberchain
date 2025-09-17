@@ -71,9 +71,14 @@ const ContainerDetailsDialog = memo(({ shipment, containers }) => {
                             {
                                 shipment.mode === 'Sea' || shipment.mode == 'E-BUSINESS'
                                     ? (
-                                        <Link to='containers'>
+                                        <Link
+                                            to='/containers'
+                                            state={{
+                                                fromShipmentId: shipment?.id,
+                                            }}
+                                        >
                                             <Button variant={'outline'} className={'cursor-pointer'}>
-                                                View Full list
+                                                {t('containers.viewFullList')}
                                                 <ExternalLink />
                                             </Button>
                                         </Link>

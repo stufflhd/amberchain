@@ -11,6 +11,7 @@ import ActiveShipmentsOverview from "@/features/shipments/ActiveShipmentsOvervie
 import SearchResultsPage from "@/features/search/SearchResultsPage";
 import BookingsOverview from "@/features/bookings/BookingsOverview";
 import AuthRedirect from "@/app/AuthRedirect";
+import ContainersOverview from "@/features/containers/ContainersOverview";
 
 const LoginPage = lazy(() => import("@/features/auth/pages/LoginPage"));
 const RegisterPage = lazy(() => import("@/features/auth/pages/RegisterPage"));
@@ -117,6 +118,14 @@ const router = createBrowserRouter([
                 element: (
                     <MainLayout title="pageTitles.bookings-view">
                         <BookingsOverview />
+                    </MainLayout>
+                ),
+            },
+            {
+                path: "containers",
+                element: (
+                    <MainLayout title="pageTitles.bookings-view">
+                        <ContainersOverview />
                     </MainLayout>
                 ),
             },

@@ -99,7 +99,31 @@
             "package": "Package",
             "cargoWeight": "Cargo Weight",
             "dimensions": "Dimensions",
-            "barcode": "Barcode"
+            "barcode": "Barcode",
+            "viewFullList": "View Full List",
+            "table": {
+                "columns": {
+                    "id": "ID",
+                    "type": "Type",
+                    "status": "Status",
+                    "containerNo": "Container No",
+                    "bookingId": "Booking ID",
+                    "por": "POR",
+                    "origin": "ORIGIN",
+                    "destination": "DESTINATION",
+                    "finalPod": "Final POD",
+                    "etd": "ETD",
+                    "eta": "ETA",
+                    "carrier": "Carrier",
+                    "smartTool": "Smart Tool",
+                    "terminal": "Terminal",
+                    "task": "Task",
+                    "mode": "Mode"
+                },
+                "actions": {
+                    "viewDetails": "View Details"
+                }
+            }
         },
         "actions": {
             "trackLive": "Track Live",
@@ -413,7 +437,8 @@
             "assign-agent": "Assign Agent",
             "enhance-profitability": "Enhance Profitability",
             "insights": "Insights",
-            "bookings-view": "Bookings Overview"
+            "bookings-view": "Bookings Overview",
+            "containers-view": "Containers Overview"
         },
         "cargoNav": {
             "deliveryOrder": "Delivery Order",
