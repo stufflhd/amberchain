@@ -72,7 +72,7 @@ const ContainerDetailsDialog = memo(({ shipment, containers }) => {
                                 shipment.mode === 'Sea' || shipment.mode == 'E-BUSINESS'
                                     ? (
                                         <Link
-                                            to='/containers'
+                                            to={`/containers/${shipment?.id}`}
                                             state={{
                                                 fromShipmentId: shipment?.id,
                                             }}

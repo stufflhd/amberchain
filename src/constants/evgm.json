@@ -1,0 +1,12 @@
+[
+    {
+        "id": "EVGM1",
+        "containerNumber": "MRKU1234567",
+        "tare": 3400,
+        "grossWeight": 22000,
+        "totalGrossWeight": 27400,
+        "preview": "VGM DECLARATION",
+        "status": "Missing",
+        "certifyText": "I certify the accuracy of the above information."
+    }
+]

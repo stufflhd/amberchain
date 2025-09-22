@@ -70,12 +70,33 @@ const managementColumns = (t, onEditPermissions, onDelete) => [
 ];
 
 export const getParticipantColumns = (options) => {
-    const { t, type = 'add', onEditPermissions, onDelete } = options;
+    const { t, type = 'add', onEditPermissions, onDelete, onAddWithPermissions } = options;
     const columns = [...baseColumns(t)];
 
     if (type === 'management') {
         const manageCols = managementColumns(t, onEditPermissions, onDelete);
         columns.push(...manageCols);
+    }
+    
+    if (type === 'add' && typeof onAddWithPermissions === 'function') {
+        columns.push({
+            id: 'actions',
+            cell: ({ row }) => (
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" className="h-8 w-8 p-0">
+                            <span className="sr-only">{t('common.openMenu')}</span>
+                            <MoreHorizontal className="h-4 w-4" />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        <DropdownMenuItem onClick={() => onAddWithPermissions(row.original)}>
+                            {t('participants.management.addWithPermissions')}
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            )
+        });
     }
     
     return columns;

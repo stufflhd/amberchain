@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import DataTableWithSkeleton from './DataTableWithSkeleton';
 
@@ -6,7 +6,7 @@ export default function ParticipantsList({ participants, columns, onUpdatePermis
     const { t } = useTranslation();
     const [selectedRows, setSelectedRows] = useState([]);
 
-    const bulkActions = [
+    const bulkActions = useMemo(() => ([
         {
             label: t('participants.management.updatePermissions'),
             onSelect: (rows) => {
@@ -21,7 +21,7 @@ export default function ParticipantsList({ participants, columns, onUpdatePermis
                 requestAnimationFrame(() => onDelete(rows));
             }
         }
-    ];
+    ]), [t, onUpdatePermissions, onDelete]);
 
     return (
         <div className="flex flex-col">

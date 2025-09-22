@@ -7,6 +7,7 @@ import { addParticipant } from '@/services/participantsService';
 import SearchInput from './SearchInput';
 import DataTableWithSkeleton from './DataTableWithSkeleton';
 import PermissionsDialog from './PermissionsDialog';
+import { Button } from '@/components/ui/button';
 
 export default function AddParticipantTab() {
     const { t } = useTranslation();
@@ -15,14 +16,19 @@ export default function AddParticipantTab() {
     const [isPermissionsOpen, setIsPermissionsOpen] = useState(false);
     const { data: participants, isLoading } = useParticipantsSearch(searchTerm);
 
-    const columns = getParticipantColumns({ t, type: 'add' });
+    const columns = getParticipantColumns({
+        t,
+        type: 'add',
+        onAddWithPermissions: (participant) => {
+            setSelectedRows([participant]);
+            requestAnimationFrame(() => setIsPermissionsOpen(true));
+        }
+    });
 
-    const handleAddParticipants = useCallback((selectedParticipants) => {
-        setSelectedRows(selectedParticipants);
-        requestAnimationFrame(() => {
-            setIsPermissionsOpen(true);
-        });
-    }, []);
+    const openPermissionsForSelection = useCallback(() => {
+        if (!selectedRows || selectedRows.length === 0) return;
+        requestAnimationFrame(() => setIsPermissionsOpen(true));
+    }, [selectedRows]);
 
     const handleSavePermissions = useCallback(async (permissions) => {
         try {
@@ -45,33 +51,40 @@ export default function AddParticipantTab() {
         }
     }, [selectedRows, t]);
 
-    const bulkActions = [
-        {
-            label: t('participants.management.setPermissions'),
-            tooltip: t('participants.management.selectInitialPermissions'),
-            onSelect: handleAddParticipants
-        }
-    ];
+    const bulkActions = [];
 
     return (
         <div className="flex flex-col mt-4">
             <SearchInput value={searchTerm} onChange={setSearchTerm} />
 
             <div className="flex flex-col sapce-y-4 [&_.dataTablePagination]:hidden">
-                <DataTableWithSkeleton
-                    columns={columns}
-                    data={participants || []}
-                    isLoading={isLoading}
-                    setSelectedRows={setSelectedRows}
-                    selectedRows={selectedRows}
-                    enablePagination={false}
-                    enableColumnFilters={false}
-                    enableGlobalFilter={false}
-                    bulkActions={bulkActions}
-                    actionTitle="common.addParticipants"
-                    columnCount={columns.length}
-                    rowCount={3}
-                />
+                {selectedRows.length > 0 && (
+                    <div className="dataTableBulkActions flex items-center gap-2 ml-auto mb-2 -mt-8.5">
+                        <span className="text-sm text-muted-foreground whitespace-nowrap">
+                            {selectedRows.length} {t('common.selected')}
+                        </span>
+                        <Button variant="outline" size="sm" onClick={openPermissionsForSelection}>
+                            {t('participants.management.addParticipants')}
+                        </Button>
+                    </div>
+                )}
+                {
+                    participants?.length > 0 && (
+                        <DataTableWithSkeleton
+                            columns={columns}
+                            data={participants || []}
+                            isLoading={isLoading}
+                            setSelectedRows={setSelectedRows}
+                            selectedRows={selectedRows}
+                            enablePagination={false}
+                            enableColumnFilters={false}
+                            enableGlobalFilter={false}
+                            bulkActions={bulkActions}
+                            columnCount={columns.length}
+                            rowCount={3}
+                        />
+                    )
+                }
             </div>
 
             <PermissionsDialog

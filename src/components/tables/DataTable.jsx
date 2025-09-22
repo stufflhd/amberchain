@@ -29,6 +29,8 @@ export function DataTable({
     globalFilter,
     setGlobalFilter,
     actionTitle,
+    setSelectedRows,
+    externalRowSelectionResetKey,
 }) {
     const [sorting, setSorting] = useState([]);
     const [rowSelection, setRowSelection] = useState({});
@@ -70,6 +72,21 @@ export function DataTable({
             setExpanded({});
         }
     }, [data, searchTerm]);
+
+    // Expose selected rows to parent when requested
+    useEffect(() => {
+        if (!setSelectedRows) return;
+        const selected = table.getFilteredSelectedRowModel().rows.map(r => r.original);
+        setSelectedRows(selected);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [rowSelection, table]);
+
+    // Allow parent to request clearing selection
+    useEffect(() => {
+        if (externalRowSelectionResetKey === undefined) return;
+        setRowSelection({});
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [externalRowSelectionResetKey]);
 
     const handleRowClick = (row) => {
         const newExpandedState = {};

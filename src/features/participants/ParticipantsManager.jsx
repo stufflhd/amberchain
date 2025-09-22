@@ -1,3 +1,4 @@
+import { useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
@@ -19,23 +20,23 @@ export default function ParticipantsManager({ participants: participantIds }) {
         dialogs
     } = useParticipantManagement();
 
-    const tabs = [
+    const tabs = useMemo(() => ([
         { id: "participants", label: t('participants.management.title') },
         { id: "addParticipant", label: t('participants.management.addParticipant') }
-    ];
+    ]), [t]);
 
-    const participants = participantIds
+    const participants = useMemo(() => participantIds
         .map(id => allParticipants.find(p => p.id === id))
-        .filter(Boolean);
+        .filter(Boolean), [participantIds]);
 
-    const managementColumns = getParticipantColumns({
+    const managementColumns = useMemo(() => getParticipantColumns({
         t,
         type: 'management',
         onEditPermissions: actions.handleEditPermissions,
         onDelete: actions.handleDelete,
-    });
+    }), [t, actions.handleEditPermissions, actions.handleDelete]);
 
-    const renderTabContent = () => {
+    const renderTabContent = useCallback(() => {
         switch (state.activeTab) {
             case "participants":
                 return <ParticipantsList
@@ -49,7 +50,7 @@ export default function ParticipantsManager({ participants: participantIds }) {
             default:
                 return null;
         }
-    };
+    }, [state.activeTab, participants, managementColumns, actions.handleBulkUpdatePermissions, actions.handleDelete]);
 
     return (
         <>
@@ -75,7 +76,7 @@ export default function ParticipantsManager({ participants: participantIds }) {
                 onOpenChange={actions.setDeleteOpen}
                 onConfirm={actions.confirmDelete}
                 title={t('common.confirmDelete')}
-                description={t('participants.management.deleteConfirmation')}
+                description={t('participants.management.deleteConfirmation', { count: state.participantsForAction.length })}
             />
 
             <PermissionsDialog

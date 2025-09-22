@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import DetailsTab from "./DetailsTab";
 import EquipmentTab from "./EquipmentTab";
 import BookingActions from "./BookingActions";
+import DocumentsTab from "./DocumentsTab";
+import EVGMTab from "./EVGMTab";
+import ShippingInstructionTab from "./ShippingInstruction";
+import PaymentTab from "./PaymentTab";
 
 export default function BookingTabs({ booking }) {
+
     const { t } = useTranslation();
     const [activeTab, setActiveTab] = useState("details");
 
@@ -24,6 +29,14 @@ export default function BookingTabs({ booking }) {
                 return <DetailsTab booking={booking} />;
             case "equipment":
                 return <EquipmentTab equipmentIds={booking.equipmentIds} />;
+            case "documents":
+                return <DocumentsTab documentIds={booking.documentIds} />;
+            case "evgm":
+                return <EVGMTab evgmIds={booking.evgmIds} />;
+            case "shippingInst":
+                return <ShippingInstructionTab shippingInstructionIds={booking.shippingInstructionIds} />;
+            case "payment":
+                return <PaymentTab paymentIds={booking.paymentIds} />;
             default:
                 return <div className="p-4 border rounded-md">{t('common.comingSoon')}</div>;
         }
@@ -46,9 +59,7 @@ export default function BookingTabs({ booking }) {
                 </ToggleGroup>
                 <BookingActions actions={booking.actions} />
             </div>
-            <div className="mt-4">
-                {renderTabContent()}
-            </div>
+            {renderTabContent()}
         </div>
     );
 }

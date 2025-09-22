@@ -126,6 +126,7 @@
             "addParticipants": "Ajouter Participant(s)",
             "loading": "Chargement...",
             "submit": "Soumettre",
+            "confirmDelete": "Confirmer la suppression",
             "previous": "Précédent",
             "required": "Requis",
             "back": "Retour",
@@ -144,6 +145,15 @@
             "close": "Fermer",
             "copy": "Copier",
             "copied": "Copié !"
+        },
+        "pagination": {
+            "selected": "{{count}} sur {{total}} ligne(s) sélectionnée(s).",
+            "rowsPerPage": "Lignes par page",
+            "pageInfo": "Page {{currentPage}} sur {{totalPages}}",
+            "firstPage": "Aller à la première page",
+            "previousPage": "Aller à la page précédente",
+            "nextPage": "Aller à la page suivante",
+            "lastPage": "Aller à la dernière page"
         },
         "validation": {
             "required": "Ce champ est requis",
@@ -436,7 +446,8 @@
         },
         "filters": {
             "status": "Statut",
-            "mode": "Mode"
+            "mode": "Mode",
+            "type": "Type"
         },
         "modes": {
             "sea": "MER",
@@ -478,6 +489,7 @@
                 "participants": "Participants",
                 "noParticipants": "Aucun participant assigné.",
                 "noEquipment": "Aucun détail d'équipement disponible.",
+                "noShippingInstruction":"Aucune instruction d'expédition disponible",
                 "info": {
                     "container": "Conteneur",
                     "serviceAgreement": "Contrat de service",
@@ -555,6 +567,7 @@
             "management": {
                 "title": "Gérer les participants",
                 "addParticipant": "Ajouter un participant",
+                "addParticipants": "Ajouter un participant(s)",
                 "editParticipant": "Modifier le participant",
                 "removeParticipant": "Supprimer le participant",
                 "confirmRemove": "Êtes-vous sûr de vouloir supprimer ce participant ?",
@@ -573,7 +586,8 @@
                 "addError": "Échec de l'ajout des participants. Veuillez réessayer.",
                 "saveChanges": "Enregistrer les modifications",
                 "participantsSelected": "{{count}} participants sélectionnés",
-                "deleteConfirmation": "Êtes-vous sûr de vouloir supprimer {{count, plural, =1 {ce participant} other {ces # participants}}} ?",
+                "deleteConfirmation_one": "Êtes-vous sûr de vouloir supprimer ce participant ?",
+                "deleteConfirmation_other": "Êtes-vous sûr de vouloir supprimer {{count}} participants ?",
                 "permissionsUpdated": "Permissions updated successfully.",
                 "updateError": "Failed to update permissions. Please try again."
             }

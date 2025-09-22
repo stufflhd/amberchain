@@ -1,0 +1,40 @@
+[
+    {
+        "id": "SI1",
+        "shipper": {
+            "company": "MPH",
+            "firstName": "Yahya",
+            "lastName": "Mghizar",
+            "country": "Morocco",
+            "city": "Tangier",
+            "address": "Tanger, Tanger",
+            "postalCode": "39000",
+            "email": "xxxxx",
+            "phone": "—",
+            "businessProfile": "Select"
+        },
+        "consignee": "MPH",
+        "notifyParty": "—",
+        "bookingParty": "215462315",
+        "freightForwarder": "—",
+        "agent": "—",
+        "freelancer": "—",
+        "containers": [
+            {
+                "containerNumber": "MNBU3256840",
+                "kindOfPackages": "Box",
+                "quantityOfPackages": 2000,
+                "netWeight": 20000,
+                "grossWeight": 22000,
+                "imoClass": 5,
+                "grossVolume": "12m3",
+                "setPoint": "5°C/F",
+                "ventilation": "15%",
+                "dehumidification": "15%",
+                "o2": "25%",
+                "co2": "40%",
+                "cargoDescription": "Citrus"
+            }
+        ]
+    }
+]

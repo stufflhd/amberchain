@@ -1,0 +1,11 @@
+[
+    {
+        "id": "PAY1",
+        "policyText": "Please review our Refund, Cancellation, and Amendment Policy before proceeding with payment. By continuing, you accept all terms and conditions related to charges, deadlines, and platform usage.",
+        "googlePay": "BOMBX LTD",
+        "applePay": null,
+        "card": "USD4500",
+        "invoicePayment": "Due Date",
+        "status": "Awaiting Payment"
+    }
+]

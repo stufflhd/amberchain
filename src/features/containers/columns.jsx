@@ -55,6 +55,14 @@ export const getColumns = (t, activeMode = 'all') => {
             header: ({ column }) => <DataTableColumnHeader column={column} title={t('bookings.table.columns.bookingId')} />,
         },
         {
+            accessorKey: "type",
+            header: ({ column }) => <DataTableColumnHeader column={column} title={t('bookings.equipment.type')} />,
+            filterFn: (row, id, value) => {
+                if (Array.isArray(value)) return value.includes(row.getValue(id));
+                return value === row.getValue(id);
+            },
+        },
+        {
             accessorKey: "por",
             header: ({ column }) => <DataTableColumnHeader column={column} title={t('shipments.table.columns.por')} />,
         },
@@ -83,6 +91,11 @@ export const getColumns = (t, activeMode = 'all') => {
         {
             accessorKey: "status",
             header: ({ column }) => <DataTableColumnHeader column={column} title={t('shipments.table.columns.status')} />,
+            filterFn: (row, id, value) => {
+                // Handle both tabs (single value) and dropdown (array) use-cases
+                if (Array.isArray(value)) return value.includes(row.getValue(id));
+                return value === row.getValue(id);
+            },
         },
         {
             accessorKey: "carrier",

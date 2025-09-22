@@ -112,6 +112,23 @@
         "label": "common.cancel",
         "enabled": true
       }
+    ],
+    "documentIds": [
+      "DOC2",
+      "DOC3",
+      "DOC4"
+    ],
+    "evgmIds": [
+      "EVGM1"
+    ],
+    "shippingInstructionIds": [
+      "SI1"
+    ],
+    "paymentIds": [
+      "PAY1"
+    ],
+    "paymentIds": [
+      "PAY1"
     ]
   },
   {
@@ -215,6 +232,14 @@
         "label": "common.generatePdf",
         "enabled": true
       }
+    ],
+    "documentIds": [],
+    "evgmIds": [
+      "EVGM1"
+    ],
+    "shippingInstructionIds": [],
+    "paymentIds": [
+      "PAY1"
     ]
   },
   {
@@ -321,6 +346,18 @@
         "label": "common.cancel",
         "enabled": true
       }
+    ],
+    "documentIds": [
+      "DOC4"
+    ],
+    "evgmIds": [
+      "EVGM1"
+    ],
+    "shippingInstructionIds": [
+      "SI1"
+    ],
+    "paymentIds": [
+      "PAY1"
     ]
   },
   {
@@ -421,6 +458,14 @@
         "label": "common.edit",
         "enabled": true
       }
+    ],
+    "documentIds": [
+      "DOC4"
+    ],
+    "evgmIds": [],
+    "shippingInstructionIds": [],
+    "paymentIds": [
+      "PAY1"
     ]
   },
   {
@@ -522,6 +567,21 @@
         "label": "common.cancel",
         "enabled": true
       }
+    ],
+    "documentIds": [
+      "DOC1",
+      "DOC2",
+      "DOC3",
+      "DOC4"
+    ],
+    "evgmIds": [
+      "EVGM1"
+    ],
+    "shippingInstructionIds": [
+      "SI1"
+    ],
+    "paymentIds": [
+      "PAY1"
     ]
   }
 ]

@@ -3,35 +3,36 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
-} from "lucide-react"
+} from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-import { Button } from "../ui/button"
+import { Button } from "../ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select"
-import { useTranslation } from "react-i18next";
+} from "../ui/select";
 
-export function DataTablePagination({
-  table,
-}) {
+export function DataTablePagination({ table }) {
   const { t } = useTranslation();
+
   return (
     <div className="dataTablePagination flex items-center justify-start sm:justify-between flex-col sm:flex-row">
       <div className="text-muted-foreground w-full sm:w-fit sm:flex-1 text-sm">
-        {table.getFilteredSelectedRowModel().rows.length} of{" "}
-        {table.getFilteredRowModel().rows.length} row(s)  {t("common.selected")}.
+        {t("pagination.selected", {
+          count: table.getFilteredSelectedRowModel().rows.length,
+          total: table.getFilteredRowModel().rows.length,
+        })}
       </div>
-      <div className="flex items-center flex-wrap sm:flex-nowrap w-full sm:w-fit gap-2 sm:gap-0">
-        <div className="flex items-center space-x-2 w-full sm:w-fit justify-between sm:justify-start">
-          <p className="text-sm font-medium">Rows per page</p>
+      <div className="flex items-center flex-wrap sm:flex-nowrap w-full sm:w-fit">
+        <div className="flex items-center gap-2 w-full sm:w-fit justify-between sm:justify-start">
+          <p className="text-sm font-medium">{t("pagination.rowsPerPage")}</p>
           <Select
             value={`${table.getState().pagination.pageSize}`}
             onValueChange={(value) => {
-              table.setPageSize(Number(value))
+              table.setPageSize(Number(value));
             }}
           >
             <SelectTrigger className="h-8 w-[70px]">
@@ -46,10 +47,12 @@ export function DataTablePagination({
             </SelectContent>
           </Select>
         </div>
-        <div className="flex items-center justify-between sm:justify-center w-full sm:w-fit">
-          <div className="flex w-[100px] items-center text-sm font-medium">
-            Page {table.getState().pagination.pageIndex + 1} of{" "}
-            {table.getPageCount()}
+        <div className="flex items-center justify-between sm:justify-center w-full sm:w-fit ml-4">
+          <div className="flex items-center text-sm font-medium mr-4">
+            {t("pagination.pageInfo", {
+              currentPage: table.getState().pagination.pageIndex + 1,
+              totalPages: table.getPageCount(),
+            })}
           </div>
           <div className="flex items-center space-x-2 -mr-2 sm:mr-0">
             <Button
@@ -59,7 +62,7 @@ export function DataTablePagination({
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
             >
-              <span className="sr-only">Go to first page</span>
+              <span className="sr-only">{t("pagination.firstPage")}</span>
               <ChevronsLeft />
             </Button>
             <Button
@@ -69,7 +72,7 @@ export function DataTablePagination({
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
-              <span className="sr-only">Go to previous page</span>
+              <span className="sr-only">{t("pagination.previousPage")}</span>
               <ChevronLeft />
             </Button>
             <Button
@@ -79,7 +82,7 @@ export function DataTablePagination({
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
-              <span className="sr-only">Go to next page</span>
+              <span className="sr-only">{t("pagination.nextPage")}</span>
               <ChevronRight />
             </Button>
             <Button
@@ -89,12 +92,12 @@ export function DataTablePagination({
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
             >
-              <span className="sr-only">Go to last page</span>
+              <span className="sr-only">{t("pagination.lastPage")}</span>
               <ChevronsRight />
             </Button>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -159,6 +159,7 @@
             "addParticipants": "Add Participant(s)",
             "loading": "Loading...",
             "submit": "Submit",
+            "confirmDelete": "Confirm Delete",
             "cancel": "Cancel",
             "next": "Next",
             "back": "Back",
@@ -177,6 +178,15 @@
             "close": "Close",
             "copy": "Copy",
             "copied": "Copied!"
+        },
+        "pagination": {
+            "selected": "{{count}} of {{total}} row(s) selected.",
+            "rowsPerPage": "Rows per page",
+            "pageInfo": "Page {{currentPage}} of {{totalPages}}",
+            "firstPage": "Go to first page",
+            "previousPage": "Go to previous page",
+            "nextPage": "Go to next page",
+            "lastPage": "Go to last page"
         },
         "validation": {
             "required": "This field is required",
@@ -470,7 +480,8 @@
         },
         "filters": {
             "status": "Status",
-            "mode": "Mode"
+            "mode": "Mode",
+            "type": "Type"
         },
         "modes": {
             "sea": "SEA",
@@ -512,6 +523,9 @@
                 "participants": "Participants",
                 "noParticipants": "No participants assigned.",
                 "noEquipment": "No equipment details available.",
+                "noDocuments": "No documents available",
+                "noEVGM": "No eVGM records available",
+                "noShippingInstruction": "No shipping instruction available",
                 "info": {
                     "container": "Container",
                     "serviceAgreement": "Service agreement",
@@ -557,10 +571,69 @@
                 "containerNo": "Container №",
                 "size": "Size",
                 "type": "Type",
-                "status": "Status"
+                "sealNo": "Seal №",
+                "status": "Status",
+                "pickUpDate": "Pick-up date",
+                "preferredDepot": "Preferred depot",
+                "truckProvider": "Truck Provider",
+                "truckId": "Truck Id",
+                "stuffingDate": "Stuffing Date",
+                "truckSealingWindow": "Truck sealling Time Window"
+            },
+            "documents": {
+                "documentName": "Document Name",
+                "upload": "Upload",
+                "status": "Status",
+                "deadline": "Deadline",
+                "preview": "Preview",
+                "comments": "Comments"
+            },
+            "evgm": {
+                "containerNumber": "Container Number",
+                "tare": "Tare",
+                "grossWeight": "Gross Weight",
+                "totalGrossWeight": "Total Gross Weight",
+                "preview": "Preview",
+                "status": "Status",
+                "certify": "I certify the accuracy of the above information.",
+                "footnote": "* VGM DECLARATION A DOCUMENT AUTOMATICALLY GENERATED INCLUDE THE CONTAINERS WITH THEIR VGM AND THE AUTHORISED SIGNER"
             },
             "actions": {
                 "convertToShipment": "Convert to"
+            },
+            "shipping": {
+                "shipper": {
+                    "company": "Company",
+                    "firstName": "First Name",
+                    "lastName": "Last Name",
+                    "country": "Country",
+                    "city": "City",
+                    "address": "Address",
+                    "postalCode": "Postal Code",
+                    "email": "Email Address",
+                    "phone": "Phone Number",
+                    "businessProfile": "Business Profile",
+                    "freightForwarder": "Freight Forwarder"
+                },
+                "consignee": "Consignee",
+                "notifyParty": "Notify Party",
+                "bookingParty": "Booking Party",
+                "freightForwarder": "Freight Forwarder",
+                "agent": "Agent",
+                "freelancer": "Freelancer",
+                "containerNumber": "Container Number",
+                "kindOfPackages": "Kind of Packages",
+                "quantityOfPackages": "Quantity of Packages",
+                "netWeight": "Net Weight",
+                "grossWeight": "Gross Weight",
+                "imoClass": "IMO Class",
+                "grossVolume": "Gross Volume",
+                "setPoint": "Set Point",
+                "ventilation": "Ventilation",
+                "dehumidification": "Dehumidification",
+                "o2": "O₂",
+                "co2": "CO₂",
+                "cargoDescription": "Cargo Description"
             }
         },
         "participants": {
@@ -589,6 +662,7 @@
             "management": {
                 "title": "Manage Participants",
                 "addParticipant": "Add Participant",
+                "addParticipants": "Add Participant(s)",
                 "editParticipant": "Edit Participant",
                 "removeParticipant": "Remove Participant",
                 "confirmRemove": "Are you sure you want to remove this participant?",
@@ -607,7 +681,8 @@
                 "addError": "Failed to add participants. Please try again.",
                 "saveChanges": "Save Changes",
                 "participantsSelected": "{{count}} participants selected",
-                "deleteConfirmation": "Are you sure you want to delete {{count, plural, =1 {this participant} other {# participants}}}?",
+                "deleteConfirmation_one": "Are you sure you want to delete this participant?",
+                "deleteConfirmation_other": "Are you sure you want to delete {{count}} participants?",
                 "permissionsUpdated": "Permissions updated successfully.",
                 "updateError": "Failed to update permissions. Please try again."
             }

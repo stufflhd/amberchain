@@ -129,6 +129,14 @@ const router = createBrowserRouter([
                     </MainLayout>
                 ),
             },
+            {
+                path: "containers/:shipmentId",
+                element: (
+                    <MainLayout title="pageTitles.bookings-view">
+                        <ContainersOverview />
+                    </MainLayout>
+                ),
+            },
         ],
     },
 ]);

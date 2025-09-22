@@ -1,8 +1,8 @@
-
+import PageLoader from "@/components/PageisLoading";
+import useCurrentUserQuery from "@/queries/useCurrentUserQuery";
+import useAuthStore from "@/store/authStore";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useAuthStore from "@/store/authStore";
-import useCurrentUserQuery from "@/queries/useCurrentUserQuery";
 
 export default function AuthRedirect() {
   const navigate = useNavigate();
@@ -10,13 +10,13 @@ export default function AuthRedirect() {
   const { data, isLoading: isQueryLoading, isFetched } = useCurrentUserQuery();
 
   useEffect(() => {
-    if (isQueryLoading) return;
-    setUser(data || null);
+    if (!isQueryLoading) {
+      setUser(data || null);
+    }
   }, [isQueryLoading, data]);
 
   useEffect(() => {
-    if (isLoading) return;
-    if (!isFetched) return;
+    if (isLoading || !isFetched) return;
     if (user) {
       navigate("/dashboard", { replace: true });
     } else {
@@ -24,5 +24,6 @@ export default function AuthRedirect() {
     }
   }, [user, isLoading, isFetched, navigate]);
 
+  if (isQueryLoading) return <PageLoader />;
   return null;
 }

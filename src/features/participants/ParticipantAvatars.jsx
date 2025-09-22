@@ -1,14 +1,15 @@
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { participants as allParticipants } from "@/constants/participants";
 import { cn } from "@/lib/utils";
-import ParticipantsManager from "@/features/participants";
+import ParticipantsManager from "@/features/participants/ParticipantsManager";
 
 export default function ParticipantAvatars({ participants, className = '' }) {
     const { t } = useTranslation();
-    const participantObjs = participants
+    const participantObjs = useMemo(() => participants
         .map(pid => allParticipants.find(p => p.id === pid))
-        .filter(Boolean);
+        .filter(Boolean), [participants]);
 
     const maxVisible = 4;
     const visibleParticipants = participantObjs.slice(0, maxVisible);
@@ -21,9 +22,9 @@ export default function ParticipantAvatars({ participants, className = '' }) {
                 <>
                     <div className="bg-muted flex items-center rounded-full p-0.5">
                         <div className="flex -space-x-3">
-                            {visibleParticipants.map((p, index) => (
+                            {visibleParticipants.map((p) => (
                                 <img
-                                    key={index}
+                                    key={p.id}
                                     className="ring-muted rounded-full ring-2"
                                     src={p.avatarUrl}
                                     width={40}
