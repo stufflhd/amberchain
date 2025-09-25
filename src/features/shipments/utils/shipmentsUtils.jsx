@@ -1,11 +1,9 @@
 import React, { Fragment } from 'react';
 import { Badge } from "@/components/ui/badge";
 import * as icons from "lucide-react";
-import SuccessIcon from "@/components/icons/SuccessIcon";
-import ErrorIcon from "@/components/icons/ErrorIcon";
 import { format, parseISO } from 'date-fns';
 import { enUS, fr } from 'date-fns/locale';
-import ActiveIcon from '@/components/icons/ActiveIcon';
+// icons for status badge moved to shared StatusBadge
 
 const iconComponents = {
     Package: icons.Package, Truck: icons.Truck, Anchor: icons.Anchor, Ship: icons.Ship,
@@ -20,11 +18,7 @@ const getStepIcon = (iconName) => {
     return IconComponent ? <IconComponent className="mr-2 size-4" /> : <icons.Package className="mr-2 size-4" />;
 };
 
-export const getStatusConfig = (t) => ({
-    active: { icon: <ActiveIcon />, text: t('shipments.status.active'), variant: "outline" },
-    finished: { icon: <SuccessIcon />, text: t('shipments.status.finished'), variant: "outline" },
-    delayed: { icon: <ErrorIcon />, text: t('shipments.status.delayed'), variant: "destructive" },
-});
+// getStatusConfig removed; use shared components/StatusBadge for status mapping
 
 export const generateTimelineItems = (shipment, stepsData) => {
     if (!shipment?.route) return [];

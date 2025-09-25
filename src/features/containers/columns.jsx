@@ -2,6 +2,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { DataTableColumnHeader } from "@/components/tables/dataTableColumnHeader";
 import i18n from "@/i18n";
 import { formatDisplayDate } from "@/features/shipments/utils/shipmentsUtils";
+import StatusBadge from "@/components/StatusBadge";
 
 const getDynamicHeader = (mode, t) => {
     switch (mode) {
@@ -55,14 +56,6 @@ export const getColumns = (t, activeMode = 'all') => {
             header: ({ column }) => <DataTableColumnHeader column={column} title={t('bookings.table.columns.bookingId')} />,
         },
         {
-            accessorKey: "type",
-            header: ({ column }) => <DataTableColumnHeader column={column} title={t('bookings.equipment.type')} />,
-            filterFn: (row, id, value) => {
-                if (Array.isArray(value)) return value.includes(row.getValue(id));
-                return value === row.getValue(id);
-            },
-        },
-        {
             accessorKey: "por",
             header: ({ column }) => <DataTableColumnHeader column={column} title={t('shipments.table.columns.por')} />,
         },
@@ -91,8 +84,8 @@ export const getColumns = (t, activeMode = 'all') => {
         {
             accessorKey: "status",
             header: ({ column }) => <DataTableColumnHeader column={column} title={t('shipments.table.columns.status')} />,
+            cell: ({ row }) => <StatusBadge status={row.original.status} />,
             filterFn: (row, id, value) => {
-                // Handle both tabs (single value) and dropdown (array) use-cases
                 if (Array.isArray(value)) return value.includes(row.getValue(id));
                 return value === row.getValue(id);
             },
@@ -114,11 +107,14 @@ export const getColumns = (t, activeMode = 'all') => {
             header: ({ column }) => <DataTableColumnHeader column={column} title={t('shipments.table.columns.task')} />,
         },
         {
-            accessorKey: "mode",
-            header: ({ column }) => <DataTableColumnHeader column={column} title={t('filters.mode')} />,
+            accessorKey: "type",
+            header: ({ column }) => <DataTableColumnHeader column={column} title={t('bookings.equipment.type')} />,
             enableHiding: true,
-            filterFn: (row, id, value) => value === row.getValue(id),
-        },
+            filterFn: (row, id, value) => {
+                if (Array.isArray(value)) return value.includes(row.getValue(id));
+                return value === row.getValue(id);
+            },
+        }
     ];
 };
 

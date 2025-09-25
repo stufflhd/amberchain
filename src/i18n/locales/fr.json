@@ -1,6 +1,11 @@
 {
     "translation": {
         "shipments": {
+            "status": {
+                "active": "Actif",
+                "finished": "Terminé",
+                "delayed": "Retardé"
+            },
             "cards": {
                 "totalValue": {
                     "description": "Valeur totale des expéditions",
@@ -39,6 +44,11 @@
                     "sortationHub": "Centre de tri",
                     "origin": "ORIGINE",
                     "destination": "DESTINATION"
+                },
+                "actions": {
+                    "viewDetails": "Voir les détails",
+                    "reportIssue": "Signaler un problème",
+                    "manageDocs": "Gérer les documents"
                 },
                 "status": {
                     "confirmed": "Confirmé",
@@ -90,7 +100,30 @@
             "cargoWeight": "Poids du Cargo",
             "dimensions": "Dimensions",
             "barcode": "Code-barres",
-            "viewFullList": "Voir la liste complète"
+            "viewFullList": "Voir la liste complète",
+            "table": {
+                "columns": {
+                    "id": "ID",
+                    "type": "Type",
+                    "status": "Statut",
+                    "containerNo": "N° Conteneur",
+                    "bookingId": "ID Réservation",
+                    "por": "POR",
+                    "origin": "ORIGINE",
+                    "destination": "DESTINATION",
+                    "finalPod": "POD Final",
+                    "etd": "ETD",
+                    "eta": "ETA",
+                    "carrier": "Transporteur",
+                    "smartTool": "Outil Intelligent",
+                    "terminal": "Terminal",
+                    "task": "Tâche",
+                    "mode": "Mode"
+                },
+                "actions": {
+                    "viewDetails": "Voir les détails"
+                }
+            }
         },
         "actions": {
             "trackLive": "Suivi en direct",
@@ -144,7 +177,8 @@
             "confirm": "Confirmer",
             "close": "Fermer",
             "copy": "Copier",
-            "copied": "Copié !"
+            "copied": "Copié !",
+            "clearFilters": "Effacer les filtres"
         },
         "pagination": {
             "selected": "{{count}} sur {{total}} ligne(s) sélectionnée(s).",
@@ -307,6 +341,12 @@
         "dashboard": {
             "title": "Tableau de bord"
         },
+        "widgets": {
+            "cardContent": "Contenu de la carte",
+            "alertsTitle": "Alertes",
+            "alertItem": "Contenu de l'alerte",
+            "alertDescriptionShort": "desc"
+        },
         "notFound": {
             "title": "Cette page est introuvable,",
             "cta": "Retour à l'accueil ?"
@@ -437,6 +477,7 @@
             "startTyping": "Commencez à taper pour rechercher un envoi.",
             "resultsFor": "Affichage des résultats pour :",
             "clear": "Effacer la recherche",
+            "placeholder": "Rechercher des participants...",
             "pageTitle": "Résultats de recherche pour \"{{searchTerm}}\"",
             "shipmentResultsTitle": "Résultats d'expéditions ({{count}})",
             "bookingResultsTitle": "Résultats de réservations ({{count}})",
@@ -489,6 +530,8 @@
                 "participants": "Participants",
                 "noParticipants": "Aucun participant assigné.",
                 "noEquipment": "Aucun détail d'équipement disponible.",
+                "noDocuments": "Aucun document disponible",
+                "noEVGM": "Aucun enregistrement eVGM disponible",
                 "noShippingInstruction":"Aucune instruction d'expédition disponible",
                 "info": {
                     "container": "Conteneur",
@@ -531,14 +574,73 @@
                     "payment": "Paiement"
                 }
             },
+            "documents": {
+                "documentName": "Nom du document",
+                "upload": "Téléverser",
+                "status": "Statut",
+                "deadline": "Date limite",
+                "preview": "Aperçu",
+                "comments": "Commentaires"
+            },
+            "evgm": {
+                "containerNumber": "Numéro de conteneur",
+                "tare": "Tare",
+                "grossWeight": "Poids brut",
+                "totalGrossWeight": "Poids brut total",
+                "preview": "Aperçu",
+                "status": "Statut",
+                "certify": "Je certifie l'exactitude des informations ci-dessus.",
+                "footnote": "* DÉCLARATION VGM UN DOCUMENT GÉNÉRÉ AUTOMATIQUEMENT INCLUT LES CONTENEURS AVEC LEUR VGM ET LE SIGNATAIRE AUTORISÉ"
+            },
             "equipment": {
                 "containerNo": "N° Conteneur",
                 "size": "Taille",
                 "type": "Type",
-                "status": "Statut"
+                "status": "Statut",
+                "sealNo": "N° Scellé",
+                "pickUpDate": "Date d'enlèvement",
+                "preferredDepot": "Dépôt préféré",
+                "truckProvider": "Fournisseur du camion",
+                "truckId": "ID Camion",
+                "stuffingDate": "Date de chargement",
+                "truckSealingWindow": "Créneau de scellage du camion"
             },
             "actions": {
                 "convertToShipment": "Convertir en"
+            },
+            "shipping": {
+                "shipper": {
+                    "company": "Société",
+                    "firstName": "Prénom",
+                    "lastName": "Nom",
+                    "country": "Pays",
+                    "city": "Ville",
+                    "address": "Adresse",
+                    "postalCode": "Code postal",
+                    "email": "Adresse e-mail",
+                    "phone": "Numéro de téléphone",
+                    "businessProfile": "Profil d'entreprise",
+                    "freightForwarder": "Transitaire"
+                },
+                "consignee": "Destinataire",
+                "notifyParty": "Partie notifiée",
+                "bookingParty": "Partie réservation",
+                "freightForwarder": "Transitaire",
+                "agent": "Agent",
+                "freelancer": "Freelance",
+                "containerNumber": "Numéro de conteneur",
+                "kindOfPackages": "Type de colis",
+                "quantityOfPackages": "Quantité de colis",
+                "netWeight": "Poids net",
+                "grossWeight": "Poids brut",
+                "imoClass": "Classe IMO",
+                "grossVolume": "Volume brut",
+                "setPoint": "Point de consigne",
+                "ventilation": "Ventilation",
+                "dehumidification": "Déshumidification",
+                "o2": "O₂",
+                "co2": "CO₂",
+                "cargoDescription": "Description de la cargaison"
             }
         },
         "participants": {

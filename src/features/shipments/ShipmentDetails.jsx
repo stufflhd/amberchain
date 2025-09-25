@@ -2,7 +2,7 @@ import React, { memo, useMemo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import AmbTimeline from "@/components/Timeline";
-import ShipmentStatusBadge from "./components/ShipmentStatusBadge";
+import StatusBadge from "@/components/StatusBadge";
 import ImageCarousel from "./components/ImageCarousel";
 import ParticipantAvatars from "../participants/ParticipantAvatars";
 import ShipmentInfoHeader from "./components/ShipmentInfoHeader";

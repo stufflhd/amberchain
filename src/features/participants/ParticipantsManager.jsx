@@ -44,6 +44,7 @@ export default function ParticipantsManager({ participants: participantIds }) {
                     columns={managementColumns}
                     onUpdatePermissions={actions.handleBulkUpdatePermissions}
                     onDelete={actions.handleDelete}
+                    selectionResetKey={state.selectionResetKey}
                 />;
             case "addParticipant":
                 return <AddParticipantTab />;

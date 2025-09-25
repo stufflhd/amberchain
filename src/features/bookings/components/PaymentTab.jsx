@@ -13,8 +13,16 @@ export default function PaymentTab({ paymentIds }) {
 
     const payment = payments[0];
 
+    const columns = [
+        { key: 'googlePay', label: t('bookings.payment.googlePay', 'GooglePay') },
+        { key: 'applePay', label: t('bookings.payment.applePay', 'ApplePay') },
+        { key: 'card', label: t('bookings.payment.card', 'Card') },
+        { key: 'invoicePayment', label: t('bookings.payment.invoice', 'Invoice Payment') },
+        { key: 'status', label: t('bookings.payment.statusTitle', 'Payment Status') },
+    ];
+
     return (
-        <div className="space-y-6">
+        <div className="space-y-4">
             {/* Policy and General Info Section */}
             <div className="">
                 <h3 className="font-bold text-lg">{t('bookings.payment.title', 'Payment')}</h3>
@@ -26,28 +34,22 @@ export default function PaymentTab({ paymentIds }) {
             <div className='h-[1px] w-full bg-primary/50'></div>
 
             {/* Payment Methods Table */}
-            <div className="space-y-4">
-                <Table className={'rounded-md overflow-hidden w-full cursor-default'}>
-                    <TableHeader className={'border-b border-primary/50'}>
-                        <TableRow>
-                            <TableHead>{t('bookings.payment.googlePay', 'GooglePay')}</TableHead>
-                            <TableHead>{t('bookings.payment.applePay', 'ApplePay')}</TableHead>
-                            <TableHead>{t('bookings.payment.card', 'Card')}</TableHead>
-                            <TableHead>{t('bookings.payment.invoice', 'Invoice Payment')}</TableHead>
-                            <TableHead>{t('bookings.payment.statusTitle', 'Payment Status')}</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        <TableRow>
-                            <TableCell className="">{payment.googlePay || '—'}</TableCell>
-                            <TableCell className="">{payment.applePay || '—'}</TableCell>
-                            <TableCell className="">{payment.card || '—'}</TableCell>
-                            <TableCell className="">{payment.invoicePayment || '—'}</TableCell>
-                            <TableCell className="">{payment.status || '—'}</TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            </div>
+            <Table className={'rounded-md overflow-hidden w-full cursor-default text-sm'}>
+                <TableHeader className={'border-b'}>
+                    <TableRow>
+                        {columns.map(col => (
+                            <TableHead key={col.key}>{col.label}</TableHead>
+                        ))}
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    <TableRow>
+                        {columns.map(col => (
+                            <TableCell key={col.key} className="">{payment[col.key] || '—'}</TableCell>
+                        ))}
+                    </TableRow>
+                </TableBody>
+            </Table>
         </div>
     );
 }

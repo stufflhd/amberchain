@@ -1,6 +1,6 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { formatDisplayDate } from "./utils/bookingsUtils";
-import { BookingStatusBadge } from "./utils/bookingsUtils";
+import StatusBadge from "@/components/StatusBadge";
 import i18n from "@/i18n";
 import { DataTableColumnHeader } from "@/components/tables/dataTableColumnHeader";
 
@@ -85,7 +85,7 @@ export const getColumns = (t, activeMode = 'all') => {
         {
             accessorKey: "status",
             header: ({ column }) => <DataTableColumnHeader column={column} title={t('bookings.table.columns.status')} />,
-            cell: ({ row }) => <BookingStatusBadge status={row.original.status} />,
+            cell: ({ row }) => <StatusBadge status={row.original.status} />,
             filterFn: (row, id, value) => value.includes(row.getValue(id)),
         },
         {

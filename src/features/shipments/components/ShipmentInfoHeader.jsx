@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ShipmentStatusBadge from "./ShipmentStatusBadge";
+import StatusBadge from "@/components/StatusBadge";
 import ContainerDetailsDialog from "./ContainerDetailsDialog";
 import { formatDisplayDate } from "../utils/shipmentsUtils";
 import containersData from "../../../constants/containers";
@@ -32,7 +32,7 @@ export default function ShipmentInfoHeader({ shipment, containerCount }) {
             <div className="w-full sm:w-1/2 sm:space-y-4 pr-0 sm:pr-8">
                 <div className="flex justify-between gap-4 items-center">
                     <h2 className="large font-semibold">{t('shipments.shipmentDetails.shipmentTitle', { shipmentNumber: shipment.number })}</h2>
-                    <ShipmentStatusBadge status={shipment.status} />
+                    <StatusBadge status={shipment.status} />
                 </div>
                 <div className="flex justify-between gap-4 items-end sm:items-center">
                     <p className="flex sm:gap-4 text-sm flex-col sm:flex-row">

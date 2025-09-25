@@ -23,95 +23,95 @@ export default function ShippingInstructionTab({ shippingInstructionIds }) {
         return <p className="text-muted-foreground">{t('bookings.details.noShippingInstruction')}</p>;
     }
 
+    const getValueByPath = (obj, path) => {
+        return path.split('.').reduce((acc, key) => (acc ? acc[key] : undefined), obj);
+    };
+
+    const detailColumns = [
+        [
+            { label: t('bookings.shipping.shipper.company'), path: 'shipper.company' },
+            { label: t('bookings.shipping.shipper.firstName'), path: 'shipper.firstName' },
+            { label: t('bookings.shipping.shipper.lastName'), path: 'shipper.lastName' },
+        ],
+        [
+            { label: t('bookings.shipping.shipper.country'), path: 'shipper.country' },
+            { label: t('bookings.shipping.shipper.city'), path: 'shipper.city' },
+            { label: t('bookings.shipping.shipper.address'), path: 'shipper.address' },
+        ],
+        [
+            { label: t('bookings.shipping.shipper.postalCode'), path: 'shipper.postalCode' },
+            { label: t('bookings.shipping.bookingParty'), path: 'bookingParty' },
+            { label: t('bookings.shipping.consignee'), path: 'consignee' },
+        ],
+        [
+            { label: t('bookings.shipping.freightForwarder'), path: 'freightForwarder' },
+            { label: t('bookings.shipping.agent'), path: 'agent' },
+            { label: t('bookings.shipping.freelancer'), path: 'freelancer' },
+            { label: t('bookings.shipping.notifyParty'), path: 'notifyParty', className: 'w-full' },
+        ],
+    ];
+
+    const containerColumns = [
+        { key: 'containerNumber', label: t('bookings.shipping.containerNumber') },
+        { key: 'kindOfPackages', label: t('bookings.shipping.kindOfPackages') },
+        { key: 'quantityOfPackages', label: t('bookings.shipping.quantityOfPackages') },
+        { key: 'netWeight', label: t('bookings.shipping.netWeight') },
+        { key: 'grossWeight', label: t('bookings.shipping.grossWeight') },
+        { key: 'imoClass', label: t('bookings.shipping.imoClass') },
+        { key: 'grossVolume', label: t('bookings.shipping.grossVolume') },
+        { key: 'setPoint', label: t('bookings.shipping.setPoint') },
+        { key: 'ventilation', label: t('bookings.shipping.ventilation') },
+        { key: 'dehumidification', label: t('bookings.shipping.dehumidification') },
+        { key: 'o2', label: t('bookings.shipping.o2') },
+        { key: 'co2', label: t('bookings.shipping.co2') },
+        { key: 'cargoDescription', label: t('bookings.shipping.cargoDescription') },
+    ];
+
     return (
         <div>
             {instructions.map((inst) => (
                 <React.Fragment
                     key={inst.id}
-                // className="rounded-lg flex flex-row justify-between items-stretch gap-x-8"
                 >
                     {/* General Info (Column-like) */}
                     <div className={colsClasssNames}>
-                        <div className='w-full'>
-                            <DetailItem label={t('bookings.shipping.shipper.company')} value={inst.shipper.company} />
-                            <DetailItem label={t('bookings.shipping.shipper.firstName')} value={inst.shipper.firstName} />
-                            <DetailItem label={t('bookings.shipping.shipper.lastName')} value={inst.shipper.lastName} />
-                        </div>
-                        {/* Devider */}
-                        <div className={deviderClassNames}>
-                            <div className={deviderInnerClassNames} />
-                        </div>
-                        <div className='w-full'>
-                            <DetailItem label={t('bookings.shipping.shipper.country')} value={inst.shipper.country} />
-                            <DetailItem label={t('bookings.shipping.shipper.city')} value={inst.shipper.city} />
-                            <DetailItem label={t('bookings.shipping.shipper.address')} value={inst.shipper.address} />
-                        </div>
-                        {/* Devider */}
-                        <div className={deviderClassNames}>
-                            <div className={deviderInnerClassNames} />
-                        </div>
-                        <div className='w-full'>
-                            <DetailItem label={t('bookings.shipping.shipper.postalCode')} value={inst.shipper.postalCode} />
-                            <DetailItem label={t('bookings.shipping.bookingParty')} value={inst.bookingParty} />
-                            <DetailItem label={t('bookings.shipping.consignee')} value={inst.consignee} />
-                        </div>
-                        {/* Devider */}
-                        <div className={deviderClassNames}>
-                            <div className={deviderInnerClassNames} />
-                        </div>
-                        <div className='w-full'>
-                            <DetailItem label={t('bookings.shipping.freightForwarder')} value={inst.freightForwarder} />
-                            <DetailItem label={t('bookings.shipping.agent')} value={inst.agent} />
-                            <DetailItem label={t('bookings.shipping.freelancer')} value={inst.freelancer} />
-                        </div>
-                    </div>
-                    <div className='w-full flex justify-between gap-x-16'>
-                        <DetailItem className='w-full' label={t('bookings.shipping.notifyParty')} value={inst.notifyParty} />
-                        {
-                            Array.from({ length: 2 }).map((_, i) => (
-                                <div key={i} className='w-full' />
-                            ))
-                        }
-                        <div className='w-full'></div>
-                        <div className='w-full'></div>
+                        {detailColumns.map((column, columnIndex) => (
+                            <React.Fragment key={columnIndex}>
+                                <div className='w-full'>
+                                    {column.map((item, idx) => (
+                                        <DetailItem
+                                            key={idx}
+                                            label={item.label}
+                                            value={getValueByPath(inst, item.path)}
+                                            className={item.className || ''}
+                                        />
+                                    ))}
+                                </div>
+                                {columnIndex < detailColumns.length - 1 && (
+                                    <div className={deviderClassNames}>
+                                        <div className={deviderInnerClassNames} />
+                                    </div>
+                                )}
+                            </React.Fragment>
+                        ))}
                     </div>
 
                     {/* Container Table */}
-                    <div className="space-y-4 w-full mt-4">
-                        <Table className={'rounded-md overflow-hidden w-full cursor-default'}>
-                            <TableHeader className={'border-b border-primary/50'}>
+                    <div className="space-y-4 w-full mt-4 pt-4 border-t border-primary/50">
+                        <Table className={'overflow-hidden w-full cursor-default text-sm rounded-md'}>
+                            <TableHeader className={'border-b'}>
                                 <TableRow>
-                                    <TableHead>{t('bookings.shipping.containerNumber')}</TableHead>
-                                    <TableHead>{t('bookings.shipping.kindOfPackages')}</TableHead>
-                                    <TableHead>{t('bookings.shipping.quantityOfPackages')}</TableHead>
-                                    <TableHead>{t('bookings.shipping.netWeight')}</TableHead>
-                                    <TableHead>{t('bookings.shipping.grossWeight')}</TableHead>
-                                    <TableHead>{t('bookings.shipping.imoClass')}</TableHead>
-                                    <TableHead>{t('bookings.shipping.grossVolume')}</TableHead>
-                                    <TableHead>{t('bookings.shipping.setPoint')}</TableHead>
-                                    <TableHead>{t('bookings.shipping.ventilation')}</TableHead>
-                                    <TableHead>{t('bookings.shipping.dehumidification')}</TableHead>
-                                    <TableHead>{t('bookings.shipping.o2')}</TableHead>
-                                    <TableHead>{t('bookings.shipping.co2')}</TableHead>
-                                    <TableHead>{t('bookings.shipping.cargoDescription')}</TableHead>
+                                    {containerColumns.map(col => (
+                                        <TableHead key={col.key}>{col.label}</TableHead>
+                                    ))}
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 {inst.containers.map((c, i) => (
                                     <TableRow key={i}>
-                                        <TableCell>{c.containerNumber}</TableCell>
-                                        <TableCell>{c.kindOfPackages}</TableCell>
-                                        <TableCell>{c.quantityOfPackages}</TableCell>
-                                        <TableCell>{c.netWeight}</TableCell>
-                                        <TableCell>{c.grossWeight}</TableCell>
-                                        <TableCell>{c.imoClass}</TableCell>
-                                        <TableCell>{c.grossVolume}</TableCell>
-                                        <TableCell>{c.setPoint}</TableCell>
-                                        <TableCell>{c.ventilation}</TableCell>
-                                        <TableCell>{c.dehumidification}</TableCell>
-                                        <TableCell>{c.o2}</TableCell>
-                                        <TableCell>{c.co2}</TableCell>
-                                        <TableCell>{c.cargoDescription}</TableCell>
+                                        {containerColumns.map(col => (
+                                            <TableCell key={col.key}>{c[col.key]}</TableCell>
+                                        ))}
                                     </TableRow>
                                 ))}
                             </TableBody>

@@ -13,28 +13,31 @@ export default function EVGMTab({ evgmIds }) {
         return <p className="text-muted-foreground">{t('bookings.details.noEVGM')}</p>;
     }
 
+    const columns = [
+        { key: 'containerNumber', label: t('bookings.evgm.containerNumber') },
+        { key: 'tare', label: t('bookings.evgm.tare') },
+        { key: 'grossWeight', label: t('bookings.evgm.grossWeight') },
+        { key: 'totalGrossWeight', label: t('bookings.evgm.totalGrossWeight') },
+        { key: 'preview', label: t('bookings.evgm.preview') },
+        { key: 'status', label: t('bookings.evgm.status') },
+    ];
+
     return (
         <div className="space-y-4">
-            <Table className={'rounded-md overflow-hidden w-full cursor-default'}>
+            <Table className={'rounded-md overflow-hidden w-full cursor-default text-sm'}>
                 <TableHeader className={'border-b border-primary/50'}>
                     <TableRow>
-                        <TableHead>{t('bookings.evgm.containerNumber')}</TableHead>
-                        <TableHead>{t('bookings.evgm.tare')}</TableHead>
-                        <TableHead>{t('bookings.evgm.grossWeight')}</TableHead>
-                        <TableHead>{t('bookings.evgm.totalGrossWeight')}</TableHead>
-                        <TableHead>{t('bookings.evgm.preview')}</TableHead>
-                        <TableHead>{t('bookings.evgm.status')}</TableHead>
+                        {columns.map(col => (
+                            <TableHead key={col.key}>{col.label}</TableHead>
+                        ))}
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {evgm.map((item) => (
                         <TableRow key={item.id}>
-                            <TableCell>{item.containerNumber}</TableCell>
-                            <TableCell>{item.tare}</TableCell>
-                            <TableCell>{item.grossWeight}</TableCell>
-                            <TableCell>{item.totalGrossWeight}</TableCell>
-                            <TableCell>{item.preview}</TableCell>
-                            <TableCell>{item.status}</TableCell>
+                            {columns.map(col => (
+                                <TableCell key={col.key}>{item[col.key]}</TableCell>
+                            ))}
                         </TableRow>
                     ))}
                 </TableBody>

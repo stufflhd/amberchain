@@ -2,7 +2,7 @@ import * as React from "react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
-import ShipmentStatusBadge from "./components/ShipmentStatusBadge";
+import StatusBadge from "@/components/StatusBadge";
 import { formatDisplayDate } from "@/features/shipments/utils/shipmentsUtils";
 import i18n from "@/i18n";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -103,7 +103,7 @@ export const getColumns = (t, activeMode = 'all') => {
     {
       accessorKey: "status",
       header: ({ column }) => <DataTableColumnHeader column={column} title={t('shipments.table.columns.status')} />,
-      cell: ({ row }) => <ShipmentStatusBadge status={row.original.status} />,
+      cell: ({ row }) => <StatusBadge status={row.original.status} />,
       filterFn: (row, id, value) => value.includes(row.getValue(id)),
     },
     {

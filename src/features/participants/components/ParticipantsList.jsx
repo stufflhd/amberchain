@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import DataTableWithSkeleton from './DataTableWithSkeleton';
 
-export default function ParticipantsList({ participants, columns, onUpdatePermissions, onDelete }) {
+export default function ParticipantsList({ participants, columns, onUpdatePermissions, onDelete, selectionResetKey }) {
     const { t } = useTranslation();
     const [selectedRows, setSelectedRows] = useState([]);
 
@@ -10,14 +10,12 @@ export default function ParticipantsList({ participants, columns, onUpdatePermis
         {
             label: t('participants.management.updatePermissions'),
             onSelect: (rows) => {
-                setSelectedRows([]);
                 requestAnimationFrame(() => onUpdatePermissions(rows));
             }
         },
         {
             label: t('common.delete'),
             onSelect: (rows) => {
-                setSelectedRows([]);
                 requestAnimationFrame(() => onDelete(rows));
             }
         }
@@ -32,6 +30,7 @@ export default function ParticipantsList({ participants, columns, onUpdatePermis
                 selectedRows={selectedRows}
                 setSelectedRows={setSelectedRows}
                 bulkActions={bulkActions}
+                externalRowSelectionResetKey={selectionResetKey}
                 enablePagination={false}
                 columnCount={columns.length}
                 rowCount={5}

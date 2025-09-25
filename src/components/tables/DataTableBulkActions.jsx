@@ -15,8 +15,7 @@ export default function DataTableBulkActions({ table, actions = [], actionTitle 
 
     const handleActionSelect = (onSelect) => {
         onSelect(selectedRows);
-        table.resetRowSelection();
-    };
+    }
 
     return (
         <div className="dataTableBulkActions flex items-center gap-2 ml-auto">

@@ -55,7 +55,7 @@ export function AppSidebar() {
                 ))}
                 <div className={`relative ${!isMobile && 'hidden'}`}>
                     <SidebarGroup key='dahNav'>
-                        <SidebarGroupLabel>Company</SidebarGroupLabel>
+                        <SidebarGroupLabel>{t("dashNav.company")}</SidebarGroupLabel>
                         <SidebarGroupContent>
                             <SidebarMenu>
                                 {navConfig.clientDashNav.map((item) => (

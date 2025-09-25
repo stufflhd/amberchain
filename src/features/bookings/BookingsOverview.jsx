@@ -2,10 +2,11 @@ import { useTranslation } from "react-i18next";
 import { DataTable } from "@/components/tables/DataTable";
 import { getColumns } from "./columns";
 import BookingDetails from "./BookingDetails.jsx";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useCallback } from "react";
 import { useBookingsQuery } from "@/queries/useBookingsQuery";
 import DashNav from "@/components/dashboard/DashNav.jsx";
 import DashboardSearch from "@/components/dashboard/DashboardSearch.jsx";
+import { buildModeFilterOptions, buildStatusFilterOptions, buildTabsFilterConfig } from "./utils/filters";
 
 export default function BookingsOverview({ data: propData }) {
     const { t } = useTranslation();
@@ -19,25 +20,34 @@ export default function BookingsOverview({ data: propData }) {
     const isLoading = propData ? false : isFetching;
 
     const activeMode = useMemo(() => {
-        const modeFilter = columnFilters.find(f => f.id === 'mode');
+        const modeFilter = columnFilters.find((filterItem) => filterItem.id === 'mode');
         return modeFilter ? modeFilter.value : 'all';
     }, [columnFilters]);
 
     const columns = useMemo(() => getColumns(t, activeMode), [activeMode, t]);
 
-    const modeFilterOptions = [
-        { value: "Sea", label: t('modes.sea') },
-        { value: "Air", label: t('modes.air') },
-        { value: "Road", label: t('modes.road') },
-        { value: "Rail", label: t('modes.rail') },
-        { value: "E-BUSINESS", label: t('modes.ebusiness') },
-    ];
+    const modeFilterOptions = useMemo(() => buildModeFilterOptions(t), [t]);
+    const statusFilterOptions = useMemo(() => buildStatusFilterOptions(t), [t]);
+    const tabsFilterConfig = useMemo(() => buildTabsFilterConfig(t), [t]);
 
-    const statusFilterOptions = [
-        { value: "Confirmed", label: t('bookings.status.confirmed') },
-        { value: "Pending", label: t('bookings.status.pending') },
-        { value: "Cancelled", label: t('bookings.status.cancelled') },
-    ];
+    const handleSetColumnFilters = useCallback((updater) => {
+        setColumnFilters((prev) => {
+            const next = typeof updater === 'function' ? updater(prev) : updater;
+            return Array.isArray(next) ? next : prev;
+        });
+    }, []);
+
+    const dropdownFilters = useMemo(() => ([
+        {
+            columnId: "status",
+            title: t('filters.status'),
+            options: statusFilterOptions,
+        },
+    ]), [statusFilterOptions, t]);
+
+    const renderExpandedRow = useCallback((bookingObj) => (
+        <BookingDetails booking={bookingObj} />
+    ), []);
 
     return (
         <>
@@ -53,21 +63,11 @@ export default function BookingsOverview({ data: propData }) {
                     data={tableData || []}
                     isLoading={isLoading}
                     expandable={true}
-                    renderExpandedRow={(bookingObj) => <BookingDetails booking={bookingObj} />}
+                    renderExpandedRow={renderExpandedRow}
                     columnFilters={columnFilters}
-                    setColumnFilters={setColumnFilters}
-                    tabsFilter={{
-                        columnId: "mode",
-                        options: modeFilterOptions,
-                        allLabel: t('common.all'),
-                    }}
-                    dropdownFilters={[
-                        {
-                            columnId: "status",
-                            title: t('filters.status'),
-                            options: statusFilterOptions,
-                        },
-                    ]}
+                    setColumnFilters={handleSetColumnFilters}
+                    tabsFilter={tabsFilterConfig}
+                    dropdownFilters={dropdownFilters}
                     initialColumnVisibility={{ mode: false }}
                 />
             </div>

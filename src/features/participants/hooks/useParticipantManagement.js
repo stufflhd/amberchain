@@ -10,6 +10,7 @@ export const useParticipantManagement = () => {
     const [isDeleteOpen, setDeleteOpen] = useState(false);
     const [isPermissionsOpen, setPermissionsOpen] = useState(false);
     const [participantsForAction, setParticipantsForAction] = useState([]);
+    const [selectionResetKey, setSelectionResetKey] = useState(0);
 
     const handleDelete = useCallback((participants) => {
         setParticipantsForAction(participants);
@@ -31,6 +32,7 @@ export const useParticipantManagement = () => {
         toast.success(t('participants.management.participantsDeleted', { count: participantsForAction.length }));
         setDeleteOpen(false);
         setParticipantsForAction([]);
+        setSelectionResetKey((k) => k + 1);
     }, [participantsForAction, t]);
 
     const confirmPermissionUpdate = useCallback((permissions) => {
@@ -38,12 +40,14 @@ export const useParticipantManagement = () => {
         toast.success(t('participants.management.permissionsUpdated'));
         setPermissionsOpen(false);
         setParticipantsForAction([]);
+        setSelectionResetKey((k) => k + 1);
     }, [participantsForAction, t]);
 
     return {
         state: {
             activeTab,
             participantsForAction,
+            selectionResetKey,
         },
         actions: {
             setActiveTab,

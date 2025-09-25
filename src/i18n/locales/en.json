@@ -59,6 +59,8 @@
             },
             "table": {
                 "columns": {
+                    "selectAll": "Select All",
+                    "selectRow": "Select Row",
                     "shipmentId": "Shipment ID",
                     "documentNumber": "Document Number",
                     "por": "POR",
@@ -67,7 +69,7 @@
                     "finalPod": "Final POD",
                     "etd": "ETD",
                     "eta": "ETA",
-                    "status": "Shipment Status",
+                    "status": "Status",
                     "carrier": "Carrier / Forwarder",
                     "smartTool": "Smart Tool",
                     "terminal": "Terminal",
@@ -78,7 +80,8 @@
                     "fulfillmentCenter": "Fulfillment center",
                     "sortationHub": "Sortation Hub",
                     "origin": "ORIGIN",
-                    "destination": "DESTINATION"
+                    "destination": "DESTINATION",
+                    "dailyShipments": "Daily Shipments"
                 },
                 "actions": {
                     "viewDetails": "View Details",
@@ -177,7 +180,8 @@
             "confirm": "Confirm",
             "close": "Close",
             "copy": "Copy",
-            "copied": "Copied!"
+            "copied": "Copied!",
+            "clearFilters": "Clear filters"
         },
         "pagination": {
             "selected": "{{count}} of {{total}} row(s) selected.",
@@ -339,6 +343,12 @@
         },
         "dashboard": {
             "title": "Dashboard"
+        },
+        "widgets": {
+            "cardContent": "Card Content",
+            "alertsTitle": "Alerts",
+            "alertItem": "Alert Content",
+            "alertDescriptionShort": "desc"
         },
         "notFound": {
             "title": "This page could not be found,",

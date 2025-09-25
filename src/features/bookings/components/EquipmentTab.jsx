@@ -11,38 +11,36 @@ export default function EquipmentTab({ equipmentIds }) {
         return <p className="text-muted-foreground">{t('bookings.details.noEquipment')}</p>;
     }
 
+    const columns = [
+        { key: 'containerNo', label: t('bookings.equipment.containerNo') },
+        { key: 'size', label: t('bookings.equipment.size') },
+        { key: 'type', label: t('bookings.equipment.type') },
+        { key: 'sealNo', label: t('bookings.equipment.sealNo') },
+        { key: 'status', label: t('bookings.equipment.status') },
+        { key: 'pickUpDate', label: t('bookings.equipment.pickUpDate') },
+        { key: 'preferredDepot', label: t('bookings.equipment.preferredDepot') },
+        { key: 'truckProvider', label: t('bookings.equipment.truckProvider') },
+        { key: 'truckId', label: t('bookings.equipment.truckId') },
+        { key: 'stuffingDate', label: t('bookings.equipment.stuffingDate') },
+        { key: 'truckSealingWindow', label: t('bookings.equipment.truckSealingWindow') },
+    ];
+
     return (
         <div className="rounded-md _border border-primary/50 overflow-hidden">
-            <Table className={'w-full cursor-default'}>
+            <Table className={'w-full cursor-default text-sm'}>
                 <TableHeader className={'border-b border-primary/50'}>
                     <TableRow>
-                        <TableHead>{t('bookings.equipment.containerNo')}</TableHead>
-                        <TableHead>{t('bookings.equipment.size')}</TableHead>
-                        <TableHead>{t('bookings.equipment.type')}</TableHead>
-                        <TableHead>{t('bookings.equipment.sealNo')}</TableHead>
-                        <TableHead>{t('bookings.equipment.status')}</TableHead>
-                        <TableHead>{t('bookings.equipment.pickUpDate')}</TableHead>
-                        <TableHead>{t('bookings.equipment.preferredDepot')}</TableHead>
-                        <TableHead>{t('bookings.equipment.truckProvider')}</TableHead>
-                        <TableHead>{t('bookings.equipment.truckId')}</TableHead>
-                        <TableHead>{t('bookings.equipment.stuffingDate')}</TableHead>
-                        <TableHead>{t('bookings.equipment.truckSealingWindow')}</TableHead>
+                        {columns.map(col => (
+                            <TableHead key={col.key}>{col.label}</TableHead>
+                        ))}
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {equipment.map((item) => (
                         <TableRow key={item.id}>
-                            <TableCell>{item.containerNo}</TableCell>
-                            <TableCell>{item.size}</TableCell>
-                            <TableCell>{item.type}</TableCell>
-                            <TableCell>{item.sealNo}</TableCell>
-                            <TableCell>{item.status}</TableCell>
-                            <TableCell>{item.pickUpDate}</TableCell>
-                            <TableCell>{item.preferredDepot}</TableCell>
-                            <TableCell>{item.truckProvider}</TableCell>
-                            <TableCell>{item.truckId}</TableCell>
-                            <TableCell>{item.stuffingDate}</TableCell>
-                            <TableCell>{item.truckSealingWindow}</TableCell>
+                            {columns.map(col => (
+                                <TableCell key={col.key}>{item[col.key]}</TableCell>
+                            ))}
                         </TableRow>
                     ))}
                 </TableBody>

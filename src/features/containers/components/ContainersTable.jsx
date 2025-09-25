@@ -32,7 +32,7 @@ export default function ContainersTable({
                     options: typeFilterOptions,
                 },
             ]}
-            initialColumnVisibility={{ mode: false }}
+            initialColumnVisibility={{ type: false }}
         />
     );
 }
