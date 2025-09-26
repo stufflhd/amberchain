@@ -87,7 +87,7 @@ export const sidebarNav = (t) => [
     items: [
       { label: t("sidebar.multimodal"), path: "/active-shipments", icon: Package },
       { label: t("sidebar.bookings"), path: "/bookings", icon: ClipboardList },
-      { label: t("sidebar.quotations"), path: "/dashboard/shipments/quotations", icon: BookOpen },
+      { label: t("sidebar.quotations"), path: "/quotations", icon: BookOpen },
     ]
   },
   {

@@ -181,7 +181,10 @@
             "close": "Close",
             "copy": "Copy",
             "copied": "Copied!",
-            "clearFilters": "Clear filters"
+            "clearFilters": "Clear filters",
+            "pending": "Pending",
+            "expired": "Expired",
+            "confirmed": "Confirmed"
         },
         "pagination": {
             "selected": "{{count}} of {{total}} row(s) selected.",
@@ -458,7 +461,100 @@
             "enhance-profitability": "Enhance Profitability",
             "insights": "Insights",
             "bookings-view": "Bookings Overview",
-            "containers-view": "Containers Overview"
+            "containers-view": "Containers Overview",
+            "quotations-view": "Quotations Overview"
+        },
+        "quotations": {
+            "pageTitle": "Quotations",
+            "common": {
+                "all": "All",
+                "status": "Status",
+                "pending": "Pending",
+                "expired": "Expired",
+                "confirmed": "Confirmed",
+                "price": "Price",
+                "carrier": "Carrier / For Smart Tool",
+                "additionalInfo": "Additional Information"
+            },
+            "filters": {
+                "status": "Status"
+            },
+            "modes": {
+                "sea": "Sea",
+                "air": "Air",
+                "road": "Road",
+                "rail": "Rail",
+                "ebusiness": "E-BUSINESS"
+            },
+            "route": "ROUTE",
+            "bookNow": "BOOK NOW",
+            "totalBreakdown": "TOTAL BREAKDOWN",
+            "tabs": {
+                "cost": "Cost Breakdown",
+                "conditions": "Conditions"
+            },
+            "costBreakdown": {
+                "oceanFreight": "Ocean Freight",
+                "includedCharges": "Included charges : Bunker Adjustment Factor/ISPS - Vessel Security Surcharge",
+                "chargesPayableAsPerFreight": "Charges payable as per freight",
+                "energyTransitionSurcharge": "Energy Transition Surcharge",
+                "lowSulfurSurcharge": "Low Sulfur Surcharge",
+                "chargesPayableAtImport": "Charges payable at import",
+                "ispsFee": "ISPS-Terminal security Fee at destination",
+                "thcOrigin": "Terminal Handling Charge (THC) at Origin",
+                "thcDestination": "Terminal Handling Charge (THC) at destination",
+                "precarriage": "Precarriage",
+                "oncarriage": "Oncarriage",
+                "customsBrokerage": "Customs Brokerage",
+                "insurance": "Insurance",
+                "certification": "Certification",
+                "totalPerContainer": "Total per container",
+                "surchargesCalculationNote": "Surcharges calculation was simulated with surcharges valid on {date}",
+                "exchangeRateNote": "All rates are based on Reuters rate of exchange of {date}",
+                "subjectToNote": "Subject to {details}"
+            },
+            "conditions": {
+                "validity": "Validity",
+                "from": "From",
+                "to": "To",
+                "shipmentConditions": "Shipment Conditions",
+                "transitTime": "Transit Time",
+                "days": "Days",
+                "carbonFootprint": "Carbon Footprint",
+                "additionalInfo": {
+                    "title": "Additional Information",
+                    "line1": "The breakdown of payment surcharges will be determined at time of booking.",
+                    "line2": "All surcharges are applicable for the selected departure date and will be recalculated at time of shipment unless rate is fixed.",
+                    "line3": "Additional charges such as contingency, transhipments, over weight surcharges, pre/on carriage charge for inland transport and local charges may be applicable depending on the requested service, local regulations and type of cargo ({cargoTypes}) at the time of booking.",
+                    "line4": "Offer and booking confirmation remains subject to equipment and space availability."
+                }
+            },
+            "table": {
+                "columns": {
+                    "quotationId": "Quotation ID",
+                    "readinessDate": "Readiness Date",
+                    "por": "POR",
+                    "pol": "POL",
+                    "pod": "POD",
+                    "finalPod": "Final POD",
+                    "aod": "AOD",
+                    "aoa": "AOA",
+                    "consolidationPoint": "Consolidation Point",
+                    "deconsolidationPoint": "Deconsolidation Point",
+                    "ror": "ROR",
+                    "rrd": "RRD",
+                    "fulfillmentCenter": "Fulfillment C",
+                    "firstMile": "First Mile",
+                    "sortationHub": "Sortation H",
+                    "lastMile": "Last Mile",
+                    "cargoType": "Cargo Type",
+                    "containerSize": "Container Si",
+                    "packageType": "Package Typ",
+                    "truckType": "Truck Type S",
+                    "commodity": "Commodity",
+                    "numberOfCommodity": "Number Of F"
+                }
+            }
         },
         "cargoNav": {
             "deliveryOrder": "Delivery Order",

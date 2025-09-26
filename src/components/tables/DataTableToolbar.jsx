@@ -16,16 +16,18 @@ export default function DataTableToolbar({ table, tabsFilter, dropdownFilters, s
                     allLabel={tabsFilter.allLabel}
                 />
             )}
-            {dropdownFilters?.map((filter) =>
-                table.getColumn(filter.columnId) && (
-                    <DataTableFacetedFilter
-                        key={filter.columnId}
-                        column={table.getColumn(filter.columnId)}
-                        title={filter.title}
-                        options={filter.options}
-                    />
-                )
-            )}
+            <div className="flex items-center gap-4 mr-auto">
+                {dropdownFilters?.map((filter) =>
+                    table.getColumn(filter.columnId) && (
+                        <DataTableFacetedFilter
+                            key={filter.columnId}
+                            column={table.getColumn(filter.columnId)}
+                            title={filter.title}
+                            options={filter.options}
+                        />
+                    )
+                )}
+            </div>
             {globalFilter !== undefined && setGlobalFilter && (
                 <DataTableGlobalSearch
                     globalFilter={globalFilter}

@@ -532,7 +532,7 @@
                 "noEquipment": "Aucun détail d'équipement disponible.",
                 "noDocuments": "Aucun document disponible",
                 "noEVGM": "Aucun enregistrement eVGM disponible",
-                "noShippingInstruction":"Aucune instruction d'expédition disponible",
+                "noShippingInstruction": "Aucune instruction d'expédition disponible",
                 "info": {
                     "container": "Conteneur",
                     "serviceAgreement": "Contrat de service",
@@ -692,6 +692,98 @@
                 "deleteConfirmation_other": "Êtes-vous sûr de vouloir supprimer {{count}} participants ?",
                 "permissionsUpdated": "Permissions updated successfully.",
                 "updateError": "Failed to update permissions. Please try again."
+            }
+        },
+        "quotations": {
+            "pageTitle": "Devis",
+            "common": {
+                "all": "Tous",
+                "status": "Statut",
+                "pending": "En attente",
+                "expired": "Expiré",
+                "confirmed": "Confirmé",
+                "price": "Prix",
+                "carrier": "Transporteur / Outil intelligent",
+                "additionalInfo": "Informations supplémentaires"
+            },
+            "filters": {
+                "status": "Statut"
+            },
+            "modes": {
+                "sea": "Mer",
+                "air": "Air",
+                "road": "Route",
+                "rail": "Rail",
+                "ebusiness": "E-BUSINESS"
+            },
+            "route": "ITINÉRAIRE",
+            "bookNow": "RÉSERVER MAINTENANT",
+            "totalBreakdown": "RÉPARTITION TOTALE",
+            "tabs": {
+                "cost": "Répartition des coûts",
+                "conditions": "Conditions"
+            },
+            "costBreakdown": {
+                "oceanFreight": "Fret maritime",
+                "includedCharges": "Frais inclus : Facteur d'ajustement de soute/ISPS - Surtaxe de sécurité du navire",
+                "chargesPayableAsPerFreight": "Frais payables selon le fret",
+                "energyTransitionSurcharge": "Surcharge de transition énergétique",
+                "lowSulfurSurcharge": "Surcharge pour faible teneur en soufre",
+                "chargesPayableAtImport": "Frais payables à l'importation",
+                "ispsFee": "Frais de sécurité ISPS-Terminal à destination",
+                "thcOrigin": "Frais de manutention au terminal (THC) à l'origine",
+                "thcDestination": "Frais de manutention au terminal (THC) à destination",
+                "precarriage": "Pré-acheminement",
+                "oncarriage": "Post-acheminement",
+                "customsBrokerage": "Courtage en douane",
+                "insurance": "Assurance",
+                "certification": "Certification",
+                "totalPerContainer": "Total par conteneur",
+                "surchargesCalculationNote": "Le calcul des surcharges a été simulé avec les surcharges valables le {date}",
+                "exchangeRateNote": "Tous les taux sont basés sur le taux de change Reuters du {date}",
+                "subjectToNote": "Sujet à {details}"
+            },
+            "conditions": {
+                "validity": "Validité",
+                "from": "Du",
+                "to": "Au",
+                "shipmentConditions": "Conditions d'expédition",
+                "transitTime": "Temps de transit",
+                "days": "Jours",
+                "carbonFootprint": "Empreinte carbone",
+                "additionalInfo": {
+                    "title": "Informations supplémentaires",
+                    "line1": "La répartition des surtaxes de paiement sera déterminée au moment de la réservation.",
+                    "line2": "Toutes les surtaxes sont applicables pour la date de départ sélectionnée et seront recalculées au moment de l'expédition, sauf si le tarif est fixe.",
+                    "line3": "Des frais supplémentaires tels que l'imprévu, les transbordements, les surcharges de poids, les frais de pré/post-acheminement pour le transport intérieur et les frais locaux peuvent être applicables en fonction du service demandé, des réglementations locales et du type de cargaison ({cargoTypes}) au moment de la réservation.",
+                    "line4": "L'offre et la confirmation de réservation restent soumises à la disponibilité de l'équipement et de l'espace."
+                }
+            },
+            "table": {
+                "columns": {
+                    "quotationId": "ID Devis",
+                    "readinessDate": "Date de disponibilité",
+                    "por": "POR",
+                    "pol": "POL",
+                    "pod": "POD",
+                    "finalPod": "POD Final",
+                    "aod": "AOD",
+                    "aoa": "AOA",
+                    "consolidationPoint": "Point de consolidation",
+                    "deconsolidationPoint": "Point de déconsolidation",
+                    "ror": "ROR",
+                    "rrd": "RRD",
+                    "fulfillmentCenter": "Centre de distribution",
+                    "firstMile": "Premier kilomètre",
+                    "sortationHub": "Centre de tri",
+                    "lastMile": "Dernier kilomètre",
+                    "cargoType": "Type de cargaison",
+                    "containerSize": "Taille conteneur",
+                    "packageType": "Type colis",
+                    "truckType": "Type camion S",
+                    "commodity": "Marchandise",
+                    "numberOfCommodity": "Nombre de M"
+                }
             }
         }
     }

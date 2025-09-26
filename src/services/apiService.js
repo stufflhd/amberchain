@@ -1,5 +1,6 @@
 import shipmentsData from '@/constants/shipments.json';
 import bookingsData from '@/constants/bookings.json';
+import quotationsData from '@/constants/quotations.json';
 
 // --- Shipments ---
 const searchShipments = (searchTerm) => {
@@ -33,10 +34,25 @@ export const fetchAllBookings = async () => {
     return bookingsData;
 };
 
+// --- Quotations ---
+const searchQuotations = (searchTerm) => {
+    if (!searchTerm) return [];
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
+    return quotationsData.filter(q => {
+        return Object.values(q).some(value => String(value).toLowerCase().includes(lowerCaseSearchTerm));
+    }).map(q => ({ ...q, type: 'quotation' }));
+};
+
+export const fetchAllQuotations = async () => {
+    await new Promise(resolve => setTimeout(resolve, 300));
+    return quotationsData;
+};
+
 // --- Combined Search ---
 export const searchAll = async ({ searchTerm = '' }) => {
     await new Promise(resolve => setTimeout(resolve, 500));
     const shipmentResults = searchShipments(searchTerm);
     const bookingResults = searchBookings(searchTerm);
-    return [...shipmentResults, ...bookingResults];
+    const quotationResults = searchQuotations(searchTerm);
+    return [...shipmentResults, ...bookingResults, ...quotationResults];
 };

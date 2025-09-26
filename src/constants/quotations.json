@@ -1,0 +1,58 @@
+[
+  {
+    "id": "S2354686",
+    "mode": "Sea",
+    "readinessDate": "2025-09-24T00:00:00",
+    "por": "Shareboike",
+    "origin": "Newyork C Depot",
+    "destination": "Amazon California",
+    "finalPod": "California, 23 St",
+    "cargoType": "Reefer",
+    "cargoSubType": "Perishable Cargo",
+    "containerSizeType": "40' HC",
+    "commodity": "Niga two pack",
+    "loadType": null,
+    "price": "2850 USD",
+    "status": "Confirmed",
+    "truckTypeSize": null,
+    "carrierForwarder": "AMAZON",
+    "smartTool": "ReadyToLoad",
+    "route": [
+      "Tangier",
+      "Tangier Med",
+      "Rotterdam",
+      "Vlissingen"
+    ],
+    "costBreakdown": {
+      "oceanFreight": 1800,
+      "energyTransitionSurcharge": 150,
+      "ispsFee": 150,
+      "thcOrigin": 400,
+      "thcDestination": 400,
+      "precarriage": 120,
+      "oncarriage": 180,
+      "customsBrokerage": 250,
+      "insurance": 100,
+      "certification": 50,
+      "total": 2850,
+      "surchargesCalculationDate": "23 Sep 2025",
+      "exchangeRateDate": "24 Sep 2025",
+      "subjectTo": "xxxxxxxxxxxxxxxxxxxx"
+    },
+    "conditions": {
+      "validFrom": "2025-08-25",
+      "validTo": "2025-09-30",
+      "shipmentConditions": "Door To Door",
+      "transitTimeDays": 12,
+      "carbonFootprint": 0.63,
+      "additionalInfo": {
+        "cargoTypes": [
+          "Food Grade",
+          "Heavy Cargo",
+          "High value",
+          "Sensitive"
+        ]
+      }
+    }
+  }
+]

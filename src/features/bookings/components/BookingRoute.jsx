@@ -6,7 +6,7 @@ export default function BookingRoute({ route = [] }) {
         <div className="flex items-center flex-wrap gap-2 text-sm font-medium">
             {route.map((point, index) => (
                 <div key={index} className="flex items-center gap-2">
-                    <span>{point}</span>
+                    <div className="text-muted-foreground text-sm uppercase">{point}</div>
                     {index < route.length - 1 && (
                         <ChevronRight className="h-4 w-4 text-muted-foreground" />
                     )}

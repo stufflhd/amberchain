@@ -8,6 +8,7 @@ import RequireRole from "./RequireRole";
 import PageLoader from "@/components/PageisLoading";
 import NotFoundPage from "@/features/errors/NotFoundPage";
 import ActiveShipmentsOverview from "@/features/shipments/ActiveShipmentsOverview";
+import QuotationsOverview from "@/features/quotations/QuotationsOverview";
 import SearchResultsPage from "@/features/search/SearchResultsPage";
 import BookingsOverview from "@/features/bookings/BookingsOverview";
 import AuthRedirect from "@/app/AuthRedirect";
@@ -118,6 +119,14 @@ const router = createBrowserRouter([
                 element: (
                     <MainLayout title="pageTitles.bookings-view">
                         <BookingsOverview />
+                    </MainLayout>
+                ),
+            },
+            {
+                path: "quotations",
+                element: (
+                    <MainLayout title="pageTitles.quotations-view">
+                        <QuotationsOverview />
                     </MainLayout>
                 ),
             },
