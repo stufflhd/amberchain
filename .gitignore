@@ -1,3 +1,7 @@
+# ignore speicifc files
+/public/Auth-guide
+/public/swagger.json
+
 # Logs
 logs
 *.log
