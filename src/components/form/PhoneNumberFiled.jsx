@@ -81,7 +81,7 @@ export default function PhoneNumberField({
 
   const [isPending, startTransition] = useTransition();
 
-  const phoneRegex = /^[\+]?[\d\s\-\(\)]{7,20}$/;
+  const phoneRegex = /^[+]?[\d\s\-()]{7,20}$/;
   const validatePhoneNumber = (phoneValue) => {
     const trimmed = String(phoneValue || "").trim();
     if (!trimmed) return required ? t("validation.required") : null;

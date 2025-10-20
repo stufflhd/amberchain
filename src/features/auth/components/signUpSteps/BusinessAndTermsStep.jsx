@@ -21,7 +21,7 @@ const businessProfiles = [
   { value: "retailer", label: t => t('businessProfiles.retailer'), icon: StoreIcon },
   { value: "service_provider", label: t => t('businessProfiles.serviceProvider'), icon: UsersIcon },
   { value: "consultant", label: t => t('businessProfiles.consultant'), icon: BriefcaseIcon },
-  { value: "others", label: t => t('businessProfiles.others'), icon: MoreHorizontalIcon },
+  { value: "other", label: t => t('businessProfiles.other'), icon: MoreHorizontalIcon },
 ];
 
 export default function BusinessAndTermsStep({ data, errors, onUpdate }) {
@@ -33,13 +33,13 @@ export default function BusinessAndTermsStep({ data, errors, onUpdate }) {
 
   const handleBusinessProfileChange = (value) => {
     onUpdate("businessProfile", value);
-    if (value !== "others") {
+    if (value !== "other") {
       onUpdate("customBusinessType", "");
     }
   };
 
   return (
-    <section className="space-y-6">
+    <section className="space-y-8">
       <h2 className="text-xl font-semibold text-center mb-6">{t('registerForm.step3Title')}</h2>
 
       <div className="space-y-2 text-start">
@@ -77,7 +77,7 @@ export default function BusinessAndTermsStep({ data, errors, onUpdate }) {
         )}
       </div>
 
-      {data.businessProfile === "others" && (
+      {data.businessProfile === "other" && (
         <FormField
           label={t('registerForm.customBusinessType')}
           name="customBusinessType"

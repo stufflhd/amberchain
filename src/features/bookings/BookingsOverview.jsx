@@ -6,7 +6,7 @@ import { useMemo, useState, useCallback } from "react";
 import { useBookingsQuery } from "@/queries/useBookingsQuery";
 import DashNav from "@/components/dashboard/DashNav.jsx";
 import DashboardSearch from "@/components/dashboard/DashboardSearch.jsx";
-import { buildModeFilterOptions, buildStatusFilterOptions, buildTabsFilterConfig } from "./utils/filters";
+import { buildStatusFilterOptions, buildTabsFilterConfig } from "./utils/filters";
 
 export default function BookingsOverview({ data: propData }) {
     const { t } = useTranslation();
@@ -26,7 +26,6 @@ export default function BookingsOverview({ data: propData }) {
 
     const columns = useMemo(() => getColumns(t, activeMode), [activeMode, t]);
 
-    const modeFilterOptions = useMemo(() => buildModeFilterOptions(t), [t]);
     const statusFilterOptions = useMemo(() => buildStatusFilterOptions(t), [t]);
     const tabsFilterConfig = useMemo(() => buildTabsFilterConfig(t), [t]);
 

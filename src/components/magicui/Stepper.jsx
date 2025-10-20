@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../ui/button";
 import { Loader } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-
+import { cn } from "@/lib/utils";
 
 export default function Stepper({
     children,
@@ -48,10 +48,10 @@ export default function Stepper({
     const isButtonLoading = isStepChanging || isFinalStepLoading;
 
     return (
-        <div className="flex flex-1 flex-col items-center justify-center p-4 !pt-24 sm:aspect-[4/3] md:aspect-[2/1]" {...rest}>
-            <Card className="mx-auto w-full max-w-2xl rounded-4xl shadow-xl p-6">
+        <div className={cn("flex flex-1 flex-col items-center justify-center p-4 !pt-24 sm:aspect-[4/3] md:aspect-[2/1]", rest.className)} {...rest}>
+            <Card className="card mx-auto w-full max-w-2xl rounded-4xl shadow-xl p-6">
                 <CardHeader>
-                    <div className="flex w-full items-center p-4 px-0">
+                    <div className="steps-indicator flex w-full items-center p-4 px-0">
                         {stepsArray.map((_, index) => {
                             const stepNumber = index + 1;
                             return (

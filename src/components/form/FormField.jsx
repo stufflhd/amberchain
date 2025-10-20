@@ -42,16 +42,22 @@ export default function FormField({
       value: newValue,
       error: validationError,
       isValueValid: isValid,
-      name: name
+      name: name,
     });
   };
 
   return (
-    <div className={cn("space-y-1 text-start", className)}>
+    <div className={cn("space-y-2 text-start", className)}>
       {label && (
         <Label htmlFor={fieldId}>
           {label}
-          {required && <span className="text-destructive ml-1">*</span>}
+          <span
+            className={`text-destructive ml-1 leading-3 ${
+              required ? "" : "opacity-0"
+            }`}
+          >
+            *
+          </span>
         </Label>
       )}
 

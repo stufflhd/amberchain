@@ -1,797 +1,976 @@
 {
-    "translation": {
-        "shipments": {
-            "shipmentDetails": {
-                "shipmentTitle": "Shipment: {{shipmentNumber}}",
-                "containerCount": "{{count}} CONTAINERS",
-                "etd": "ETD",
-                "lastUpdate": "Last Update",
-                "viewDetails": "View Details",
-                "vessel": "Vessel Name",
-                "flight": "Airline name",
-                "flightNumber": "Flight n°",
-                "truck": "Truck",
-                "tripNumber": "Trip Number",
-                "railCarrier": "Rail Carrier",
-                "railCarrierNumber": "Rail Carrier Number",
-                "vehicle": "Vehicle",
-                "reference": "Reference",
-                "voyage": "Voyage",
-                "eta": "ETA",
-                "transshipment": "Transshipment",
-                "timeline": "Timeline",
-                "shipmentMap": "Shipment Map",
-                "noImages": "No images available",
-                "imageAlt": "Shipment Image {{index}}",
-                "participants": "Participants",
-                "addParticipant": "Participants",
-                "noParticipants": "No participants assigned.",
-                "containerDetailsTitle": "Container Details for Shipment {{shipmentNumber}}",
-                "noContainerDetails": "No container details available for this shipment.",
-                "tansitRailTerminal": "Tansit Rail Terminal"
-            },
-            "status": {
-                "active": "Active",
-                "finished": "Finished",
-                "delayed": "Delayed"
-            },
-            "cards": {
-                "totalValue": {
-                    "description": "Total Shipments Value",
-                    "footerMain": "Trending up this month",
-                    "footerSub": "Based on booked and completed shipments"
-                },
-                "newBookings": {
-                    "description": "New Bookings",
-                    "footerMain": "New shipment bookings received",
-                    "footerSub": "This period"
-                },
-                "activeShipments": {
-                    "description": "Active Shipments",
-                    "footerMain": "Active & in-transit",
-                    "footerSub": "Based on booked and completed shipments"
-                },
-                "conversionRate": {
-                    "description": "Quote Conversion Rate",
-                    "footerMain": "Improving conversion",
-                    "footerSub": "Based on quotes → bookings"
-                }
-            },
-            "table": {
-                "columns": {
-                    "selectAll": "Select All",
-                    "selectRow": "Select Row",
-                    "shipmentId": "Shipment ID",
-                    "documentNumber": "Document Number",
-                    "por": "POR",
-                    "pol": "POL",
-                    "pod": "POD",
-                    "finalPod": "Final POD",
-                    "etd": "ETD",
-                    "eta": "ETA",
-                    "status": "Status",
-                    "carrier": "Carrier / Forwarder",
-                    "smartTool": "Smart Tool",
-                    "terminal": "Terminal",
-                    "docNumberEBiz": "Document Number",
-                    "firstMile": "First Mile",
-                    "lastMile": "Last Mile",
-                    "task": "Task",
-                    "fulfillmentCenter": "Fulfillment center",
-                    "sortationHub": "Sortation Hub",
-                    "origin": "ORIGIN",
-                    "destination": "DESTINATION",
-                    "dailyShipments": "Daily Shipments"
-                },
-                "actions": {
-                    "viewDetails": "View Details",
-                    "reportIssue": "Report Issue",
-                    "manageDocs": "Manage Documents"
-                }
-            }
+  "translation": {
+    "shipments": {
+      "shipmentDetails": {
+        "shipmentTitle": "Shipment: {{shipmentNumber}}",
+        "containerCount": "{{count}} CONTAINERS",
+        "etd": "ETD",
+        "lastUpdate": "Last Update",
+        "viewDetails": "View Details",
+        "vessel": "Vessel Name",
+        "flight": "Airline name",
+        "flightNumber": "Flight n°",
+        "truck": "Truck",
+        "tripNumber": "Trip Number",
+        "railCarrier": "Rail Carrier",
+        "railCarrierNumber": "Rail Carrier Number",
+        "vehicle": "Vehicle",
+        "reference": "Reference",
+        "voyage": "Voyage",
+        "eta": "ETA",
+        "transshipment": "Transshipment",
+        "timeline": "Timeline",
+        "shipmentMap": "Shipment Map",
+        "noImages": "No images available",
+        "imageAlt": "Shipment Image {{index}}",
+        "participants": "Participants",
+        "addParticipant": "Participants",
+        "noParticipants": "No participants assigned.",
+        "containerDetailsTitle": "Container Details for Shipment {{shipmentNumber}}",
+        "noContainerDetails": "No container details available for this shipment.",
+        "tansitRailTerminal": "Tansit Rail Terminal"
+      },
+      "status": {
+        "active": "Active",
+        "finished": "Finished",
+        "delayed": "Delayed"
+      },
+      "cards": {
+        "totalValue": {
+          "description": "Total Shipments Value",
+          "footerMain": "Trending up this month",
+          "footerSub": "Based on booked and completed shipments"
         },
-        "containers": {
-            "location": "Location",
-            "seal": "Seal",
-            "truckId": "Truck ID",
-            "driverNumber": "Driver Number",
-            "setPoint": "Set Point",
-            "otherInfo": "Other Info",
-            "commodityDetails": "Commodity Details",
-            "commodity": "Commodity",
-            "package": "Package",
-            "cargoWeight": "Cargo Weight",
-            "dimensions": "Dimensions",
-            "barcode": "Barcode",
-            "viewFullList": "View Full List",
-            "table": {
-                "columns": {
-                    "id": "ID",
-                    "type": "Type",
-                    "status": "Status",
-                    "containerNo": "Container No",
-                    "bookingId": "Booking ID",
-                    "por": "POR",
-                    "origin": "ORIGIN",
-                    "destination": "DESTINATION",
-                    "finalPod": "Final POD",
-                    "etd": "ETD",
-                    "eta": "ETA",
-                    "carrier": "Carrier",
-                    "smartTool": "Smart Tool",
-                    "terminal": "Terminal",
-                    "task": "Task",
-                    "mode": "Mode"
-                },
-                "actions": {
-                    "viewDetails": "View Details"
-                }
-            }
+        "newBookings": {
+          "description": "New Bookings",
+          "footerMain": "New shipment bookings received",
+          "footerSub": "This period"
+        },
+        "activeShipments": {
+          "description": "Active Shipments",
+          "footerMain": "Active & in-transit",
+          "footerSub": "Based on booked and completed shipments"
+        },
+        "conversionRate": {
+          "description": "Quote Conversion Rate",
+          "footerMain": "Improving conversion",
+          "footerSub": "Based on quotes → bookings"
+        }
+      },
+      "table": {
+        "columns": {
+          "selectAll": "Select All",
+          "selectRow": "Select Row",
+          "shipmentId": "Shipment ID",
+          "documentNumber": "Document Number",
+          "por": "POR",
+          "pol": "POL",
+          "pod": "POD",
+          "finalPod": "Final POD",
+          "etd": "ETD",
+          "eta": "ETA",
+          "status": "Status",
+          "carrier": "Carrier / Forwarder",
+          "smartTool": "Smart Tool",
+          "terminal": "Terminal",
+          "docNumberEBiz": "Document Number",
+          "firstMile": "First Mile",
+          "lastMile": "Last Mile",
+          "task": "Task",
+          "fulfillmentCenter": "Fulfillment center",
+          "sortationHub": "Sortation Hub",
+          "origin": "ORIGIN",
+          "destination": "DESTINATION",
+          "dailyShipments": "Daily Shipments"
         },
         "actions": {
-            "trackLive": "Track Live",
-            "planDelivery": "Plan Delivery",
-            "planPickup": "Plan Pick-up",
-            "setPoint": "Set Point"
-        },
-        "steps": {
-            "booking_confirmed": "Booking Confirmed",
-            "arrived_at_pickup": "Arrived at Pickup",
-            "loaded": "Loaded",
-            "departed_origin": "Departed Origin",
-            "booked_on_flight": "Booked on Flight",
-            "flight_departed": "Flight Departed",
-            "gate_in_rail_terminal": "Gate-in at Rail Terminal",
-            "loaded_on_train": "Loaded on Train",
-            "train_departed": "Train Departed",
-            "gate_in_pol": "Gate-in at POL",
-            "loaded_on_vessel": "Loaded on Vessel",
-            "vessel_departed": "Vessel Departed",
-            "in_sea_transit": "In Sea Transit",
-            "vessel_arrived": "Vessel Arrived",
-            "discharged": "Discharged",
-            "arrived_at_destination": "Arrived at Destination",
-            "out_for_delivery": "Out for Delivery",
-            "delivered": "Delivered",
-            "pod_confirmed": "POD Confirmed",
-            "package_labeled": "Package Labeled",
-            "courier_assigned": "Courier Assigned"
-        },
-        "common": {
-            "actions": "Actions",
-            "addParticipants": "Add Participant(s)",
-            "loading": "Loading...",
-            "submit": "Submit",
-            "confirmDelete": "Confirm Delete",
-            "cancel": "Cancel",
-            "next": "Next",
-            "back": "Back",
-            "previous": "Previous",
-            "required": "Required",
-            "MapLoading": "Map loading...",
-            "MapLoadError": "Map data is not available for this shipment.",
-            "all": "All",
-            "openMenu": "Open menu",
-            "edit": "Edit",
-            "generatePdf": "Generate PDF",
-            "comingSoon": "Coming Soon...",
-            "selected": "selected(s)",
-            "delete": "Delete",
-            "confirm": "Confirm",
-            "close": "Close",
-            "copy": "Copy",
-            "copied": "Copied!",
-            "clearFilters": "Clear filters",
-            "pending": "Pending",
-            "expired": "Expired",
-            "confirmed": "Confirmed"
-        },
-        "pagination": {
-            "selected": "{{count}} of {{total}} row(s) selected.",
-            "rowsPerPage": "Rows per page",
-            "pageInfo": "Page {{currentPage}} of {{totalPages}}",
-            "firstPage": "Go to first page",
-            "previousPage": "Go to previous page",
-            "nextPage": "Go to next page",
-            "lastPage": "Go to last page"
-        },
-        "validation": {
-            "required": "This field is required",
-            "invalid": "Invalid format",
-            "invalidEmail": "Please enter a valid email address",
-            "invalidPhone": "Please enter a valid phone number",
-            "emailMismatch": "Email addresses do not match",
-            "weakPassword": "Password must be at least 8 characters and include uppercase, lowercase, number, and a special character",
-            "invalidZipCode": "Please enter a valid zip code",
-            "mustAgreeToTerms": "You must agree to the Terms of Service",
-            "mustAgreeToPrivacy": "You must agree to the Privacy Policy",
-            "emailRequired": "Email is required.",
-            "passwordRequired": "Password is required.",
-            "passwordComplexity": "Password must be 6+ chars, with an uppercase letter and a special character.",
-            "invalidFirstName": "Please enter a valid first name.",
-            "invalidLastName": "Please enter a valid last name.",
-            "invalidCompanyName": "Please enter a valid company name.",
-            "invalidAddress": "Please enter a valid address.",
-            "selectBusinessProfile": "Please select a business profile.",
-            "invalidBusinessType": "Please specify a valid business type.",
-            "formErrors": "Please correct the errors on all steps before completing.",
-            "creatingAccount": "Creating your account..."
-        },
-        "phoneField": {
-            "placeholder": "Phone number",
-            "searchCountry": "Search country...",
-            "loading": "Loading countries...",
-            "errorLoading": "Error loading countries",
-            "noCountryFound": "No country found",
-            "updating": "Loading..."
-        },
-        "navbar": {
-            "support": "Support",
-            "contact": "Contact Us",
-            "login": "Login"
-        },
-        "loginForm": {
-            "welcome": "Welcome back",
-            "subtitle": "Login to your AMBERCHAIN account",
-            "emailLabel": "Email",
-            "passwordLabel": "Password",
-            "forgotPassword": "Forgot your password?",
-            "loginButton": "Login",
-            "orContinueWith": "Or continue with",
-            "noAccount": "Don't have an account?",
-            "signUp": "Sign up",
-            "agreement_start": "By clicking login, you agree to our",
-            "agreement_terms": "Terms of Service",
-            "agreement_and": "and",
-            "agreement_privacy": "Privacy Policy",
-            "agreement_end": ".",
-            "notifications": {
-                "loading": "Logging in...",
-                "success": "Logged in successfully!",
-                "error": "Login failed"
-            }
-        },
-        "registerForm": {
-            "step1Title": "Personal Information",
-            "step2Title": "Company Information",
-            "step3Title": "Business Configuration",
-            "step4Title": "Terms & Conditions",
-            "userInfoTitle": "User Information",
-            "firstName": "First Name",
-            "lastName": "Last Name",
-            "email": "Professional Email",
-            "emailConfirmation": "Confirm Email",
-            "password": "Password",
-            "phoneNumber": "Phone Number",
-            "companyLocation": "Company Location",
-            "companyName": "Company Name",
-            "address": "Address",
-            "zipCode": "Zip Code",
-            "businessProfile": "Select Your Business Profile",
-            "customBusinessType": "Specify Business Type",
-            "selectBusinessProfile": "Select a business profile...",
-            "searchBusinessProfile": "Search business profiles...",
-            "noBusinessProfileFound": "No business profile found",
-            "specifyBusinessType": "Please specify your business type",
-            "agreeToTerms": "I agree to the",
-            "termsOfService": "Terms of Service",
-            "agreeToPrivacy": "I agree to the",
-            "privacyPolicy": "Privacy Policy",
-            "previousStep": "Previous",
-            "nextStep": "Next",
-            "submit": "Create Account",
-            "submitting": "Creating...",
-            "stepDescription": "Step {{current}} of {{total}}",
-            "reviewAndAccept": "Please review and accept our"
-        },
-        "dialog": {
-            "agree": "I agree",
-            "cancel": "Cancel",
-            "readWarning": "Please scroll to the bottom to continue.",
-            "readTerms": "Read all terms before accepting."
-        },
-        "agreement": {
-            "mustAgree": "You must agree to our",
-            "clickingAgree": "By clicking login, you agree to our"
-        },
-        "terms": {
-            "title": "Terms & Conditions",
-            "sections": [
-                {
-                    "title": "Acceptance of Terms",
-                    "content": "By accessing and using this website, users agree to comply with and be bound by these Terms of Service. Users who do not agree with these terms should discontinue use of the website immediately."
-                },
-                {
-                    "title": "User Account Responsibilities",
-                    "content": "Users are responsible for maintaining the confidentiality of their account credentials. Any activities occurring under a user's account are the sole responsibility of the account holder. Users must notify the website administrators immediately of any unauthorized account access."
-                },
-                {
-                    "title": "Content Usage and Restrictions",
-                    "content": "The website and its original content are protected by intellectual property laws. Users may not reproduce, distribute, modify, create derivative works, or commercially exploit any content without explicit written permission from the website owners."
-                },
-                {
-                    "title": "Limitation of Liability",
-                    "content": "The website provides content 'as is' without any warranties. The website owners shall not be liable for direct, indirect, incidental, consequential, or punitive damages arising from user interactions with the platform."
-                },
-                {
-                    "title": "Governing Law",
-                    "content": "These terms are governed by the laws of the jurisdiction where the website is primarily operated, without regard to conflict of law principles."
-                }
-            ]
-        },
-        "privacy": {
-            "title": "Privacy Policy",
-            "sections": [
-                {
-                    "title": "Introduction",
-                    "content": "This Privacy Policy describes how we collect, use, and handle your personal information when you use our website and services. We are committed to protecting your privacy."
-                },
-                {
-                    "title": "Information We Collect",
-                    "content": "We may collect personal identification information (Name, email address, phone number, etc.) and non-personal identification information (browser name, type of computer, etc.) from Users in a variety of ways."
-                },
-                {
-                    "title": "How We Use Collected Information",
-                    "content": "We may use the information we collect to personalize user experience, to improve our site, to run a promotion, contest, survey or other site feature, and to send periodic emails."
-                },
-                {
-                    "title": "Data Security",
-                    "content": "We adopt appropriate data collection, storage and processing practices and security measures to protect against unauthorized access, alteration, disclosure or destruction of your personal information, username, password, transaction information and data stored on our Site."
-                },
-                {
-                    "title": "Sharing Your Personal Information",
-                    "content": "We do not sell, trade, or rent Users personal identification information to others. We may share generic aggregated demographic information not linked to any personal identification information regarding visitors and users with our business partners, trusted affiliates and advertisers."
-                }
-            ]
-        },
-        "dashboard": {
-            "title": "Dashboard"
-        },
-        "widgets": {
-            "cardContent": "Card Content",
-            "alertsTitle": "Alerts",
-            "alertItem": "Alert Content",
-            "alertDescriptionShort": "desc"
-        },
-        "notFound": {
-            "title": "This page could not be found,",
-            "cta": "Return to home ?"
-        },
-        "loader": {
-            "title": "Loading, please wait..."
-        },
-        "clientTopNav": {
-            "account": "Account",
-            "notifications": "Notifications",
-            "exclusivity": "Exclusivity",
-            "support": "Support and User manuals",
-            "logout": "Logout"
-        },
-        "SuccessSignup": {
-            "title": "Account Created Successfully!",
-            "sub-title": "A verification link has been sent to your email to setup your account.",
-            "cta1": "Login to Dashboard",
-            "cta2": "Check Email",
-            "footerP1": "You're not alone.",
-            "footerP2": "logistics partners have already joined!"
-        },
-        "sidebar": {
-            "multimodal": "Multimodal",
-            "bookings": "Bookings",
-            "quotations": "Quotations",
-            "compareOptions": "Compare Options",
-            "instantQuote": "Instant Quote",
-            "book": "Book",
-            "smartHelpers": "Smart Helpers",
-            "readyLoad": "ReadyLoad",
-            "trokeTrace": "TrokeTrace",
-            "socForAll": "SOC For All",
-            "ireposition": "Ireposition",
-            "manageDocuments": "Manage Documents",
-            "tracking": "Tracking",
-            "depot": "Depot & Storage",
-            "freeTime": "Free Time & Penalties",
-            "customs": "Customs & Compliance",
-            "financeYourLog": "Finance Your Log",
-            "wallet": "Wallet",
-            "invoices": "Invoices",
-            "trackCommission": "Track Commission",
-            "outsourceYourLog": "Outsource Your Log",
-            "assignAgent": "Assign Agent",
-            "enhanceProfitability": "Enhance Profitability",
-            "insights": "Insights"
-        },
-        "dashNav": {
-            "manage": "Manage",
-            "services": "Services",
-            "company": "Company",
-            "integrations": "Integrations",
-            "news": "News"
-        },
-        "clientDashFilterNav": {
-            "view": "View",
-            "active-shipments": "Active Shipments",
-            "bookings": "Bookings",
-            "quote-requests": "Quote Requests"
-        },
-        "and": "and",
-        "searchWord": "Search...",
-        "searchWord2": "View Details",
-        "businessProfiles": {
-            "manufacturer": "Manufacturer",
-            "distributor": "Distributor",
-            "retailer": "Retailer",
-            "serviceProvider": "Service Provider",
-            "consultant": "Consultant",
-            "others": "Others",
-            "logisticsPartnerExample": "e.g., Logistics Partner"
-        },
-        "pageTitles": {
-            "home": "Home",
-            "login": "Login",
-            "register": "Register",
-            "admin": "Admin Panel",
-            "shipments": "Shipments",
-            "active-shipments": "Active Shipments",
-            "dashboard": "Dashboard",
-            "dashboard-view": "Dashboard View",
-            "notFound": "Page Not Found",
-            "multimodal": "Multimodal Shipments Overview",
-            "bookings": "Bookings",
-            "quotations": "Quotations",
-            "compare-options": "Compare Options",
-            "instant-quote": "Instant Quote",
-            "book": "Book Shipment",
-            "smart-helpers": "Smart Helpers",
-            "readyload": "ReadyLoad",
-            "troketrace": "TrokeTrace",
-            "soc-for-all": "SOC For All",
-            "ireposition": "IReposition",
-            "manage-documents": "Manage Documents",
-            "tracking": "Tracking",
-            "depot-storage": "Depot & Storage",
-            "free-time-penalties": "Free Time & Penalties",
-            "customs-compliance": "Customs & Compliance",
-            "finance-your-log": "Finance Your Log",
-            "wallet": "Wallet",
-            "invoices": "Invoices",
-            "track-commission": "Track Commission",
-            "outsource-your-log": "Outsource Your Log",
-            "assign-agent": "Assign Agent",
-            "enhance-profitability": "Enhance Profitability",
-            "insights": "Insights",
-            "bookings-view": "Bookings Overview",
-            "containers-view": "Containers Overview",
-            "quotations-view": "Quotations Overview"
-        },
-        "quotations": {
-            "pageTitle": "Quotations",
-            "common": {
-                "all": "All",
-                "status": "Status",
-                "pending": "Pending",
-                "expired": "Expired",
-                "confirmed": "Confirmed",
-                "price": "Price",
-                "carrier": "Carrier / For Smart Tool",
-                "additionalInfo": "Additional Information"
-            },
-            "filters": {
-                "status": "Status"
-            },
-            "modes": {
-                "sea": "Sea",
-                "air": "Air",
-                "road": "Road",
-                "rail": "Rail",
-                "ebusiness": "E-BUSINESS"
-            },
-            "route": "ROUTE",
-            "bookNow": "BOOK NOW",
-            "totalBreakdown": "TOTAL BREAKDOWN",
-            "tabs": {
-                "cost": "Cost Breakdown",
-                "conditions": "Conditions"
-            },
-            "costBreakdown": {
-                "oceanFreight": "Ocean Freight",
-                "includedCharges": "Included charges : Bunker Adjustment Factor/ISPS - Vessel Security Surcharge",
-                "chargesPayableAsPerFreight": "Charges payable as per freight",
-                "energyTransitionSurcharge": "Energy Transition Surcharge",
-                "lowSulfurSurcharge": "Low Sulfur Surcharge",
-                "chargesPayableAtImport": "Charges payable at import",
-                "ispsFee": "ISPS-Terminal security Fee at destination",
-                "thcOrigin": "Terminal Handling Charge (THC) at Origin",
-                "thcDestination": "Terminal Handling Charge (THC) at destination",
-                "precarriage": "Precarriage",
-                "oncarriage": "Oncarriage",
-                "customsBrokerage": "Customs Brokerage",
-                "insurance": "Insurance",
-                "certification": "Certification",
-                "totalPerContainer": "Total per container",
-                "surchargesCalculationNote": "Surcharges calculation was simulated with surcharges valid on {date}",
-                "exchangeRateNote": "All rates are based on Reuters rate of exchange of {date}",
-                "subjectToNote": "Subject to {details}"
-            },
-            "conditions": {
-                "validity": "Validity",
-                "from": "From",
-                "to": "To",
-                "shipmentConditions": "Shipment Conditions",
-                "transitTime": "Transit Time",
-                "days": "Days",
-                "carbonFootprint": "Carbon Footprint",
-                "additionalInfo": {
-                    "title": "Additional Information",
-                    "line1": "The breakdown of payment surcharges will be determined at time of booking.",
-                    "line2": "All surcharges are applicable for the selected departure date and will be recalculated at time of shipment unless rate is fixed.",
-                    "line3": "Additional charges such as contingency, transhipments, over weight surcharges, pre/on carriage charge for inland transport and local charges may be applicable depending on the requested service, local regulations and type of cargo ({cargoTypes}) at the time of booking.",
-                    "line4": "Offer and booking confirmation remains subject to equipment and space availability."
-                }
-            },
-            "table": {
-                "columns": {
-                    "quotationId": "Quotation ID",
-                    "readinessDate": "Readiness Date",
-                    "por": "POR",
-                    "pol": "POL",
-                    "pod": "POD",
-                    "finalPod": "Final POD",
-                    "aod": "AOD",
-                    "aoa": "AOA",
-                    "consolidationPoint": "Consolidation Point",
-                    "deconsolidationPoint": "Deconsolidation Point",
-                    "ror": "ROR",
-                    "rrd": "RRD",
-                    "fulfillmentCenter": "Fulfillment C",
-                    "firstMile": "First Mile",
-                    "sortationHub": "Sortation H",
-                    "lastMile": "Last Mile",
-                    "cargoType": "Cargo Type",
-                    "containerSize": "Container Si",
-                    "packageType": "Package Typ",
-                    "truckType": "Truck Type S",
-                    "commodity": "Commodity",
-                    "numberOfCommodity": "Number Of F"
-                }
-            }
-        },
-        "cargoNav": {
-            "deliveryOrder": "Delivery Order",
-            "releaseCargo": "Release Cargo",
-            "requestUpdate": "Request Update",
-            "docsview": "Documents View"
-        },
-        "shipmentSupport": {
-            "reportDelay": "Report Delay",
-            "ratingComment": "Rating & Comment",
-            "claimEquipment": "Claim About Equipment",
-            "emission": "Emission",
-            "claimCargo": "Claim About Cargo",
-            "reportIssue": "Report Issue"
-        },
-        "search": {
-            "loading": "Loading...",
-            "noResults": "No results found.",
-            "startTyping": "Start typing to search for a shipment.",
-            "resultsFor": "Showing results for:",
-            "clear": "Clear search",
-            "pageTitle": "Search Results for \"{{searchTerm}}\"",
-            "placeholder": "Search for participants...",
-            "shipmentResultsTitle": "Shipment Results ({{count}})",
-            "bookingResultsTitle": "Booking Results ({{count}})",
-            "bookingComponentPlaceholder": "Booking component is not implemented yet.",
-            "foundCount": "Found {{count}} booking(s).",
-            "noResultsFor": "We couldn't find anything matching \"{{searchTerm}}\"."
-        },
-        "filters": {
-            "status": "Status",
-            "mode": "Mode",
-            "type": "Type"
-        },
-        "modes": {
-            "sea": "SEA",
-            "air": "AIR",
-            "road": "ROAD",
-            "rail": "RAIL",
-            "ebusiness": "E-BUSINESS"
-        },
-        "bookings": {
-            "pageTitle": "Bookings",
-            "status": {
-                "confirmed": "Confirmed",
-                "pending": "Pending",
-                "cancelled": "Cancelled",
-                "new": "New",
-                "delayed": "Delayed"
-            },
-            "table": {
-                "columns": {
-                    "bookingId": "Booking ID",
-                    "readinessDate": "Readiness Date",
-                    "por": "POR",
-                    "origin": "ORIGIN",
-                    "destination": "DESTINATION",
-                    "finalPod": "Final POD",
-                    "etd": "ETD",
-                    "eta": "ETA",
-                    "status": "Booking Status",
-                    "carrier": "Carrier / Forwarder",
-                    "smartTool": "Smart Tool",
-                    "terminal": "Terminal",
-                    "task": "Task",
-                    "firstMile": "First Mile",
-                    "sortationHub": "Sortation Hub"
-                }
-            },
-            "details": {
-                "equipments": "Equipments",
-                "participants": "Participants",
-                "noParticipants": "No participants assigned.",
-                "noEquipment": "No equipment details available.",
-                "noDocuments": "No documents available",
-                "noEVGM": "No eVGM records available",
-                "noShippingInstruction": "No shipping instruction available",
-                "info": {
-                    "container": "Container",
-                    "serviceAgreement": "Service agreement",
-                    "readinessDate": "Readiness date",
-                    "creationDate": "Creation date",
-                    "por": "POR",
-                    "pol": "POL",
-                    "pod": "POD",
-                    "numberOfContainers": "Number of containers",
-                    "cutoffDate": "Cut off date",
-                    "shippingInstructionsDeadline": "Shipping instructions deadline",
-                    "evgmDeadline": "eVGM deadline",
-                    "gateInDeadline": "Gate-In deadline"
-                },
-                "shipping": {
-                    "shippingLine": "Shipping Line",
-                    "service": "Service",
-                    "vesselName": "Vessel Name",
-                    "terminalOrigin": "Terminal Origin",
-                    "terminalDestination": "Terminal Destination",
-                    "etd": "ETD",
-                    "eta": "ETA",
-                    "commodity": "Commodity",
-                    "grossWeight": "Gross Weight"
-                },
-                "general": {
-                    "title": "General Info",
-                    "servicesRequested": "Services requested",
-                    "comment": "Comment",
-                    "additionalInfo": "Additional information",
-                    "terms": "Terms / Additional charges"
-                },
-                "tabs": {
-                    "details": "Details",
-                    "equipment": "Equipment",
-                    "documents": "Documents",
-                    "evgm": "eVGM",
-                    "shippingInst": "Shipping Inst",
-                    "payment": "Payment"
-                }
-            },
-            "equipment": {
-                "containerNo": "Container №",
-                "size": "Size",
-                "type": "Type",
-                "sealNo": "Seal №",
-                "status": "Status",
-                "pickUpDate": "Pick-up date",
-                "preferredDepot": "Preferred depot",
-                "truckProvider": "Truck Provider",
-                "truckId": "Truck Id",
-                "stuffingDate": "Stuffing Date",
-                "truckSealingWindow": "Truck sealling Time Window"
-            },
-            "documents": {
-                "documentName": "Document Name",
-                "upload": "Upload",
-                "status": "Status",
-                "deadline": "Deadline",
-                "preview": "Preview",
-                "comments": "Comments"
-            },
-            "evgm": {
-                "containerNumber": "Container Number",
-                "tare": "Tare",
-                "grossWeight": "Gross Weight",
-                "totalGrossWeight": "Total Gross Weight",
-                "preview": "Preview",
-                "status": "Status",
-                "certify": "I certify the accuracy of the above information.",
-                "footnote": "* VGM DECLARATION A DOCUMENT AUTOMATICALLY GENERATED INCLUDE THE CONTAINERS WITH THEIR VGM AND THE AUTHORISED SIGNER"
-            },
-            "actions": {
-                "convertToShipment": "Convert to"
-            },
-            "shipping": {
-                "shipper": {
-                    "company": "Company",
-                    "firstName": "First Name",
-                    "lastName": "Last Name",
-                    "country": "Country",
-                    "city": "City",
-                    "address": "Address",
-                    "postalCode": "Postal Code",
-                    "email": "Email Address",
-                    "phone": "Phone Number",
-                    "businessProfile": "Business Profile",
-                    "freightForwarder": "Freight Forwarder"
-                },
-                "consignee": "Consignee",
-                "notifyParty": "Notify Party",
-                "bookingParty": "Booking Party",
-                "freightForwarder": "Freight Forwarder",
-                "agent": "Agent",
-                "freelancer": "Freelancer",
-                "containerNumber": "Container Number",
-                "kindOfPackages": "Kind of Packages",
-                "quantityOfPackages": "Quantity of Packages",
-                "netWeight": "Net Weight",
-                "grossWeight": "Gross Weight",
-                "imoClass": "IMO Class",
-                "grossVolume": "Gross Volume",
-                "setPoint": "Set Point",
-                "ventilation": "Ventilation",
-                "dehumidification": "Dehumidification",
-                "o2": "O₂",
-                "co2": "CO₂",
-                "cargoDescription": "Cargo Description"
-            }
-        },
-        "participants": {
-            "search": {
-                "placeholder": "Search for participants..."
-            },
-            "table": {
-                "profileId": "Profile ID",
-                "company": "Company",
-                "userName": "User Name",
-                "businessProfile": "Business Profile",
-                "party": "Party",
-                "email": "Email",
-                "phone": "Phone",
-                "authorisations": "Authorisations"
-            },
-            "authorisations": {
-                "view_shipments": "View Shipments",
-                "respond_queries": "Respond to Queries",
-                "assign_tasks": "Assign Tasks",
-                "edit_shipments": "Edit Shipments",
-                "manage_participants": "Manage Participants",
-                "view_analytics": "View Analytics",
-                "manage_documents": "Manage Documents"
-            },
-            "management": {
-                "title": "Manage Participants",
-                "addParticipant": "Add Participant",
-                "addParticipants": "Add Participant(s)",
-                "editParticipant": "Edit Participant",
-                "removeParticipant": "Remove Participant",
-                "confirmRemove": "Are you sure you want to remove this participant?",
-                "selectParticipant": "Select Participant",
-                "selectRole": "Select Role",
-                "editPermissions": "Edit Permissions",
-                "updatePermissions": "Update Permissions",
-                "managePermissions": "Manage Permissions",
-                "selectPermissions": "Select the permissions you want to assign to the selected participant(s)",
-                "setPermissions": "Set Permissions",
-                "selectInitialPermissions": "Select initial permissions for participant(s)",
-                "addWithPermissions": "Add with permissions",
-                "participantsSelectedCount": "{{count}} participant(s) selected",
-                "success": "Success!",
-                "successMessage": "Participant(s) successfully added",
-                "addError": "Failed to add participants. Please try again.",
-                "saveChanges": "Save Changes",
-                "participantsSelected": "{{count}} participants selected",
-                "deleteConfirmation_one": "Are you sure you want to delete this participant?",
-                "deleteConfirmation_other": "Are you sure you want to delete {{count}} participants?",
-                "permissionsUpdated": "Permissions updated successfully.",
-                "updateError": "Failed to update permissions. Please try again."
-            }
+          "viewDetails": "View Details",
+          "reportIssue": "Report Issue",
+          "manageDocs": "Manage Documents"
         }
+      }
+    },
+    "containers": {
+      "location": "Location",
+      "seal": "Seal",
+      "truckId": "Truck ID",
+      "driverNumber": "Driver Number",
+      "setPoint": "Set Point",
+      "otherInfo": "Other Info",
+      "commodityDetails": "Commodity Details",
+      "commodity": "Commodity",
+      "package": "Package",
+      "cargoWeight": "Cargo Weight",
+      "dimensions": "Dimensions",
+      "barcode": "Barcode",
+      "viewFullList": "View Full List",
+      "table": {
+        "columns": {
+          "id": "ID",
+          "type": "Type",
+          "status": "Status",
+          "containerNo": "Container No",
+          "bookingId": "Booking ID",
+          "por": "POR",
+          "origin": "ORIGIN",
+          "destination": "DESTINATION",
+          "finalPod": "Final POD",
+          "etd": "ETD",
+          "eta": "ETA",
+          "carrier": "Carrier",
+          "smartTool": "Smart Tool",
+          "terminal": "Terminal",
+          "task": "Task",
+          "mode": "Mode"
+        },
+        "actions": {
+          "viewDetails": "View Details"
+        }
+      }
+    },
+    "actions": {
+      "trackLive": "Track Live",
+      "planDelivery": "Plan Delivery",
+      "planPickup": "Plan Pick-up",
+      "setPoint": "Set Point"
+    },
+    "steps": {
+      "booking_confirmed": "Booking Confirmed",
+      "arrived_at_pickup": "Arrived at Pickup",
+      "loaded": "Loaded",
+      "departed_origin": "Departed Origin",
+      "booked_on_flight": "Booked on Flight",
+      "flight_departed": "Flight Departed",
+      "gate_in_rail_terminal": "Gate-in at Rail Terminal",
+      "loaded_on_train": "Loaded on Train",
+      "train_departed": "Train Departed",
+      "gate_in_pol": "Gate-in at POL",
+      "loaded_on_vessel": "Loaded on Vessel",
+      "vessel_departed": "Vessel Departed",
+      "in_sea_transit": "In Sea Transit",
+      "vessel_arrived": "Vessel Arrived",
+      "discharged": "Discharged",
+      "arrived_at_destination": "Arrived at Destination",
+      "out_for_delivery": "Out for Delivery",
+      "delivered": "Delivered",
+      "pod_confirmed": "POD Confirmed",
+      "package_labeled": "Package Labeled",
+      "courier_assigned": "Courier Assigned"
+    },
+    "common": {
+      "actions": "Actions",
+      "addParticipants": "Add Participant(s)",
+      "loading": "Loading...",
+      "submit": "Submit",
+      "confirmDelete": "Confirm Delete",
+      "cancel": "Cancel",
+      "next": "Next",
+      "back": "Back",
+      "previous": "Previous",
+      "required": "Required",
+      "MapLoading": "Map loading...",
+      "MapLoadError": "Map data is not available for this shipment.",
+      "all": "All",
+      "openMenu": "Open menu",
+      "edit": "Edit",
+      "generatePdf": "Generate PDF",
+      "comingSoon": "Coming Soon...",
+      "selected": "selected(s)",
+      "delete": "Delete",
+      "confirm": "Confirm",
+      "close": "Close",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "clearFilters": "Clear filters",
+      "pending": "Pending",
+      "expired": "Expired",
+      "confirmed": "Confirmed",
+      "generic-error": "An error occurred",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "pagination": {
+      "selected": "{{count}} of {{total}} row(s) selected.",
+      "rowsPerPage": "Rows per page",
+      "pageInfo": "Page {{currentPage}} of {{totalPages}}",
+      "firstPage": "Go to first page",
+      "previousPage": "Go to previous page",
+      "nextPage": "Go to next page",
+      "lastPage": "Go to last page"
+    },
+    "validation": {
+      "required": "This field is required",
+      "invalid": "Invalid format",
+      "invalidEmail": "Please enter a valid email address",
+      "invalidPhone": "Please enter a valid phone number",
+      "emailMismatch": "Email addresses do not match",
+      "weakPassword": "Password must be at least 8 characters and include uppercase, lowercase, number, and a special character",
+      "invalidZipCode": "Please enter a valid zip code",
+      "mustAgreeToTerms": "You must agree to the Terms of Service",
+      "mustAgreeToPrivacy": "You must agree to the Privacy Policy",
+      "emailRequired": "Email is required.",
+      "passwordRequired": "Password is required.",
+      "passwordComplexity": "Password must be 6+ chars, with an uppercase letter and a special character.",
+      "invalidFirstName": "Please enter a valid first name.",
+      "invalidLastName": "Please enter a valid last name.",
+      "invalidCompanyName": "Please enter a valid company name.",
+      "invalidAddress": "Please enter a valid address.",
+      "selectBusinessProfile": "Please select a business profile.",
+      "invalidBusinessType": "Please specify a valid business type.",
+      "formErrors": "Please correct the errors on all steps before completing.",
+      "creatingAccount": "Creating your account..."
+    },
+    "phoneField": {
+      "placeholder": "Phone number",
+      "searchCountry": "Search country...",
+      "loading": "Loading countries...",
+      "errorLoading": "Error loading countries",
+      "noCountryFound": "No country found",
+      "updating": "Loading..."
+    },
+    "navbar": {
+      "support": "Support",
+      "contact": "Contact Us",
+      "login": "Login"
+    },
+    "loginForm": {
+      "welcome": "Welcome back",
+      "subtitle": "Login to your AMBERCHAIN account",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "forgotPassword": "Forgot your password?",
+      "loginButton": "Login",
+      "orContinueWith": "Or continue with",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up",
+      "agreement_start": "By clicking login, you agree to our",
+      "agreement_terms": "Terms of Service",
+      "agreement_and": "and",
+      "agreement_privacy": "Privacy Policy",
+      "agreement_end": ".",
+      "notifications": {
+        "loading": "Logging in...",
+        "success": "Logged in successfully!",
+        "error": "Login failed"
+      }
+    },
+    "registerForm": {
+      "step1Title": "Personal Information",
+      "step2Title": "Company Information",
+      "step3Title": "Business Configuration",
+      "step4Title": "Terms & Conditions",
+      "userInfoTitle": "User Information",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Professional Email",
+      "emailConfirmation": "Confirm Email",
+      "password": "Password",
+      "phoneNumber": "Phone Number",
+      "companyLocation": "Company Location",
+      "companyName": "Company Name",
+      "address": "Address",
+      "zipCode": "Zip Code",
+      "businessProfile": "Select Your Business Profile",
+      "customBusinessType": "Specify Business Type",
+      "selectBusinessProfile": "Select a business profile...",
+      "searchBusinessProfile": "Search business profiles...",
+      "noBusinessProfileFound": "No business profile found",
+      "specifyBusinessType": "Please specify your business type",
+      "agreeToTerms": "I agree to the",
+      "termsOfService": "Terms of Service",
+      "agreeToPrivacy": "I agree to the",
+      "privacyPolicy": "Privacy Policy",
+      "previousStep": "Previous",
+      "nextStep": "Next",
+      "submit": "Create Account",
+      "submitting": "Creating...",
+      "stepDescription": "Step {{current}} of {{total}}",
+      "reviewAndAccept": "Please review and accept our"
+    },
+    "dialog": {
+      "agree": "I agree",
+      "cancel": "Cancel",
+      "readWarning": "Please scroll to the bottom to continue.",
+      "readTerms": "Read all terms before accepting."
+    },
+    "agreement": {
+      "mustAgree": "You must agree to our",
+      "clickingAgree": "By clicking login, you agree to our"
+    },
+    "terms": {
+      "title": "Terms & Conditions",
+      "sections": [
+        {
+          "title": "Acceptance of Terms",
+          "content": "By accessing and using this website, users agree to comply with and be bound by these Terms of Service. Users who do not agree with these terms should discontinue use of the website immediately."
+        },
+        {
+          "title": "User Account Responsibilities",
+          "content": "Users are responsible for maintaining the confidentiality of their account credentials. Any activities occurring under a user's account are the sole responsibility of the account holder. Users must notify the website administrators immediately of any unauthorized account access."
+        },
+        {
+          "title": "Content Usage and Restrictions",
+          "content": "The website and its original content are protected by intellectual property laws. Users may not reproduce, distribute, modify, create derivative works, or commercially exploit any content without explicit written permission from the website owners."
+        },
+        {
+          "title": "Limitation of Liability",
+          "content": "The website provides content 'as is' without any warranties. The website owners shall not be liable for direct, indirect, incidental, consequential, or punitive damages arising from user interactions with the platform."
+        },
+        {
+          "title": "Governing Law",
+          "content": "These terms are governed by the laws of the jurisdiction where the website is primarily operated, without regard to conflict of law principles."
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "sections": [
+        {
+          "title": "Introduction",
+          "content": "This Privacy Policy describes how we collect, use, and handle your personal information when you use our website and services. We are committed to protecting your privacy."
+        },
+        {
+          "title": "Information We Collect",
+          "content": "We may collect personal identification information (Name, email address, phone number, etc.) and non-personal identification information (browser name, type of computer, etc.) from Users in a variety of ways."
+        },
+        {
+          "title": "How We Use Collected Information",
+          "content": "We may use the information we collect to personalize user experience, to improve our site, to run a promotion, contest, survey or other site feature, and to send periodic emails."
+        },
+        {
+          "title": "Data Security",
+          "content": "We adopt appropriate data collection, storage and processing practices and security measures to protect against unauthorized access, alteration, disclosure or destruction of your personal information, username, password, transaction information and data stored on our Site."
+        },
+        {
+          "title": "Sharing Your Personal Information",
+          "content": "We do not sell, trade, or rent Users personal identification information to others. We may share generic aggregated demographic information not linked to any personal identification information regarding visitors and users with our business partners, trusted affiliates and advertisers."
+        }
+      ]
+    },
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "widgets": {
+      "cardContent": "Card Content",
+      "alertsTitle": "Alerts",
+      "alertItem": "Alert Content",
+      "alertDescriptionShort": "desc"
+    },
+    "notFound": {
+      "title": "This page could not be found,",
+      "cta": "Return to home ?"
+    },
+    "loader": {
+      "title": "Loading, please wait..."
+    },
+    "clientTopNav": {
+      "account": "Account",
+      "notifications": "Notifications",
+      "exclusivity": "Exclusivity",
+      "support": "Support and User manuals",
+      "logout": "Logout"
+    },
+    "SuccessSignup": {
+      "title": "Account Created Successfully!",
+      "sub-title": "A verification link has been sent to your email to setup your account.",
+      "cta1": "Login to Dashboard",
+      "cta2": "Check Email",
+      "footerP1": "You're not alone.",
+      "footerP2": "logistics partners have already joined!"
+    },
+    "sidebar": {
+      "multimodal": "Multimodal",
+      "bookings": "Bookings",
+      "quotations": "Quotations",
+      "compareOptions": "Compare Options",
+      "instantQuote": "Instant Quote",
+      "book": "Book",
+      "smartHelpers": "Smart Helpers",
+      "readyLoad": "ReadyLoad",
+      "trokeTrace": "TrokeTrace",
+      "socForAll": "SOC For All",
+      "ireposition": "Ireposition",
+      "manageDocuments": "Manage Documents",
+      "tracking": "Tracking",
+      "depot": "Depot & Storage",
+      "freeTime": "Free Time & Penalties",
+      "customs": "Customs & Compliance",
+      "financeYourLog": "Finance Your Log",
+      "wallet": "Wallet",
+      "invoices": "Invoices",
+      "trackCommission": "Track Commission",
+      "outsourceYourLog": "Outsource Your Log",
+      "assignAgent": "Assign Agent",
+      "enhanceProfitability": "Enhance Profitability",
+      "insights": "Insights"
+    },
+    "dashNav": {
+      "manage": "Manage",
+      "services": "Services",
+      "company": "Company",
+      "integrations": "Integrations",
+      "news": "News"
+    },
+    "clientDashFilterNav": {
+      "view": "View",
+      "active-shipments": "Active Shipments",
+      "bookings": "Bookings",
+      "quote-requests": "Quote Requests"
+    },
+    "and": "and",
+    "searchWord": "Search...",
+    "searchWord2": "View Details",
+    "businessProfiles": {
+      "manufacturer": "Manufacturer",
+      "distributor": "Distributor",
+      "retailer": "Retailer",
+      "serviceProvider": "Service Provider",
+      "consultant": "Consultant",
+      "other": "Other",
+      "logisticsPartnerExample": "e.g., Logistics Partner"
+    },
+    "pageTitles": {
+      "home": "Home",
+      "login": "Login",
+      "register": "Register",
+      "admin": "Admin Panel",
+      "shipments": "Shipments",
+      "active-shipments": "Active Shipments",
+      "dashboard": "Dashboard",
+      "dashboard-view": "Dashboard View",
+      "notFound": "Page Not Found",
+      "multimodal": "Multimodal Shipments Overview",
+      "bookings": "Bookings",
+      "quotations": "Quotations",
+      "instant-quote": "Instant Quote",
+      "book": "Book Shipment",
+      "smart-helpers": "Smart Helpers",
+      "readyload": "ReadyLoad",
+      "troketrace": "TrokeTrace",
+      "soc-for-all": "SOC For All",
+      "ireposition": "IReposition",
+      "manage-documents": "Manage Documents",
+      "tracking": "Tracking",
+      "depot-storage": "Depot & Storage",
+      "free-time-penalties": "Free Time & Penalties",
+      "customs-compliance": "Customs & Compliance",
+      "finance-your-log": "Finance Your Log",
+      "wallet": "Wallet",
+      "invoices": "Invoices",
+      "track-commission": "Track Commission",
+      "outsource-your-log": "Outsource Your Log",
+      "assign-agent": "Assign Agent",
+      "enhance-profitability": "Enhance Profitability",
+      "insights": "Insights",
+      "bookings-view": "Bookings Overview",
+      "containers-view": "Containers Overview",
+      "quotations-view": "Quotations Overview",
+      "compare-options": "Compare Options"
+    },
+    "quotations": {
+      "pageTitle": "Quotations",
+      "common": {
+        "all": "All",
+        "status": "Status",
+        "pending": "Pending",
+        "expired": "Expired",
+        "confirmed": "Confirmed",
+        "price": "Price",
+        "carrier": "Carrier / For Smart Tool",
+        "additionalInfo": "Additional Information"
+      },
+      "filters": {
+        "status": "Status"
+      },
+      "modes": {
+        "sea": "Sea",
+        "air": "Air",
+        "road": "Road",
+        "rail": "Rail",
+        "ebusiness": "E-BUSINESS"
+      },
+      "route": "ROUTE",
+      "bookNow": "BOOK NOW",
+      "totalBreakdown": "TOTAL BREAKDOWN",
+      "tabs": {
+        "cost": "Cost Breakdown",
+        "conditions": "Conditions"
+      },
+      "costBreakdown": {
+        "oceanFreight": "Ocean Freight",
+        "includedCharges": "Included charges : Bunker Adjustment Factor/ISPS - Vessel Security Surcharge",
+        "chargesPayableAsPerFreight": "Charges payable as per freight",
+        "energyTransitionSurcharge": "Energy Transition Surcharge",
+        "lowSulfurSurcharge": "Low Sulfur Surcharge",
+        "chargesPayableAtImport": "Charges payable at import",
+        "ispsFee": "ISPS-Terminal security Fee at destination",
+        "thcOrigin": "Terminal Handling Charge (THC) at Origin",
+        "thcDestination": "Terminal Handling Charge (THC) at destination",
+        "precarriage": "Precarriage",
+        "oncarriage": "Oncarriage",
+        "customsBrokerage": "Customs Brokerage",
+        "insurance": "Insurance",
+        "certification": "Certification",
+        "totalPerContainer": "Total per container",
+        "surchargesCalculationNote": "Surcharges calculation was simulated with surcharges valid on {date}",
+        "exchangeRateNote": "All rates are based on Reuters rate of exchange of {date}",
+        "subjectToNote": "Subject to {details}"
+      },
+      "conditions": {
+        "validity": "Validity",
+        "from": "From",
+        "to": "To",
+        "shipmentConditions": "Shipment Conditions",
+        "transitTime": "Transit Time",
+        "days": "Days",
+        "carbonFootprint": "Carbon Footprint",
+        "additionalInfo": {
+          "title": "Additional Information",
+          "line1": "The breakdown of payment surcharges will be determined at time of booking.",
+          "line2": "All surcharges are applicable for the selected departure date and will be recalculated at time of shipment unless rate is fixed.",
+          "line3": "Additional charges such as contingency, transhipments, over weight surcharges, pre/on carriage charge for inland transport and local charges may be applicable depending on the requested service, local regulations and type of cargo ({cargoTypes}) at the time of booking.",
+          "line4": "Offer and booking confirmation remains subject to equipment and space availability."
+        }
+      },
+      "table": {
+        "columns": {
+          "quotationId": "Quotation ID",
+          "readinessDate": "Readiness Date",
+          "por": "POR",
+          "pol": "POL",
+          "pod": "POD",
+          "finalPod": "Final POD",
+          "aod": "AOD",
+          "aoa": "AOA",
+          "consolidationPoint": "Consolidation Point",
+          "deconsolidationPoint": "Deconsolidation Point",
+          "ror": "ROR",
+          "rrd": "RRD",
+          "fulfillmentCenter": "Fulfillment C",
+          "firstMile": "First Mile",
+          "sortationHub": "Sortation H",
+          "lastMile": "Last Mile",
+          "cargoType": "Cargo Type",
+          "containerSize": "Container Si",
+          "packageType": "Package Typ",
+          "truckType": "Truck Type S",
+          "commodity": "Commodity",
+          "numberOfCommodity": "Number Of F"
+        }
+      }
+    },
+    "cargoNav": {
+      "deliveryOrder": "Delivery Order",
+      "releaseCargo": "Release Cargo",
+      "requestUpdate": "Request Update",
+      "docsview": "Documents View"
+    },
+    "shipmentSupport": {
+      "reportDelay": "Report Delay",
+      "ratingComment": "Rating & Comment",
+      "claimEquipment": "Claim About Equipment",
+      "emission": "Emission",
+      "claimCargo": "Claim About Cargo",
+      "reportIssue": "Report Issue"
+    },
+    "search": {
+      "loading": "Loading...",
+      "noResults": "No results found.",
+      "startTyping": "Start typing to search for a shipment.",
+      "resultsFor": "Showing results for:",
+      "clear": "Clear search",
+      "pageTitle": "Search Results for \"{{searchTerm}}\"",
+      "placeholder": "Search for participants...",
+      "shipmentResultsTitle": "Shipment Results ({{count}})",
+      "bookingResultsTitle": "Booking Results ({{count}})",
+      "bookingComponentPlaceholder": "Booking component is not implemented yet.",
+      "foundCount": "Found {{count}} booking(s).",
+      "noResultsFor": "We couldn't find anything matching \"{{searchTerm}}\"."
+    },
+    "filters": {
+      "status": "Status",
+      "mode": "Mode",
+      "type": "Type"
+    },
+    "modes": {
+      "sea": "SEA",
+      "air": "AIR",
+      "road": "ROAD",
+      "rail": "RAIL",
+      "ebusiness": "E-BUSINESS"
+    },
+    "bookings": {
+      "pageTitle": "Bookings",
+      "status": {
+        "confirmed": "Confirmed",
+        "pending": "Pending",
+        "cancelled": "Cancelled",
+        "new": "New",
+        "delayed": "Delayed"
+      },
+      "table": {
+        "columns": {
+          "bookingId": "Booking ID",
+          "readinessDate": "Readiness Date",
+          "por": "POR",
+          "origin": "ORIGIN",
+          "destination": "DESTINATION",
+          "finalPod": "Final POD",
+          "etd": "ETD",
+          "eta": "ETA",
+          "status": "Booking Status",
+          "carrier": "Carrier / Forwarder",
+          "smartTool": "Smart Tool",
+          "terminal": "Terminal",
+          "task": "Task",
+          "firstMile": "First Mile",
+          "sortationHub": "Sortation Hub"
+        }
+      },
+      "details": {
+        "equipments": "Equipments",
+        "participants": "Participants",
+        "noParticipants": "No participants assigned.",
+        "noEquipment": "No equipment details available.",
+        "noDocuments": "No documents available",
+        "noEVGM": "No eVGM records available",
+        "noShippingInstruction": "No shipping instruction available",
+        "info": {
+          "container": "Container",
+          "serviceAgreement": "Service agreement",
+          "readinessDate": "Readiness date",
+          "creationDate": "Creation date",
+          "por": "POR",
+          "pol": "POL",
+          "pod": "POD",
+          "numberOfContainers": "Number of containers",
+          "cutoffDate": "Cut off date",
+          "shippingInstructionsDeadline": "Shipping instructions deadline",
+          "evgmDeadline": "eVGM deadline",
+          "gateInDeadline": "Gate-In deadline"
+        },
+        "shipping": {
+          "shippingLine": "Shipping Line",
+          "service": "Service",
+          "vesselName": "Vessel Name",
+          "terminalOrigin": "Terminal Origin",
+          "terminalDestination": "Terminal Destination",
+          "etd": "ETD",
+          "eta": "ETA",
+          "commodity": "Commodity",
+          "grossWeight": "Gross Weight"
+        },
+        "general": {
+          "title": "General Info",
+          "servicesRequested": "Services requested",
+          "comment": "Comment",
+          "additionalInfo": "Additional information",
+          "terms": "Terms / Additional charges"
+        },
+        "tabs": {
+          "details": "Details",
+          "equipment": "Equipment",
+          "documents": "Documents",
+          "evgm": "eVGM",
+          "shippingInst": "Shipping Inst",
+          "payment": "Payment"
+        }
+      },
+      "equipment": {
+        "containerNo": "Container №",
+        "size": "Size",
+        "type": "Type",
+        "sealNo": "Seal №",
+        "status": "Status",
+        "pickUpDate": "Pick-up date",
+        "preferredDepot": "Preferred depot",
+        "truckProvider": "Truck Provider",
+        "truckId": "Truck Id",
+        "stuffingDate": "Stuffing Date",
+        "truckSealingWindow": "Truck sealling Time Window"
+      },
+      "documents": {
+        "documentName": "Document Name",
+        "upload": "Upload",
+        "status": "Status",
+        "deadline": "Deadline",
+        "preview": "Preview",
+        "comments": "Comments"
+      },
+      "evgm": {
+        "containerNumber": "Container Number",
+        "tare": "Tare",
+        "grossWeight": "Gross Weight",
+        "totalGrossWeight": "Total Gross Weight",
+        "preview": "Preview",
+        "status": "Status",
+        "certify": "I certify the accuracy of the above information.",
+        "footnote": "* VGM DECLARATION A DOCUMENT AUTOMATICALLY GENERATED INCLUDE THE CONTAINERS WITH THEIR VGM AND THE AUTHORISED SIGNER"
+      },
+      "actions": {
+        "convertToShipment": "Convert to"
+      },
+      "shipping": {
+        "shipper": {
+          "company": "Company",
+          "firstName": "First Name",
+          "lastName": "Last Name",
+          "country": "Country",
+          "city": "City",
+          "address": "Address",
+          "postalCode": "Postal Code",
+          "email": "Email Address",
+          "phone": "Phone Number",
+          "businessProfile": "Business Profile",
+          "freightForwarder": "Freight Forwarder"
+        },
+        "consignee": "Consignee",
+        "notifyParty": "Notify Party",
+        "bookingParty": "Booking Party",
+        "freightForwarder": "Freight Forwarder",
+        "agent": "Agent",
+        "freelancer": "Freelancer",
+        "containerNumber": "Container Number",
+        "kindOfPackages": "Kind of Packages",
+        "quantityOfPackages": "Quantity of Packages",
+        "netWeight": "Net Weight",
+        "grossWeight": "Gross Weight",
+        "imoClass": "IMO Class",
+        "grossVolume": "Gross Volume",
+        "setPoint": "Set Point",
+        "ventilation": "Ventilation",
+        "dehumidification": "Dehumidification",
+        "o2": "O₂",
+        "co2": "CO₂",
+        "cargoDescription": "Cargo Description"
+      }
+    },
+    "participants": {
+      "search": {
+        "placeholder": "Search for participants..."
+      },
+      "table": {
+        "profileId": "Profile ID",
+        "company": "Company",
+        "userName": "User Name",
+        "businessProfile": "Business Profile",
+        "party": "Party",
+        "email": "Email",
+        "phone": "Phone",
+        "authorisations": "Authorisations"
+      },
+      "authorisations": {
+        "view_shipments": "View Shipments",
+        "respond_queries": "Respond to Queries",
+        "assign_tasks": "Assign Tasks",
+        "edit_shipments": "Edit Shipments",
+        "manage_participants": "Manage Participants",
+        "view_analytics": "View Analytics",
+        "manage_documents": "Manage Documents"
+      },
+      "management": {
+        "title": "Manage Participants",
+        "addParticipant": "Add Participant",
+        "addParticipants": "Add Participant(s)",
+        "editParticipant": "Edit Participant",
+        "removeParticipant": "Remove Participant",
+        "confirmRemove": "Are you sure you want to remove this participant?",
+        "selectParticipant": "Select Participant",
+        "selectRole": "Select Role",
+        "editPermissions": "Edit Permissions",
+        "updatePermissions": "Update Permissions",
+        "managePermissions": "Manage Permissions",
+        "selectPermissions": "Select the permissions you want to assign to the selected participant(s)",
+        "setPermissions": "Set Permissions",
+        "selectInitialPermissions": "Select initial permissions for participant(s)",
+        "addWithPermissions": "Add with permissions",
+        "participantsSelectedCount": "{{count}} participant(s) selected",
+        "success": "Success!",
+        "successMessage": "Participant(s) successfully added",
+        "addError": "Failed to add participants. Please try again.",
+        "saveChanges": "Save Changes",
+        "participantsSelected": "{{count}} participants selected",
+        "deleteConfirmation_one": "Are you sure you want to delete this participant?",
+        "deleteConfirmation_other": "Are you sure you want to delete {{count}} participants?",
+        "permissionsUpdated": "Permissions updated successfully.",
+        "updateError": "Failed to update permissions. Please try again."
+      }
+    },
+    "compareOptions": {
+      "pageTitle": "Why guess when you can compare? Let your cargo choose the best ride.",
+      "success": "Quote request submitted successfully!",
+      "steps": {
+        "selectTransportMode": "Select Transport Mode",
+        "selectTransportModeDesc": "Choose the mode of transportation for your cargo",
+        "routeDetails": "Route Details",
+        "selectContainerType": "Select Container Type",
+        "selectContainerTypeDesc": "Choose between Full Container Load or Less than Container Load",
+        "cargoDetails": "Cargo Details",
+        "serviceAddOns": "Service Add-Ons",
+        "serviceAddOnsDesc": "Select additional services to enhance your shipment",
+        "transitPreferences": "Transit Preferences",
+        "transitPreferencesDesc": "Choose your preferred shipping options"
+      },
+      "modes": {
+        "sea": "Sea",
+        "rail": "Rail",
+        "road": "Road",
+        "air": "Air",
+        "ebusiness": "E-Business"
+      },
+      "modeDescriptions": {
+        "sea": "Ocean freight for large shipments",
+        "rail": "Efficient rail transportation",
+        "road": "Flexible trucking solutions",
+        "air": "Fast air freight delivery",
+        "ecommerce": "Last-mile e-commerce delivery"
+      },
+      "containerTypes": {
+        "fcl": "FCL",
+        "fclDesc": "Full Container Load - Entire container for your cargo",
+        "lcl": "LCL",
+        "lclDesc": "Less than Container Load - Share container space"
+      },
+      "cargoTypes": {
+        "general": "General Cargo",
+        "hazardous": "Hazardous",
+        "perishable": "Perishable",
+        "oversized": "Oversized",
+        "liquid": "Liquid Cargo"
+      },
+      "fields": {
+        "transportMode": "Transport Mode",
+        "pol": "POL (Port of Loading)",
+        "pod": "POD (Port of Discharge)",
+        "pickupEmptyContainer": "Pick-up empty container in another city",
+        "pickupLocation": "Select your pick-up location (City, Country/Region)",
+        "pickupAddress": "Pickup Address",
+        "deliveryAddress": "Delivery Address",
+        "plor": "PLOR (Place of Receipt)",
+        "plod": "PLOD (Place of Delivery)",
+        "pld": "PLD (Place of Delivery) – Optional if inland post-carriage is needed",
+        "railRampOrigin": "Rail Ramp Origin",
+        "railRampDestination": "Rail Ramp Destination",
+        "placeOfPickup": "Place of Pick-up",
+        "placeOfDelivery": "Place of Delivery",
+        "liftgateRequired": "Liftgate Required",
+        "accessConditions": "Access Conditions",
+        "truckType": "Truck Type",
+        "airportOfDeparture": "Airport of Departure",
+        "airportOfArrival": "Airport of Arrival",
+        "containerType": "Container Type",
+        "cargoType": "Cargo Type",
+        "classImo": "Class IMO",
+        "unNumber": "UN Number",
+        "coldTreatment": "Cold Treatment",
+        "temperature": "Temperature",
+        "multipleSetPoints": "Multiple Set Points",
+        "cargoProbes": "Number of Cargo Probes",
+        "drainHoles": "Drain Holes",
+        "freshAirExchange": "Fresh Air Exchange",
+        "ventilationVolume": "Ventilation Volume",
+        "humidity": "Humidity",
+        "humidityPercentage": "Humidity Percentage",
+        "gensetRequired": "GenSet Required",
+        "gensetExport": "During Export",
+        "gensetImport": "During Import",
+        "width": "Width",
+        "length": "Length",
+        "height": "Height",
+        "lengthMetric": "Length Metric",
+        "lengthMetricValue": "Length Metric Value",
+        "unit": "Unit",
+        "commodity": "Commodity",
+        "grossWeight": "Gross Weight",
+        "packageType": "Package Type",
+        "numberOfPackages": "Number of Packages",
+        "numberOfPallets": "Number of Pallets",
+        "volume": "Volume",
+        "cargoValue": "Cargo Value",
+        "currency": "Currency",
+        "equipmentNeeded": "Equipment Needed",
+        "resourcesNeeded": "Resources Needed",
+        "inspectionType": "Inspection Type"
+      },
+      "options": {
+        "open": "Open",
+        "closed": "Closed",
+        "atDestination": "At Destination",
+        "atOrigin": "At Origin"
+      },
+      "units": {
+        "inch": "Inch",
+        "foot": "Foot",
+        "meter": "Meter"
+      },
+      "services": {
+        "insurance": "Insurance",
+        "stuffing": "Stuffing",
+        "unstuffing": "Unstuffing",
+        "inspection": "Inspection",
+        "portAgent": "Port Agent",
+        "ireposition": "Ireposition",
+        "trackLive": "Track Live",
+        "trokeTrace": "Troke Trace",
+        "socForAll": "SOC For All",
+        "readyToLoad": "Ready To Load",
+        "customsBrokerage": "Customs Brokerage"
+      },
+      "placeholders": {
+        "selectPort": "Select a port...",
+        "selectLocation": "Select a location...",
+        "optional": "Optional",
+        "forklift": "Forklift...",
+        "selectContainerType": "Select container type...",
+        "selectCargoType": "Select cargo type...",
+        "selectTruckType": "Select truck type...",
+        "searchCity": "Type at least 2 characters to search..."
+      },
+      "sections": {
+        "perishableSettings": "Perishable Cargo Settings",
+        "packageDetails": "Package Details",
+        "dimensions": "Dimensions",
+        "selectPreferences": "Select Your Preferences"
+      },
+      "preferences": {
+        "fastest": "Fastest Transit",
+        "cheapest": "Cheapest Option",
+        "lowestEmission": "Lowest Emission Option",
+        "balanced": "Balanced Option (Smart Pick)"
+      },
+      "messages": {
+        "selectModeFirst": "Please select a transport mode first",
+        "typeToSearch": "Type at least 2 characters to search for cities",
+        "noCitiesFound": "No cities found",
+        "noAddonsAvailable": "No add-ons available for this transport mode",
+        "submitting": "Submitting your quote request...",
+        "fetchError": "Error loading shipping options"
+      },
+      "results": {
+        "filter": "Filter",
+        "clear": "Clear",
+        "stayUpdated": "Stay updated",
+        "disclaimer": "Disclaimer",
+        "sortBy": "Sort by",
+        "recommended": "Recommended",
+        "noResults": "No shipping options available",
+        "preBook": "Pre-book",
+        "indicative": "Indicative",
+        "confirmed": "Confirmed",
+        "days": "days",
+        "includedServices": "Included services",
+        "price": "Price",
+        "transitTime": "Transit time",
+        "rateStatus": "Rate status",
+        "filters": {
+          "placeOfLoading": "Place of loading",
+          "portOfOrigin": "Port of origin",
+          "oceanFreight": "Ocean freight",
+          "portOfDestination": "Port of destination",
+          "placeOfDischarge": "Place of discharge"
+        },
+        "backToForm": "Back to form"
+      }
     }
+  }
 }

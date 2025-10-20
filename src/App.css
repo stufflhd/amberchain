@@ -489,3 +489,7 @@
     @apply text-base font-semibold;
   }
 }
+
+.radio-parent:has([data-state="checked"]) {
+  @apply bg-accent border-primary/50;
+}

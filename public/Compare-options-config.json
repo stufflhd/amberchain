@@ -1,0 +1,1032 @@
+{
+  "definitions": {
+    "reusable_fields": {
+      "hazardous_cargo": [
+        {
+          "label": "Class IMO",
+          "type": "text",
+          "required": true
+        },
+        {
+          "label": "UN NUMBER",
+          "type": "number",
+          "required": true
+        }
+      ],
+      "oversized_cargo": [
+        {
+          "label": "width",
+          "type": "number",
+          "required": true
+        },
+        {
+          "label": "length",
+          "type": "number",
+          "required": true
+        },
+        {
+          "label": "height",
+          "type": "number",
+          "required": true
+        },
+        {
+          "label": "Lenght Metrics",
+          "type": "Dropdown",
+          "required": true,
+          "options": [
+            {
+              "label": "inch"
+            },
+            {
+              "label": "foot"
+            },
+            {
+              "label": "meter"
+            }
+          ]
+        }
+      ],
+      "perishable_fcl": [
+        {
+          "label": "Cold treatment",
+          "type": "Dropdown",
+          "required": true,
+          "options": [
+            {
+              "label": "Yes"
+            },
+            {
+              "label": "No"
+            }
+          ],
+          "extra": {
+            "more Info icon": "true"
+          }
+        },
+        {
+          "label": "Temperature",
+          "type": "number",
+          "required": true,
+          "extra": {
+            "unit": "°C",
+            "more Info icon": "true"
+          }
+        },
+        {
+          "label": "Multiple set points",
+          "type": "radio",
+          "required": true,
+          "options": [
+            {
+              "label": "Yes"
+            },
+            {
+              "label": "No"
+            }
+          ],
+          "extra": {
+            "more Info icon": "true"
+          }
+        },
+        {
+          "label": "Number of cargo probes",
+          "type": "Dropdown",
+          "required": true,
+          "extra": {
+            "more Info icon": "true"
+          }
+        },
+        {
+          "label": "Drain holes",
+          "type": "radio",
+          "required": true,
+          "options": [
+            {
+              "label": "Open"
+            },
+            {
+              "label": "Closed"
+            }
+          ],
+          "extra": {
+            "more Info icon": "true"
+          }
+        },
+        {
+          "label": "Fresh air exchange",
+          "type": "radio",
+          "required": true,
+          "options": [
+            {
+              "label": "Open"
+            },
+            {
+              "label": "Closed"
+            }
+          ],
+          "extra": {
+            "more Info icon": "true"
+          }
+        },
+        {
+          "label": "Ventilation volume",
+          "type": "number",
+          "required": true,
+          "extra": {
+            "unit": "m3/hr"
+          }
+        },
+        {
+          "label": "Humidity",
+          "type": "radio",
+          "required": true,
+          "options": [
+            {
+              "label": "Yes",
+              "next": [
+                {
+                  "type": "number",
+                  "label": "Humidity percentage",
+                  "required": true,
+                  "extra": {
+                    "unit": "%"
+                  }
+                }
+              ]
+            },
+            {
+              "label": "No"
+            }
+          ],
+          "extra": {
+            "more Info icon": "true"
+          }
+        },
+        {
+          "label": "GenSet required",
+          "type": "group",
+          "required": true,
+          "extra": {
+            "more Info icon": "true"
+          },
+          "fields": [
+            {
+              "label": "during export",
+              "type": "radio",
+              "required": true,
+              "options": [
+                {
+                  "label": "Yes"
+                },
+                {
+                  "label": "No"
+                }
+              ]
+            },
+            {
+              "label": "during import",
+              "type": "radio",
+              "required": true,
+              "options": [
+                {
+                  "label": "Yes"
+                },
+                {
+                  "label": "No"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "perishable_lcl": [
+        {
+          "label": "temprature",
+          "type": "number",
+          "required": true,
+          "extra": {
+            "unit": "°C",
+            "more Info icon": "true"
+          }
+        }
+      ],
+      "package_details": [
+        {
+          "label": "Package Type",
+          "type": "Dropdown",
+          "required": true
+        },
+        {
+          "label": "Number Of package",
+          "type": "number",
+          "required": true
+        },
+        {
+          "label": "Volume",
+          "type": "number",
+          "required": true
+        }
+      ],
+      "ltl_dimensions": [
+        {
+          "label": "width",
+          "type": "number",
+          "required": true
+        },
+        {
+          "label": "length",
+          "type": "number",
+          "required": true
+        },
+        {
+          "label": "height",
+          "type": "number",
+          "required": true
+        },
+        {
+          "label": "Lenght Metrics",
+          "type": "Dropdown",
+          "required": true,
+          "options": [
+            {
+              "label": "inch"
+            },
+            {
+              "label": "foot"
+            },
+            {
+              "label": "meter"
+            }
+          ]
+        }
+      ],
+      "number_of_pallets": [
+        {
+          "label": "Number of Pallets",
+          "type": "number",
+          "required": true
+        }
+      ],
+      "air_package_type": {
+        "type": "Dropdown",
+        "label": "Package Type",
+        "required": true,
+        "options": [
+          {
+            "label": "Perishable",
+            "next": [
+              {
+                "type": "number",
+                "label": "Temperature",
+                "required": true
+              }
+            ]
+          },
+          {
+            "label": "Hazardous",
+            "next": [
+              {
+                "type": "text",
+                "label": "Class Imo",
+                "required": true
+              },
+              {
+                "type": "number",
+                "label": "UN number",
+                "required": true
+              }
+            ]
+          }
+        ]
+      },
+      "dimensions_common": [
+        {
+          "label": "width",
+          "type": "number",
+          "required": true
+        },
+        {
+          "label": "length",
+          "type": "number",
+          "required": true
+        },
+        {
+          "label": "height",
+          "type": "number",
+          "required": true
+        },
+        {
+          "label": "Lenght Metrics",
+          "type": "Dropdown",
+          "required": true,
+          "options": [
+            {
+              "label": "inch"
+            },
+            {
+              "label": "foot"
+            },
+            {
+              "label": "meter"
+            }
+          ]
+        }
+      ],
+      "optional_pickup": {
+        "type": "Dropdown",
+        "label": "Pick-up the empty container(s) in another city(charges may apply)",
+        "required": false,
+        "extra": {
+          "helper-text": "Select yoour pick-up location (City, Country/Region)",
+          "behavior": "this input visible by default but it disabled, show radio in the left side of the input, if radio checked then input should be enabled, and required and must be validated"
+        }
+      },
+      "plor": {
+        "type": "Dropdown",
+        "label": "PLOR (Place of Receipt) – Optional if inland pre-carriage is needed",
+        "required": false,
+        "extra": {
+          "behavior": "this input hidden by default, initialy show jst radio, if radio checked then input should be visible, and required and must be validated"
+        }
+      },
+      "plod": {
+        "type": "Dropdown",
+        "label": "PLOD (Place of Delivery) – Optional if inland on-carriage is needed",
+        "required": false,
+        "extra": {
+          "behavior": "this input hidden by default, initialy show jst radio, if radio checked then input should be visible, and required and must be validated"
+        }
+      },
+      "liftgate": {
+        "type": "radio",
+        "label": "Liftgate Required",
+        "required": true,
+        "options": [
+          {
+            "label": "Yes"
+          },
+          {
+            "label": "No"
+          }
+        ]
+      },
+      "access_conditions": {
+        "type": "radio",
+        "label": "Access Conditions",
+        "required": true,
+        "options": [
+          {
+            "label": "Yes"
+          },
+          {
+            "label": "No"
+          }
+        ]
+      },
+      "nor_field": {
+        "label": "NOR (Notice of Readiness)",
+        "type": "number",
+        "required": true
+      }
+    },
+    "cargo_type_options": {
+      "fcl": [
+        {
+          "label": "General"
+        },
+        {
+          "label": "Hazardous",
+          "extend": {
+            "$ref": "#/definitions/reusable_fields/hazardous_cargo"
+          }
+        },
+        {
+          "label": "perishable",
+          "extend": {
+            "$ref": "#/definitions/reusable_fields/perishable_fcl"
+          }
+        },
+        {
+          "label": "oversized",
+          "extend": {
+            "$ref": "#/definitions/reusable_fields/oversized_cargo"
+          }
+        },
+        {
+          "label": "Liquid Cargo"
+        }
+      ],
+      "lcl": [
+        {
+          "label": "General"
+        },
+        {
+          "label": "Hazardous",
+          "extend": {
+            "$ref": "#/definitions/reusable_fields/hazardous_cargo"
+          }
+        },
+        {
+          "label": "perishable",
+          "extend": {
+            "$ref": "#/definitions/reusable_fields/perishable_lcl"
+          }
+        },
+        {
+          "label": "oversized",
+          "extend": {
+            "$ref": "#/definitions/reusable_fields/oversized_cargo"
+          }
+        },
+        {
+          "label": "Liquid Cargo"
+        }
+      ],
+      "ftl": [
+        {
+          "label": "General"
+        },
+        {
+          "label": "Hazardous",
+          "extend": {
+            "$ref": "#/definitions/reusable_fields/hazardous_cargo"
+          }
+        },
+        {
+          "label": "perishable",
+          "extend": {
+            "$ref": "#/definitions/reusable_fields/perishable_fcl"
+          }
+        },
+        {
+          "label": "oversized",
+          "extend": {
+            "$ref": "#/definitions/reusable_fields/oversized_cargo"
+          }
+        },
+        {
+          "label": "Liquid Cargo"
+        }
+      ],
+      "ltl": [
+        {
+          "label": "General"
+        },
+        {
+          "label": "Hazardous",
+          "extend": {
+            "$ref": "#/definitions/reusable_fields/hazardous_cargo"
+          }
+        },
+        {
+          "label": "perishable",
+          "extend": {
+            "$ref": "#/definitions/reusable_fields/perishable_lcl"
+          }
+        },
+        {
+          "label": "oversized",
+          "extend": {
+            "$ref": "#/definitions/reusable_fields/oversized_cargo"
+          }
+        },
+        {
+          "label": "Liquid Cargo"
+        }
+      ]
+    },
+    "service_addons": {
+      "insurance": {
+        "label": "Insurance",
+        "type": "radio",
+        "options": [
+          {
+            "label": "Yes",
+            "next": [
+              {
+                "type": "group",
+                "label": "Cargo Value",
+                "required": true,
+                "fields": [
+                  {
+                    "type": "number",
+                    "label": "Cargo Value",
+                    "required": true
+                  },
+                  {
+                    "type": "Dropdown",
+                    "label": "Currency",
+                    "required": true,
+                    "options": [
+                      {
+                        "label": "USD"
+                      },
+                      {
+                        "label": "EUR"
+                      },
+                      {
+                        "label": "GBP"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "No"
+          }
+        ]
+      },
+      "stuffing": {
+        "label": "Stuffing",
+        "type": "radio",
+        "options": [
+          {
+            "label": "Yes",
+            "next": [
+              {
+                "type": "text",
+                "label": "Equipment needed",
+                "required": true,
+                "extra": {
+                  "placeholder": "Forklift..."
+                }
+              },
+              {
+                "type": "number",
+                "label": "Ressources needed",
+                "required": true,
+                "extra": {
+                  "placeholder": "2,3,4,5..."
+                }
+              }
+            ]
+          },
+          {
+            "label": "No"
+          }
+        ]
+      },
+      "unstuffing": {
+        "label": "Unstuffing",
+        "type": "radio",
+        "options": [
+          {
+            "label": "Yes",
+            "next": [
+              {
+                "type": "text",
+                "label": "Equipment needed",
+                "required": true,
+                "extra": {
+                  "placeholder": "Forklift..."
+                }
+              },
+              {
+                "type": "number",
+                "label": "Ressources needed",
+                "required": true,
+                "extra": {
+                  "placeholder": "2,3,4,5..."
+                }
+              }
+            ]
+          },
+          {
+            "label": "No"
+          }
+        ]
+      },
+      "inspection": {
+        "label": "Inspection",
+        "type": "radio",
+        "options": [
+          {
+            "label": "Yes",
+            "next": [
+              {
+                "type": "text",
+                "label": "Type",
+                "required": true
+              }
+            ]
+          },
+          {
+            "label": "No"
+          }
+        ]
+      },
+      "port_agent": {
+        "label": "Port Agent",
+        "type": "radio",
+        "options": [
+          {
+            "label": "Yes"
+          },
+          {
+            "label": "No"
+          }
+        ]
+      },
+      "ireposition": {
+        "label": "Ireposition",
+        "type": "radio",
+        "options": [
+          {
+            "label": "Yes"
+          },
+          {
+            "label": "No"
+          }
+        ]
+      },
+      "track_live": {
+        "label": "Track Live",
+        "type": "radio",
+        "options": [
+          {
+            "label": "Yes"
+          },
+          {
+            "label": "No"
+          }
+        ]
+      },
+      "troke_trace": {
+        "label": "Troke trace",
+        "type": "radio",
+        "options": [
+          {
+            "label": "Yes"
+          },
+          {
+            "label": "No"
+          }
+        ]
+      },
+      "socforall": {
+        "label": "SOCforALL",
+        "type": "radio",
+        "options": [
+          {
+            "label": "Yes"
+          },
+          {
+            "label": "No"
+          }
+        ]
+      },
+      "readytoLoad": {
+        "label": "ReadyToLoad",
+        "type": "radio",
+        "options": [
+          {
+            "label": "Yes"
+          },
+          {
+            "label": "No"
+          }
+        ]
+      },
+      "customs_brokerage": {
+        "label": "Customs Brokerage",
+        "type": "radio",
+        "options": [
+          {
+            "label": "At Destination"
+          },
+          {
+            "label": "At Origin"
+          }
+        ]
+      }
+    }
+  },
+  "form_steps": [
+    {
+      "step": 1,
+      "sections": [
+        {
+          "section": 1,
+          "fields": [
+            {
+              "id": "transport_mode",
+              "type": "gird-of-cards/radio",
+              "label": "Transport Mode Selection",
+              "required": true,
+              "options": [
+                {
+                  "label": "Sea",
+                  "context": {
+                    "mode": "sea",
+                    "departure_label": "POL (Port of Loading)",
+                    "arrival_label": "POD (Port of Discharge)",
+                    "shipment_mode": "fcl_lcl",
+                    "addons": [
+                      "insurance",
+                      "stuffing",
+                      "unstuffing",
+                      "inspection",
+                      "port_agent",
+                      "ireposition",
+                      "track_live",
+                      "troke_trace",
+                      "socforall",
+                      "readytoLoad",
+                      "customs_brokerage"
+                    ]
+                  }
+                },
+                {
+                  "label": "RAIL",
+                  "context": {
+                    "mode": "rail",
+                    "departure_label": "Rail Ramp Origin ",
+                    "arrival_label": "Rail Ramp Destination",
+                    "shipment_mode": "fcl_lcl",
+                    "addons": [
+                      "insurance",
+                      "stuffing",
+                      "unstuffing",
+                      "inspection",
+                      "ireposition",
+                      "track_live",
+                      "troke_trace",
+                      "socforall",
+                      "readytoLoad",
+                      "customs_brokerage"
+                    ]
+                  }
+                },
+                {
+                  "label": "Road",
+                  "context": {
+                    "mode": "road",
+                    "departure_label": "Place of pick up",
+                    "arrival_label": "Place of delivery",
+                    "shipment_mode": "fcl_ftl_ltl",
+                    "addons": [
+                      "insurance",
+                      "stuffing",
+                      "unstuffing",
+                      "inspection",
+                      "track_live",
+                      "troke_trace",
+                      "customs_brokerage"
+                    ],
+                    "extra_fields": ["liftgate", "access"]
+                  }
+                },
+                {
+                  "label": "AiR",
+                  "context": {
+                    "mode": "air",
+                    "departure_label": "Airport Of departure",
+                    "arrival_label": "Airport Of arrival",
+                    "addons": [
+                      "insurance",
+                      "stuffing",
+                      "unstuffing",
+                      "inspection",
+                      "track_live",
+                      "troke_trace",
+                      "customs_brokerage"
+                    ]
+                  }
+                },
+                {
+                  "label": "Ecommerce",
+                  "context": {
+                    "mode": "ecom",
+                    "departure_label": "Pickup address",
+                    "arrival_label": "Delivery address",
+                    "addons": [
+                      "inspection",
+                      "track_live",
+                      "troke_trace",
+                      "customs_brokerage"
+                    ]
+                  }
+                },
+                {
+                  "label": "Combined",
+                  "context": {
+                    "mode": "combined",
+                    "departure_label": "POL (Port of Loading)",
+                    "arrival_label": "POD (Port of Discharge)",
+                    "shipment_mode": "fcl_lcl",
+                    "addons": [
+                      "insurance",
+                      "stuffing",
+                      "unstuffing",
+                      "inspection",
+                      "port_agent",
+                      "ireposition",
+                      "track_live",
+                      "troke_trace",
+                      "socforall",
+                      "readytoLoad",
+                      "customs_brokerage"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "section": 2,
+          "fields": [
+            {
+              "id": "shipment_mode",
+              "type": "radio",
+              "label": "Shipment Mode",
+              "required": true,
+              "options": [
+                {
+                  "label": "FCL",
+                  "condition": "context.shipment_mode === 'fcl_lcl' || context.shipment_mode === 'fcl_ftl_ltl'"
+                },
+                {
+                  "label": "LCL",
+                  "condition": "context.shipment_mode === 'fcl_lcl'"
+                },
+                {
+                  "label": "FTL",
+                  "condition": "context.shipment_mode === 'fcl_ftl_ltl'"
+                },
+                {
+                  "label": "LTL",
+                  "condition": "context.shipment_mode === 'fcl_ftl_ltl'"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "section": 3,
+          "fields": [
+            {
+              "id": "departure_location",
+              "type": "Dropdown",
+              "label": "{{context.departure_label}}",
+              "required": true
+            },
+            {
+              "id": "arrival_location",
+              "type": "Dropdown",
+              "label": "{{context.arrival_label}}",
+              "required": true
+            },
+            {
+              "id": "container_type",
+              "type": "Dropdown",
+              "label": "Container Type",
+              "required": true,
+              "options": [
+                { "label": "20' Standard" },
+                { "label": "40' Standard" },
+                { "label": "40' High Cube" },
+                { "label": "45' High Cube" },
+                { "label": "20' Refrigerated" },
+                { "label": "40' Refrigerated" },
+                { "label": "20' Open Top" },
+                { "label": "40' Open Top" },
+                { "label": "20' Flatrack" },
+                { "label": "40' Flatrack" },
+                { "label": "20' Flatrack Collapsible" },
+                { "label": "40' Flatrack Collapsible" },
+                { "label": "20' High Cube" },
+                { "label": "20' Pallet Wide" },
+                { "label": "20' High Cube Pallet Wide" },
+                { "label": "40' Pallet Wide" },
+                { "label": "40' High Cube Pallet Wide" },
+                { "label": "45' High Cube Pallet Wide" },
+                { "label": "10' Standard" },
+                { "label": "20' Bulk" },
+                { "label": "20' Tank" },
+                { "label": "20' Platform" },
+                { "label": "40' Platform" },
+                { "label": "48' High Cube" },
+                { "label": "53' High Cube" }
+              ]
+            }
+          ]
+        },
+        {
+          "section": 4,
+          "fields": [
+            {
+              "id": "plor",
+              "$ref": "#/definitions/reusable_fields/plor",
+              "condition": "context.mode === 'sea' || context.mode === 'rail' || context.mode === 'air' || context.mode === 'combined'"
+            },
+            {
+              "id": "plod",
+              "$ref": "#/definitions/reusable_fields/plod",
+              "condition": "context.mode === 'sea' || context.mode === 'rail' || context.mode === 'air' || context.mode === 'combined'"
+            }
+          ]
+        },
+        {
+          "section": 5,
+          "fields": [
+            {
+              "label": "Cargo Type",
+              "type": "gird-of-cards/radio",
+              "required": true,
+              "options": [
+                {
+                  "$ref": "#/definitions/cargo_type_options/fcl",
+                  "condition": "context.shipment_mode === 'fcl_lcl'"
+                },
+                {
+                  "$ref": "#/definitions/cargo_type_options/lcl",
+                  "condition": "context.shipment_mode === 'fcl_lcl'"
+                },
+                {
+                  "$ref": "#/definitions/cargo_type_options/ftl",
+                  "condition": "context.shipment_mode === 'fcl_ftl_ltl'"
+                },
+                {
+                  "$ref": "#/definitions/cargo_type_options/ltl",
+                  "condition": "context.shipment_mode === 'fcl_ftl_ltl'"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "section": 6,
+          "fields": [
+            {
+              "id": "commodity",
+              "type": "Dropdown",
+              "label": "Commodity ",
+              "required": true,
+              "options": [
+                {
+                  "label": "test"
+                }
+              ]
+            },
+            {
+              "id": "gross_weight",
+              "type": "text",
+              "label": "Gross Weight ",
+              "required": true
+            },
+            {
+              "id": "optional_pickup",
+              "$ref": "#/definitions/reusable_fields/optional_pickup",
+              "condition": "context.mode === 'sea' || context.mode === 'rail' || context.mode === 'combined'"
+            },
+            {
+              "id": "nor_field",
+              "$ref": "#/definitions/reusable_fields/nor_field",
+              "condition": "context.mode === 'sea' || context.mode === 'rail' || context.mode === 'air' || context.mode === 'combined'"
+            },
+            {
+              "id": "package_details",
+              "$ref": "#/definitions/reusable_fields/package_details",
+              "condition": "shipment_mode === 'lcl'"
+            },
+            {
+              "id": "liftgate",
+              "$ref": "#/definitions/reusable_fields/liftgate",
+              "condition": "context.mode === 'road'"
+            },
+            {
+              "id": "access_conditions",
+              "$ref": "#/definitions/reusable_fields/access_conditions",
+              "condition": "context.mode === 'road'"
+            },
+            {
+              "id": "number_of_pallets",
+              "$ref": "#/definitions/reusable_fields/number_of_pallets",
+              "condition": "context.mode === 'road'"
+            },
+            {
+              "id": "ltl_dimensions",
+              "$ref": "#/definitions/reusable_fields/ltl_dimensions",
+              "condition": "(context.mode === 'road' && shipment_mode === 'ltl') || conext.mode === 'air'"
+            },{
+                "id":"stackable_cargo",
+                "type":"radio",
+                "required":true,
+                "options":[
+                    {
+                        "label":"Yes"
+                    },
+                    {
+                        "label":"No"
+                    }
+                ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

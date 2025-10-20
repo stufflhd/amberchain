@@ -1,0 +1,44 @@
+Hello,
+
+Here are the endpoints for authentication:
+
+Login
+https://wapp.amberchains.com/api/public/signin
+
+Sign up
+https://wapp.amberchains.com/api/public/signup
+
+Email validation
+https://wapp.amberchains.com/auth/validate-mail
+
+Some information regarding the current profile validation process:
+
+1. User Registration
+
+Users register on the website.
+
+Their status is set to "WAITING_FOR_MAIL_CONFIRMATION".
+They are then redirected to a page (or the same page) indicating that a confirmation email has been sent.
+
+If a user tries to log in before confirming their email,
+the site will display a message inviting them to confirm their email (with the option to resend the confirmation email).
+
+2. Email Validation
+
+When the user clicks the validation link in the email, they are redirected to the site to complete their profile.
+
+Their status is updated to "INCOMPLETE_PROFILE".
+
+The user will not have access to any pages except their profile page until the profile is activated.
+
+Certain information will be required before the profile can be activated (we’ll define those details later).
+
+3. Profile Review
+
+After the user completes their profile, the site displays a message indicating that the profile is under review.
+
+Once approved, the user's status is updated to "ACTIVE",
+and they gain access to all user pages (an email will be sent to inform them that their account is now active).
+
+I’m attaching the swagger.json file;
+you can use it in a Swagger editor to see all the necessary data for the endpoints.

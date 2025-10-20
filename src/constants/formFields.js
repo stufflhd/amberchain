@@ -3,7 +3,7 @@ import { t } from "i18next";
 export const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9])\S{8,}$/;
 export const nameRegex = /^(?=.*[A-Za-z])[\sA-Za-z'.-]{2,}$/;
-export const generalTextRegex = /^(?=.*[A-Za-z0-9])[\sA-Za-z0-9&@#',.\/()-]{2,}$/;
+export const generalTextRegex = /^(?=.*[A-Za-z0-9])[\sA-Za-z0-9&@#',./()-]{2,}$/;
 export const zipCodeRegex = /^[0-9]{5}(-[0-9]{4})?$/;
 export const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
 

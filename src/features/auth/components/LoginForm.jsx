@@ -8,9 +8,9 @@ import { useTranslation } from "react-i18next";
 import { useMutation } from '@tanstack/react-query';
 import { useForm, Controller } from 'react-hook-form';
 import { handleApiRequest } from '@/lib/handleApiRequest';
-import { useNavigate } from 'react-router-dom';
-
+// import { useNavigate } from 'react-router-dom';
 import { loginFields } from '@/constants/formFields';
+import { loginUser } from '@/services/auth';
 
 export default function LoginForm() {
     const { t } = useTranslation();
@@ -18,7 +18,7 @@ export default function LoginForm() {
     const [agreedToPrivacy, setAgreedToPrivacy] = useState(true);
     const [showAgreementError, setShowAgreementError] = useState(false);
     const [manualAgreement, setManualAgreement] = useState(true);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const { control, handleSubmit, formState: { isValid, isSubmitting } } = useForm({
         mode: 'onChange',
@@ -29,30 +29,23 @@ export default function LoginForm() {
     });
 
     const mutation = useMutation({
-        mutationFn: async (data) => {
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            const res = await fetch('/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
-            });
-            if (!res.ok) throw new Error('Invalid credentials');
-            return res.json();
-        },
+        mutationFn: loginUser,
     });
 
     const onFormSubmit = async (data) => {
+        console.log(data)
         try {
             await handleApiRequest(
                 () => mutation.mutateAsync(data),
                 {
                     loading: t('loginForm.notifications.loading'),
                     success: t('loginForm.notifications.success'),
-                    error: t('loginForm.notifications.error'),
+                    error: t('common.generic-error'),
                 }
             );
+            
         } catch (err) {
-            navigate('/dashboard')
+            console.error(err)
         }
     };
 
@@ -88,6 +81,7 @@ export default function LoginForm() {
                             error={error?.message}
                             isValueValid={!error}
                             onBlur={field.onBlur}
+                            autoComplete='username'
                         />
                     )}
                 />
@@ -108,7 +102,7 @@ export default function LoginForm() {
                         rules={{
                             required: t('validation.passwordRequired'),
                             pattern: {
-                                value: /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{6,}$/,
+                                value: /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{6,}$/,
                                 message: t('validation.passwordComplexity')
                             }
                         }}
@@ -121,6 +115,7 @@ export default function LoginForm() {
                                 error={error?.message}
                                 isValueValid={!error}
                                 onBlur={field.onBlur}
+                                autoComplete='current-password'
                             />
                         )}
                     />
