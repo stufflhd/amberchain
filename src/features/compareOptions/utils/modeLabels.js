@@ -1,8 +1,8 @@
 export const locationLabels = {
     sea: ['Port of Loading', 'Port of Discharge'],
-    rail: ['Station of Loading', 'Station of Discharge'],
-    road: ['Pickup Location', 'Delivery Location'],
-    air: ['Airport of Origin', 'Airport of Destination'],
-    ecommerce: ['Warehouse Pickup', 'Delivery Zone'],
+    rail: ['Rail Ramp Origin', 'Rail Ramp Destination'],
+    road: ['Place of Pick-up', 'Place of Delivery'],
+    air: ['Airport of Departure', 'Airport of Arrival'],
+    ecommerce: ['Pickup address', 'Delivery address'],
   }
   
