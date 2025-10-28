@@ -5,11 +5,12 @@ import { ExternalLink } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 
 const modeImages = {
-  sea: "https://c.pxhere.com/photos/70/2a/freighter_ship_cargo_shipping_transport_industry_transportation_freight-553552.jpg!d",
-  air: "https://c.pxhere.com/photos/94/38/plane_air_force_military_flight_fly_airplane_transportation-816197.jpg!d",
-  road: "https://c.pxhere.com/photos/67/0c/truck_semi_truck_semi_truck_desert_new_mexico_weigh_station_transportation_shipping-593542.jpg!d",
-  rail: "https://images.pexels.com/photos/11560608/pexels-photo-11560608.jpeg",
-  ecommerce: "https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg"
+  sea: "/public/confetti-svgrepo-com.svg",
+  air: "/public/confetti-svgrepo-com.svg",
+  road: "/public/confetti-svgrepo-com.svg",
+  rail: "/public/confetti-svgrepo-com.svg",
+  ecommerce: "/public/confetti-svgrepo-com.svg"
+  
 }
 
 export function BookingConfirmationPopup({ isOpen, onClose, bookingData }) {
@@ -36,7 +37,7 @@ export function BookingConfirmationPopup({ isOpen, onClose, bookingData }) {
       <img
         src={modeImages[selectedMode] || modeImages["ecommerce"]}
         alt={selectedMode}
-        className="w-full h-64 sm:h-80 object-cover transition-transform duration-300 hover:scale-105"
+className="w-full h-64 sm:h-80 object-contain bg-center bg-no-repeat"
       />
     </div>
 

@@ -118,7 +118,7 @@ export default function PopUp({ showSuccessPopup, setShowSuccessPopup }) {
         <Button
           key={main}
           variant={selectedMain === main ? "default" : "outline"}
-          className={`h-10 px-4 ${
+          className={`h-10 px-4 rounded-none ${
             selectedMain === main 
               ? "bg-primary hover:bg-primary/90 text-primary-foreground" 
               : "hover:bg-accent text-foreground"
@@ -136,7 +136,7 @@ export default function PopUp({ showSuccessPopup, setShowSuccessPopup }) {
         <Button
           key={sub.value}
           variant={selectedSub === sub.value ? "default" : "outline"}
-          className={`shrink-0 h-10 ${
+          className={`shrink-0 h-10 rounded-none ${
             selectedSub === sub.value 
               ? "bg-primary hover:bg-primary/90 text-primary-foreground" 
               : "hover:bg-accent text-foreground"

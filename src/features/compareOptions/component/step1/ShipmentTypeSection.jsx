@@ -47,7 +47,7 @@ export default function ShipmentTypeSection({ mode, shipmentType, setField, erro
                     }
                   }}
                 >
-                  <Boxes className="w-8 h-8 mb-1 flex-shrink-0" />
+                  <Boxes className="w-12 h-12 mb-1 flex-shrink-0" />
                   <div className="font-medium text-base">{type}</div>
                   <div className="text-sm opacity-90 max-w-[220px]">{descriptions[type]}</div>
                 </Button>

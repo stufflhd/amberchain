@@ -25,7 +25,7 @@ import {
   Timer,
   ShoppingCart,
   ChevronDown,
-  TrainFront as Train
+  Train
 } from "lucide-react"
 import CompareResultTimeline from "@/components/CompareResultTimeline";
 import TransportationIcon from "@/components/icons/TransportationIcon";
@@ -152,7 +152,7 @@ export default function CompareResults() {
             <div className="rounded-lg bg-primary/10 p-2 ring-1 ring-primary/20">
               <Building2 className="w-6 h-6 text-primary" />
             </div>
-            <div className="flex flex-col">
+<div className="flex flex-col gap-0.2">
               <span className="font-bold text-lg leading-tight whitespace-nowrap">
                 Amber Chains Logistics
               </span>
@@ -163,12 +163,13 @@ export default function CompareResults() {
           {/* Mode & Shipment Type */}
           <div className="flex items-center gap-1.5 px-3 py-2 rounded-md bg-background border border-border/50 flex-shrink-0">
             {modeIcon}
-            <span className="text-sm font-medium whitespace-nowrap">
-              {data.mode || "—"}
-              {data.shipmentType && (
-                <span className="ml-1 text-muted-foreground">• {data.shipmentType}</span>
-              )}
-            </span>
+          <span className="text-sm font-medium whitespace-nowrap">
+  {data.mode ? data.mode.charAt(0).toUpperCase() + data.mode.slice(1) : "—"}
+  {data.shipmentType && (
+    <span className="ml-1 text-muted-foreground"> / {data.shipmentType}</span>
+  )}
+</span>
+
           </div>
 
           {/* Cargo Type */}
@@ -259,8 +260,8 @@ export default function CompareResults() {
               {/* Left Column - Timeline */}
               <div className="lg:col-span-5 flex flex-col h-full min-w-0">
                 <div className="bg-card rounded-xl border p-6 shadow-sm flex-1 flex flex-col min-h-[400px] w-full">
-                  <h3 className="text-lg font-bold mb-4 text-primary flex items-center gap-2">
-                    <Clock className="w-5 h-5" />
+<h3 className="text-lg font-bold mb-4 text-foreground flex items-center gap-2">
+                    <Clock className={`w-6 h-6 ${modeIconColor}`} />
                     Route Timeline
                   </h3>
                   <CompareResultTimeline items={timelineItems} />

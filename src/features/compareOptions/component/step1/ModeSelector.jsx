@@ -15,9 +15,9 @@ export default function ModeSelector({ mode, setField }) {
   const disabledModes = ["combined"]
 
   return (
-    <section className="space-y-5">
+    <section className="space-y-8">
       <h2 className="text-2xl font-semibold text-center">Mode of Transport</h2>
-      <div className="flex overflow-x-auto gap-4 pb-2 -mx-2 px-2">
+      <div className="flex overflow-x-auto gap-4 pb-2 -mx-2 px-2 pt-4">
         {modes.map(m => {
           const Icon = modeIcons[m]
           const active = mode === m
@@ -56,4 +56,4 @@ export default function ModeSelector({ mode, setField }) {
       </div>
     </section>
   )
-}
+}  
