@@ -13,7 +13,7 @@ import SearchResultsPage from "@/features/search/SearchResultsPage";
 import BookingsOverview from "@/features/bookings/BookingsOverview";
 import AuthRedirect from "@/app/AuthRedirect";
 import ContainersOverview from "@/features/containers/ContainersOverview";
-import CompareOptions from "@/features/compareOptions/compareOptions";
+import CompareOptions from "@/features/compareOptions/CompareOptions";
 
 const LoginPage = lazy(() => import("@/features/auth/pages/LoginPage"));
 const RegisterPage = lazy(() => import("@/features/auth/pages/RegisterPage"));
