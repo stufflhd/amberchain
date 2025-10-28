@@ -1,22 +1,39 @@
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
-import { Ship, Train, Truck, Plane, ShoppingCart } from "lucide-react"
+import { Ship, Train, Truck, Plane, ShoppingCart, ArrowRightLeft } from "lucide-react"
 
 export default function ModeSelector({ mode, setField }) {
-  const modes = ["sea", "rail", "road", "air", "ecommerce"]
-  const modeIcons = { sea: Ship, rail: Train, road: Truck, air: Plane, ecommerce: ShoppingCart }
+  const modes = ["sea", "rail", "road", "air", "ecommerce", "combined"]
+  const modeIcons = { 
+    sea: Ship, 
+    rail: Train, 
+    road: Truck, 
+    air: Plane, 
+    ecommerce: ShoppingCart,
+    combined: ArrowRightLeft
+  }
+  const disabledModes = ["combined"]
 
   return (
     <section className="space-y-5">
       <h2 className="text-2xl font-semibold text-center">Mode of Transport</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+      <div className="flex overflow-x-auto gap-4 pb-2 -mx-2 px-2">
         {modes.map(m => {
           const Icon = modeIcons[m]
           const active = mode === m
           return (
-            <motion.div key={m} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.15 }}>
-              <Card className={`cursor-pointer transition-all duration-300 border-2 ${active ? "border-primary bg-primary text-primary-foreground shadow-md" : "hover:border-primary hover:bg-accent hover:text-accent-foreground"}`}
+            <motion.div key={m} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.15 }}
+              className="flex-1 min-w-[140px] md:min-w-[160px]">
+              <Card 
+                className={`transition-all duration-300 border-2 ${
+                  disabledModes.includes(m) 
+                    ? "opacity-50 cursor-not-allowed" 
+                    : "cursor-pointer " + (active 
+                      ? "border-primary bg-primary text-primary-foreground shadow-md" 
+                      : "hover:border-primary hover:bg-accent hover:text-accent-foreground")
+                }`}
                 onClick={() => {
+                  if (disabledModes.includes(m)) return;
                   if (active) {
                     setField("mode", "")
                     setField("shipmentType", "")

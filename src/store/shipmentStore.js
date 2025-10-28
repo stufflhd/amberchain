@@ -25,8 +25,16 @@ export const useShipmentStore = create((set) => ({
       mainCategory: "",
       subCategory: "",
     },
+    setWizardSelection: (selection) => set((state) => ({
+      data: {
+        ...state.data,
+        wizardSelection: selection
+      }
+    })),
     coldTreatment: {
     required: false, // yes/no
+      temperature: "", // <— add this line
+
     temperatureSetPoints: [], // array of numbers if multiple set points
     multipleSetPoints: false, // yes/no
     },
@@ -58,13 +66,25 @@ export const useShipmentStore = create((set) => ({
       packageType: "",
       numberOfPackages: "",
       volume: "",
-      truckType: ""
-    }
+      truckType: "",
+      numberOfPallets: "",
+      stackableCargo: false,
+    },
+    liftgate: {
+  required: false, // yes/no
+},
+accsesConditions: "",
   },
+
+
+
+
   setField: (key, value) =>
     set((state) => ({
       data: { ...state.data, [key]: value }
     })),
+
+    
   reset: () =>
     set({
       data: {
@@ -84,7 +104,7 @@ export const useShipmentStore = create((set) => ({
         wizardSelection: {
           mainCategory: "",
           subCategory: "",
-          incoterms: ""
+          incoterms: "",
         }
       }
     })

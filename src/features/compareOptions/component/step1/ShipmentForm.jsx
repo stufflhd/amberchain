@@ -66,6 +66,14 @@ export default function ShipmentForm({ onFormComplete }) {
       return errors
     }
 
+    // Commodity and gross weight are required once cargo type is selected
+    if (!data.commodity) {
+      errors.commodity = "Please select a commodity."
+    }
+    if (!data.grossWeight) {
+      errors.grossWeight = "Please enter gross weight."
+    }
+
     // plor, plod, pickup are optional, but if their checkbox is checked, value is required
     if (data.plorChecked && !data.plor) errors.plor = "Please enter a valid PLOR."
     if (data.plodChecked && !data.plod) errors.plod = "Please enter a valid PLOD."
@@ -91,7 +99,7 @@ export default function ShipmentForm({ onFormComplete }) {
       // Enhanced scroll handling for all field types
       const order = [
         "pol", "pod", "plor", "plod", "pickup", // Location fields first
-        "mode", "shipmentType", "cargoType"      // Then mode and types
+        "mode", "shipmentType", "cargoType", "commodity", "grossWeight" // Then mode/types and required cargo details
       ]
       const firstInvalid = order.find(k => validationErrors[k])
       if (firstInvalid) {
@@ -118,7 +126,9 @@ export default function ShipmentForm({ onFormComplete }) {
           pickup: '#pickup',
           mode: '.mode-section',
           shipmentType: '.shipment-type-section',
-          cargoType: '.cargo-type-section'
+          cargoType: '.cargo-type-section',
+          commodity: '#commodity',
+          grossWeight: '#grossWeight'
         }
 
         scrollToElement(selectorMap[firstInvalid])
@@ -173,7 +183,7 @@ export default function ShipmentForm({ onFormComplete }) {
             setPickupChecked={setPickupChecked}
             data={data}
             setField={setField}
-            error={fieldErrors.cargoType}
+            errors={fieldErrors}
           />
         )}
         <AnimatePresence>
@@ -194,7 +204,7 @@ export default function ShipmentForm({ onFormComplete }) {
         {mode && (
           <motion.section ref={submitRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={transition} className="flex justify-center pt-8">
             <Button type="submit" size="lg" className="px-12 py-4 text-lg font-semibold bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300">
-              <CheckCircle className="w-6 h-6 mr-3" />
+              {/* <CheckCircle className="w-6 h-6 mr-3" /> */}
               {hasSubmitted ? "Compare Shipment Options" : "Submit Shipment Request"}
             </Button>
           </motion.section>

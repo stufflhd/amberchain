@@ -4,6 +4,13 @@ export const generalTextRegex = /^(?=.*[A-Za-z0-9])[\sA-Za-z0-9&@#',./()-]{2,}$/
 
 // Transport Modes Configuration
 export const TRANSPORT_MODES = {
+  COMBINED: {
+    id: 'combined',
+    translationKey: 'compareOptions.modes.combined',
+    description: 'compareOptions.modeDescriptions.combined',
+    icon: 'Combined',
+    disabled: true
+  },
   SEA: {
     id: 'sea',
     translationKey: 'compareOptions.modes.sea',

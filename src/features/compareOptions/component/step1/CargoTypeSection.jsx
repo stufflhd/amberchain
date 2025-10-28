@@ -6,7 +6,7 @@ import LocationInput from "./LocationInput"
 import CommoditySearchSelect from "./CommoditySearchSelect"
 import { Input } from "@/components/ui/input"
 
-export default function CargoTypeSection({ cargoType, pickupChecked, setPickupChecked, data, setField, error }) {
+export default function CargoTypeSection({ cargoType, pickupChecked, setPickupChecked, data, setField, errors = {} }) {
   const allCargoTypes = [
     { value: "General", label: "General", icon: Package },
     { value: "Hazardous", label: "Hazardous", icon: AlertTriangle },
@@ -39,37 +39,59 @@ export default function CargoTypeSection({ cargoType, pickupChecked, setPickupCh
         })}
       </div>
 
-      {error && (
-        <motion.p 
-          initial={{ opacity: 0, y: -10 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          className="text-destructive text-sm text-center mt-2" 
+      {errors.cargoType && (
+        <motion.p
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-destructive text-sm text-center mt-2"
           role="alert"
         >
-          {error}
+          {errors.cargoType}
         </motion.p>
       )}
 
       {cargoType && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={transition} className="mt-6 border-t pt-6 space-y-6">
           <div className="grid md:grid-cols-2 gap-6">
-            <CommoditySearchSelect label="Commodity" value={data.commodity || ""} onChange={v => setField("commodity", v)} placeholder="Search commodities" />
-            <div className="space-y-2">
+            <div id="commodity">
+              <CommoditySearchSelect label="Commodity" value={data.commodity || ""} onChange={v => setField("commodity", v)} placeholder="Search commodities" />
+              {errors.commodity && (
+                <p className="text-destructive text-sm mt-1" role="alert">{errors.commodity}</p>
+              )}
+            </div>
+            <div id="grossWeight" className="space-y-2">
               <Label>Gross Weight (kg)</Label>
               <Input type="number" value={data.grossWeight || ""} onChange={e => setField("grossWeight", e.target.value)} placeholder="Enter weight" className="w-full h-11 border-2 focus:border-primary rounded-md" />
+              {errors.grossWeight && (
+                <p className="text-destructive text-sm mt-1" role="alert">{errors.grossWeight}</p>
+              )}
             </div>
           </div>
 
-          <div className="flex items-start gap-4">
-            <Checkbox id="pickup" checked={pickupChecked} onCheckedChange={setPickupChecked} className="w-5 h-5 mt-1" />
-            <div className="flex-1 space-y-2">
-              <Label htmlFor="pickup">Pickup</Label>
-              {pickupChecked ? (
-                <LocationInput value={data.pickupLocation || ""} onChange={v => setField("pickupLocation", v)} placeholder="Enter pickup location" />
-              ) : (
-                <Input disabled placeholder="Enter pickup location" className="w-full h-11 border-2 focus:border-primary disabled:opacity-50 rounded-md" value="" />
-              )}
+          <div className="bg-accent/50 p-6 rounded-lg border-2 border-accent shadow-sm">
+            <div className="flex items-center gap-3 mb-4">
+              <Checkbox 
+                id="pickup" 
+                checked={pickupChecked} 
+                onCheckedChange={setPickupChecked} 
+                className="w-6 h-6"
+              />
+              <Label htmlFor="pickup" className="text-lg font-semibold">Add Pickup Location</Label>
             </div>
+            {pickupChecked && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-2"
+              >
+                <LocationInput 
+                  value={data.pickupLocation || ""} 
+                  onChange={v => setField("pickupLocation", v)} 
+                  placeholder="Enter pickup location"
+                  className="bg-background"
+                />
+              </motion.div>
+            )}
           </div>
         </motion.div>
       )}

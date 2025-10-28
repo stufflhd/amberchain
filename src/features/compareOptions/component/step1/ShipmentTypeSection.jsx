@@ -10,26 +10,53 @@ export default function ShipmentTypeSection({ mode, shipmentType, setField, erro
   return (
     <motion.section className="shipment-type-section" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={transition}>
       <h2 className="text-2xl font-semibold text-center mb-4">Shipment Type</h2>
-      <div className="flex flex-wrap justify-center gap-5">
-        {shipmentOptions.map(type => (
-          <Button key={type} type="button"
-            variant={shipmentType === type ? "default" : "outline"}
-            className={`flex items-center gap-3 px-8 py-4 rounded-xl text-lg transition-all ${shipmentType === type ? "bg-primary text-primary-foreground shadow-lg" : "hover:bg-accent hover:text-accent-foreground"}`}
-            onClick={() => {
-              if (shipmentType === type) {
-                setField("shipmentType", "")
-                setField("cargoType", "")
-              } else {
-                setField("shipmentType", type)
-                setField("cargoType", "")
-              }
-            }}
-          >
-            <Boxes className="w-6 h-6" />
-            {type}
-          </Button>
-        ))}
-      </div>
+      {/**
+       * Responsive layout:
+       * - If there are exactly 2 options, render as a centered horizontal row for better balance.
+       * - Otherwise use a responsive grid (1/2/3 cols) which keeps cards evenly sized.
+       */}
+      {(() => {
+        const isTwo = shipmentOptions.length === 2
+        return (
+          <div className={`max-w-2xl mx-auto ${isTwo ? 'flex justify-center gap-6' : 'grid sm:grid-cols-2 lg:grid-cols-3 gap-4'}`}>
+            {shipmentOptions.map(type => {
+              const descriptions = {
+                FCL: "Full Container Load",
+                LCL: "Less than Container Load",
+                FTL: "Full Truck Load",
+                LTL: "Less than Truck Load"
+              };
+              return (
+                <Button
+                  key={type}
+                  type="button"
+                  aria-pressed={shipmentType === type}
+                  variant={shipmentType === type ? "default" : "outline"}
+                  className={`relative flex flex-col items-center text-center h-full gap-3 p-5 rounded-xl transition-all min-w-[180px] ${
+                    shipmentType === type
+                      ? "bg-primary text-primary-foreground shadow-lg ring-2 ring-primary ring-offset-2"
+                      : "bg-card hover:bg-accent hover:text-accent-foreground"
+                  }`}
+                  onClick={() => {
+                    if (shipmentType === type) {
+                      setField("shipmentType", "")
+                      setField("cargoType", "")
+                    } else {
+                      setField("shipmentType", type)
+                      setField("cargoType", "")
+                    }
+                  }}
+                >
+                  <Boxes className="w-8 h-8 mb-1 flex-shrink-0" />
+                  <div className="font-medium text-base">{type}</div>
+                  <div className="text-sm opacity-90 max-w-[220px]">{descriptions[type]}</div>
+                </Button>
+              )
+            })}
+          </div>
+        )
+      })()}
+      
 
       {error && (
         <motion.p 
