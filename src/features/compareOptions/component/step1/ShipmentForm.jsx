@@ -205,7 +205,7 @@ export default function ShipmentForm({ onFormComplete }) {
           <motion.section ref={submitRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={transition} className="flex justify-center pt-8">
             <Button type="submit" size="lg" className="px-12 py-4 text-lg font-semibold bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300">
               {/* <CheckCircle className="w-6 h-6 mr-3" /> */}
-              {hasSubmitted ? "Compare Shipment Options" : "Submit Shipment Request"}
+              {hasSubmitted ? "Shipment Results" : "Shipment Request"}
             </Button>
           </motion.section>
         )}
