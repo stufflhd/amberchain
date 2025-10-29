@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { ExternalLink } from "lucide-react"
@@ -16,16 +16,24 @@ const modeImages = {
 export function BookingConfirmationPopup({ isOpen, onClose, bookingData }) {
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (bookingData) {
-      localStorage.setItem("submittedBooking", JSON.stringify(bookingData))
-    }
-  }, [bookingData])
-
   const handleViewQuotations = () => {
+    // Store booking data with a 30 second expiry so the quotations overview
+    // can show a short-lived success banner with a countdown.
+    const payload = {
+      bookingData,
+      // expires in 30 seconds
+      expiresAt: Date.now() + 30 * 1000,
+    }
+    try {
+      localStorage.setItem("submittedBooking", JSON.stringify(payload))
+    } catch (e) {
+      // ignore storage errors
+    }
     navigate("/quotations")
     onClose()
   }
+
+  
 
   const selectedMode = bookingData?.mode || "ecommerce"
 

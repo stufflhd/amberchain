@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Boxes } from "lucide-react"
+import { Boxes, Container, Truck, Package } from "lucide-react"
 import ContainerTypeSearchSelect from "./ContainerTypeSearchSelect"
 import { useShipmentStore } from "../../../../store/shipmentStore"
 export default function ShipmentTypeSection({ mode, shipmentType, setField, error }) {
@@ -26,6 +26,7 @@ export default function ShipmentTypeSection({ mode, shipmentType, setField, erro
                 FTL: "Full Truck Load",
                 LTL: "Less than Truck Load"
               };
+              const Icon = type === 'FCL' ? Container : type === 'LCL' ? Package : type === 'FTL' ? Truck : Package;
               return (
                 <Button
                   key={type}
@@ -47,7 +48,7 @@ export default function ShipmentTypeSection({ mode, shipmentType, setField, erro
                     }
                   }}
                 >
-                  <Boxes className="w-12 h-12 mb-1 flex-shrink-0" />
+                  <Icon className="size-12 w-12 h-12 mb-1 flex-shrink-0" />
                   <div className="font-medium text-base">{type}</div>
                   <div className="text-sm opacity-90 max-w-[220px]">{descriptions[type]}</div>
                 </Button>

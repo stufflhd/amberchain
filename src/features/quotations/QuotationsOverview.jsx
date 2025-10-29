@@ -14,15 +14,54 @@ export default function QuotationsOverview({ data: propData }) {
     const { t } = useTranslation();
     const [columnFilters, setColumnFilters] = useState([]);
   const [showSuccessBanner, setShowSuccessBanner] = useState(false);
-
+  const [countdown, setCountdown] = useState(30);
   useEffect(() => {
-    const booking = localStorage.getItem("submittedBooking");
-    if (booking) {
-      setShowSuccessBanner(true);
-      // Optionally remove after showing once
+    const raw = localStorage.getItem("submittedBooking");
+    if (!raw) return;
+    let parsed = null;
+    try {
+      parsed = JSON.parse(raw);
+    } catch (e) {
+      // invalid payload, remove
       localStorage.removeItem("submittedBooking");
+      return;
     }
+
+    const expiresAt = parsed?.expiresAt ? Number(parsed.expiresAt) : Date.now() + 30 * 1000;
+    const remainingMs = expiresAt - Date.now();
+    if (remainingMs <= 0) {
+      localStorage.removeItem("submittedBooking");
+      return;
+    }
+
+    setShowSuccessBanner(true);
+    setCountdown(Math.ceil(remainingMs / 1000));
+
+    const timerId = setInterval(() => {
+      setCountdown(prev => {
+        if (prev <= 1) {
+          clearInterval(timerId);
+          setShowSuccessBanner(false);
+          try { localStorage.removeItem("submittedBooking"); } catch (e) {}
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timerId);
   }, []);
+
+  const formatTime = (s) => {
+    const mm = String(Math.floor(s / 60)).padStart(2, '0');
+    const ss = String(s % 60).padStart(2, '0');
+    return `${mm}:${ss}`;
+  }
+
+  const handleDismissBanner = () => {
+    setShowSuccessBanner(false);
+    try { localStorage.removeItem('submittedBooking'); } catch (e) {}
+  }
 
     const { data: fetchedData, isLoading: isFetching } = useQuotationsQuery({
         enabled: !propData,
@@ -59,7 +98,7 @@ export default function QuotationsOverview({ data: propData }) {
   <CheckCircle className="text-green-600 dark:text-green-400 w-6 h-6 mt-0.5 flex-shrink-0" />
   <div className="text-sm text-green-800 dark:text-green-200">
     <p className="font-semibold text-green-900 dark:text-green-100">
-    Your booking has been successfully submitted!
+      Your booking has been successfully submitted!
     </p>
     <p className="text-green-700 dark:text-green-300">
       Request Reference Number:{" "}
@@ -68,11 +107,15 @@ export default function QuotationsOverview({ data: propData }) {
       </span>
     </p>
     <p className="text-green-700 dark:text-green-300">
-      You will shortly receive an email confirming your submission. Within 2 hours, our team will review and validate your request.
+      You will shortly receive an email confirming your submission. This banner will disappear automatically in <span className="font-medium text-green-900 dark:text-green-200">{formatTime(countdown)}</span>.
     </p>
     <p className="font-semibold text-green-900 dark:text-green-100 mt-1">
       Thank you for choosing our service — we appreciate your trust.
     </p>
+  </div>
+  <div className="ml-auto flex flex-col items-end gap-2">
+    <div className="text-sm text-green-700 dark:text-green-300">{formatTime(countdown)}</div>
+    <button onClick={handleDismissBanner} className="text-sm text-green-900 dark:text-green-100 underline">Dismiss</button>
   </div>
 </div>
 

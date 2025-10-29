@@ -78,7 +78,7 @@ export default function PopUp({ showSuccessPopup, setShowSuccessPopup }) {
 
   const mainCategories = Object.keys(wizardOptions);
 
-  const setWizardSelection = useShipmentStore(state => state.setWizardSelection);
+  // const setWizardSelection = useShipmentStore(state => state.setWizardSelection);
   const [selectedMain, setSelectedMain] = useState(mainCategories[0]);
   const [selectedSub, setSelectedSub] = useState(wizardOptions[mainCategories[0]].subOptions[0].value);
 
@@ -118,7 +118,7 @@ export default function PopUp({ showSuccessPopup, setShowSuccessPopup }) {
         <Button
           key={main}
           variant={selectedMain === main ? "default" : "outline"}
-          className={`h-10 px-4 rounded-none ${
+          className={`h-10 px-4 rounded ${
             selectedMain === main 
               ? "bg-primary hover:bg-primary/90 text-primary-foreground" 
               : "hover:bg-accent text-foreground"
@@ -136,7 +136,7 @@ export default function PopUp({ showSuccessPopup, setShowSuccessPopup }) {
         <Button
           key={sub.value}
           variant={selectedSub === sub.value ? "default" : "outline"}
-          className={`shrink-0 h-10 rounded-none ${
+          className={`shrink-0 h-10 rounded ${
             selectedSub === sub.value 
               ? "bg-primary hover:bg-primary/90 text-primary-foreground" 
               : "hover:bg-accent text-foreground"
