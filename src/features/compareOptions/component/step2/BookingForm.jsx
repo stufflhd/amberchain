@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useMemo} from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -6,6 +6,9 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useShipmentStore } from "../../../../store/shipmentStore";
 import { Info, CheckCircle, Plus, X, Package } from "lucide-react";
+
+
+
 import {
   Select,
   SelectContent,
@@ -74,6 +77,43 @@ export default function BookingForm() {
     </div>
   );
 
+
+// Check if Cargo Information section should be displayed
+const shouldShowCargoInfo = useMemo(() => {
+  const isHazardous = data.cargoType == "Hazardous" && ["sea", "rail", "road", "air"].includes(data.mode);
+  const isOversized = 
+    (data.cargoType == "Oversized" && ["sea", "rail", "road"].includes(data.mode)) ||
+    (data.mode == "road" && data.shipmentType == "LTL") ||
+    ["air", "ecommerce"].includes(data.mode);
+  const hasPackageInfo = 
+    (data.shipmentType == "LCL" && ["sea", "rail"].includes(data.mode)) ||
+    (data.shipmentType == "LTL" && data.mode == "road") ||
+    ["air", "ecommerce"].includes(data.mode);
+  const isRoadFTL = data.mode == "road" && data.shipmentType == "FTL";
+  const isAirStackable = data.mode == "air";
+
+  return isHazardous || isOversized || hasPackageInfo || isRoadFTL || isAirStackable;
+}, [data.cargoType, data.mode, data.shipmentType]);
+
+// Check if Temperature Control section should be displayed
+const shouldShowTempControl = useMemo(() => {
+  return data.cargoType == "Perishable" && ["sea", "rail", "road", "air"].includes(data.mode);
+}, [data.cargoType, data.mode]);
+
+// Check if Delivery Requirements section should be displayed
+const shouldShowDeliveryReq = useMemo(() => {
+  return data.mode == "road";
+}, [data.mode]);
+
+// Calculate grid columns based on visible sections
+const visibleSectionsCount = useMemo(() => {
+  return [shouldShowCargoInfo, shouldShowTempControl, shouldShowDeliveryReq].filter(Boolean).length;
+}, [shouldShowCargoInfo, shouldShowTempControl, shouldShowDeliveryReq]);
+
+
+
+
+
   return (
     <div className="bg-card rounded-xl border border-border shadow-sm p-6 space-y-6">
       <div className="border-b border-border/50 pb-3">
@@ -81,9 +121,17 @@ export default function BookingForm() {
         <p className="text-xs text-muted-foreground mt-0.5">Configure your shipment settings</p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {/* Cargo Details */}
-        <Section title="Cargo Information">
+     <div 
+        className={`grid gap-4 ${
+          visibleSectionsCount === 1 
+            ? 'grid-cols-1' 
+            : 'grid-cols-1 lg:grid-cols-2'
+        }`}
+      >
+
+
+     {shouldShowCargoInfo && (
+  <Section title="Cargo Details">
           <div className="grid grid-cols-2 gap-3">
             {data.cargoType == "Hazardous" && ["sea", "rail", "road", "air"].includes(data.mode) && (
               <>
@@ -217,6 +265,7 @@ export default function BookingForm() {
             )}
           </div>
         </Section>
+)}
 
         {/* Perishable Settings */}
         {data.cargoType == "Perishable" && ["sea", "rail", "road", "air"].includes(data.mode) && (
