@@ -416,7 +416,7 @@ const visibleSectionsCount = useMemo(() => {
                     <Input
                       value={data.humidity.percentage}
                       onChange={(e) => setField("humidity", { ...data.humidity, percentage: e.target.value })}
-                      className="h-9 max-w-xs"
+                      className="h-9 max-w-xs "
                       placeholder="e.g. 85"
                     />
                   </FormField>
@@ -571,84 +571,347 @@ const visibleSectionsCount = useMemo(() => {
           </Section>
         )}
 
-        {/* Add-ons Section */}
-        <Section title="Additional Services" className="lg:col-span-2">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div className="flex items-start gap-3 p-3 rounded-lg border border-border/50 hover:border-primary/50 transition-colors cursor-pointer">
-              <Checkbox
-                id="insurance"
-                checked={data.addons?.insurance || false}
-                onCheckedChange={(checked) => setField("addons", { ...data.addons, insurance: checked })}
-              />
-              <div className="flex-1">
-                <label htmlFor="insurance" className="text-sm font-medium cursor-pointer">Cargo Insurance</label>
-                <p className="text-xs text-muted-foreground mt-0.5">Comprehensive coverage for your shipment</p>
-              </div>
-            </div>
+{/* Service Add-ons Section */}
+<Section title="Service Add-Ons" className="lg:col-span-2">
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full items-stretch">
+    
+    {/* Complex add-ons with sub-options - More compact */}
+    <div className="space-y-1.5">
+      {/* Transit Preferences Section - ULTRA COMPACT */}
+<Section title="Transit Preferences" className="lg:col-span-2">
+  <Select 
+    value={data.transitPreference || ""} 
+    onValueChange={(val) => setField("transitPreference", val)}
+  >
+    <SelectTrigger className="h-9">
+      <SelectValue placeholder="Select preference" />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectItem value="fastest">Fastest Transit</SelectItem>
+      <SelectItem value="cheapest">Cheapest Option</SelectItem>
+      <SelectItem value="lowestEmission">Lowest Emission Option</SelectItem>
+      <SelectItem value="balanced">Balanced Option (Smart Pick)</SelectItem>
+    </SelectContent>
+  </Select>
+</Section>
+      {/* Customs Brokerage */}
+      {["sea", "rail", "road", "air", "ecommerce"].includes(data.mode) && (
+       <div className="border border-border/30 rounded p-1.5 flex flex-col justify-center">
 
-            <div className="flex items-start gap-3 p-3 rounded-lg border border-border/50 hover:border-primary/50 transition-colors cursor-pointer">
+          <div className="flex items-center justify-between gap-3">
+            <label className="text-xs font-medium">Customs Brokerage</label>
+            <div className="flex items-center gap-3">
+              {data.addons?.customsBrokerage?.enabled && (
+                <Select 
+                  value={data.addons?.customsBrokerage?.location || "origin"} 
+                  onValueChange={(val) => setField("addons", { ...data.addons, customsBrokerage: { ...data.addons?.customsBrokerage, location: val } })}
+                >
+                  <SelectTrigger className="h-7 w-28 text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="origin">Origin</SelectItem>
+                    <SelectItem value="destination">Destination</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
               <Checkbox
-                id="tracking"
-                checked={data.addons?.tracking || false}
-                onCheckedChange={(checked) => setField("addons", { ...data.addons, tracking: checked })}
+                checked={data.addons?.customsBrokerage?.enabled || false}
+                onCheckedChange={(checked) => setField("addons", { ...data.addons, customsBrokerage: { ...data.addons?.customsBrokerage, enabled: checked } })}
+                className="h-4 w-4"
               />
-              <div className="flex-1">
-                <label htmlFor="tracking" className="text-sm font-medium cursor-pointer">Real-time Tracking</label>
-                <p className="text-xs text-muted-foreground mt-0.5">GPS tracking with alerts</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3 p-3 rounded-lg border border-border/50 hover:border-primary/50 transition-colors cursor-pointer">
-              <Checkbox
-                id="priority"
-                checked={data.addons?.priority || false}
-                onCheckedChange={(checked) => setField("addons", { ...data.addons, priority: checked })}
-              />
-              <div className="flex-1">
-                <label htmlFor="priority" className="text-sm font-medium cursor-pointer">Priority Handling</label>
-                <p className="text-xs text-muted-foreground mt-0.5">Expedited processing and delivery</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3 p-3 rounded-lg border border-border/50 hover:border-primary/50 transition-colors cursor-pointer">
-              <Checkbox
-                id="customs"
-                checked={data.addons?.customs || false}
-                onCheckedChange={(checked) => setField("addons", { ...data.addons, customs: checked })}
-              />
-              <div className="flex-1">
-                <label htmlFor="customs" className="text-sm font-medium cursor-pointer">Customs Clearance</label>
-                <p className="text-xs text-muted-foreground mt-0.5">Full customs documentation service</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3 p-3 rounded-lg border border-border/50 hover:border-primary/50 transition-colors cursor-pointer">
-              <Checkbox
-                id="packaging"
-                checked={data.addons?.packaging || false}
-                onCheckedChange={(checked) => setField("addons", { ...data.addons, packaging: checked })}
-              />
-              <div className="flex-1">
-                <label htmlFor="packaging" className="text-sm font-medium cursor-pointer">Professional Packaging</label>
-                <p className="text-xs text-muted-foreground mt-0.5">Expert packing and crating services</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3 p-3 rounded-lg border border-border/50 hover:border-primary/50 transition-colors cursor-pointer">
-              <Checkbox
-                id="storage"
-                checked={data.addons?.storage || false}
-                onCheckedChange={(checked) => setField("addons", { ...data.addons, storage: checked })}
-              />
-              <div className="flex-1">
-                <label htmlFor="storage" className="text-sm font-medium cursor-pointer">Warehouse Storage</label>
-                <p className="text-xs text-muted-foreground mt-0.5">Secure storage facilities available</p>
-              </div>
             </div>
           </div>
-        </Section>
-      </div>
+        </div>
+      )}
 
+      {/* Insurance */}
+      {["sea", "rail", "road", "air"].includes(data.mode) && (
+        <div className="border border-border/30 rounded p-1.5 flex flex-col justify-center">
+
+          <div className="flex items-center justify-between gap-3">
+            <label className="text-xs font-medium">Insurance</label>
+            <div className="flex items-center gap-2">
+              {data.addons?.insurance?.enabled && (
+                <>
+                  <Input
+                    type="number"
+                    value={data.addons?.insurance?.cargoValue || ""}
+                    onChange={(e) => setField("addons", { ...data.addons, insurance: { ...data.addons?.insurance, cargoValue: e.target.value } })}
+                    className="h-7 w-24 text-xs"
+                    placeholder="Value"
+                  />
+                  <Select 
+                    value={data.addons?.insurance?.currency || "USD"} 
+                    onValueChange={(val) => setField("addons", { ...data.addons, insurance: { ...data.addons?.insurance, currency: val } })}
+                  >
+                    <SelectTrigger className="h-7 w-20 text-xs">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="USD">USD</SelectItem>
+                      <SelectItem value="EUR">EUR</SelectItem>
+                      <SelectItem value="GBP">GBP</SelectItem>
+                      <SelectItem value="AED">MAD</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </>
+              )}
+              <Checkbox
+                checked={data.addons?.insurance?.enabled || false}
+                onCheckedChange={(checked) => setField("addons", { ...data.addons, insurance: { ...data.addons?.insurance, enabled: checked } })}
+                className="h-4 w-4"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Stuffing */}
+      {["sea", "rail", "road", "air"].includes(data.mode) && (
+      <div className="border border-border/30 rounded p-1.5 flex flex-col justify-center">
+
+          <div className="flex items-center justify-between gap-3">
+            <label className="text-xs font-medium">Stuffing</label>
+            <div className="flex items-center gap-2">
+              {data.addons?.stuffing?.enabled && (
+                <>
+                  <Select 
+                    value={data.addons?.stuffing?.equipment || ""} 
+                    onValueChange={(val) => setField("addons", { ...data.addons, stuffing: { ...data.addons?.stuffing, equipment: val } })}
+                  >
+                    <SelectTrigger className="h-7 w-28 text-xs">
+                      <SelectValue placeholder="Equipment" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="forklift">Forklift</SelectItem>
+                      <SelectItem value="manually">Manually</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Select 
+                    value={data.addons?.stuffing?.resources || ""} 
+                    onValueChange={(val) => setField("addons", { ...data.addons, stuffing: { ...data.addons?.stuffing, resources: val } })}
+                  >
+                    <SelectTrigger className="h-7 w-20 text-xs">
+                      <SelectValue placeholder="Workers" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="2">2</SelectItem>
+                      <SelectItem value="3">3</SelectItem>
+                      <SelectItem value="4">4</SelectItem>
+                      <SelectItem value="5">5</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </>
+              )}
+              <Checkbox
+                checked={data.addons?.stuffing?.enabled || false}
+                onCheckedChange={(checked) => setField("addons", { ...data.addons, stuffing: { ...data.addons?.stuffing, enabled: checked } })}
+                className="h-4 w-4"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* UnStuffing */}
+      {["sea", "rail", "road", "air"].includes(data.mode) && (
+       <div className="border border-border/30 rounded p-1.5 flex flex-col justify-center">
+
+          <div className="flex items-center justify-between gap-3">
+            <label className="text-xs font-medium">UnStuffing</label>
+            <div className="flex items-center gap-2">
+              {data.addons?.unstuffing?.enabled && (
+                <>
+                  <Select 
+                    value={data.addons?.unstuffing?.equipment || ""} 
+                    onValueChange={(val) => setField("addons", { ...data.addons, unstuffing: { ...data.addons?.unstuffing, equipment: val } })}
+                  >
+                    <SelectTrigger className="h-7 w-28 text-xs">
+                      <SelectValue placeholder="Equipment" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="forklift">Forklift</SelectItem>
+                      <SelectItem value="crane">Crane</SelectItem>
+                      <SelectItem value="pallet-jack">Pallet Jack</SelectItem>
+                      <SelectItem value="manually">Manually</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Select 
+                    value={data.addons?.unstuffing?.resources || ""} 
+                    onValueChange={(val) => setField("addons", { ...data.addons, unstuffing: { ...data.addons?.unstuffing, resources: val } })}
+                  >
+                    <SelectTrigger className="h-7 w-20 text-xs">
+                      <SelectValue placeholder="Workers" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="2">2</SelectItem>
+                      <SelectItem value="3">3</SelectItem>
+                      <SelectItem value="4">4</SelectItem>
+                      <SelectItem value="5">5</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </>
+              )}
+              <Checkbox
+                checked={data.addons?.unstuffing?.enabled || false}
+                onCheckedChange={(checked) => setField("addons", { ...data.addons, unstuffing: { ...data.addons?.unstuffing, enabled: checked } })}
+                className="h-4 w-4"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Inspection */}
+      {["sea", "rail", "road", "air", "ecommerce"].includes(data.mode) && (
+      <div className="border border-border/30 rounded p-1.5 flex flex-col justify-center">
+
+          <div className="flex items-center justify-between gap-3">
+            <label className="text-xs font-medium">Inspection</label>
+            <div className="flex items-center gap-2">
+              {data.addons?.inspection?.enabled && (
+                <Select 
+                  value={data.addons?.inspection?.type || ""} 
+                  onValueChange={(val) => setField("addons", { ...data.addons, inspection: { ...data.addons?.inspection, type: val } })}
+                >
+                  <SelectTrigger className="h-7 w-36 text-xs">
+                    <SelectValue placeholder="Type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="quality">Quality</SelectItem>
+                    <SelectItem value="quantity">Quantity</SelectItem>
+                    <SelectItem value="customs">Customs</SelectItem>
+                    <SelectItem value="phytosanitary">Phytosanitary</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+              <Checkbox
+                checked={data.addons?.inspection?.enabled || false}
+                onCheckedChange={(checked) => setField("addons", { ...data.addons, inspection: { ...data.addons?.inspection, enabled: checked } })}
+                className="h-4 w-4"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+
+    {/* Simple Yes/No items - Compact Grid */}
+<div className="grid grid-cols-4 gap-2 pt-3">
+      
+      {data.mode === "sea" && (
+        <div className="flex items-center justify-between bg-muted/40 hover:bg-muted/50 px-2 py-1.5 rounded">
+
+          <label className="text-xs cursor-pointer">Port Agent</label>
+          <Checkbox
+            checked={data.addons?.portAgent || false}
+            onCheckedChange={(checked) => setField("addons", { ...data.addons, portAgent: checked })}
+            className="h-4 w-4"
+          />
+        </div>
+      )}
+
+      {["sea", "rail"].includes(data.mode) && (
+        <div className="flex items-center justify-between bg-muted/40 hover:bg-muted/50 px-2 py-1.5 rounded">
+
+          <label className="text-xs cursor-pointer">Repositioning</label>
+          <Checkbox
+            checked={data.addons?.reposition || false}
+            onCheckedChange={(checked) => setField("addons", { ...data.addons, reposition: checked })}
+            className="h-4 w-4"
+          />
+        </div>
+      )}
+
+      {["sea", "rail", "road", "air", "ecommerce"].includes(data.mode) && (
+        <div className="flex items-center justify-between bg-muted/40 hover:bg-muted/50 px-2 py-1.5 rounded">
+
+          <label className="text-xs cursor-pointer">Live Tracking</label>
+          <Checkbox
+            checked={data.addons?.trackLive || false}
+            onCheckedChange={(checked) => setField("addons", { ...data.addons, trackLive: checked })}
+            className="h-4 w-4"
+          />
+        </div>
+      )}
+
+      {["sea", "rail", "road", "air", "ecommerce"].includes(data.mode) && (
+        <div className="flex items-center justify-between bg-muted/40 hover:bg-muted/50 px-2 py-1.5 rounded">
+
+          <label className="text-xs cursor-pointer">Troke Trace</label>
+          <Checkbox
+            checked={data.addons?.trokeTrace || false}
+            onCheckedChange={(checked) => setField("addons", { ...data.addons, trokeTrace: checked })}
+            className="h-4 w-4"
+          />
+        </div>
+      )}
+
+      {["sea", "rail"].includes(data.mode) && (
+        <div className="flex items-center justify-between bg-muted/40 hover:bg-muted/50 px-2 py-1.5 rounded">
+
+          <label className="text-xs cursor-pointer">SOC for All</label>
+          <Checkbox
+            checked={data.addons?.socForAll || false}
+            onCheckedChange={(checked) => setField("addons", { ...data.addons, socForAll: checked })}
+            className="h-4 w-4"
+          />
+        </div>
+      )}
+
+      {["sea", "rail", "road"].includes(data.mode) && (
+        <div className="flex items-center justify-between bg-muted/40 hover:bg-muted/50 px-2 py-1.5 rounded">
+
+          <label className="text-xs cursor-pointer">Ready To Load</label>
+          <Checkbox
+            checked={data.addons?.readyToLoad || false}
+            onCheckedChange={(checked) => setField("addons", { ...data.addons, readyToLoad: checked })}
+            className="h-4 w-4"
+          />
+        </div>
+      )}
+
+      {["sea", "rail", "road", "air", "ecommerce"].includes(data.mode) && (
+        <div className="flex items-center justify-between bg-muted/40 hover:bg-muted/50 px-2 py-1.5 rounded">
+
+          <label className="text-xs cursor-pointer">Change Destination</label>
+          <Checkbox
+            checked={data.addons?.changeDestination || false}
+            onCheckedChange={(checked) => setField("addons", { ...data.addons, changeDestination: checked })}
+            className="h-4 w-4"
+          />
+        </div>
+      )}
+
+      {["sea", "rail", "road", "air", "ecommerce"].includes(data.mode) && (
+        <div className="flex items-center justify-between bg-muted/40 hover:bg-muted/50 px-2 py-1.5 rounded">
+
+          <label className="text-xs cursor-pointer">Extra Free Time</label>
+          <Checkbox
+            checked={data.addons?.extraFreeTime || false}
+            onCheckedChange={(checked) => setField("addons", { ...data.addons, extraFreeTime: checked })}
+            className="h-4 w-4"
+          />
+        </div>
+      )}
+
+      {["sea", "rail", "road", "air", "ecommerce"].includes(data.mode) && (
+        <div className="flex items-center justify-between bg-muted/40 hover:bg-muted/50 px-2 py-1.5 rounded">
+
+          <label className="text-xs cursor-pointer">Reduce Emission</label>
+          <Checkbox
+            checked={data.addons?.reduceEmission || false}
+            onCheckedChange={(checked) => setField("addons", { ...data.addons, reduceEmission: checked })}
+            className="h-4 w-4"
+          />
+        </div>
+      )}
+    </div>
+
+  </div>
+</Section>
+    </div>
       {/* Book Now Button */}
       <div className="flex justify-center pt-4 border-t border-border/50">
         <Button
