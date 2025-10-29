@@ -655,7 +655,7 @@ const visibleSectionsCount = useMemo(() => {
           onClick={handleBookNow}
           className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-12 h-11 rounded-lg shadow-sm hover:shadow transition-all"
         >
-          <CheckCircle className="mr-2 h-4 w-4" />
+          {/* <CheckCircle className="mr-2 h-4 w-4" /> */}
           Book Now
         </Button>
       </div>

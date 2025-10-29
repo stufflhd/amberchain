@@ -69,7 +69,7 @@ export default function ShipmentTypeSection({ mode, shipmentType, setField, erro
         </motion.p>
       )}
 
-      {(mode === "sea" || mode === "rail") && shipmentType === "FCL" && (
+      {(mode === "sea" || mode === "rail" || mode==="road") && shipmentType === "FCL" && (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={transition} className="mt-6">
            <ContainerTypeSearchSelect
                 label="Container Type"
