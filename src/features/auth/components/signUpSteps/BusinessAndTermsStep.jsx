@@ -13,16 +13,22 @@ import {
   UsersIcon,
   BriefcaseIcon,
   MoreHorizontalIcon,
+  UserIcon,
 } from "lucide-react";
 
+// Values chosen to align with backend UsersSignupDto enum values.
+// Adjust mapping if different enum semantics are required.
+// Use exact enum values from UsersSignupDto while keeping existing labels.
 const businessProfiles = [
-  { value: "manufacturer", label: t => t('businessProfiles.manufacturer'), icon: Building2Icon },
-  { value: "distributor", label: t => t('businessProfiles.distributor'), icon: TruckIcon },
-  { value: "retailer", label: t => t('businessProfiles.retailer'), icon: StoreIcon },
-  { value: "service_provider", label: t => t('businessProfiles.serviceProvider'), icon: UsersIcon },
-  { value: "consultant", label: t => t('businessProfiles.consultant'), icon: BriefcaseIcon },
-  { value: "other", label: t => t('businessProfiles.other'), icon: MoreHorizontalIcon },
+  { value: "PUBLIC_ORGANISATION", label: t => t(`businessProfiles.PUBLIC_ORGANISATION`), icon: Building2Icon },
+  { value: "ADMIN", label: t => t(`businessProfiles.ADMIN`), icon:  UsersIcon },
+  { value: "BANK", label: t => t(`businessProfiles.BANK`), icon: BriefcaseIcon },
+  { value: "FREIGHT_FORWARDER", label: t => t(`businessProfiles.FREIGHT_FORWARDER`), icon: TruckIcon },
+  { value: "INDIVIDUAL", label: t => t(`businessProfiles.INDIVIDUAL`), icon: UserIcon },
+  { value: "PROFESSIONAL", label: t => t(`businessProfiles.PROFESSIONAL`), icon: BriefcaseIcon },
+  { value: "OTHER", label: t => t(`businessProfiles.OTHER`), icon: MoreHorizontalIcon },
 ];
+
 
 export default function BusinessAndTermsStep({ data, errors, onUpdate }) {
   const { t } = useTranslation();
@@ -33,7 +39,8 @@ export default function BusinessAndTermsStep({ data, errors, onUpdate }) {
 
   const handleBusinessProfileChange = (value) => {
     onUpdate("businessProfile", value);
-    if (value !== "other") {
+    // keep customBusinessType only when PROFESSIONAL is selected
+    if (value !== "PROFESSIONAL") {
       onUpdate("customBusinessType", "");
     }
   };
@@ -77,7 +84,7 @@ export default function BusinessAndTermsStep({ data, errors, onUpdate }) {
         )}
       </div>
 
-      {data.businessProfile === "other" && (
+      {data.businessProfile === "OTHER" && (
         <FormField
           label={t('registerForm.customBusinessType')}
           name="customBusinessType"

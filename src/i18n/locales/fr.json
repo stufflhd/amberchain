@@ -412,15 +412,16 @@
     "and": "et",
     "searchWord": "Rechercher...",
     "searchWord2": "Voir les détails",
-    "businessProfiles": {
-      "manufacturer": "Fabricant",
-      "distributor": "Distributeur",
-      "retailer": "Détaillant",
-      "serviceProvider": "Prestataire de services",
-      "consultant": "Consultant",
-      "other": "Autre",
-      "logisticsPartnerExample": "ex: Partenaire logistique"
-    },
+  "businessProfiles": {
+  "PUBLIC_ORGANISATION": "Organisation Publique",
+  "ADMIN": "Administrateur",
+  "BANK": "Banque",
+  "FREIGHT_FORWARDER": "Transitaire",
+  "INDIVIDUAL": "Individu",
+  "PROFESSIONAL": "Professionnel",
+  "OTHER": "Autre"
+},
+
     "pageTitles": {
       "home": "Accueil",
       "login": "Connexion",

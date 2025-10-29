@@ -19,6 +19,7 @@ export const loginUser = async (credentials) => {
 };
 
 export const registerUser = async (userData) => {
+  console.log("Registering user with data:", userData);
   const res = await fetch(`${import.meta.env.VITE_APP_DOMAIN}/public/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

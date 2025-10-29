@@ -27,17 +27,17 @@ export default function UserInfoStep({ data, errors, onUpdate }) {
       return <PasswordField key={field.name} {...props} />;
     }
 
-    if (field.name === 'phoneNumber') {
+    if (field.name === 'gsm') {
       return (
         <PhoneNumberField
           key={field.name}
-          value={data.phoneNumber}
-          onChange={(e) => onUpdate("phoneNumber", e.target.value)}
+          value={data.gsm}
+          onChange={(e) => onUpdate("gsm", e.target.value)}
           required
-          error={errors.phoneNumber}
+          error={errors.gsm}
           selectedCountry={data.phoneCountry || "US"}
           onCountryChange={(countryCode) => onUpdate("phoneCountry", countryCode)}
-          onValidation={(err) => onUpdate("phoneNumberError", err)}
+          onValidation={(err) => onUpdate("gsmError", err)}
         />
       );
     }

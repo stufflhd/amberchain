@@ -420,15 +420,16 @@
     "and": "and",
     "searchWord": "Search...",
     "searchWord2": "View Details",
-    "businessProfiles": {
-      "manufacturer": "Manufacturer",
-      "distributor": "Distributor",
-      "retailer": "Retailer",
-      "serviceProvider": "Service Provider",
-      "consultant": "Consultant",
-      "other": "Other",
-      "logisticsPartnerExample": "e.g., Logistics Partner"
-    },
+   "businessProfiles": {
+  "PUBLIC_ORGANISATION": "Public Organisation",
+  "ADMIN": "Admin",
+  "BANK": "Bank",
+  "FREIGHT_FORWARDER": "Freight Forwarder",
+  "INDIVIDUAL": "Individual",
+  "PROFESSIONAL": "Professional",
+  "OTHER": "Other"
+}
+,
     "pageTitles": {
       "home": "Home",
       "login": "Login",

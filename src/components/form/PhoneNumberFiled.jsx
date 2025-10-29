@@ -22,7 +22,7 @@ import { useCountriesQuery } from "@/queries/useCountriesQuery";
 
 export default function PhoneNumberField({
   id,
-  name = "phoneNumber",
+  name = "gsm",
   value = "",
   onChange,
   label,

@@ -32,13 +32,7 @@ export const formFields = {
         regex: emailRegex,
         validation: (value) => !value.trim() || !emailRegex.test(value) ? t('validation.invalidEmail') : null
     },
-    emailConfirmation: {
-        name: "emailConfirmation",
-        label: () => t('registerForm.emailConfirmation'),
-        type: "email",
-        required: true,
-        validation: (value, formData) => value !== formData.email ? t('validation.emailMismatch') : null
-    },
+    // Note: emailConfirmation removed from DTO; keep validation elsewhere if needed
     password: {
         name: "password",
         label: () => t('registerForm.password'),
@@ -47,8 +41,8 @@ export const formFields = {
         regex: passwordRegex,
         validation: (value) => !value.trim() || !passwordRegex.test(value) ? t('validation.weakPassword') : null
     },
-    phoneNumber: {
-        name: "phoneNumber",
+    gsm: {
+        name: "gsm",
         label: () => t('registerForm.phoneNumber'),
         type: "tel",
         required: true,
@@ -98,9 +92,8 @@ export const userInfoStepFields = [
     formFields.firstName,
     formFields.lastName,
     formFields.email,
-    formFields.emailConfirmation,
     formFields.password,
-    formFields.phoneNumber
+    formFields.gsm
 ];
 
 export const companyInfoStepFields = [

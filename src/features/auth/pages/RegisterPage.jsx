@@ -20,9 +20,8 @@ const initialFormData = {
   firstName: "",
   lastName: "",
   email: "",
-  emailConfirmation: "",
   password: "",
-  phoneNumber: "",
+  gsm: "",
   companyLocation: "",
   companyName: "",
   address: "",
@@ -79,7 +78,7 @@ export default function RegisterPage() {
         if (!businessProfile)
           newErrors.businessProfile = t("validation.selectBusinessProfile");
         if (
-          businessProfile === "others" &&
+          businessProfile === "PROFESSIONAL" &&
           (!customBusinessType.trim() ||
             !generalTextRegex.test(customBusinessType))
         ) {
@@ -112,12 +111,22 @@ export default function RegisterPage() {
       return;
     }
 
-    formData.username = `${formData.firstName}-${formData.lastName}`;
-    formData.userType = "CLIENT";
-    formData.gsm = formData.phoneNumber;
-    formData.language = i18n.language;
-    
-    await handleApiRequest(() => mutation.mutateAsync(formData), {
+    // Build payload matching UsersSignupDto from swagger
+    const payload = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      password: formData.password,
+      gsm: formData.gsm, // backend expects 'gsm'
+      companyLocation: formData.companyLocation,
+      companyName: formData.companyName,
+      address: formData.address,
+      zipCode: formData.zipCode,
+      businessProfile: formData.businessProfile,
+      customBusinessType: formData.customBusinessType || undefined,
+    };
+
+    await handleApiRequest(() => mutation.mutateAsync(payload), {
       loading: t("validation.creatingAccount"),
       success: t("SuccessSignup.title"),
       error: (err) => err?.message || t("loginForm.notifications.error"),
