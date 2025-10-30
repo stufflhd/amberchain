@@ -1,4 +1,4 @@
-import React, { useState ,useMemo} from "react";
+import React, { useState, useMemo, useCallback, memo } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -19,63 +19,94 @@ import {
 import { BookingConfirmationPopup } from "@/components/ui/booking-confirmation-popup";
 import { Checkbox } from "@/components/ui/checkbox";
 
-export default function BookingForm() {
-  const { data, setField } = useShipmentStore();
+// Small presentational helpers defined outside the component so they are stable
+// and won't be recreated each render. They are pure render helpers and
+// intentionally simple to preserve exact markup and styles.
+const FormField = memo(({ label, children, info = false, className = "" }) => (
+  <div className={`space-y-1.5 ${className}`}>
+    <Label className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
+      {label}
+      {info && <Info className="h-3 w-3" />}
+    </Label>
+    {children}
+  </div>
+));
+
+const Section = memo(({ title, children, className = "" }) => (
+  <div className={`p-4 rounded-lg border border-border/50 bg-card/30 space-y-3 ${className}`}>
+    {title && <h4 className="text-sm font-semibold text-foreground mb-3">{title}</h4>}
+    {children}
+  </div>
+));
+
+function BookingForm() {
+  // select data and setField separately to avoid recreating a new object
+  // on every store update (minimizes unnecessary re-renders)
+  const data = useShipmentStore((s) => s.data);
+  const setField = useShipmentStore((s) => s.setField);
 
   const [newBeforeETA, setNewBeforeETA] = useState({ day: "", temperature: "" });
   const [newAfterGateIn, setNewAfterGateIn] = useState({ day: "", temperature: "" });
   const [activeScheduleTab, setActiveScheduleTab] = useState("beforeEta");
   const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
 
-  const addBeforeETA = () => {
+  const addBeforeETA = useCallback(() => {
     if (!newBeforeETA.day || !newBeforeETA.temperature) return;
     setField("temperatureSchedule", {
       ...data.temperatureSchedule,
       daysBeforeETA: [...(data.temperatureSchedule?.daysBeforeETA || []), { ...newBeforeETA }],
     });
     setNewBeforeETA({ day: "", temperature: "" });
-  };
+  }, [newBeforeETA, data.temperatureSchedule, setField]);
 
-  const addAfterGateIn = () => {
+  const addAfterGateIn = useCallback(() => {
     if (!newAfterGateIn.day || !newAfterGateIn.temperature) return;
     setField("temperatureSchedule", {
       ...data.temperatureSchedule,
       daysAfterGateIn: [...(data.temperatureSchedule?.daysAfterGateIn || []), { ...newAfterGateIn }],
     });
     setNewAfterGateIn({ day: "", temperature: "" });
-  };
+  }, [newAfterGateIn, data.temperatureSchedule, setField]);
 
-  const removeBeforeETA = (index) => {
+  const removeBeforeETA = useCallback((index) => {
     const updatedPoints = data.temperatureSchedule?.daysBeforeETA?.filter((_, i) => i !== index) || [];
     setField("temperatureSchedule", { ...data.temperatureSchedule, daysBeforeETA: updatedPoints });
-  };
+  }, [data.temperatureSchedule, setField]);
 
-  const removeAfterGateIn = (index) => {
+  const removeAfterGateIn = useCallback((index) => {
     const updatedPoints = data.temperatureSchedule?.daysAfterGateIn?.filter((_, i) => i !== index) || [];
     setField("temperatureSchedule", { ...data.temperatureSchedule, daysAfterGateIn: updatedPoints });
-  };
+  }, [data.temperatureSchedule, setField]);
 
-  const handleBookNow = () => {
+
+  const handleBookNow = useCallback(() => {
     console.log("Booking data:", data);
     setShowConfirmationPopup(true);
-  };
+  }, [data]);
 
-  const FormField = ({ label, children, info = false }) => (
-    <div className="space-y-1.5">
-      <Label className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
-        {label}
-        {info && <Info className="h-3 w-3" />}
-      </Label>
-      {children}
-    </div>
-  );
+  // Stable handlers to avoid recreating inline functions for common UI events
+  const handleScheduleTabChange = useCallback((val) => setActiveScheduleTab(val || "beforeEta"), []);
 
-  const Section = ({ title, children, className = "" }) => (
-    <div className={`p-4 rounded-lg border border-border/50 bg-card/30 space-y-3 ${className}`}>
-      {title && <h4 className="text-sm font-semibold text-foreground mb-3">{title}</h4>}
-      {children}
-    </div>
-  );
+  const handleNewBeforeDayChange = useCallback((e) => {
+    const v = e?.target ? e.target.value : e;
+    setNewBeforeETA((prev) => ({ ...prev, day: v }));
+  }, []);
+
+  const handleNewBeforeTempChange = useCallback((e) => {
+    const v = e?.target ? e.target.value : e;
+    setNewBeforeETA((prev) => ({ ...prev, temperature: v }));
+  }, []);
+
+  const handleNewAfterDayChange = useCallback((e) => {
+    const v = e?.target ? e.target.value : e;
+    setNewAfterGateIn((prev) => ({ ...prev, day: v }));
+  }, []);
+
+  const handleNewAfterTempChange = useCallback((e) => {
+    const v = e?.target ? e.target.value : e;
+    setNewAfterGateIn((prev) => ({ ...prev, temperature: v }));
+  }, []);
+
 
 
 // Check if Cargo Information section should be displayed
@@ -96,19 +127,19 @@ const shouldShowCargoInfo = useMemo(() => {
 }, [data.cargoType, data.mode, data.shipmentType]);
 
 // Check if Temperature Control section should be displayed
-const shouldShowTempControl = useMemo(() => {
-  return data.cargoType == "Perishable" && ["sea", "rail", "road", "air"].includes(data.mode);
-}, [data.cargoType, data.mode]);
+// const shouldShowTempControl = useMemo(() => {
+//   return data.cargoType == "Perishable" && ["sea", "rail", "road", "air"].includes(data.mode);
+// }, [data.cargoType, data.mode]);
 
 // Check if Delivery Requirements section should be displayed
-const shouldShowDeliveryReq = useMemo(() => {
-  return data.mode == "road";
-}, [data.mode]);
+// const shouldShowDeliveryReq = useMemo(() => {
+//   return data.mode == "road";
+// }, [data.mode]);
 
 // Calculate grid columns based on visible sections
-const visibleSectionsCount = useMemo(() => {
-  return [shouldShowCargoInfo, shouldShowTempControl, shouldShowDeliveryReq].filter(Boolean).length;
-}, [shouldShowCargoInfo, shouldShowTempControl, shouldShowDeliveryReq]);
+// const visibleSectionsCount = useMemo(() => {
+//   return [shouldShowCargoInfo, shouldShowTempControl, shouldShowDeliveryReq].filter(Boolean).length;
+// }, [shouldShowCargoInfo, shouldShowTempControl, shouldShowDeliveryReq]);
 
 
 
@@ -323,7 +354,7 @@ const visibleSectionsCount = useMemo(() => {
           <ToggleGroup
             type="single"
             value={activeScheduleTab}
-            onValueChange={(val) => setActiveScheduleTab(val || "beforeEta")}
+            onValueChange={handleScheduleTabChange}
             variant="outline"
             size="sm"
             className="justify-start"
@@ -350,13 +381,13 @@ const visibleSectionsCount = useMemo(() => {
               <div className="flex gap-2 items-center pt-2 border-t border-dashed">
                 <Input
                   value={newBeforeETA.day}
-                  onChange={(e) => setNewBeforeETA({ ...newBeforeETA, day: e.target.value })}
+                  onChange={handleNewBeforeDayChange}
                   placeholder="Day"
                   className="w-20 h-8"
                 />
                 <Input
                   value={newBeforeETA.temperature}
-                  onChange={(e) => setNewBeforeETA({ ...newBeforeETA, temperature: e.target.value })}
+                  onChange={handleNewBeforeTempChange}
                   placeholder="Temp"
                   className="flex-1 h-8"
                 />
@@ -384,13 +415,13 @@ const visibleSectionsCount = useMemo(() => {
               <div className="flex gap-2 items-center pt-2 border-t border-dashed">
                 <Input
                   value={newAfterGateIn.day}
-                  onChange={(e) => setNewAfterGateIn({ ...newAfterGateIn, day: e.target.value })}
+                  onChange={handleNewAfterDayChange}
                   placeholder="Day"
                   className="w-20 h-8"
                 />
                 <Input
                   value={newAfterGateIn.temperature}
-                  onChange={(e) => setNewAfterGateIn({ ...newAfterGateIn, temperature: e.target.value })}
+                  onChange={handleNewAfterTempChange}
                   placeholder="Temp"
                   className="flex-1 h-8"
                 />
@@ -561,6 +592,8 @@ const visibleSectionsCount = useMemo(() => {
         {/* Road-specific settings */}
         {data.mode == "road" && (
           <Section title="Delivery Requirements">
+            <div className="grid grid-cols-2 gap-3">
+
             <FormField label="Liftgate Required">
               <RadioGroup
                 value={data.liftgate.required ? "yes" : "no"}
@@ -593,6 +626,7 @@ const visibleSectionsCount = useMemo(() => {
                 </SelectContent>
               </Select>
             </FormField>
+                </div>
           </Section>
         )}
 
@@ -959,3 +993,5 @@ const visibleSectionsCount = useMemo(() => {
     </div>
   );
 }
+
+export default memo(BookingForm);

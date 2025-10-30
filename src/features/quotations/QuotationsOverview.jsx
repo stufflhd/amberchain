@@ -103,7 +103,7 @@ export default function QuotationsOverview({ data: propData }) {
     <p className="text-green-700 dark:text-green-300">
       Request Reference Number:{" "}
       <span className="font-medium text-green-900 dark:text-green-200">
-        REF-{Math.floor(100000 + Math.random() * 900000)}
+        REF-125258
       </span>
     </p>
     <p className="text-green-700 dark:text-green-300">
