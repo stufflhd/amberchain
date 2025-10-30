@@ -26,7 +26,7 @@ const businessProfiles = [
   { value: "FREIGHT_FORWARDER", label: t => t(`businessProfiles.FREIGHT_FORWARDER`), icon: TruckIcon },
   { value: "INDIVIDUAL", label: t => t(`businessProfiles.INDIVIDUAL`), icon: UserIcon },
   { value: "PROFESSIONAL", label: t => t(`businessProfiles.PROFESSIONAL`), icon: BriefcaseIcon },
-  { value: "OTHER", label: t => t(`businessProfiles.OTHER`), icon: MoreHorizontalIcon },
+  // { value: "OTHER", label: t => t(`businessProfiles.OTHER`), icon: MoreHorizontalIcon },
 ];
 
 
@@ -84,7 +84,7 @@ export default function BusinessAndTermsStep({ data, errors, onUpdate }) {
         )}
       </div>
 
-      {data.businessProfile === "OTHER" && (
+      {/* {data.businessProfile === "OTHER" && ( */}
         <FormField
           label={t('registerForm.customBusinessType')}
           name="customBusinessType"
@@ -94,7 +94,7 @@ export default function BusinessAndTermsStep({ data, errors, onUpdate }) {
           error={errors.customBusinessType}
           required
         />
-      )}
+      {/* )} */}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
         <div className={`border rounded-md p-4 flex items-start gap-3 ${errors.hasAgreedToTerms ? 'border-destructive' : 'border-input'}`}>
