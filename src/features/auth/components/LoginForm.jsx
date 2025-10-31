@@ -8,9 +8,10 @@ import { useTranslation } from "react-i18next";
 import { useMutation } from '@tanstack/react-query';
 import { useForm, Controller } from 'react-hook-form';
 import { handleApiRequest } from '@/lib/handleApiRequest';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import useAuthStore from '@/store/authStore';
 import { loginFields } from '@/constants/formFields';
-import { loginUser } from '@/services/auth';
+import { loginUser , getConnectedUser } from '@/services/auth';
 
 export default function LoginForm() {
     const { t } = useTranslation();
@@ -18,7 +19,8 @@ export default function LoginForm() {
     const [agreedToPrivacy, setAgreedToPrivacy] = useState(true);
     const [showAgreementError, setShowAgreementError] = useState(false);
     const [manualAgreement, setManualAgreement] = useState(true);
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
+    const { setUser } = useAuthStore();
 
     const { control, handleSubmit, formState: { isValid, isSubmitting } } = useForm({
         mode: 'onChange',
@@ -33,17 +35,35 @@ export default function LoginForm() {
     });
 
     const onFormSubmit = async (data) => {
-        console.log(data)
+        const payload= {
+            username: data.email,
+            password: data.password,
+        }
+        console.log('login payload' , data)
+
         try {
-            await handleApiRequest(
-                () => mutation.mutateAsync(data),
-                {
-                    loading: t('loginForm.notifications.loading'),
-                    success: t('loginForm.notifications.success'),
-                    error: t('common.generic-error'),
-                }
-            );
-            
+         const apiResponse = await handleApiRequest(
+    () => mutation.mutateAsync(payload),
+    {
+        loading: t('loginForm.notifications.loading'),
+        success: t('loginForm.notifications.success'),
+        error: t('common.generic-error'),
+    }
+);
+
+console.log("✅ Login response:", apiResponse);
+
+            // If the response includes the user object and token:
+            if (apiResponse?.user) {
+                localStorage.setItem("user", JSON.stringify(apiResponse.user));
+                localStorage.setItem("token", apiResponse.token);
+                // populate the global auth store so layouts/components update
+                setUser(apiResponse.user);
+                // redirect to dashboard
+                navigate('/dashboard', { replace: true });
+            }
+
+
         } catch (err) {
             console.error(err)
         }

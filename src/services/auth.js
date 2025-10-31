@@ -17,8 +17,11 @@ export const loginUser = async (credentials) => {
 
   return response;
 };
+// console.log("Signup payload:", JSON.stringify(payload, null, 2));
+
 
 export const registerUser = async (userData) => {
+
   console.log("Registering user with data:", userData);
   const res = await fetch(`${import.meta.env.VITE_APP_DOMAIN}/public/signup`, {
     method: "POST",
@@ -39,4 +42,20 @@ export const registerUser = async (userData) => {
     throw error;
   }
   return response;
+};
+
+export const getConnectedUser = async () => {
+  const res = await fetch(`${import.meta.env.VITE_APP_DOMAIN}/users`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include", // ⚠️ important if backend uses cookies/sessions
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch connected user");
+  }
+
+  return res.json();
 };

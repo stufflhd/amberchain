@@ -15,55 +15,86 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { getNavConfig } from "@/constants/navConfig";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuthStore from '@/store/authStore';
 
 export default function UserMenu() {
   const { t } = useTranslation();
   const navConfig = getNavConfig(t);
   const logoutNavItem = navConfig.clientTopNav[navConfig.clientTopNav.length - 1];
   const LogoutIcon = logoutNavItem.icon;
+  const navigate = useNavigate();
+  const { user, logout, setUser } = useAuthStore();
+
+  const displayName = user?.name || user?.username || "Keith Kennedy";
+  const displayEmail = user?.email || "k.kennedy@originui.com";
+  const avatarSrc = user?.avatar || user?.avatarUrl || null;
+  const initials = (() => {
+    if (!displayName) return "KK";
+    return displayName
+      .split(" ")
+      .map((s) => s[0])
+      .slice(0, 2)
+      .join("")
+      .toUpperCase();
+  })();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    try {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+    } catch (err) {
+      // ignore
+    }
+    // update store
+    if (typeof logout === 'function') logout();
+    else if (typeof setUser === 'function') setUser(null);
+    navigate('/auth/login', { replace: true });
+  };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="h-auto p-0 hover:bg-transparent rounded-full">
           <Avatar>
-            <AvatarImage src="./avatar.jpg" alt="Profile image" />
-            <AvatarFallback>KK</AvatarFallback>
+            {avatarSrc ? (
+              <AvatarImage src={avatarSrc} alt="Profile image" />
+            ) : (
+              <AvatarFallback>{initials}</AvatarFallback>
+            )}
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="max-w-64 [&_div]:cursor-pointer" align="end">
         <DropdownMenuLabel className="flex min-w-0 flex-col">
           <span className="text-foreground truncate text-sm font-medium">
-            Keith Kennedy
+            {displayName}
           </span>
           <span className="text-muted-foreground truncate text-xs font-normal">
-            k.kennedy@originui.com
+            {displayEmail}
           </span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          {
-            navConfig.clientTopNav.filter((_, index) => index != navConfig.clientTopNav.length - 1).map((link) => (
+          {navConfig.clientTopNav
+            .filter((_, index) => index != navConfig.clientTopNav.length - 1)
+            .map((link) => (
               <Link to={link.path} key={link.path}>
-                <DropdownMenuItem  href={link.path}>
+                <DropdownMenuItem href={link.path}>
                   <link.icon size={16} className="opacity-60" aria-hidden="true" />
                   <span>{link.label}</span>
                 </DropdownMenuItem>
               </Link>
-            ))
-          }
+            ))}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        {
-          <Link to={navConfig.clientTopNav[navConfig.clientTopNav.length - 1].path}>
-            <DropdownMenuItem>
-              <LogoutIcon size={16} className="opacity-60" aria-hidden="true" />
-              <span>{navConfig.clientTopNav[navConfig.clientTopNav.length - 1].label}</span>
-            </DropdownMenuItem>
-          </Link>
-        }
+        <DropdownMenuItem asChild>
+          <a href="#" onClick={handleLogout}>
+            <LogoutIcon size={16} className="opacity-60" aria-hidden="true" />
+            <span>{logoutNavItem.label}</span>
+          </a>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

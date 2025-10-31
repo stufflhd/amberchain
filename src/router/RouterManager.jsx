@@ -47,8 +47,22 @@ const router = createBrowserRouter([
                 ),
                 children: [
                     { index: true, element: <Navigate to="/auth/login" /> },
-                    { path: "login", element: <LoginPage /> },
-                    { path: "register", element: <RegisterPage /> },
+                    { 
+                        path: "login", 
+                        element: (
+                            <Suspense fallback={<PageLoader />}>
+                                <LoginPage />
+                            </Suspense>
+                        ) 
+                    },
+                    { 
+                        path: "register", 
+                        element: (
+                            <Suspense fallback={<PageLoader />}>
+                                <RegisterPage />
+                            </Suspense>
+                        ) 
+                    },
                 ],
             },
             {
