@@ -137,22 +137,27 @@ export default function RegisterPage() {
   await handleApiRequest(() => mutation.mutateAsync(payload), {
     loading: t("validation.creatingAccount"),
     success: t("SuccessSignup.title"),
-    error: (err) => {
-      if (err?.isEmailTakenError) {
-        setErrors(prev => ({ ...prev, email: t("validation.emailTaken") }));
-        return t("validation.emailTaken");
-      }
-      if (err?.isValidationError) {
-        try {
-          const validationErrors = JSON.parse(err.message);
-          setErrors(prev => ({ ...prev, ...validationErrors }));
-          return t("validation.formErrors");
-        } catch (e) {
-          return err.message;
-        }
-      }
-      return err?.message || t("loginForm.notifications.error");
-    },
+        error: (err) => {
+          if (err?.isServerDupError) {
+            // Inform the user this looks like a server-side duplicate records problem
+            toast.error(t('validation.serverDuplicate') || 'Server error: duplicate user records detected. Please contact support.');
+            return t('validation.serverDuplicate') || 'Server error: duplicate user records detected. Please contact support.';
+          }
+          if (err?.isEmailTakenError) {
+            setErrors(prev => ({ ...prev, email: t("validation.emailTaken") }));
+            return t("validation.emailTaken");
+          }
+          if (err?.isValidationError) {
+            try {
+              const validationErrors = JSON.parse(err.message);
+              setErrors(prev => ({ ...prev, ...validationErrors }));
+              return t("validation.formErrors");
+            } catch (e) {
+              return err.message;
+            }
+          }
+          return err?.message || t("loginForm.notifications.error");
+        },
   });
 
   // ✅ Redirect to login after successful registration

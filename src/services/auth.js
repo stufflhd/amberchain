@@ -35,6 +35,13 @@ export const registerUser = async (userData) => {
   } catch (error) {
     // Log error details for easier debugging
     console.error('[auth] registerUser error:', error?.response?.status, error?.response?.data || error.message);
+    // Detect common server-side duplicate-query error and provide a clearer error
+    const serverMessage = error?.response?.data?.message || error?.response?.data || '';
+    if (typeof serverMessage === 'string' && serverMessage.includes('NonUniqueResultException')) {
+      const e = new Error('Server error: duplicate user records detected. Please contact support.');
+      e.isServerDupError = true;
+      throw e;
+    }
     if (error.response?.data?.errors) {
       // Backend validation errors
       const e = new Error(JSON.stringify(error.response.data.errors));
