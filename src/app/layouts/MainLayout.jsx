@@ -22,7 +22,9 @@ export default function MainLayout({ children, title = 'AMBERCHAINS' }) {
           <Navbar type='main' />
         </header>
         <div className="flex flex-1 flex-col gap-8 h-fit">
-          {children}
+          {/* Render children when MainLayout is used directly with children prop,
+              otherwise render nested route content via Outlet. */}
+          {children || <Outlet />}
         </div>
       </SidebarInset>
     </SidebarProvider>

@@ -24,34 +24,30 @@ export default function UserMenu() {
   const logoutNavItem = navConfig.clientTopNav[navConfig.clientTopNav.length - 1];
   const LogoutIcon = logoutNavItem.icon;
   const navigate = useNavigate();
-  const { user, logout, setUser } = useAuthStore();
+  const { user, logout, setAuth } = useAuthStore();
 
-  const displayName = user?.name || user?.username || "Keith Kennedy";
-  const displayEmail = user?.email || "k.kennedy@originui.com";
-  const avatarSrc = user?.avatar || user?.avatarUrl || null;
-  const initials = (() => {
-    if (!displayName) return "KK";
-    return displayName
-      .split(" ")
-      .map((s) => s[0])
-      .slice(0, 2)
-      .join("")
-      .toUpperCase();
-  })();
+const displayName = `${user?.firstName || ""} ${user?.lastName || ""}`.trim() || "User";
+const displayEmail = user?.email || "user@example.com";
+const avatarSrc = null; // backend doesn't provide avatar, so fallback to initials
 
-  const handleLogout = (e) => {
-    e.preventDefault();
-    try {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-    } catch (err) {
-      // ignore
-    }
-    // update store
-    if (typeof logout === 'function') logout();
-    else if (typeof setUser === 'function') setUser(null);
-    navigate('/auth/login', { replace: true });
-  };
+
+const initials = (() => {
+  if (!displayName) return "UU"; // fallback initials
+  return displayName
+    .split(" ")
+    .map((s) => s[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+})();
+
+
+const handleLogout = () => {
+  const { logout } = useAuthStore.getState();
+  logout();
+  navigate("/auth/login", { replace: true });
+};
+
 
   return (
     <DropdownMenu>

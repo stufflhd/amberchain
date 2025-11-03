@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import useAuthStore from '@/store/authStore';
 import { loginFields } from '@/constants/formFields';
 import { loginUser , getConnectedUser } from '@/services/auth';
+import { toast } from 'sonner';
 
 export default function LoginForm() {
     const { t } = useTranslation();
@@ -20,7 +21,7 @@ export default function LoginForm() {
     const [showAgreementError, setShowAgreementError] = useState(false);
     const [manualAgreement, setManualAgreement] = useState(true);
     const navigate = useNavigate();
-    const { setUser } = useAuthStore();
+    const { setAuth } = useAuthStore();
 
     const { control, handleSubmit, formState: { isValid, isSubmitting } } = useForm({
         mode: 'onChange',
@@ -31,6 +32,43 @@ export default function LoginForm() {
     });
 
     const mutation = useMutation({
+        onSuccess: async (response) => {
+            // Server-side login error message
+            if (response?.loginError) {
+                toast.error(response.loginError);
+                return;
+            }
+
+            const { token, user } = response || {};
+
+            // If token present but no user, try to fetch connected user
+            let resolvedUser = user;
+            if (token && !resolvedUser) {
+                try {
+                    resolvedUser = await getConnectedUser();
+                } catch (e) {
+                    // fallback - still allow login if token is present
+                    console.warn('Failed to fetch connected user after login:', e);
+                }
+            }
+
+            if (token) {
+                // Persist auth and navigate regardless of user status
+                useAuthStore.getState().setAuth(resolvedUser || null, token);
+
+                // Notify user if their account requires email confirmation, but do NOT block access
+                const status = resolvedUser?.status || resolvedUser?.userStatus || null;
+                if (status === 'WAITING_FOR_MAIL_CONFIRMATION' || status === 'WAITING_FOR_MAIL_CONFIRMATION') {
+                    toast("Your account is waiting for email confirmation. Some features may be limited until you confirm your email.");
+                }
+
+                navigate('/dashboard');
+                return;
+            }
+
+            toast.error('Invalid server response.');
+        },
+
         mutationFn: loginUser,
     });
 
@@ -58,7 +96,7 @@ console.log("✅ Login response:", apiResponse);
                 localStorage.setItem("user", JSON.stringify(apiResponse.user));
                 localStorage.setItem("token", apiResponse.token);
                 // populate the global auth store so layouts/components update
-                setUser(apiResponse.user);
+                setAuth(apiResponse.user, apiResponse.token);
                 // redirect to dashboard
                 navigate('/dashboard', { replace: true });
             }

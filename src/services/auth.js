@@ -1,61 +1,86 @@
-export const loginUser = async (credentials) => {
-  const res = await fetch(`${import.meta.env.VITE_APP_DOMAIN}/public/signin`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(credentials),
-  });
+// src/services/auth.js
+import apiClient from "@/lib/apiClient";
 
-  let response;
+/**
+ * LOGIN USER
+ * @param {Object} payload - { username/email, password }
+ * @returns {Object} - { token, user, ... }
+ */
+export const loginUser = async (payload) => {
   try {
-    response = await res.json();
-  } catch (err) {
-    response = { message: err };
+    // Transform email to username if email is provided
+    const loginPayload = {
+      username: payload.username,
+      password: payload.password
+    };
+    const { data } = await apiClient.post("/public/signin", loginPayload);
+    return data;
+  } catch (error) {
+    const message =
+      error.response?.data?.message || "Login failed. Please try again.";
+    throw new Error(message);
   }
-  if (!res.ok) {
-    throw new Error(response.message);
-  }
-
-  return response;
 };
-// console.log("Signup payload:", JSON.stringify(payload, null, 2));
 
-
+/**
+ * REGISTER USER
+ * @param {Object} userData - { email, password, firstName, lastName, ... }
+ * @returns {Object} - { user, token, ... }
+ */
 export const registerUser = async (userData) => {
-
-  console.log("Registering user with data:", userData);
-  const res = await fetch(`${import.meta.env.VITE_APP_DOMAIN}/public/signup`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(userData),
-  });
-
-  const response = await res.json().catch(() => ({}));
-
-  if (!res.ok) {
-    if (response.errors && Array.isArray(response.errors)) {
-      const error = new Error(JSON.stringify(response));
-      error.isValidationError = true;
-      throw error;
+  try {
+    const { data } = await apiClient.post("/public/signup", userData);
+    console.debug('[auth] registerUser response:', data);
+    return data;
+  } catch (error) {
+    // Log error details for easier debugging
+    console.error('[auth] registerUser error:', error?.response?.status, error?.response?.data || error.message);
+    if (error.response?.data?.errors) {
+      // Backend validation errors
+      const e = new Error(JSON.stringify(error.response.data.errors));
+      e.isValidationError = true;
+      throw e;
     }
-    const error = new Error("REGISTRATION_FAILED");
-    error.isRegistrationError = true;
-    throw error;
+    // If we flagged email-taken earlier, pass that through
+  if (error.isEmailTakenError) throw error;
+
+    // If server returned 409 or a message, surface it
+    if (error.response?.status === 409) {
+      const e = new Error('This email address is already registered.');
+      e.isEmailTakenError = true;
+      throw e;
+    }
+
+    const message = error.response?.data?.message || "Registration failed.";
+    const e = new Error(message);
+    e.isRegistrationError = true;
+    throw e;
   }
-  return response;
 };
 
+/**
+ * GET CONNECTED USER
+ * Fetch the currently logged-in user
+ * @returns {Object} - user object
+ */
 export const getConnectedUser = async () => {
-  const res = await fetch(`${import.meta.env.VITE_APP_DOMAIN}/users`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include", // ⚠️ important if backend uses cookies/sessions
-  });
-
-  if (!res.ok) {
+  try {
+    const { data } = await apiClient.get("/users");
+    return data;
+  } catch (error) {
     throw new Error("Failed to fetch connected user");
   }
+};
 
-  return res.json();
+/**
+ * LOGOUT USER
+ * Clears token and user from storage
+ */
+export const logoutUser = () => {
+  try {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+  } catch (err) {
+    console.warn("Failed to clear local storage:", err);
+  }
 };

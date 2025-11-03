@@ -9,6 +9,7 @@ import CompanyInfoStep from "../components/signUpSteps/CompanyInfoStep";
 import BusinessAndTermsStep from "../components/signUpSteps/BusinessAndTermsStep";
 import { useCountriesQuery } from "@/queries/useCountriesQuery";
 import { toast } from "sonner";
+import { useNavigate } from 'react-router-dom';
 import {
   userInfoStepFields,
   companyInfoStepFields,
@@ -44,6 +45,7 @@ export default function RegisterPage() {
   const mutation = useMutation({
     mutationFn: registerUser,
   });
+  const navigate = useNavigate();
 
   const handleUpdate = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -102,6 +104,11 @@ export default function RegisterPage() {
   };
 
   const finishSignUp = async () => {
+    // Prevent duplicate submissions
+    if (mutation.isPending) {
+      console.warn('Signup already in progress, preventing duplicate submission');
+      return;
+    }
     const isStep1Valid = validateStep(1);
     const isStep2Valid = validateStep(2);
     const isStep3Valid = validateStep(3);
@@ -123,15 +130,38 @@ export default function RegisterPage() {
       address: formData.address,
       zipCode: formData.zipCode,
       businessProfile: formData.businessProfile,
-      customBusinessType: formData.customBusinessType || undefined,
+      customBusinessType: formData.customBusinessType ,
     };
 
-    await handleApiRequest(() => mutation.mutateAsync(payload), {
-      loading: t("validation.creatingAccount"),
-      success: t("SuccessSignup.title"),
-      error: (err) => err?.message || t("loginForm.notifications.error"),
-    });
-    setIsSignUpComplete(true);
+   try {
+  await handleApiRequest(() => mutation.mutateAsync(payload), {
+    loading: t("validation.creatingAccount"),
+    success: t("SuccessSignup.title"),
+    error: (err) => {
+      if (err?.isEmailTakenError) {
+        setErrors(prev => ({ ...prev, email: t("validation.emailTaken") }));
+        return t("validation.emailTaken");
+      }
+      if (err?.isValidationError) {
+        try {
+          const validationErrors = JSON.parse(err.message);
+          setErrors(prev => ({ ...prev, ...validationErrors }));
+          return t("validation.formErrors");
+        } catch (e) {
+          return err.message;
+        }
+      }
+      return err?.message || t("loginForm.notifications.error");
+    },
+  });
+
+  // ✅ Redirect to login after successful registration
+  navigate('/auth/login', { replace: true });
+
+} catch (error) {
+  console.error('Registration error:', error);
+}
+
   };
 
   return (
