@@ -12,21 +12,18 @@ const EmailVerify = () => {
 
   useEffect(() => {
     if (!token) {
-      setMessage("❌ Missing token. Please check your link.");
+      setMessage("❌Your Account need confirmation. Please check your email.");
       setLoading(false);
       return;
     }
 
     const verifyEmail = async () => {
       try {
-        // replace this with your backend base URL
-        // const res = await axios.get(
-        //   `https://wapp.amberchains.com/api/users/email-validation?token=${token}`
-        // );
+      
  const res = await axios.put(
-          `https://wapp.amberchains.com/api/users/email-validation?token=${encodeURIComponent(token)}`
+          `${import.meta.env.VITE_APP_DOMAIN}/users/email-validation?token=${encodeURIComponent(token)}`
         );
-        
+
         if (res.status === 200) {
           setMessage("✅ Email verified! Redirecting to login...");
           setTimeout(() => navigate("/auth/login"), 2000);

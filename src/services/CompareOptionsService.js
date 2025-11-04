@@ -1,6 +1,6 @@
 export const submitCompareOptions = async (formData) => {
     
-    const res = await fetch(`${import.meta.env.VITE_APP_DOMAIN}/api/compare-options`, {
+    const res = await fetch(`${import.meta.env.VITE_APP_DOMAIN}/compare-options`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
