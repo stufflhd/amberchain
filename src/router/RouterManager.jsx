@@ -19,6 +19,7 @@ const SearchResultsPage = lazy(() => import("@/features/search/SearchResultsPage
 const BookingsOverview = lazy(() => import("@/features/bookings/BookingsOverview"));
 const ContainersOverview = lazy(() => import("@/features/containers/ContainersOverview"));
 const CompareOptions = lazy(() => import("@/features/compareOptions/CompareOptions"));
+const EmailVerify = lazy(() => import("@/features/auth/pages/EmailVerify"));
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,14 @@ const router = createBrowserRouter([
             element: (
               <Suspense fallback={<PageLoader />}>
                 <RegisterPage />
+              </Suspense>
+            ),
+          },
+          { 
+            path: "emailVerify", 
+            element: (
+              <Suspense fallback={<PageLoader />}>
+                <EmailVerify />
               </Suspense>
             ),
           },

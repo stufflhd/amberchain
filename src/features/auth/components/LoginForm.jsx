@@ -53,15 +53,24 @@ export default function LoginForm() {
             }
 
             if (token) {
-                // Persist auth and navigate regardless of user status
+                // Persist auth in store
                 useAuthStore.getState().setAuth(resolvedUser || null, token);
 
-                // Notify user if their account requires email confirmation, but do NOT block access
+                // Check if user needs email verification and redirect them to verify page
                 const status = resolvedUser?.status || resolvedUser?.userStatus || null;
-                if (status === 'WAITING_FOR_MAIL_CONFIRMATION' || status === 'WAITING_FOR_MAIL_CONFIRMATION') {
-                    toast("Your account is waiting for email confirmation. Some features may be limited until you confirm your email.");
+                const needsVerification =
+                    status === 'WAITING_FOR_MAIL_CONFIRMATION' ||
+                    status === 'WAITING_FOR_EMAIL_CONFIRMATION' ||
+                    resolvedUser?.emailVerified === false ||
+                    resolvedUser?.verified === false;
+
+                if (needsVerification) {
+                    toast("Your account requires email confirmation. Please verify your email to access the app.");
+                    navigate('/auth/emailVerify', { replace: true });
+                    return;
                 }
 
+                // Otherwise allow access
                 navigate('/dashboard');
                 return;
             }
@@ -97,8 +106,21 @@ console.log("✅ Login response:", apiResponse);
                 localStorage.setItem("token", apiResponse.token);
                 // populate the global auth store so layouts/components update
                 setAuth(apiResponse.user, apiResponse.token);
-                // redirect to dashboard
-                navigate('/dashboard', { replace: true });
+
+                const status = apiResponse.user?.status || apiResponse.user?.userStatus || null;
+                const needsVerification =
+                    status === 'WAITING_FOR_MAIL_CONFIRMATION' ||
+                    status === 'WAITING_FOR_EMAIL_CONFIRMATION' ||
+                    apiResponse.user?.emailVerified === false ||
+                    apiResponse.user?.verified === false;
+
+                if (needsVerification) {
+                    toast("Your account requires email confirmation. Please verify your email to access the app.");
+                    navigate('/auth/emailVerify', { replace: true });
+                } else {
+                    // redirect to dashboard
+                    navigate('/dashboard', { replace: true });
+                }
             }
 
 

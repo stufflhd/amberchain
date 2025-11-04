@@ -46,5 +46,18 @@ export default function ProtectedRoute() {
   // While fetching user data, show loader to avoid exposing protected UI
   if (isFetchingUser || (token && !user)) return <PageLoader />;
 
+  // If user exists but their email isn't verified (or backend reports waiting status)
+  const userStatus = user?.status || user?.userStatus || null;
+  const needsEmailVerification =
+    userStatus === 'WAITING_FOR_MAIL_CONFIRMATION' ||
+    userStatus === 'WAITING_FOR_EMAIL_CONFIRMATION' ||
+    user?.emailVerified === false ||
+    user?.verified === false;
+
+  if (needsEmailVerification) {
+    // Redirect to the email verification flow
+    return <Navigate to="/auth/emailVerify" replace />;
+  }
+
   return <Outlet />;
 }
