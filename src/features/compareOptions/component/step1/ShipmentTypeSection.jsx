@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Boxes, Container, Truck, Package } from "lucide-react"
 import ContainerTypeSearchSelect from "./ContainerTypeSearchSelect"
-import { useShipmentStore } from "../../../../store/shipmentStore"
+import { useShipmentStore } from "@/store/shipmentStore"
 export default function ShipmentTypeSection({ mode, shipmentType, setField, error }) {
   const shipmentOptions = mode === "sea" || mode === "rail" ? ["FCL", "LCL"] : mode === "road" ? ["FCL", "FTL", "LTL"] : []
   const transition = { duration: 0.35, ease: "easeOut" }

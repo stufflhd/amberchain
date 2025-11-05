@@ -16,7 +16,7 @@ export default function ModeSelector({ mode, setField }) {
 
   return (
     <section className="space-y-8">
-      <h2 className="text-2xl font-semibold text-center">Mode of Transport</h2>
+      <h2 className="text-2xl font-semibold text-center pt-8 ">Mode of Transport</h2>
       <div className="flex overflow-x-auto gap-4 pb-2 -mx-2 px-2 pt-4">
         {modes.map(m => {
           const Icon = modeIcons[m]

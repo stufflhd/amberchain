@@ -67,7 +67,8 @@ export default function CargoTypeSection({ cargoType, pickupChecked, setPickupCh
               )}
             </div>
           </div>
-
+{!(data.mode === "air" || (data.mode === "road" && ["LTL", "FTL"].includes(data.shipmentType)))
+ && (
           <div className="bg-accent/50 p-6 rounded-lg border-2 border-accent shadow-sm">
             <div className="flex items-center gap-3 mb-4">
               <Checkbox 
@@ -92,7 +93,7 @@ export default function CargoTypeSection({ cargoType, pickupChecked, setPickupCh
                 />
               </motion.div>
             )}
-          </div>
+          </div>)}
         </motion.div>
       )}
     </motion.section>

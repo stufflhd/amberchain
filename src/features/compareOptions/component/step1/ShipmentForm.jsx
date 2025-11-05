@@ -4,13 +4,12 @@ import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom"
 import { CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useShipmentStore } from "../../../../store/shipmentStore"
+import { useShipmentStore } from "@/store/shipmentStore"
 import { locationLabels } from "../../utils/modeLabels"
 import ModeSelector from "./ModeSelector"
 import LocationSection from "./LocationSection"
 import ShipmentTypeSection from "./ShipmentTypeSection"
 import CargoTypeSection from "./CargoTypeSection"
-
 
 import { AnimatePresence, motion as m } from "framer-motion"
 import PopUp from "./PopUp"
@@ -32,31 +31,40 @@ export default function ShipmentForm({ onFormComplete }) {
   const cargoTypeRef = useRef(null)
   const submitRef = useRef(null)
   const transition = { duration: 0.35, ease: "easeOut" }
-  const [polLabel, podLabel] = locationLabels[mode] || []
+
+  // POL / POD labels come from locationLabels[mode] if available,
+  // otherwise fallback to standard names
+  const [polLabel, podLabel] = locationLabels[mode] || ["Port of Loading", "Port of Discharge"]
+
+  // PLOR / PLOD full names — conditional on selected mode.
+  // If mode exists, include the chosen POL/POD label in the description;
+  // if not, show a standard full name.
+  const plorLabel = mode
+    ? `${polLabel} — Place/Return of Loading (PLOR)`
+    : "Place of Loading (PLOR)"
+  const plodLabel = mode
+    ? `${podLabel} — Place/Return of Discharge (PLOD)`
+    : "Place of Discharge (PLOD)"
 
   // Return an object of field errors. Empty object = valid
   const validateForm = () => {
     const errors = {}
 
-    // Start with location validation first
+    // Start with location validation first (POL/POD are always required)
     if (!data.pol) errors.pol = `Please enter a valid ${polLabel || 'POL'}.`
     if (!data.pod) errors.pod = `Please enter a valid ${podLabel || 'POD'}.`
 
-    // Check optional locations if their checkboxes are checked
-    if (data.plorChecked && !data.plor) errors.plor = "Please enter a valid PLOR."
-    if (data.plodChecked && !data.plod) errors.plod = "Please enter a valid PLOD."
+    // Optional PLOR/PLOD/Pickup (only required if their checkboxes are checked)
+    if (data.plorChecked && !data.plor) errors.plor = `Please enter a valid ${plorLabel}.`
+    if (data.plodChecked && !data.plod) errors.plod = `Please enter a valid ${plodLabel}.`
     if (data.pickupChecked && !data.pickup) errors.pickup = "Please enter a valid Pickup location."
 
-    // Only proceed with other validations if locations are valid
+    // If location errors found, short-circuit (so user sees location errors first)
     if (Object.keys(errors).length > 0) return errors
 
-    // Then check mode and types
-    if (!mode) {
-      errors.mode = "Please select a shipment mode."
-      return errors
-    }
-
-    if ((mode !== "air" && mode !== "ecommerce") && !shipmentType) {
+    // Mode is optional now — do NOT require mode
+    // But if mode is selected and it requires shipmentType, validate it
+    if ((mode && mode !== "air" && mode !== "ecommerce") && !shipmentType) {
       errors.shipmentType = "Please select a shipment type."
       return errors
     }
@@ -66,7 +74,7 @@ export default function ShipmentForm({ onFormComplete }) {
       return errors
     }
 
-    // Commodity and gross weight are required once cargo type is selected
+    // Commodity and gross weight required once cargo type is selected
     if (!data.commodity) {
       errors.commodity = "Please select a commodity."
     }
@@ -74,118 +82,112 @@ export default function ShipmentForm({ onFormComplete }) {
       errors.grossWeight = "Please enter gross weight."
     }
 
-    // plor, plod, pickup are optional, but if their checkbox is checked, value is required
-    if (data.plorChecked && !data.plor) errors.plor = "Please enter a valid PLOR."
-    if (data.plodChecked && !data.plod) errors.plod = "Please enter a valid PLOD."
+    // plor, plod, pickup re-check (kept, though we already did above)
+    if (data.plorChecked && !data.plor) errors.plor = `Please enter a valid ${plorLabel}.`
+    if (data.plodChecked && !data.plod) errors.plod = `Please enter a valid ${plodLabel}.`
     if (data.pickupChecked && !data.pickup) errors.pickup = "Please enter a valid Pickup location."
 
     return errors
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const validationErrors = validateForm()
-    if (validationErrors && Object.keys(validationErrors).length) {
-      // If there's a general error, keep the top banner
-      if (validationErrors._general) {
-        setError(validationErrors._general)
-        setShowError(true)
-        setFieldErrors({})
-        setTimeout(() => setShowError(false), 2200)
-        return
-      }
 
-      setFieldErrors(validationErrors)
-      // Enhanced scroll handling for all field types
-      const order = [
-        "pol", "pod", "plor", "plod", "pickup", // Location fields first
-        "mode", "shipmentType", "cargoType", "commodity", "grossWeight" // Then mode/types and required cargo details
-      ]
-      const firstInvalid = order.find(k => validationErrors[k])
-      if (firstInvalid) {
-        const scrollToElement = (selector) => {
-          const el = document.querySelector(selector)
-          if (el) {
-            // Use a larger timeout to ensure DOM is ready
-            setTimeout(() => {
-              const yOffset = -100; // Adjust this value to control final scroll position
-              const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset
-              window.scrollTo({ top: y, behavior: 'smooth' })
-              // Try to focus if it's an input
-              el.querySelector('input')?.focus()
-            }, 100)
-          }
-        }
 
-        // Map field names to their container selectors
-        const selectorMap = {
-          pol: '#pol',
-          pod: '#pod',
-          plor: '#plor',
-          plod: '#plod',
-          pickup: '#pickup',
-          mode: '.mode-section',
-          shipmentType: '.shipment-type-section',
-          cargoType: '.cargo-type-section',
-          commodity: '#commodity',
-          grossWeight: '#grossWeight'
-        }
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-        scrollToElement(selectorMap[firstInvalid])
-      }
-      return
-    }
-    setError("")
-    setShowError(false)
-    setFieldErrors({})
-    if (!hasSubmitted) {
-      setShowSuccessPopup(true)
-      setHasSubmitted(true)
-    } else {
-      if (onFormComplete) onFormComplete()
-    }
-    setTimeout(() => submitRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }), 100)
-
-    console.log("Form submitted with data:", data)
+  const validationErrors = validateForm();
+  if (validationErrors && Object.keys(validationErrors).length) {
+    setFieldErrors(validationErrors);
+    return;
   }
+
+  // Clear any previous errors
+  setError("");
+  setShowError(false);
+  setFieldErrors({});
+
+  // Check if popup is needed
+  const requiresPopup = ["air", "ecommerce"].includes(data.mode);
+
+  if (requiresPopup) {
+    setShowSuccessPopup(true);
+    return; // stop here, submission will continue after popup closes
+  }
+
+  // Normal submission for other modes
+  completeSubmission();
+};
+
+// Function that handles the actual submission
+const completeSubmission = () => {
+  if (onFormComplete) onFormComplete();
+
+  setTimeout(() => submitRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }), 100);
+
+  console.log("Form submitted with data:", data);
+};
+
+
+
+
+
   return (
     <div className="w-full flex justify-center">
       <form onSubmit={handleSubmit} className="w-3/4 space-y-10 bg-card p-8 rounded-2xl border shadow-xl">
+
+        {/* Mode selector remains (unchanged behavior / placement can be kept below POL/POD) */}
         <div className="mode-section">
+          {/* POL / POD: always visible */}
+          <LocationSection
+            data={data}
+            setField={setField}
+            labels={[polLabel, podLabel]}
+            plorPlodLabels={[plorLabel, plodLabel]} // new prop to communicate full names to LocationSection
+            errors={fieldErrors}
+          />
           <ModeSelector mode={mode} setField={setField} />
           {fieldErrors.mode && (
-            <motion.p 
-              initial={{ opacity: 0, y: -10 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              className="text-destructive text-sm text-center mt-2" 
-              role="alert"
+            <motion.p
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-destructive text-sm text-center mt-2"
+            role="alert"
             >
               {fieldErrors.mode}
             </motion.p>
           )}
         </div>
-        
-        {mode && <LocationSection data={data} setField={setField} labels={[polLabel, podLabel]} errors={fieldErrors} />}
-        
-        {mode && mode !== "air" && mode !== "ecommerce" && (
-          <ShipmentTypeSection
-            mode={mode}
-            shipmentType={shipmentType}
-            setField={setField}
-            error={fieldErrors.shipmentType}
-          />
-        )}
-        
-        {((mode !== "air" && mode !== "ecommerce" && shipmentType) || mode === "air" || mode === "ecommerce") && (
-          <CargoTypeSection
-            cargoType={cargoType}
-            pickupChecked={pickupChecked}
-            setPickupChecked={setPickupChecked}
-            data={data}
-            setField={setField}
-            errors={fieldErrors}
-          />
-        )}
+
+     {/* Shipment Type section (same as before) */}
+{mode && mode !== "air" && mode !== "ecommerce" && (
+  <ShipmentTypeSection
+    mode={mode}
+    shipmentType={shipmentType}
+    setField={setField}
+    error={fieldErrors.shipmentType}
+  />
+)}
+
+{/* Cargo Type section logic updated */}
+{(
+  // Case 1: normal behavior if mode selected
+  (mode && (
+    (mode === "air" || mode === "ecommerce") ||
+    (mode !== "air" && mode !== "ecommerce" && shipmentType)
+  ))
+  // Case 2: NEW behavior — no mode, but POL & POD filled
+  || (!mode && data.pol && data.pod)
+) && (
+  <CargoTypeSection
+    cargoType={cargoType}
+    pickupChecked={pickupChecked}
+    setPickupChecked={setPickupChecked}
+    data={data}
+    setField={setField}
+    errors={fieldErrors}
+  />
+)}
+
         <AnimatePresence>
           {showError && error && (
             <m.div
@@ -201,16 +203,28 @@ export default function ShipmentForm({ onFormComplete }) {
             </m.div>
           )}
         </AnimatePresence>
-        {mode && (
+        { (data.mode || data.pol && data.pod)  && (
           <motion.section ref={submitRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={transition} className="flex justify-center pt-8">
             <Button type="submit" size="lg" className="px-12 py-4 text-lg font-semibold bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300">
-              {/* <CheckCircle className="w-6 h-6 mr-3" /> */}
               {hasSubmitted ? "Shipment Results" : "Shipment Request"}
             </Button>
           </motion.section>
-        )}
+          )} 
       </form>
-      <PopUp showSuccessPopup={showSuccessPopup} setShowSuccessPopup={setShowSuccessPopup} />
+      
+{["air", "ecommerce"].includes(data.mode) && (
+  <PopUp 
+    showSuccessPopup={showSuccessPopup} 
+    setShowSuccessPopup={(val) => {
+      setShowSuccessPopup(val);
+      if (!val) {
+        // Popup closed — continue submission
+        completeSubmission();
+      }
+    }} 
+  />
+)}
+
     </div>
   )
 }
