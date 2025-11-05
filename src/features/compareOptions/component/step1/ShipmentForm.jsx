@@ -10,6 +10,7 @@ import ModeSelector from "./ModeSelector"
 import LocationSection from "./LocationSection"
 import ShipmentTypeSection from "./ShipmentTypeSection"
 import CargoTypeSection from "./CargoTypeSection"
+import BookingForm from "./bookingForm/BookingForm"
 
 import { AnimatePresence, motion as m } from "framer-motion"
 import PopUp from "./PopUp"
@@ -26,6 +27,7 @@ export default function ShipmentForm({ onFormComplete }) {
   const [fieldErrors, setFieldErrors] = useState({})
   const navigate = useNavigate()
 
+  const modeRef = useRef(null)
   const shipmentTypeRef = useRef(null)
   const locationsRef = useRef(null)
   const cargoTypeRef = useRef(null)
@@ -59,11 +61,15 @@ export default function ShipmentForm({ onFormComplete }) {
     if (data.plodChecked && !data.plod) errors.plod = `Please enter a valid ${plodLabel}.`
     if (data.pickupChecked && !data.pickup) errors.pickup = "Please enter a valid Pickup location."
 
-    // If location errors found, short-circuit (so user sees location errors first)
+    // Mode is now required
+    if (!mode) {
+      errors.mode = "Please select a mode of transport."
+    }
+
+    // If location or mode errors found, short-circuit (so user sees these errors first)
     if (Object.keys(errors).length > 0) return errors
 
-    // Mode is optional now — do NOT require mode
-    // But if mode is selected and it requires shipmentType, validate it
+    // Validate shipmentType if mode requires it
     if ((mode && mode !== "air" && mode !== "ecommerce") && !shipmentType) {
       errors.shipmentType = "Please select a shipment type."
       return errors
@@ -97,7 +103,36 @@ const handleSubmit = (e) => {
 
   const validationErrors = validateForm();
   if (validationErrors && Object.keys(validationErrors).length) {
+    // Set errors first
     setFieldErrors(validationErrors);
+    
+    // Use setTimeout to ensure the error messages are rendered before scrolling
+    setTimeout(() => {
+      // Find the first error and scroll to its section
+      const errorKeys = Object.keys(validationErrors);
+      if (errorKeys.length > 0) {
+        const firstError = errorKeys[0];
+        // Map error keys to their respective refs
+        const errorToRef = {
+          mode: modeRef,
+          shipmentType: shipmentTypeRef,
+          pol: locationsRef,
+          pod: locationsRef,
+          plor: locationsRef,
+          plod: locationsRef,
+          pickup: locationsRef,
+          cargoType: cargoTypeRef
+        };
+
+        const targetRef = errorToRef[firstError];
+        if (targetRef?.current) {
+          targetRef.current.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center' 
+          });
+        }
+      }
+    }, 100); // Small delay to ensure DOM update
     return;
   }
 
@@ -145,17 +180,12 @@ const completeSubmission = () => {
             plorPlodLabels={[plorLabel, plodLabel]} // new prop to communicate full names to LocationSection
             errors={fieldErrors}
           />
-          <ModeSelector mode={mode} setField={setField} />
-          {fieldErrors.mode && (
-            <motion.p
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-destructive text-sm text-center mt-2"
-            role="alert"
-            >
-              {fieldErrors.mode}
-            </motion.p>
-          )}
+          <ModeSelector 
+            mode={mode} 
+            setField={setField} 
+            error={fieldErrors.mode}
+            forwardedRef={modeRef}
+          />
         </div>
 
      {/* Shipment Type section (same as before) */}
@@ -203,6 +233,7 @@ const completeSubmission = () => {
             </m.div>
           )}
         </AnimatePresence>
+        {(data.cargoType)   && (<BookingForm /> ) }
         { (data.mode || data.pol && data.pod)  && (
           <motion.section ref={submitRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={transition} className="flex justify-center pt-8">
             <Button type="submit" size="lg" className="px-12 py-4 text-lg font-semibold bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300">
@@ -210,8 +241,9 @@ const completeSubmission = () => {
             </Button>
           </motion.section>
           )} 
+
       </form>
-      
+
 {["air", "ecommerce"].includes(data.mode) && (
   <PopUp 
     showSuccessPopup={showSuccessPopup} 

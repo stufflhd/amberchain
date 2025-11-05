@@ -963,6 +963,182 @@
         },
         "backToForm": "Retour au formulaire"
       }
+    },
+    "quote": {
+    "pageTitle": "Créer  vote devis",
+     "success": "Demande de devis soumise avec succès !",
+      "steps": {
+        "selectTransportMode": "Sélectionnez le mode de transport",
+        "selectTransportModeDesc": "Choisissez le mode de transport pour votre cargaison",
+        "routeDetails": "Détails de l'itinéraire",
+        "selectContainerType": "Sélectionnez le type de conteneur",
+        "selectContainerTypeDesc": "Choisissez entre conteneur complet ou groupage",
+        "cargoDetails": "Détails de la cargaison",
+        "serviceAddOns": "Services additionnels",
+        "serviceAddOnsDesc": "Sélectionnez des services supplémentaires pour améliorer votre expédition",
+        "transitPreferences": "Préférences de transit",
+        "transitPreferencesDesc": "Choisissez vos options d'expédition préférées"
+      },
+      "modes": {
+        "sea": "Maritime",
+        "rail": "Ferroviaire",
+        "road": "Routier",
+        "air": "Aérien",
+        "ebusiness": "E-Business"
+      },
+      "modeDescriptions": {
+        "sea": "Fret maritime pour grandes expéditions",
+        "rail": "Transport ferroviaire efficace",
+        "road": "Solutions de camionnage flexibles",
+        "air": "Livraison rapide par fret aérien",
+        "ecommerce": "Livraison e-commerce dernier kilomètre"
+      },
+      "containerTypes": {
+        "fcl": "FCL",
+        "fclDesc": "Conteneur complet - Conteneur entier pour votre cargaison",
+        "lcl": "LCL",
+        "lclDesc": "Groupage - Partager l'espace du conteneur"
+      },
+      "cargoTypes": {
+        "general": "Cargaison générale",
+        "hazardous": "Dangereux",
+        "perishable": "Périssable",
+        "oversized": "Surdimensionné",
+        "liquid": "Cargaison liquide"
+      },
+      "fields": {
+        "transportMode": "Mode de transport",
+        "pol": "POL (Port de chargement)",
+        "pod": "POD (Port de déchargement)",
+        "pickupEmptyContainer": "Récupérer le conteneur vide dans une autre ville",
+        "pickupLocation": "Sélectionnez votre lieu de récupération (Ville, Pays/Région)",
+        "pickupAddress": "Adresse de récupération",
+        "deliveryAddress": "Adresse de livraison",
+        "plor": "PLOR (Lieu de réception)",
+        "plod": "PLOD (Lieu de livraison)",
+        "pld": "PLD (Lieu de livraison) – Optionnel si post-acheminement terrestre nécessaire",
+        "railRampOrigin": "Rampe ferroviaire d'origine",
+        "railRampDestination": "Rampe ferroviaire de destination",
+        "placeOfPickup": "Lieu de récupération",
+        "placeOfDelivery": "Lieu de livraison",
+        "liftgateRequired": "Hayon élévateur requis",
+        "accessConditions": "Conditions d'accès",
+        "truckType": "Type de camion",
+        "airportOfDeparture": "Aéroport de départ",
+        "airportOfArrival": "Aéroport d'arrivée",
+        "containerType": "Type de conteneur",
+        "cargoType": "Type de cargaison",
+        "classImo": "Classe IMO",
+        "unNumber": "Numéro UN",
+        "coldTreatment": "Traitement au froid",
+        "temperature": "Température",
+        "multipleSetPoints": "Points de consigne multiples",
+        "cargoProbes": "Nombre de sondes de cargaison",
+        "drainHoles": "Trous de drainage",
+        "freshAirExchange": "Échange d'air frais",
+        "ventilationVolume": "Volume de ventilation",
+        "humidity": "Humidité",
+        "humidityPercentage": "Pourcentage d'humidité",
+        "gensetRequired": "Groupe électrogène requis",
+        "gensetExport": "Pendant l'exportation",
+        "gensetImport": "Pendant l'importation",
+        "width": "Largeur",
+        "length": "Longueur",
+        "height": "Hauteur",
+        "lengthMetric": "Unité de longueur",
+        "lengthMetricValue": "Valeur de l'unité de longueur",
+        "unit": "Unité",
+        "commodity": "Marchandise",
+        "grossWeight": "Poids brut",
+        "packageType": "Type de colis",
+        "numberOfPackages": "Nombre de colis",
+        "numberOfPallets": "Nombre de palettes",
+        "volume": "Volume",
+        "cargoValue": "Valeur de la cargaison",
+        "currency": "Devise",
+        "equipmentNeeded": "Équipement nécessaire",
+        "resourcesNeeded": "Ressources nécessaires",
+        "inspectionType": "Type d'inspection"
+      },
+      "options": {
+        "open": "Ouvert",
+        "closed": "Fermé",
+        "atDestination": "À destination",
+        "atOrigin": "À l'origine"
+      },
+      "units": {
+        "inch": "Pouce",
+        "foot": "Pied",
+        "meter": "Mètre"
+      },
+      "services": {
+        "insurance": "Assurance",
+        "stuffing": "Empotage",
+        "unstuffing": "Dépotage",
+        "inspection": "Inspection",
+        "portAgent": "Agent portuaire",
+        "ireposition": "Ireposition",
+        "trackLive": "Suivi en direct",
+        "trokeTrace": "Troke Trace",
+        "socForAll": "SOC For All",
+        "readyToLoad": "Prêt à charger",
+        "customsBrokerage": "Courtage en douane"
+      },
+      "placeholders": {
+        "selectPort": "Sélectionnez un port...",
+        "selectLocation": "Sélectionnez un lieu...",
+        "optional": "Optionnel",
+        "forklift": "Chariot élévateur...",
+        "selectContainerType": "Sélectionnez le type de conteneur...",
+        "selectCargoType": "Sélectionnez le type de cargaison...",
+        "selectTruckType": "Sélectionnez le type de camion...",
+        "searchCity": "Tapez au moins 2 caractères pour rechercher..."
+      },
+      "sections": {
+        "perishableSettings": "Paramètres de cargaison périssable",
+        "packageDetails": "Détails du colis",
+        "dimensions": "Dimensions",
+        "selectPreferences": "Sélectionnez vos préférences"
+      },
+      "preferences": {
+        "fastest": "Transit le plus rapide",
+        "cheapest": "Option la moins chère",
+        "lowestEmission": "Option à émissions les plus faibles",
+        "balanced": "Option équilibrée (Choix intelligent)"
+      },
+      "messages": {
+        "selectModeFirst": "Veuillez d'abord sélectionner un mode de transport",
+        "typeToSearch": "Tapez au moins 2 caractères pour rechercher des villes",
+        "noCitiesFound": "Aucune ville trouvée",
+        "noAddonsAvailable": "Aucun service supplémentaire disponible pour ce mode de transport",
+        "submitting": "Envoi de votre demande de devis...",
+        "fetchError": "Erreur lors du chargement des options d'expédition"
+      },
+      "results": {
+        "filter": "Filtrer",
+        "clear": "Effacer",
+        "stayUpdated": "Rester à jour",
+        "disclaimer": "Avertissement",
+        "sortBy": "Trier par",
+        "recommended": "Recommandé",
+        "noResults": "Aucune option d'expédition disponible",
+        "preBook": "Pré-réserver",
+        "indicative": "Indicatif",
+        "confirmed": "Confirmé",
+        "days": "jours",
+        "includedServices": "Services inclus",
+        "price": "Prix",
+        "transitTime": "Temps de transit",
+        "rateStatus": "Statut du tarif",
+        "filters": {
+          "placeOfLoading": "Lieu de chargement",
+          "portOfOrigin": "Port d'origine",
+          "oceanFreight": "Fret maritime",
+          "portOfDestination": "Port de destination",
+          "placeOfDischarge": "Lieu de déchargement"
+        },
+        "backToForm": "Retour au formulaire"
+      }
     }
   }
 }

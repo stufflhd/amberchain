@@ -53,7 +53,7 @@ export default function CargoTypeSection({ cargoType, pickupChecked, setPickupCh
       {cargoType && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={transition} className="mt-6 border-t pt-6 space-y-6">
           <div className="grid md:grid-cols-2 gap-6">
-            <div id="commodity">
+            <div id="commodity" className="space-y-2">
               <CommoditySearchSelect label="Commodity" value={data.commodity || ""} onChange={v => setField("commodity", v)} placeholder="Search commodities" />
               {errors.commodity && (
                 <p className="text-destructive text-sm mt-1" role="alert">{errors.commodity}</p>

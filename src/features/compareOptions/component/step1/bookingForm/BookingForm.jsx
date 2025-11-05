@@ -1,7 +1,5 @@
 import React, { useState, useMemo, useCallback, memo } from "react";
-import { Button } from "@/components/ui/button";
 import { useShipmentStore } from "@/store/shipmentStore";
-import { BookingConfirmationPopup } from "@/components/ui/booking-confirmation-popup";
 import CargoDetailsSection from "./CargoDetailsSection";
 import TemperatureControlSection from "./TemperatureControlSection";
 import DeliveryRequirementsSection from "./DeliveryRequirementsSection";
@@ -55,20 +53,7 @@ function BookingForm() {
         <ServiceAddonsSection data={data} setField={setField} />
       </div>
 
-      <div className="flex justify-center pt-4 border-t border-border/50">
-        <Button
-          onClick={handleBookNow}
-          className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-12 h-11 rounded-lg shadow-sm hover:shadow transition-all"
-        >
-          Book Now
-        </Button>
-      </div>
-
-      <BookingConfirmationPopup
-        isOpen={showConfirmationPopup}
-        onClose={() => setShowConfirmationPopup(false)}
-        bookingData={data}
-      />
+   
     </div>
   );
 }

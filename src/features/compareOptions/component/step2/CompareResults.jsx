@@ -1,4 +1,5 @@
 import React from "react"
+import { Button } from "@/components/ui/button"
 import { useShipmentStore } from "@/store/shipmentStore"
 import {
   Card,
@@ -11,13 +12,12 @@ import {
 } from "lucide-react"
 import CompareResultTimeline from "@/components/CompareResultTimeline"
 import ShipmentMap from "@/components/map/ShipmentMap"
-import BookingForm from "./bookingForm/BookingForm"
 import { useGeocoding } from "@/hooks/useGeocoding"
 import CompareResultsHeader from "./CompareResultsHeader"
 import "@/App.css"
 import TransportationIcon from "@/components/icons/TransportationIcon";
 
-export default function CompareResults() {
+export default function CompareResults({ onBack }) {
   const { data } = useShipmentStore()
   const [expanded, setExpanded] = React.useState(false)
   const price = data.price ?? (data.mode === "Air" ? "1,200" : "450")
@@ -96,6 +96,13 @@ export default function CompareResults() {
       className="mx-auto my-6 border shadow-sm transition-all duration-300 bg-card text-card-foreground w-full max-w-[95vw] 2xl:max-w-[1600px] cursor-pointer hover:shadow-md"
       onClick={() => setExpanded(!expanded)}
     >
+      <div className="px-8 pt-4 flex justify-start">
+        {onBack && (
+          <Button variant="outline" size="sm" onClick={e => { e.stopPropagation(); onBack(); }}>
+            ← Back
+          </Button>
+        )}
+      </div>
       <CardHeader className="border-b bg-gradient-to-r from-muted/30 to-muted/10 px-8 py-3.5">
         <CompareResultsHeader data={data} expanded={expanded} setExpanded={setExpanded} price={price} />
       </CardHeader>
@@ -147,7 +154,6 @@ export default function CompareResults() {
                 </div>
               </div>
             </div>
-            <BookingForm />
           </div>
         )}
       </CardContent>

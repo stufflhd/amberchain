@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Ship, Train, Truck, Plane, ShoppingCart, ArrowRightLeft } from "lucide-react"
 
-export default function ModeSelector({ mode, setField }) {
+export default function ModeSelector({ mode, setField, error, forwardedRef }) {
   const modes = ["sea", "rail", "road", "air", "ecommerce", "combined"]
   const modeIcons = { 
     sea: Ship, 
@@ -15,8 +15,18 @@ export default function ModeSelector({ mode, setField }) {
   const disabledModes = ["combined"]
 
   return (
-    <section className="space-y-8">
+    <section ref={forwardedRef} className="space-y-8">
       <h2 className="text-2xl font-semibold text-center pt-8 ">Mode of Transport</h2>
+      {error && (
+        <motion.p
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-destructive text-sm text-center"
+          role="alert"
+        >
+          {error}
+        </motion.p>
+      )}
       <div className="flex overflow-x-auto gap-4 pb-2 -mx-2 px-2 pt-4">
         {modes.map(m => {
           const Icon = modeIcons[m]

@@ -80,7 +80,7 @@ const CommoditySearchSelect = ({
   }, [])
 
   return (
-    <div className={`relative space-y-2 ${className}`}>
+    <div className={`relative ${className}`}>
       {label && <Label className="text-sm font-medium text-foreground">{label}</Label>}
       <div className="relative">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">

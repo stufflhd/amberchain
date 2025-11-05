@@ -972,6 +972,182 @@
         },
         "backToForm": "Back to form"
       }
+    },
+    "quote": {
+      "pageTitle": "create your quote ",
+      "success": "Quote request submitted successfully!",
+      "steps": {
+        "selectTransportMode": "Select Transport Mode",
+        "selectTransportModeDesc": "Choose the mode of transportation for your cargo",
+        "routeDetails": "Route Details",
+        "selectContainerType": "Select Container Type",
+        "selectContainerTypeDesc": "Choose between Full Container Load or Less than Container Load",
+        "cargoDetails": "Cargo Details",
+        "serviceAddOns": "Service Add-Ons",
+        "serviceAddOnsDesc": "Select additional services to enhance your shipment",
+        "transitPreferences": "Transit Preferences",
+        "transitPreferencesDesc": "Choose your preferred shipping options"
+      },
+      "modes": {
+        "sea": "Sea",
+        "rail": "Rail",
+        "road": "Road",
+        "air": "Air",
+        "ebusiness": "E-Business"
+      },
+      "modeDescriptions": {
+        "sea": "Ocean freight for large shipments",
+        "rail": "Efficient rail transportation",
+        "road": "Flexible trucking solutions",
+        "air": "Fast air freight delivery",
+        "ecommerce": "Last-mile e-commerce delivery"
+      },
+      "containerTypes": {
+        "fcl": "FCL",
+        "fclDesc": "Full Container Load - Entire container for your cargo",
+        "lcl": "LCL",
+        "lclDesc": "Less than Container Load - Share container space"
+      },
+      "cargoTypes": {
+        "general": "General Cargo",
+        "hazardous": "Hazardous",
+        "perishable": "Perishable",
+        "oversized": "Oversized",
+        "liquid": "Liquid Cargo"
+      },
+      "fields": {
+        "transportMode": "Transport Mode",
+        "pol": "POL (Port of Loading)",
+        "pod": "POD (Port of Discharge)",
+        "pickupEmptyContainer": "Pick-up empty container in another city",
+        "pickupLocation": "Select your pick-up location (City, Country/Region)",
+        "pickupAddress": "Pickup Address",
+        "deliveryAddress": "Delivery Address",
+        "plor": "PLOR (Place of Receipt)",
+        "plod": "PLOD (Place of Delivery)",
+        "pld": "PLD (Place of Delivery) – Optional if inland post-carriage is needed",
+        "railRampOrigin": "Rail Ramp Origin",
+        "railRampDestination": "Rail Ramp Destination",
+        "placeOfPickup": "Place of Pick-up",
+        "placeOfDelivery": "Place of Delivery",
+        "liftgateRequired": "Liftgate Required",
+        "accessConditions": "Access Conditions",
+        "truckType": "Truck Type",
+        "airportOfDeparture": "Airport of Departure",
+        "airportOfArrival": "Airport of Arrival",
+        "containerType": "Container Type",
+        "cargoType": "Cargo Type",
+        "classImo": "Class IMO",
+        "unNumber": "UN Number",
+        "coldTreatment": "Cold Treatment",
+        "temperature": "Temperature",
+        "multipleSetPoints": "Multiple Set Points",
+        "cargoProbes": "Number of Cargo Probes",
+        "drainHoles": "Drain Holes",
+        "freshAirExchange": "Fresh Air Exchange",
+        "ventilationVolume": "Ventilation Volume",
+        "humidity": "Humidity",
+        "humidityPercentage": "Humidity Percentage",
+        "gensetRequired": "GenSet Required",
+        "gensetExport": "During Export",
+        "gensetImport": "During Import",
+        "width": "Width",
+        "length": "Length",
+        "height": "Height",
+        "lengthMetric": "Length Metric",
+        "lengthMetricValue": "Length Metric Value",
+        "unit": "Unit",
+        "commodity": "Commodity",
+        "grossWeight": "Gross Weight",
+        "packageType": "Package Type",
+        "numberOfPackages": "Number of Packages",
+        "numberOfPallets": "Number of Pallets",
+        "volume": "Volume",
+        "cargoValue": "Cargo Value",
+        "currency": "Currency",
+        "equipmentNeeded": "Equipment Needed",
+        "resourcesNeeded": "Resources Needed",
+        "inspectionType": "Inspection Type"
+      },
+      "options": {
+        "open": "Open",
+        "closed": "Closed",
+        "atDestination": "At Destination",
+        "atOrigin": "At Origin"
+      },
+      "units": {
+        "inch": "Inch",
+        "foot": "Foot",
+        "meter": "Meter"
+      },
+      "services": {
+        "insurance": "Insurance",
+        "stuffing": "Stuffing",
+        "unstuffing": "Unstuffing",
+        "inspection": "Inspection",
+        "portAgent": "Port Agent",
+        "ireposition": "Ireposition",
+        "trackLive": "Track Live",
+        "trokeTrace": "Troke Trace",
+        "socForAll": "SOC For All",
+        "readyToLoad": "Ready To Load",
+        "customsBrokerage": "Customs Brokerage"
+      },
+      "placeholders": {
+        "selectPort": "Select a port...",
+        "selectLocation": "Select a location...",
+        "optional": "Optional",
+        "forklift": "Forklift...",
+        "selectContainerType": "Select container type...",
+        "selectCargoType": "Select cargo type...",
+        "selectTruckType": "Select truck type...",
+        "searchCity": "Type at least 2 characters to search..."
+      },
+      "sections": {
+        "perishableSettings": "Perishable Cargo Settings",
+        "packageDetails": "Package Details",
+        "dimensions": "Dimensions",
+        "selectPreferences": "Select Your Preferences"
+      },
+      "preferences": {
+        "fastest": "Fastest Transit",
+        "cheapest": "Cheapest Option",
+        "lowestEmission": "Lowest Emission Option",
+        "balanced": "Balanced Option (Smart Pick)"
+      },
+      "messages": {
+        "selectModeFirst": "Please select a transport mode first",
+        "typeToSearch": "Type at least 2 characters to search for cities",
+        "noCitiesFound": "No cities found",
+        "noAddonsAvailable": "No add-ons available for this transport mode",
+        "submitting": "Submitting your quote request...",
+        "fetchError": "Error loading shipping options"
+      },
+      "results": {
+        "filter": "Filter",
+        "clear": "Clear",
+        "stayUpdated": "Stay updated",
+        "disclaimer": "Disclaimer",
+        "sortBy": "Sort by",
+        "recommended": "Recommended",
+        "noResults": "No shipping options available",
+        "preBook": "Pre-book",
+        "indicative": "Indicative",
+        "confirmed": "Confirmed",
+        "days": "days",
+        "includedServices": "Included services",
+        "price": "Price",
+        "transitTime": "Transit time",
+        "rateStatus": "Rate status",
+        "filters": {
+          "placeOfLoading": "Place of loading",
+          "portOfOrigin": "Port of origin",
+          "oceanFreight": "Ocean freight",
+          "portOfDestination": "Port of destination",
+          "placeOfDischarge": "Place of discharge"
+        },
+        "backToForm": "Back to form"
+      }
     }
   }
 }

@@ -19,6 +19,7 @@ const SearchResultsPage = lazy(() => import("@/features/search/SearchResultsPage
 const BookingsOverview = lazy(() => import("@/features/bookings/BookingsOverview"));
 const ContainersOverview = lazy(() => import("@/features/containers/ContainersOverview"));
 const CompareOptions = lazy(() => import("@/features/compareOptions/CompareOptions"));
+const Quote = lazy(() => import("@/features/quote/Quote"));
 const EmailVerify = lazy(() => import("@/features/auth/pages/EmailVerify"));
 
 const router = createBrowserRouter([
@@ -93,6 +94,7 @@ const router = createBrowserRouter([
               { path: "containers/:shipmentId", element: <ContainersOverview /> },
               { path: "active-shipments", element: <ActiveShipmentsOverview /> },
               { path: "compare-options", element: <CompareOptions /> },
+              { path: "quote", element: <Quote /> },
               {
                 path: "admin",
                 element: (
