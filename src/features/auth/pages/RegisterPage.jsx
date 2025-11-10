@@ -23,7 +23,7 @@ const initialFormData = {
   email: "",
   password: "",
   gsm: "",
-  companyLocation: "",
+  country: "",
   companyName: "",
   address: "",
   zipCode: "",
@@ -125,7 +125,7 @@ export default function RegisterPage() {
       email: formData.email,
       password: formData.password,
       gsm: formData.gsm, // backend expects 'gsm'
-      companyLocation: formData.companyLocation,
+      country: formData.country,
       companyName: formData.companyName,
       address: formData.address,
       zipCode: formData.zipCode,

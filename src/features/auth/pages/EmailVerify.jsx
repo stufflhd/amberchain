@@ -53,20 +53,20 @@ const EmailVerify = () => {
   }, [token, navigate]);
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gradient-to-br from-indigo-50 to-blue-100">
-      <div className="p-8 max-w-md w-full bg-white shadow-xl rounded-2xl text-center transform transition-all duration-300 hover:scale-[1.02]">
-        <h1 className="text-3xl font-bold mb-4 text-gray-800">
+    <div className="flex items-center justify-center min-h-screen bg-background text-foreground">
+      <div className="max-w-md w-full p-6 md:p-8 bg-card text-card-foreground border border-border shadow-sm rounded-lg text-center transition-transform duration-300 hover:scale-[1.01]">
+        <h1 className="text-2xl md:text-3xl font-semibold tracking-tight mb-3">
           Email Verification
         </h1>
         <p
-          className={`text-lg transition-colors duration-300 ${
+          className={`text-base md:text-lg transition-colors duration-300 ${
             message.includes("✅")
-              ? "text-green-600"
+              ? "text-primary"
               : message.includes("❌") || message.includes("🚫")
-              ? "text-red-600"
+              ? "text-destructive"
               : message.includes("⚠️") || message.includes("🔗")
-              ? "text-yellow-600"
-              : "text-gray-700"
+              ? "text-secondary"
+              : "text-muted-foreground"
           }`}
         >
           {message}
@@ -74,11 +74,11 @@ const EmailVerify = () => {
 
         {loading && (
           <div className="mt-6 flex justify-center">
-            <div className="h-10 w-10 border-4 border-blue-300 border-t-blue-600 rounded-full animate-spin"></div>
+            <div className="h-10 w-10 border-4 border-input border-t-primary rounded-full animate-spin"></div>
           </div>
         )}
 
-        <p className="mt-6 text-sm text-gray-500 animate-pulse">
+        <p className="mt-6 text-sm text-muted-foreground animate-pulse">
           You’ll be redirected to login shortly...
         </p>
       </div>

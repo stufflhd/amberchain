@@ -258,7 +258,7 @@
       "emailConfirmation": "Confirmer l'e-mail",
       "password": "Mot de passe",
       "phoneNumber": "Numéro de téléphone",
-      "companyLocation": "Localisation de l'entreprise",
+      "country": "Pays",
       "companyName": "Nom de l'entreprise",
       "address": "Adresse",
       "zipCode": "Code postal",

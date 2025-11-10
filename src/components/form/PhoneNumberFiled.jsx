@@ -81,7 +81,9 @@ export default function PhoneNumberField({
 
   const [isPending, startTransition] = useTransition();
 
-  const phoneRegex = /^[+]?[\d\s\-()]{7,20}$/;
+  // require the phone number to start with a leading 0, then allow digits, spaces, hyphen and parentheses
+  // total length remains between 7 and 20 characters (so after leading 0, 6-19 allowed chars)
+  const phoneRegex = /^0[\d\s\-()]{6,19}$/;
   const validatePhoneNumber = (phoneValue) => {
     const trimmed = String(phoneValue || "").trim();
     if (!trimmed) return required ? t("validation.required") : null;

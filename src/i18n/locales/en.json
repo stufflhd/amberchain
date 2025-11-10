@@ -266,7 +266,7 @@
       "emailConfirmation": "Confirm Email",
       "password": "Password",
       "phoneNumber": "Phone Number",
-      "companyLocation": "Company Location",
+      "country": "Country",
       "companyName": "Company Name",
       "address": "Address",
       "zipCode": "Zip Code",

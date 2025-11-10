@@ -3,9 +3,12 @@ import { t } from "i18next";
 export const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9])\S{8,}$/;
 export const nameRegex = /^(?=.*[A-Za-z])[\sA-Za-z'.-]{2,}$/;
-export const generalTextRegex = /^(?=.*[A-Za-z0-9])[\sA-Za-z0-9&@#',./()-]{2,}$/;
+// Allow Unicode letters (both uppercase and lowercase, including accented letters) and digits.
+// Use \p{L} to match any kind of letter; the `u` flag enables Unicode property escapes.
+export const generalTextRegex = /^(?=.*[\p{L}\d])[\s\p{L}\d&@#',./()\-]{2,}$/u;
 export const zipCodeRegex = /^[0-9]{5}(-[0-9]{4})?$/;
-export const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
+// Require phone numbers to start with a leading 0, then allow digits/spaces/hyphen/parentheses.
+export const phoneRegex = /^0[\d\s\-()]{6,19}$/;
 
 export const formFields = {
     firstName: {
@@ -58,9 +61,9 @@ export const formFields = {
         regex: generalTextRegex,
         validation: (value) => !value.trim() || !generalTextRegex.test(value) ? t('validation.invalidCompanyName') : null
     },
-    companyLocation: {
-        name: "companyLocation",
-        label: () => t('registerForm.companyLocation'),
+    country: {
+        name: "country",
+        label: () => t('registerForm.country'),
         type: "text",
         required: true,
         validation: (value) => !value.trim() ? t('validation.required') : null
@@ -98,7 +101,7 @@ export const userInfoStepFields = [
 
 export const companyInfoStepFields = [
     formFields.companyName,
-    formFields.companyLocation,
+    formFields.country,
     formFields.address,
     formFields.zipCode
 ];
