@@ -11,7 +11,7 @@ export const MOCK_SHIPPING_OPTIONS = [
     to: 'Los Angeles, US',
     toPort: 'Los Angeles',
     via: 'Casablanca',
-    price: 4436,
+    price: 5000,
     currency: 'USD',
     rateStatus: 'Indicative'
   },
@@ -26,8 +26,8 @@ export const MOCK_SHIPPING_OPTIONS = [
     to: 'Long Beach, US',
     toPort: 'Long Beach',
     via: 'Casablanca',
-    price: 4582,
-    currency: 'USD',
+    price: 6000,
+    currency: 'EURO',
     rateStatus: 'Indicative'
   },
   {

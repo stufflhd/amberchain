@@ -15,7 +15,7 @@ import BookingForm from "./bookingForm/BookingForm"
 import { AnimatePresence, motion as m } from "framer-motion"
 import PopUp from "./PopUp"
 
-export default function ShipmentForm({ onFormComplete }) {
+export default function ShipmentForm({ onFormComplete, enableServicePopup = true }) {
 
   const { data, setField } = useShipmentStore()
   const { mode, shipmentType, cargoType } = data
@@ -142,7 +142,7 @@ const handleSubmit = (e) => {
   setFieldErrors({});
 
   // Check if popup is needed
-  const requiresPopup = ["air", "ecommerce"].includes(data.mode);
+  const requiresPopup = enableServicePopup && ["air", "ecommerce"].includes(data.mode);
 
   if (requiresPopup) {
     setShowSuccessPopup(true);
@@ -244,7 +244,7 @@ const completeSubmission = () => {
 
       </form>
 
-{["air", "ecommerce"].includes(data.mode) && (
+{enableServicePopup && ["air", "ecommerce"].includes(data.mode) && (
   <PopUp 
     showSuccessPopup={showSuccessPopup} 
     setShowSuccessPopup={(val) => {

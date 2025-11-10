@@ -77,8 +77,7 @@ export default function PopUp({ showSuccessPopup, setShowSuccessPopup }) {
   };
 
   const mainCategories = Object.keys(wizardOptions);
-
-  // const setWizardSelection = useShipmentStore(state => state.setWizardSelection);
+  const setWizardSelection = useShipmentStore(state => state.setWizardSelection);
   const [selectedMain, setSelectedMain] = useState(mainCategories[0]);
   const [selectedSub, setSelectedSub] = useState(wizardOptions[mainCategories[0]].subOptions[0].value);
 

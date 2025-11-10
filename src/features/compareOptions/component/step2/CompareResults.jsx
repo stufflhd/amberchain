@@ -9,6 +9,7 @@ import {
 import {
   AlertCircle,
   Clock,
+  MapPin,
 } from "lucide-react"
 import CompareResultTimeline from "@/components/CompareResultTimeline"
 import ShipmentMap from "@/components/map/ShipmentMap"
@@ -17,10 +18,10 @@ import CompareResultsHeader from "./CompareResultsHeader"
 import "@/App.css"
 import TransportationIcon from "@/components/icons/TransportationIcon";
 
-export default function CompareResults({ onBack }) {
+export default function CompareResults({ onBack, ctaLabel = "Book Now", enableBookingPopup = true, onCtaClick, priceOverride, resultMeta }) {
   const { data } = useShipmentStore()
   const [expanded, setExpanded] = React.useState(false)
-  const price = data.price ?? (data.mode === "Air" ? "1,200" : "450")
+  const price = priceOverride ?? data.price ?? (data.mode === "Air" ? "1,200" : "450")
 
   // Geocode the locations for the map
   const { coordinates: originCoords, isLoading: originLoading, error: originError } = useGeocoding(data.pol)
@@ -93,18 +94,27 @@ export default function CompareResults({ onBack }) {
 
   return (
     <Card
-      className="mx-auto my-6 border shadow-sm transition-all duration-300 bg-card text-card-foreground w-full max-w-[95vw] 2xl:max-w-[1600px] cursor-pointer hover:shadow-md"
+      className="mx-auto my-2 border shadow-sm transition-all duration-300 bg-card text-card-foreground w-full max-w-[95vw] 2xl:max-w-[1600px] cursor-pointer hover:shadow-md"
       onClick={() => setExpanded(!expanded)}
     >
-      <div className="px-8 pt-4 flex justify-start">
-        {onBack && (
+      {onBack && (
+        <div className="px-8 pt-4 flex justify-start">
           <Button variant="outline" size="sm" onClick={e => { e.stopPropagation(); onBack(); }}>
             ← Back
           </Button>
-        )}
-      </div>
+        </div>
+      )}
       <CardHeader className="border-b bg-gradient-to-r from-muted/30 to-muted/10 px-8 py-3.5">
-        <CompareResultsHeader data={data} expanded={expanded} setExpanded={setExpanded} price={price} />
+        <CompareResultsHeader
+          data={data}
+          expanded={expanded}
+          setExpanded={setExpanded}
+          price={price}
+          ctaLabel={ctaLabel}
+          enableBookingPopup={enableBookingPopup}
+          onCtaClick={onCtaClick}
+          resultMeta={resultMeta}
+        />
       </CardHeader>
 
       <CardContent className="p-0 w-full">
@@ -154,6 +164,86 @@ export default function CompareResults({ onBack }) {
                 </div>
               </div>
             </div>
+            {/* Summary row */}
+            {(() => {
+              const formatBool = (v) => (v === true ? "Yes" : v === false ? "No" : v)
+              const formatArray = (arr) => Array.isArray(arr) ? arr.join(", ") : arr
+              const detailsRaw = [
+                ["Mode", data.mode],
+                ["Shipment Type", data.shipmentType],
+                ["Container Type", data.containerType],
+                ["POL", data.pol],
+                // ["PLOR Enabled", data.plorChecked],
+                ["PLOR", data.plorChecked ? data.plor : ""],
+                // ["PLOD Enabled", data.plodChecked],
+                ["PLOD", data.plodChecked ? data.plod : ""],
+                ["POD", data.pod],
+                ["Pickup", data.pickupLocation],
+                ["Cargo Type", cargoType],
+                ["Commodity", data.commodity],
+                ["Gross Weight", data.grossWeight ? `${data.grossWeight} kg` : ""],
+                ["PopUp Main", data.wizardSelection?.mainCategory],
+                ["Popup Sub", data.wizardSelection?.subCategory],
+                ["Liftgate Required", data.liftgate?.required],
+                ["Access Conditions", data.accsesConditions],
+                // ["Cold Treatment Required", data.coldTreatment?.required],
+                // ["Cold Treatment Temp", data.coldTreatment?.temperature],
+                // ["Multiple Temp Set Points", data.coldTreatment?.multipleSetPoints],
+                // ["Temperature Set Points", formatArray(data.coldTreatment?.temperatureSetPoints)],
+                ["Probes - Cargo Count", data.probes?.numberOfCargoProbes],
+                ["Probes - Drain Holes", data.probes?.drainHoles],
+                ["Probes - Fresh Air Exchange", data.probes?.freshAirExchange],
+                ["Probes - Ventilation Volume", data.probes?.ventilationVolume],
+                ["Humidity Control", data.humidity?.required],
+                ["Humidity %", data.humidity?.percentage],
+                ["Genset Export", data.genset?.duringExport],
+                ["Genset Import", data.genset?.duringImport],
+                ["Cargo Class", data.cargo?.class],
+                ["Cargo UN Number", data.cargo?.unNumber],
+                ["Cargo Dimensions (L×W×H)", [data.cargo?.length, data.cargo?.width, data.cargo?.height].filter(Boolean).join(" × ")],
+                ["Length Metrics", data.cargo?.lengthMetrics],
+                ["Package Type", data.cargo?.packageType],
+                ["Number Of Packages", data.cargo?.numberOfPackages],
+                ["Volume", data.cargo?.volume],
+                ["Truck Type", data.cargo?.truckType],
+                ["Number Of Pallets", data.cargo?.numberOfPallets],
+                ["Stackable Cargo", data.cargo?.stackableCargo],
+                ["Price", price ? `$${price}` : ""],
+              ]
+                .map(([k, v]) => [k, formatArray(formatBool(v))])
+                .filter(([, v]) => v !== undefined && v !== null && v !== "")
+
+              const colSize = Math.ceil(detailsRaw.length / 3) || 1
+              const cols = [
+                detailsRaw.slice(0, colSize),
+                detailsRaw.slice(colSize, colSize * 2),
+                detailsRaw.slice(colSize * 2)
+              ]
+
+              return (
+                <div className="w-full bg-card border rounded-xl shadow-sm p-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+                    {cols.map((items, idx) => (
+                      <div key={idx} className={`flex flex-col gap-2 ${idx > 0 ? 'md:border-l md:pl-4' : ''}`}>
+                        {items.length === 0 ? (
+                          <span className="text-sm text-muted-foreground">—</span>
+                        ) : (
+                          <div className="flex flex-col gap-1">
+                            {items.map(([label, value], i) => (
+                              <div key={label + i} className="flex flex-wrap items-center text-sm text-foreground/90">
+                                <span className="font-medium">{label}</span>
+                                <span className="mx-2 text-muted-foreground">:</span>
+                                <span className="truncate">{String(value)}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )
+            })()}
           </div>
         )}
       </CardContent>

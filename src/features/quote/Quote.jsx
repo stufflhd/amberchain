@@ -20,9 +20,9 @@ export default function CompareOptions() {
       </h2>
 
       {!showResults ? (
-        <ShipmentForm onFormComplete={handleFormComplete} />
+        <ShipmentForm onFormComplete={handleFormComplete} enableServicePopup={false} />
       ) : (
-        <CompareResults />
+        <CompareResults ctaLabel="Request a Quote" enableBookingPopup={false} />
       )}
     </div>
   )

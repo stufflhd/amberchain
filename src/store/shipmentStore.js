@@ -25,12 +25,6 @@ export const useShipmentStore = create((set) => ({
       mainCategory: "",
       subCategory: "",
     },
-    setWizardSelection: (selection) => set((state) => ({
-      data: {
-        ...state.data,
-        wizardSelection: selection
-      }
-    })),
     coldTreatment: {
     required: false, // yes/no
       temperature: "", // <— add this line
@@ -82,6 +76,14 @@ accsesConditions: "",
   setField: (key, value) =>
     set((state) => ({
       data: { ...state.data, [key]: value }
+    })),
+
+  setWizardSelection: (selection) =>
+    set((state) => ({
+      data: {
+        ...state.data,
+        wizardSelection: selection
+      }
     })),
 
     

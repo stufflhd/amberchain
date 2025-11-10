@@ -7,7 +7,7 @@ import DashboardSearch from "@/components/dashboard/DashboardSearch";
 import DashNav from "@/components/dashboard/DashNav";
 import { useQuotationsQuery } from "@/queries/useQuotationsQuery";
 import { useEffect } from "react";
-import { CheckCircle } from "lucide-react";
+import SuccessBanner from "@/components/ui/SuccessBanner";
 
 
 export default function QuotationsOverview({ data: propData }) {
@@ -42,7 +42,7 @@ export default function QuotationsOverview({ data: propData }) {
         if (prev <= 1) {
           clearInterval(timerId);
           setShowSuccessBanner(false);
-          try { localStorage.removeItem("submittedBooking"); } catch (e) {}
+          try { localStorage.removeItem("submittedBooking"); } catch (e) { void e }
           return 0;
         }
         return prev - 1;
@@ -60,7 +60,7 @@ export default function QuotationsOverview({ data: propData }) {
 
   const handleDismissBanner = () => {
     setShowSuccessBanner(false);
-    try { localStorage.removeItem('submittedBooking'); } catch (e) {}
+    try { localStorage.removeItem('submittedBooking'); } catch (e) { void e }
   }
 
     const { data: fetchedData, isLoading: isFetching } = useQuotationsQuery({
@@ -94,32 +94,21 @@ export default function QuotationsOverview({ data: propData }) {
     return (
         <>
          {showSuccessBanner && (
-   <div className="flex items-start gap-3 bg-green-100 dark:bg-green-900/40 border border-green-300 dark:border-green-800 rounded-lg p-4 shadow-sm animate-slideDown">
-  <CheckCircle className="text-green-600 dark:text-green-400 w-6 h-6 mt-0.5 flex-shrink-0" />
-  <div className="text-sm text-green-800 dark:text-green-200">
-    <p className="font-semibold text-green-900 dark:text-green-100">
-      Your booking has been successfully submitted!
-    </p>
-    <p className="text-green-700 dark:text-green-300">
-      Request Reference Number:{" "}
-      <span className="font-medium text-green-900 dark:text-green-200">
-        REF-125258
-      </span>
-    </p>
-    <p className="text-green-700 dark:text-green-300">
-      You will shortly receive an email confirming your submission. This banner will disappear automatically in <span className="font-medium text-green-900 dark:text-green-200">{formatTime(countdown)}</span>.
-    </p>
-    <p className="font-semibold text-green-900 dark:text-green-100 mt-1">
-      Thank you for choosing our service — we appreciate your trust.
-    </p>
-  </div>
-  <div className="ml-auto flex flex-col items-end gap-2">
-    <div className="text-sm text-green-700 dark:text-green-300">{formatTime(countdown)}</div>
-    <button onClick={handleDismissBanner} className="text-sm text-green-900 dark:text-green-100 underline">Dismiss</button>
-  </div>
-</div>
-
-      )}
+            <SuccessBanner 
+              title="Your booking has been successfully submitted!" 
+              onClose={handleDismissBanner}
+              className="animate-slideDown"
+            >
+              <p>
+                Request Reference Number: <span className="font-medium text-green-900 dark:text-green-200">REF-125258</span>
+              </p>
+              <p>You will shortly receive an email confirming your submission</p>
+              <p className="font-semibold text-green-900 dark:text-green-100 mt-1">
+                Thank you for choosing our service — we appreciate your trust.
+              </p>
+              
+            </SuccessBanner>
+          )}
             {!propData && (
                 <div className="gap-4 flex flex-col">
                     <DashNav DashTitle={t('quotations.pageTitle')} />
