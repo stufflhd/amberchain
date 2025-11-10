@@ -3,7 +3,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import LocationInput from "./LocationInput";
 
-export default function LocationSection({ data, setField, labels, errors = {} }) {
+export default function LocationSection({ data, setField, labels, errors = {}, forwardedRef }) {
   const [polLabel, podLabel] = labels;
 
   // Define full labels for PLOR & PLOD based on mode
@@ -22,6 +22,7 @@ export default function LocationSection({ data, setField, labels, errors = {} })
 
   return (
     <motion.section
+      ref={forwardedRef}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"

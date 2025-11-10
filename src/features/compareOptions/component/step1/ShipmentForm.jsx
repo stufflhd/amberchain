@@ -121,7 +121,9 @@ const handleSubmit = (e) => {
           plor: locationsRef,
           plod: locationsRef,
           pickup: locationsRef,
-          cargoType: cargoTypeRef
+          cargoType: cargoTypeRef,
+          commodity: cargoTypeRef,
+          grossWeight: cargoTypeRef
         };
 
         const targetRef = errorToRef[firstError];
@@ -179,6 +181,7 @@ const completeSubmission = () => {
             labels={[polLabel, podLabel]}
             plorPlodLabels={[plorLabel, plodLabel]} // new prop to communicate full names to LocationSection
             errors={fieldErrors}
+            forwardedRef={locationsRef}
           />
           <ModeSelector 
             mode={mode} 
@@ -195,6 +198,7 @@ const completeSubmission = () => {
     shipmentType={shipmentType}
     setField={setField}
     error={fieldErrors.shipmentType}
+    forwardedRef={shipmentTypeRef}
   />
 )}
 
@@ -215,6 +219,7 @@ const completeSubmission = () => {
     data={data}
     setField={setField}
     errors={fieldErrors}
+    forwardedRef={cargoTypeRef}
   />
 )}
 
