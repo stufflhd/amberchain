@@ -404,7 +404,7 @@ function ServiceAddonsSection({ data, setField }) {
           {/* Complex Add-Ons */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Customs Brokerage */}
-            {["sea", "rail", "road", "air", "ecommerce"].includes(data.mode) && (
+            {["sea", "rail", "road", "air", "ecommerce", "combined"].includes(data.mode) && (
               <div className="flex flex-col gap-2 rounded-xl border border-border/40 bg-background/60 p-3 hover:shadow-md transition-all">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -421,15 +421,35 @@ function ServiceAddonsSection({ data, setField }) {
                   </div>
                   <Checkbox
                     checked={data.addons?.customsBrokerage?.enabled || false}
-                    onCheckedChange={(checked) =>
-                      setField("addons", {
-                        ...data.addons,
-                        customsBrokerage: {
-                          ...data.addons?.customsBrokerage,
-                          enabled: checked,
-                        },
-                      })
-                    }
+                    onCheckedChange={(checked) => {
+                      const current = data.addons?.customsBrokerage || {};
+                      if (checked) {
+                        const origin = current.origin || current.location === "origin" || current.location === "both" || true;
+                        const destination = current.destination || current.location === "destination" || current.location === "both" || false;
+                        const location = origin && destination ? "both" : origin ? "origin" : destination ? "destination" : "origin";
+                        setField("addons", {
+                          ...data.addons,
+                          customsBrokerage: {
+                            ...current,
+                            enabled: true,
+                            origin: location === "origin" || location === "both",
+                            destination: location === "destination" || location === "both",
+                            location,
+                          },
+                        });
+                      } else {
+                        setField("addons", {
+                          ...data.addons,
+                          customsBrokerage: {
+                            ...current,
+                            enabled: false,
+                            origin: false,
+                            destination: false,
+                            location: undefined,
+                          },
+                        });
+                      }
+                    }}
                   />
                 </div>
                 <AnimatePresence initial={false}>
@@ -440,26 +460,54 @@ function ServiceAddonsSection({ data, setField }) {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.18, ease: "easeOut" }}
                     >
-                      <Select
-                        value={data.addons?.customsBrokerage?.location || "origin"}
-                        onValueChange={(val) =>
-                          setField("addons", {
-                            ...data.addons,
-                            customsBrokerage: {
-                              ...data.addons?.customsBrokerage,
-                              location: val,
-                            },
-                          })
-                        }
-                      >
-                        <SelectTrigger className="h-8 w-full text-xs">
-                          <SelectValue placeholder="Location" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="origin">Origin</SelectItem>
-                          <SelectItem value="destination">Destination</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-2">
+                          <Checkbox
+                            className="h-4 w-4"
+                            checked={Boolean(data.addons?.customsBrokerage?.origin)}
+                            onCheckedChange={(checked) => {
+                              const origin = Boolean(checked);
+                              const destination = Boolean(data.addons?.customsBrokerage?.destination);
+                              const enabled = origin || destination;
+                              const location = origin && destination ? "both" : origin ? "origin" : destination ? "destination" : undefined;
+                              setField("addons", {
+                                ...data.addons,
+                                customsBrokerage: {
+                                  ...data.addons?.customsBrokerage,
+                                  origin,
+                                  destination,
+                                  enabled,
+                                  location,
+                                },
+                              });
+                            }}
+                          />
+                          <span className="text-xs">Origin</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Checkbox
+                            className="h-4 w-4"
+                            checked={Boolean(data.addons?.customsBrokerage?.destination)}
+                            onCheckedChange={(checked) => {
+                              const destination = Boolean(checked);
+                              const origin = Boolean(data.addons?.customsBrokerage?.origin);
+                              const enabled = origin || destination;
+                              const location = origin && destination ? "both" : origin ? "origin" : destination ? "destination" : undefined;
+                              setField("addons", {
+                                ...data.addons,
+                                customsBrokerage: {
+                                  ...data.addons?.customsBrokerage,
+                                  origin,
+                                  destination,
+                                  enabled,
+                                  location,
+                                },
+                              });
+                            }}
+                          />
+                          <span className="text-xs">Destination</span>
+                        </div>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -467,7 +515,7 @@ function ServiceAddonsSection({ data, setField }) {
             )}
 
             {/* Insurance */}
-            {["sea", "rail", "road", "air"].includes(data.mode) && (
+            {["sea", "rail", "road", "air", "combined"].includes(data.mode) && (
               <div className="flex flex-col gap-2 rounded-xl border border-border/40 bg-background/60 p-3 hover:shadow-md transition-all">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -504,6 +552,7 @@ function ServiceAddonsSection({ data, setField }) {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.18, ease: "easeOut" }}
                     >
+                      <span className="text-xs text-muted-foreground">cargo</span>
                       <Input
                         type="number"
                         value={data.addons?.insurance?.cargoValue || ""}
@@ -548,7 +597,7 @@ function ServiceAddonsSection({ data, setField }) {
             )}
 
             {/* Stuffing */}
-            {["sea", "rail", "road", "air"].includes(data.mode) && (
+            {["sea", "rail", "road", "air", "combined"].includes(data.mode) && (
               <div className="flex flex-col gap-2 rounded-xl border border-border/40 bg-background/60 p-3 hover:shadow-md transition-all">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -579,15 +628,17 @@ function ServiceAddonsSection({ data, setField }) {
                     >
                       <Select
                         value={data.addons?.stuffing?.equipment || ""}
-                        onValueChange={(val) =>
+                        onValueChange={(val) => {
+                          const isManual = val === "manually";
                           setField("addons", {
                             ...data.addons,
                             stuffing: {
                               ...data.addons?.stuffing,
                               equipment: val,
+                              resources: isManual ? data.addons?.stuffing?.resources || "" : "",
                             },
-                          })
-                        }
+                          });
+                        }}
                       >
                         <SelectTrigger className="h-8 w-32 text-xs">
                           <SelectValue placeholder="Equipment" />
@@ -597,29 +648,31 @@ function ServiceAddonsSection({ data, setField }) {
                           <SelectItem value="manually">Manually</SelectItem>
                         </SelectContent>
                       </Select>
-                      <Select
-                        value={data.addons?.stuffing?.resources || ""}
-                        onValueChange={(val) =>
-                          setField("addons", {
-                            ...data.addons,
-                            stuffing: {
-                              ...data.addons?.stuffing,
-                              resources: val,
-                            },
-                          })
-                        }
-                      >
-                        <SelectTrigger className="h-8 w-28 text-xs">
-                          <SelectValue placeholder="Workers" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {[2, 3, 4, 5].map((n) => (
-                            <SelectItem key={n} value={n.toString()}>
-                              {n}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      {data.addons?.stuffing?.equipment === "manually" && (
+                        <Select
+                          value={data.addons?.stuffing?.resources || ""}
+                          onValueChange={(val) =>
+                            setField("addons", {
+                              ...data.addons,
+                              stuffing: {
+                                ...data.addons?.stuffing,
+                                resources: val,
+                              },
+                            })
+                          }
+                        >
+                          <SelectTrigger className="h-8 w-28 text-xs">
+                            <SelectValue placeholder="Workers" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {[2, 3, 4, 5].map((n) => (
+                              <SelectItem key={n} value={n.toString()}>
+                                {n}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      )}
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -627,7 +680,7 @@ function ServiceAddonsSection({ data, setField }) {
             )}
 
             {/* Unstuffing */}
-            {["sea", "rail", "road", "air"].includes(data.mode) && (
+            {["sea", "rail", "road", "air", "combined"].includes(data.mode) && (
               <div className="flex flex-col gap-2 rounded-xl border border-border/40 bg-background/60 p-3 hover:shadow-md transition-all">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -658,15 +711,17 @@ function ServiceAddonsSection({ data, setField }) {
                     >
                       <Select
                         value={data.addons?.unstuffing?.equipment || ""}
-                        onValueChange={(val) =>
+                        onValueChange={(val) => {
+                          const isManual = val === "manually";
                           setField("addons", {
                             ...data.addons,
                             unstuffing: {
                               ...data.addons?.unstuffing,
                               equipment: val,
+                              resources: isManual ? data.addons?.unstuffing?.resources || "" : "",
                             },
-                          })
-                        }
+                          });
+                        }}
                       >
                         <SelectTrigger className="h-8 w-32 text-xs">
                           <SelectValue placeholder="Equipment" />
@@ -676,29 +731,31 @@ function ServiceAddonsSection({ data, setField }) {
                           <SelectItem value="manually">Manually</SelectItem>
                         </SelectContent>
                       </Select>
-                      <Select
-                        value={data.addons?.unstuffing?.resources || ""}
-                        onValueChange={(val) =>
-                          setField("addons", {
-                            ...data.addons,
-                            unstuffing: {
-                              ...data.addons?.unstuffing,
-                              resources: val,
-                            },
-                          })
-                        }
-                      >
-                        <SelectTrigger className="h-8 w-28 text-xs">
-                          <SelectValue placeholder="Workers" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {[2, 3, 4, 5].map((n) => (
-                            <SelectItem key={n} value={n.toString()}>
-                              {n}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      {data.addons?.unstuffing?.equipment === "manually" && (
+                        <Select
+                          value={data.addons?.unstuffing?.resources || ""}
+                          onValueChange={(val) =>
+                            setField("addons", {
+                              ...data.addons,
+                              unstuffing: {
+                                ...data.addons?.unstuffing,
+                                resources: val,
+                              },
+                            })
+                          }
+                        >
+                          <SelectTrigger className="h-8 w-28 text-xs">
+                            <SelectValue placeholder="Workers" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {[2, 3, 4, 5].map((n) => (
+                              <SelectItem key={n} value={n.toString()}>
+                                {n}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      )}
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -706,7 +763,7 @@ function ServiceAddonsSection({ data, setField }) {
             )}
 
             {/* Inspection */}
-            {["sea", "rail", "road", "air", "ecommerce"].includes(data.mode) && (
+            {["sea", "rail", "road", "air", "ecommerce", "combined"].includes(data.mode) && (
               <div className="flex flex-col gap-2 rounded-xl border border-border/40 bg-background/60 p-3 hover:shadow-md transition-all">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -766,15 +823,15 @@ function ServiceAddonsSection({ data, setField }) {
           {/* Simple Add-Ons */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-4">
             {[
-              { key: "portAgent", label: "Port Agent", modes: ["sea"] },
-              { key: "reposition", label: "Repositioning", modes: ["sea", "rail"] },
-              { key: "trackLive", label: "Live Tracking", modes: ["sea", "rail", "road", "air", "ecommerce"] },
-              { key: "trokeTrace", label: "Troke Trace", modes: ["sea", "rail", "road", "air", "ecommerce"] },
-              { key: "socForAll", label: "SOC for All", modes: ["sea", "rail"] },
-              { key: "readyToLoad", label: "Ready To Load", modes: ["sea", "rail", "road"] },
-              { key: "changeDestination", label: "Change Destination", modes: ["sea", "rail", "road", "air", "ecommerce"] },
-              { key: "extraFreeTime", label: "Extra Free Time", modes: ["sea", "rail", "road", "air", "ecommerce"] },
-              { key: "reduceEmission", label: "Reduce Emission", modes: ["sea", "rail", "road", "air", "ecommerce"] },
+              { key: "portAgent", label: "Port Agent", modes: ["sea", "combined"] },
+              { key: "reposition", label: "Repositioning", modes: ["sea", "rail", "combined"] },
+              { key: "trackLive", label: "Live Tracking", modes: ["sea", "rail", "road", "air", "ecommerce", "combined"] },
+              { key: "trokeTrace", label: "Troke Trace", modes: ["sea", "rail", "road", "air", "ecommerce", "combined"] },
+              { key: "socForAll", label: "SOC for All", modes: ["sea", "rail", "combined"] },
+              { key: "readyToLoad", label: "Ready To Load", modes: ["sea", "rail", "road", "combined"] },
+              { key: "changeDestination", label: "Change Destination", modes: ["sea", "rail", "road", "air", "ecommerce", "combined"] },
+              { key: "extraFreeTime", label: "Extra Free Time", modes: ["sea", "rail", "road", "air", "ecommerce", "combined"] },
+              { key: "reduceEmission", label: "Reduce Emission", modes: ["sea", "rail", "road", "air", "ecommerce", "combined"] },
             ]
               .filter((item) => item.modes.includes(data.mode))
               .map((item) => (

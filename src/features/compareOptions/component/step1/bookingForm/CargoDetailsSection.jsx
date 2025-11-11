@@ -26,7 +26,7 @@ function CargoDetailsSection({ data, setField }) {
   return (
     <Section title="Cargo Details">
       <div className="grid grid-cols-2 gap-3">
-        {data.cargoType == "Hazardous" && ["sea", "rail", "road", "air"].includes(data.mode) && (
+        {(data.cargoType == "Hazardous" && ["sea", "rail", "road", "air"].includes(data.mode))  && (
           <>
             <FormField label="Class IMO">
               <Input
@@ -47,7 +47,7 @@ function CargoDetailsSection({ data, setField }) {
 
         {((data.cargoType == "Oversized" && ["sea", "rail", "road"].includes(data.mode)) ||
           (data.mode == "road" && data.shipmentType == "LTL") ||
-          ["air", "ecommerce"].includes(data.mode)) && (
+          ["air", "ecommerce", "combined"].includes(data.mode) ) && (
           <>
             <FormField label="Width">
               <Input

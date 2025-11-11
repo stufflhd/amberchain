@@ -17,10 +17,20 @@ import { useGeocoding } from "@/hooks/useGeocoding"
 import CompareResultsHeader from "./CompareResultsHeader"
 import "@/App.css"
 import TransportationIcon from "@/components/icons/TransportationIcon";
+import CompareCostBreakdown from "./CompareCostBreakdown";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { BookingConfirmationPopup } from "@/components/ui/booking-confirmation-popup";
+import CompareConditions from "./CompareConditions";
+
+import BookingRoute from "@/features/bookings/components/BookingRoute";
+
+
 
 export default function CompareResults({ onBack, ctaLabel = "Book Now", enableBookingPopup = true, onCtaClick, priceOverride, resultMeta }) {
   const { data } = useShipmentStore()
   const [expanded, setExpanded] = React.useState(false)
+  const [activeTab, setActiveTab] = React.useState("cost")
+  const [showConfirmationPopup, setShowConfirmationPopup] = React.useState(false)
   const price = priceOverride ?? data.price ?? (data.mode === "Air" ? "1,200" : "450")
 
   // Geocode the locations for the map
@@ -45,6 +55,17 @@ export default function CompareResults({ onBack, ctaLabel = "Book Now", enableBo
   }
 
   const labels = modeLabels[mode] || modeLabels.road
+
+  const handleBookNow = (e) => {
+    e.stopPropagation()
+    if (onCtaClick) {
+      onCtaClick()
+      return
+    }
+    if (enableBookingPopup) {
+      setShowConfirmationPopup(true)
+    }
+  }
 
   // POL (start)
   timelineItems.push({
@@ -164,86 +185,73 @@ export default function CompareResults({ onBack, ctaLabel = "Book Now", enableBo
                 </div>
               </div>
             </div>
-            {/* Summary row */}
-            {(() => {
-              const formatBool = (v) => (v === true ? "Yes" : v === false ? "No" : v)
-              const formatArray = (arr) => Array.isArray(arr) ? arr.join(", ") : arr
-              const detailsRaw = [
-                ["Mode", data.mode],
-                ["Shipment Type", data.shipmentType],
-                ["Container Type", data.containerType],
-                ["POL", data.pol],
-                // ["PLOR Enabled", data.plorChecked],
-                ["PLOR", data.plorChecked ? data.plor : ""],
-                // ["PLOD Enabled", data.plodChecked],
-                ["PLOD", data.plodChecked ? data.plod : ""],
-                ["POD", data.pod],
-                ["Pickup", data.pickupLocation],
-                ["Cargo Type", cargoType],
-                ["Commodity", data.commodity],
-                ["Gross Weight", data.grossWeight ? `${data.grossWeight} kg` : ""],
-                ["PopUp Main", data.wizardSelection?.mainCategory],
-                ["Popup Sub", data.wizardSelection?.subCategory],
-                ["Liftgate Required", data.liftgate?.required],
-                ["Access Conditions", data.accsesConditions],
-                // ["Cold Treatment Required", data.coldTreatment?.required],
-                // ["Cold Treatment Temp", data.coldTreatment?.temperature],
-                // ["Multiple Temp Set Points", data.coldTreatment?.multipleSetPoints],
-                // ["Temperature Set Points", formatArray(data.coldTreatment?.temperatureSetPoints)],
-                ["Probes - Cargo Count", data.probes?.numberOfCargoProbes],
-                ["Probes - Drain Holes", data.probes?.drainHoles],
-                ["Probes - Fresh Air Exchange", data.probes?.freshAirExchange],
-                ["Probes - Ventilation Volume", data.probes?.ventilationVolume],
-                ["Humidity Control", data.humidity?.required],
-                ["Humidity %", data.humidity?.percentage],
-                ["Genset Export", data.genset?.duringExport],
-                ["Genset Import", data.genset?.duringImport],
-                ["Cargo Class", data.cargo?.class],
-                ["Cargo UN Number", data.cargo?.unNumber],
-                ["Cargo Dimensions (L×W×H)", [data.cargo?.length, data.cargo?.width, data.cargo?.height].filter(Boolean).join(" × ")],
-                ["Length Metrics", data.cargo?.lengthMetrics],
-                ["Package Type", data.cargo?.packageType],
-                ["Number Of Packages", data.cargo?.numberOfPackages],
-                ["Volume", data.cargo?.volume],
-                ["Truck Type", data.cargo?.truckType],
-                ["Number Of Pallets", data.cargo?.numberOfPallets],
-                ["Stackable Cargo", data.cargo?.stackableCargo],
-                ["Price", price ? `$${price}` : ""],
-              ]
-                .map(([k, v]) => [k, formatArray(formatBool(v))])
-                .filter(([, v]) => v !== undefined && v !== null && v !== "")
+            {/* Cost/Conditions toggle */}
+            <div className="w-full bg-card border rounded-xl shadow-sm p-4">
+              <div className="flex items-center justify-between gap-3">
+                <ToggleGroup
+                  type="single"
+                  variant="outline"
+                  value={activeTab}
+                  onValueChange={(v) => v && setActiveTab(v)}
+                >
+                  <ToggleGroupItem value="cost" className={'bg-background'}>
+                    Cost Breakdown
+                  </ToggleGroupItem>
+                  <ToggleGroupItem value="conditions" className={'bg-background'}>
+                    Conditions
+                  </ToggleGroupItem>
+                </ToggleGroup>
+                {/* {(() => {
+                  const origin = resultMeta?.fromPort || (data.pol ? data.pol.split(',')[0].trim() : null)
+                  const via = resultMeta?.via
+                  const destination = resultMeta?.toPort || (data.pod ? data.pod.split(',')[0].trim() : null)
+                  const route = [origin, via, destination].filter(Boolean)
+                  return route.length > 0 ? (
+                    <div className="ml-auto">
+                      <BookingRoute route={route} />
+                    </div>
+                  ) : null
+                })()} */}
+              </div>
 
-              const colSize = Math.ceil(detailsRaw.length / 3) || 1
-              const cols = [
-                detailsRaw.slice(0, colSize),
-                detailsRaw.slice(colSize, colSize * 2),
-                detailsRaw.slice(colSize * 2)
-              ]
+              <div className="mt-4">
+                {activeTab === 'cost' ? (
+                  <CompareCostBreakdown
+                    price={price}
+                    currency={resultMeta?.currency}
+                    costBreakdown={resultMeta?.costBreakdown}
+                  />
+                ) : (
+                  // Lazy import to avoid circular deps; colocated component
+                  <CompareConditions
+                    conditions={resultMeta?.conditions}
+                    fallbackTransitDays={resultMeta?.transitDays}
+                  />
+                )}
+              </div>
+            </div>
 
-              return (
-                <div className="w-full bg-card border rounded-xl shadow-sm p-4">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
-                    {cols.map((items, idx) => (
-                      <div key={idx} className={`flex flex-col gap-2 ${idx > 0 ? 'md:border-l md:pl-4' : ''}`}>
-                        {items.length === 0 ? (
-                          <span className="text-sm text-muted-foreground">—</span>
-                        ) : (
-                          <div className="flex flex-col gap-1">
-                            {items.map(([label, value], i) => (
-                              <div key={label + i} className="flex flex-wrap items-center text-sm text-foreground/90">
-                                <span className="font-medium">{label}</span>
-                                <span className="mx-2 text-muted-foreground">:</span>
-                                <span className="truncate">{String(value)}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )
-            })()}
+            <div className="flex items-center justify-between gap-3 mt-4">
+              {(() => {
+                const origin = data.pol ? data.pol.split(',')[0].trim() : null
+                const viaPlor = data.plor || null
+                const viaPlod = data.plod || null
+                const destination = data.pod ? data.pod.split(',')[0].trim() : null
+                const route = [origin, viaPlor, viaPlod, destination].filter(Boolean)
+                return route.length > 0 ? (
+                  <BookingRoute route={route} />
+                ) : <div />
+              })()}
+              <Button onClick={handleBookNow}>{ctaLabel}</Button>
+            </div>
+
+            {enableBookingPopup && (
+              <BookingConfirmationPopup
+                isOpen={showConfirmationPopup}
+                onClose={() => setShowConfirmationPopup(false)}
+                bookingData={data}
+              />
+            )}
           </div>
         )}
       </CardContent>

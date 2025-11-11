@@ -1,4 +1,4 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { TRANSPORT_MODES } from "@/constants/CompareOptionsFields"
 import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom"
@@ -19,7 +19,6 @@ export default function ShipmentForm({ onFormComplete, enableServicePopup = true
 
   const { data, setField } = useShipmentStore()
   const { mode, shipmentType, cargoType } = data
-  const [pickupChecked, setPickupChecked] = useState(false)
   const [showSuccessPopup, setShowSuccessPopup] = useState(false)
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [error, setError] = useState("")
@@ -33,6 +32,15 @@ export default function ShipmentForm({ onFormComplete, enableServicePopup = true
   const cargoTypeRef = useRef(null)
   const submitRef = useRef(null)
   const transition = { duration: 0.35, ease: "easeOut" }
+
+  // Default mode to 'combined' on initial load if not already set
+  useEffect(() => {
+    if (!mode) {
+      setField("mode", "combined")
+      setField("shipmentType", "")
+      setField("cargoType", "")
+    }
+  }, [])
 
   // POL / POD labels come from locationLabels[mode] if available,
   // otherwise fallback to standard names
@@ -59,7 +67,8 @@ export default function ShipmentForm({ onFormComplete, enableServicePopup = true
     // Optional PLOR/PLOD/Pickup (only required if their checkboxes are checked)
     if (data.plorChecked && !data.plor) errors.plor = `Please enter a valid ${plorLabel}.`
     if (data.plodChecked && !data.plod) errors.plod = `Please enter a valid ${plodLabel}.`
-    if (data.pickupChecked && !data.pickup) errors.pickup = "Please enter a valid Pickup location."
+    if (data.pickupChecked && !data.pickupLocation) errors.pickupLocation = "Please enter a valid Pickup location."
+    if (data.returnChecked && !data.returnLocation) errors.returnLocation = "Please enter a valid Return location."
 
     // Mode is now required
     if (!mode) {
@@ -70,7 +79,7 @@ export default function ShipmentForm({ onFormComplete, enableServicePopup = true
     if (Object.keys(errors).length > 0) return errors
 
     // Validate shipmentType if mode requires it
-    if ((mode && mode !== "air" && mode !== "ecommerce") && !shipmentType) {
+    if ((mode && mode !== "air" && mode !== "ecommerce" && mode !== "combined") && !shipmentType) {
       errors.shipmentType = "Please select a shipment type."
       return errors
     }
@@ -88,10 +97,11 @@ export default function ShipmentForm({ onFormComplete, enableServicePopup = true
       errors.grossWeight = "Please enter gross weight."
     }
 
-    // plor, plod, pickup re-check (kept, though we already did above)
+    // plor, plod, pickup/return re-check (kept, though we already did above)
     if (data.plorChecked && !data.plor) errors.plor = `Please enter a valid ${plorLabel}.`
     if (data.plodChecked && !data.plod) errors.plod = `Please enter a valid ${plodLabel}.`
-    if (data.pickupChecked && !data.pickup) errors.pickup = "Please enter a valid Pickup location."
+    if (data.pickupChecked && !data.pickupLocation) errors.pickupLocation = "Please enter a valid Pickup location."
+    if (data.returnChecked && !data.returnLocation) errors.returnLocation = "Please enter a valid Return location."
 
     return errors
   }
@@ -120,7 +130,8 @@ const handleSubmit = (e) => {
           pod: locationsRef,
           plor: locationsRef,
           plod: locationsRef,
-          pickup: locationsRef,
+          pickupLocation: locationsRef,
+          returnLocation: locationsRef,
           cargoType: cargoTypeRef,
           commodity: cargoTypeRef,
           grossWeight: cargoTypeRef
@@ -175,6 +186,12 @@ const completeSubmission = () => {
         {/* Mode selector remains (unchanged behavior / placement can be kept below POL/POD) */}
         <div className="mode-section">
           {/* POL / POD: always visible */}
+          <ModeSelector 
+            mode={mode} 
+            setField={setField} 
+            error={fieldErrors.mode}
+            forwardedRef={modeRef}
+          />
           <LocationSection
             data={data}
             setField={setField}
@@ -183,16 +200,10 @@ const completeSubmission = () => {
             errors={fieldErrors}
             forwardedRef={locationsRef}
           />
-          <ModeSelector 
-            mode={mode} 
-            setField={setField} 
-            error={fieldErrors.mode}
-            forwardedRef={modeRef}
-          />
         </div>
 
-     {/* Shipment Type section (same as before) */}
-{mode && mode !== "air" && mode !== "ecommerce" && (
+     {/* Shipment Type section (hidden for combined/air/ecommerce) */}
+{mode && mode !== "air" && mode !== "ecommerce" && mode !== "combined" && (
   <ShipmentTypeSection
     mode={mode}
     shipmentType={shipmentType}
@@ -205,17 +216,15 @@ const completeSubmission = () => {
 {/* Cargo Type section logic updated */}
 {(
   // Case 1: normal behavior if mode selected
-  (mode && (
-    (mode === "air" || mode === "ecommerce") ||
-    (mode !== "air" && mode !== "ecommerce" && shipmentType)
+    (mode && (
+    (mode === "air" || mode === "ecommerce" || mode === "combined") ||
+    (mode !== "air" && mode !== "ecommerce" && mode !== "combined" && shipmentType)
   ))
   // Case 2: NEW behavior — no mode, but POL & POD filled
   || (!mode && data.pol && data.pod)
 ) && (
   <CargoTypeSection
     cargoType={cargoType}
-    pickupChecked={pickupChecked}
-    setPickupChecked={setPickupChecked}
     data={data}
     setField={setField}
     errors={fieldErrors}
@@ -240,9 +249,9 @@ const completeSubmission = () => {
         </AnimatePresence>
         {(data.cargoType)   && (<BookingForm /> ) }
         { (data.mode || data.pol && data.pod)  && (
-          <motion.section ref={submitRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={transition} className="flex justify-center pt-8">
-            <Button type="submit" size="lg" className="px-12 py-4 text-lg font-semibold bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300">
-              {hasSubmitted ? "Shipment Results" : "Shipment Request"}
+          <motion.section ref={submitRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={transition} className="flex justify-center ">
+            <Button type="submit" size="lg" className="px-12 py-4 text-lg  bg-primary hover:bg-primary text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300">
+              {hasSubmitted ? "COMPARE OPTIONS" : "COMPARE OPTIONS"}
             </Button>
           </motion.section>
           )} 

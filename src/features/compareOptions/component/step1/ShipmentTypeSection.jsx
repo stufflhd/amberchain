@@ -3,6 +3,9 @@ import { Button } from "@/components/ui/button"
 import { Boxes, Container, Truck, Package } from "lucide-react"
 import ContainerTypeSearchSelect from "./ContainerTypeSearchSelect"
 import { useShipmentStore } from "@/store/shipmentStore"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Label } from "@/components/ui/label"
+import LocationInput from "./LocationInput"
 export default function ShipmentTypeSection({ mode, shipmentType, setField, error, forwardedRef }) {
   const shipmentOptions = mode === "sea" || mode === "rail" ? ["FCL", "LCL"] : mode === "road" ? ["FCL", "FTL", "LTL"] : []
   const transition = { duration: 0.35, ease: "easeOut" }
@@ -70,15 +73,70 @@ export default function ShipmentTypeSection({ mode, shipmentType, setField, erro
         </motion.p>
       )}
 
-      {(mode === "sea" || mode === "rail" || mode==="road") && shipmentType === "FCL" && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={transition} className="mt-6">
-           <ContainerTypeSearchSelect
-                label="Container Type"
-                value={data.containerType || ""}
-                onChange={v => setField("containerType", v)}
-                placeholder="Search container types"
-            />
-  </motion.div>
+      {(mode === "sea" || mode === "rail" || mode === "road") && (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={transition} className="mt-6 space-y-4">
+          {(() => {
+            const isFCL = shipmentType === "FCL"
+            return (
+              <>
+                {isFCL && (
+                  <div>
+                    <ContainerTypeSearchSelect
+                      label="Container Type"
+                      value={data.containerType || ""}
+                      onChange={(v) => setField("containerType", v)}
+                      placeholder="Search container types"
+                    />
+                  </div>
+                )}
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="bg-accent/30 p-4 rounded-lg border">
+                    <div className="flex items-center gap-3 mb-3">
+                      <Checkbox
+                        id="pickup-inline"
+                        checked={!!data.pickupChecked || !!data.plorChecked}
+                        onCheckedChange={(val) => setField("pickupChecked", val)}
+                        disabled={!!data.plorChecked}
+                        className="w-5 h-5"
+                      />
+                      <Label htmlFor="pickup-inline" className="font-medium">Add Pickup Location</Label>
+                    </div>
+                    {(data.pickupChecked || data.plorChecked) && (
+                      <LocationInput
+                        id="pickupLocation-inline"
+                        label="Pickup Location"
+                        value={data.pickupLocation || ""}
+                        onChange={(v) => setField("pickupLocation", v)}
+                        placeholder="Enter pickup location"
+                      />
+                    )}
+                  </div>
+                  <div className="bg-accent/30 p-4 rounded-lg border">
+                    <div className="flex items-center gap-3 mb-3">
+                      <Checkbox
+                        id="return-inline"
+                        checked={!!data.returnChecked || !!data.plodChecked}
+                        onCheckedChange={(val) => setField("returnChecked", val)}
+                        disabled={!!data.plodChecked}
+                        className="w-5 h-5"
+                      />
+                      <Label htmlFor="return-inline" className="font-medium">Add Return Location</Label>
+                    </div>
+                    {(data.returnChecked || data.plodChecked) && (
+                      <LocationInput
+                        id="returnLocation-inline"
+                        label="Return Location"
+                        value={data.returnLocation || ""}
+                        onChange={(v) => setField("returnLocation", v)}
+                        placeholder="Enter return location"
+                      />
+                    )}
+                  </div>
+                </div>
+              </>
+            )
+          })()}
+        </motion.div>
       )}
     </motion.section>
   )

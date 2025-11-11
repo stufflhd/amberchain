@@ -102,7 +102,7 @@ export default function CompareResultsHeader({ data, expanded, setExpanded, pric
             {modeIcon}
             <span className="text-sm font-medium whitespace-nowrap">
               {data.mode ? data.mode.charAt(0).toUpperCase() + data.mode.slice(1) : "—"}
-              {data.shipmentType && (
+              {data.shipmentType && mode !== 'combined' && (
                 <span className="ml-1 text-muted-foreground"> / {data.shipmentType}</span>
               )}
             </span>

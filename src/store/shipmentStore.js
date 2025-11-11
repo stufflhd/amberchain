@@ -19,7 +19,10 @@ export const useShipmentStore = create((set) => ({
     cargoType: "",
     commodity: "",
     grossWeight: "",
+    pickupChecked: false,
     pickupLocation: "",
+    returnChecked: false,
+    returnLocation: "",
     // Wizard form data
     wizardSelection: {
       mainCategory: "",

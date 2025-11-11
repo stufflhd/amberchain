@@ -9,7 +9,7 @@ export const TRANSPORT_MODES = {
     translationKey: 'compareOptions.modes.combined',
     description: 'compareOptions.modeDescriptions.combined',
     icon: 'Combined',
-    disabled: true
+    disabled: false
   },
   SEA: {
     id: 'sea',

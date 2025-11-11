@@ -6,7 +6,7 @@ import LocationInput from "./LocationInput"
 import CommoditySearchSelect from "./CommoditySearchSelect"
 import { Input } from "@/components/ui/input"
 
-export default function CargoTypeSection({ cargoType, pickupChecked, setPickupChecked, data, setField, errors = {}, forwardedRef }) {
+export default function CargoTypeSection({ cargoType, data, setField, errors = {}, forwardedRef }) {
   const allCargoTypes = [
     { value: "General", label: "General", icon: Package },
     { value: "Hazardous", label: "Hazardous", icon: AlertTriangle },
@@ -68,33 +68,7 @@ export default function CargoTypeSection({ cargoType, pickupChecked, setPickupCh
               )}
             </div>
           </div>
-{!(data.mode === "air" || (data.mode === "road" && ["LTL", "FTL"].includes(data.shipmentType)))
- && (
-          <div className="bg-accent/50 p-6 rounded-lg border-2 border-accent shadow-sm">
-            <div className="flex items-center gap-3 mb-4">
-              <Checkbox 
-                id="pickup" 
-                checked={pickupChecked} 
-                onCheckedChange={setPickupChecked} 
-                className="w-6 h-6"
-              />
-              <Label htmlFor="pickup" className="text-lg font-semibold">Add Pickup Location</Label>
-            </div>
-            {pickupChecked && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mt-2"
-              >
-                <LocationInput 
-                  value={data.pickupLocation || ""} 
-                  onChange={v => setField("pickupLocation", v)} 
-                  placeholder="Enter pickup location"
-                  className="bg-background"
-                />
-              </motion.div>
-            )}
-          </div>)}
+          {/* Pickup/Return moved to ShipmentTypeSection for consistent layout across modes */}
         </motion.div>
       )}
     </motion.section>

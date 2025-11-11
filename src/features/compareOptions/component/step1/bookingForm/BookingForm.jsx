@@ -29,7 +29,7 @@ function BookingForm() {
     const isRoadFTL = data.mode == "road" && data.shipmentType == "FTL";
     const isAirStackable = data.mode == "air";
 
-    return isHazardous || isOversized || hasPackageInfo || isRoadFTL || isAirStackable;
+    return isHazardous || isOversized || hasPackageInfo || isRoadFTL || isAirStackable || data.mode == "combined";
   }, [data.cargoType, data.mode, data.shipmentType]);
 
   const isLeftColumnEmpty = useMemo(() => {

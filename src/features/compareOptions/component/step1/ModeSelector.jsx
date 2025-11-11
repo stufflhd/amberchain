@@ -12,7 +12,7 @@ export default function ModeSelector({ mode, setField, error, forwardedRef }) {
     ecommerce: ShoppingCart,
     combined: ArrowRightLeft
   }
-  const disabledModes = ["combined"]
+  const disabledModes = []
 
   return (
     <section ref={forwardedRef} className="space-y-8">
@@ -66,4 +66,4 @@ export default function ModeSelector({ mode, setField, error, forwardedRef }) {
       </div>
     </section>
   )
-}  
+}

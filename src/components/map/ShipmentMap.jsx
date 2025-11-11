@@ -37,6 +37,12 @@ export default function ShipmentMap({ origin, destination, mapHeight = '300px', 
                 routeGeometry.coordinates.forEach(coord => bounds.extend(coord));
                 currentMap.fitBounds(bounds, { padding: 80, maxZoom: 15, duration: 1000 });
             } else if (origin && destination) {
+                // Fallback: draw a straight line between origin and destination
+                const fallbackGeometry = {
+                    type: 'LineString',
+                    coordinates: [origin, destination]
+                };
+                addRouteToMap(currentMap, fallbackGeometry, mode);
                 const bounds = new maplibregl.LngLatBounds();
                 bounds.extend(origin);
                 bounds.extend(destination);
