@@ -98,7 +98,7 @@ export default function CompareResultsHeader({ data, expanded, setExpanded, pric
           </div>
 
           {/* Mode & Shipment Type */}
-          <div className="flex items-center gap-1.5 px-3 py-2 rounded-md bg-background border border-border/50 shrink md:shrink-0">
+          <div className="flex items-center gap-1.5 px-3 py-2 rounded-md bg-muted border border-border/50 shrink md:shrink-0">
             {modeIcon}
             <span className="text-sm font-medium whitespace-nowrap">
               {data.mode ? data.mode.charAt(0).toUpperCase() + data.mode.slice(1) : "—"}
@@ -109,13 +109,13 @@ export default function CompareResultsHeader({ data, expanded, setExpanded, pric
           </div>
 
           {/* Cargo Type */}
-          <div className="flex items-center gap-1.5 px-3 py-2 rounded-md bg-background border border-border/50 shrink md:shrink-0">
+          <div className="flex items-center gap-1.5 px-3 py-2 rounded-md bg-muted border border-border/50 shrink md:shrink-0">
             {cargoIcon}
             <span className="text-sm font-medium whitespace-nowrap">{cargoType}</span>
           </div>
 
           {/* Weight & Days Left */}
-          <div className="flex items-center gap-3 px-3 py-2 rounded-md bg-background border border-border/50 shrink md:shrink-0">
+          <div className="flex items-center gap-3 px-3 py-2 rounded-md bg-muted border border-border/50 shrink md:shrink-0">
             <div className="flex items-center gap-1.5 whitespace-nowrap">
               <Weight className={`w-4 h-4 ${modeIconColor}`} />
               <span className="text-sm font-medium">
@@ -131,15 +131,15 @@ export default function CompareResultsHeader({ data, expanded, setExpanded, pric
 
           {/* Route */}
           <div className="flex items-center gap-2.5 min-w-0 shrink md:shrink-0">
-            <div className="rounded-md bg-primary/10 p-1.5">
-              <MapPin className="w-5 h-5 text-primary" />
+            <div className="rounded-md bg-muted p-1.5">
+              <MapPin className="w-5 h-5 text-muted-foreground" />
             </div>
             <span className="font-semibold text-base whitespace-nowrap max-w-[160px] truncate">
               {data.pol ? data.pol.split(',')[0].trim() : "—"}
             </span>
             <div className="flex items-center gap-1 flex-shrink-0">
               <div className="h-px w-6 bg-border" />
-              <div className="w-2 h-2 rotate-45 border-r-2 border-t-2 border-primary" />
+              <div className="w-2 h-2 rotate-45 border-r-2 border-t-2 border-muted-foreground" />
             </div>
             <span className="font-semibold text-base whitespace-nowrap max-w-[160px] truncate">
               {data.pod ? data.pod.split(',')[0].trim() : "—"}

@@ -97,7 +97,7 @@ export default function CompareCostBreakdown({ price, currency = "USD", costBrea
   ];
 
   return (
-    <div className="w-full bg-card border rounded-xl shadow-sm p-4">
+    <div className="w-full bg-card group-hover:bg-accent shadow-sm p-4">
       <div className="space-y-2 text-sm grid sm:grid-cols-3 justify-between items-stretch gap-x-8">
         {items.map((item, idx) => (
           <DetailItem key={idx} label={item.label} value={item.value} />

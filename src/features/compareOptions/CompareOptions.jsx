@@ -11,7 +11,7 @@ import { ArrowLeft } from "lucide-react"
 
 export default function CompareOptions({
   enableServicePopup = true,
-  resultsCtaLabel = "Book Now",
+  resultsCtaLabel = "Book now",
   enableBookingPopup = true,
   onResultsCtaClick,
   prefillDummy = false,

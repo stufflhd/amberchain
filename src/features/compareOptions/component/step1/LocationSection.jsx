@@ -8,21 +8,21 @@ export default function LocationSection({ data, setField, labels, errors = {}, f
 
   // Define full labels for PLOR & PLOD based on mode
   const modeLabels = {
-    // sea: { plor: "Place of Loading (Origin)", plod: "Place of Discharge (Destination)" },
-    // air: { plor: "Airport of Loading", plod: "Airport of Destination" },
-    // road: { plor: "Pickup Location", plod: "Delivery Location" },
-    // rail: { plor: "Rail Terminal of Loading", plod: "Rail Terminal of Destination" },
-    // ecommerce: { plor: "Warehouse / Fulfillment Center", plod: "Customer Delivery Location" },
-    sea: { plor: "Place Of Receipt", plod: "Place Of Delivery" },
-    air: { plor: "Place Of Receipt", plod: "Place Of Delivery" },
-    road: { plor: "Place Of Receipt", plod: "Place Of Delivery" },
-    rail: { plor: "Place Of Receipt", plod: "Place Of Delivery" },
+    sea: { plor: "Place of Loading (Origin)", plod: "Place of Discharge (Destination)" },
+    air: { plor: "Airport of Loading", plod: "Airport of Destination" },
+    road: { plor: "Pickup Location", plod: "Delivery Location" },
+    rail: { plor: "Rail Terminal of Loading", plod: "Rail Terminal of Destination" },
     ecommerce: { plor: "Warehouse / Fulfillment Center", plod: "Customer Delivery Location" },
+    // sea: { plor: "Place Of Receipt", plod: "Place Of Delivery" },
+    // air: { plor: "Place Of Receipt", plod: "Place Of Delivery" },
+    // road: { plor: "Place Of Receipt", plod: "Place Of Delivery" },
+    // rail: { plor: "Place Of Receipt", plod: "Place Of Delivery" },
+    // ecommerce: { plor: "Warehouse / Fulfillment Center", plod: "Customer Delivery Location" },
   };
 
   const currentLabels = modeLabels[data.mode] || {
-    plor: "Place of Loading (Origin)",
-    plod: "Place of Discharge (Destination)",
+    plor: "Place of receipt",
+    plod: "Place of delivery",
   };
 
   return (

@@ -44,7 +44,7 @@ export default function ShipmentForm({ onFormComplete, enableServicePopup = true
 
   // POL / POD labels come from locationLabels[mode] if available,
   // otherwise fallback to standard names
-  const [polLabel, podLabel] = locationLabels[mode] || ["Port of Loading", "Port of Discharge"]
+  const [polLabel, podLabel] = locationLabels[mode] || ["Place of origin", "Port of destination"]
 
   // PLOR / PLOD full names — conditional on selected mode.
   // If mode exists, include the chosen POL/POD label in the description;

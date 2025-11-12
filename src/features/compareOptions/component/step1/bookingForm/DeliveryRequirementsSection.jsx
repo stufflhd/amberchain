@@ -47,7 +47,7 @@ function DeliveryRequirementsSection({ data, setField }) {
             value={data.accessConditions || ""}
             onValueChange={(val) => setField("accessConditions", val)}
           >
-            <SelectTrigger className="h-9">
+            <SelectTrigger className="h-9 rounded-lg">
               <SelectValue placeholder="Select condition" />
             </SelectTrigger>
             <SelectContent>

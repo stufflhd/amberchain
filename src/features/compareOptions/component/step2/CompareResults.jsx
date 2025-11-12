@@ -26,7 +26,7 @@ import BookingRoute from "@/features/bookings/components/BookingRoute";
 
 
 
-export default function CompareResults({ onBack, ctaLabel = "Book Now", enableBookingPopup = true, onCtaClick, priceOverride, resultMeta, headerOnly = false, toggle_button = true, popupVariant = "booking" }) {
+export default function CompareResults({ onBack, ctaLabel = "Book now", enableBookingPopup = true, onCtaClick, priceOverride, resultMeta, headerOnly = false, toggle_button = true, popupVariant = "booking" }) {
   const { data } = useShipmentStore()
   const [expanded, setExpanded] = React.useState(false)
   const [activeTab, setActiveTab] = React.useState("cost")
@@ -125,7 +125,7 @@ export default function CompareResults({ onBack, ctaLabel = "Book Now", enableBo
           </Button>
         </div>
       )}
-      <CardHeader className="border-b bg-gradient-to-r from-muted/30 to-muted/10 px-8 py-3.5">
+      <CardHeader className="border-none px-8 gap-0">
         <CompareResultsHeader
           data={data}
           expanded={expanded}
@@ -189,32 +189,22 @@ export default function CompareResults({ onBack, ctaLabel = "Book Now", enableBo
               </div>
             </div>
             {/* Cost/Conditions toggle */}
-            <div className="w-full bg-card border rounded-xl shadow-sm p-4">
+            <div className="group w-full bg-card hover:bg-accent border rounded-xl shadow-sm p-4">
               <div className="flex items-center justify-between gap-3">
                 <ToggleGroup
                   type="single"
+                  
                   variant="outline"
                   value={activeTab}
                   onValueChange={(v) => v && setActiveTab(v)}
                 >
-                  <ToggleGroupItem value="cost" className={'bg-background'}>
+                  <ToggleGroupItem value="cost" className={'bg-background '}>
                     Cost Breakdown
                   </ToggleGroupItem>
                   <ToggleGroupItem value="conditions" className={'bg-background'}>
                     Conditions
                   </ToggleGroupItem>
                 </ToggleGroup>
-                {/* {(() => {
-                  const origin = resultMeta?.fromPort || (data.pol ? data.pol.split(',')[0].trim() : null)
-                  const via = resultMeta?.via
-                  const destination = resultMeta?.toPort || (data.pod ? data.pod.split(',')[0].trim() : null)
-                  const route = [origin, via, destination].filter(Boolean)
-                  return route.length > 0 ? (
-                    <div className="ml-auto">
-                      <BookingRoute route={route} />
-                    </div>
-                  ) : null
-                })()} */}
               </div>
 
               <div className="mt-4">

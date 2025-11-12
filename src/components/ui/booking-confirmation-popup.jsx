@@ -59,7 +59,7 @@ export function BookingConfirmationPopup({ isOpen, onClose, bookingData, popupVa
               transition={{ duration: 0.25 }}
               className="flex flex-col items-center text-center"
             >
-              <div className="w-full mb-6 rounded-2xl overflow-hidden shadow-xl">
+              <div className="w-full mb-6 rounded-2xl overflow-hidden ">
                 <img
                   src={modeImages[selectedMode] || modeImages["ecommerce"]}
                   alt={selectedMode}

@@ -75,7 +75,7 @@ function CargoDetailsSection({ data, setField }) {
                 value={data.cargo?.lengthMetrics || ""}
                 onValueChange={(val) => setField("cargo", { ...data.cargo, lengthMetrics: val })}
               >
-                <SelectTrigger className="h-9">
+                <SelectTrigger className="h-9 rounded-lg">
                   <SelectValue placeholder="Select unit" />
                 </SelectTrigger>
                 <SelectContent>
