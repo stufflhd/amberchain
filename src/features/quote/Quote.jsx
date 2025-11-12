@@ -7,6 +7,11 @@ import CompareResults from "../compareOptions/component/step2/CompareResults"
 export default function CompareOptions() {
   const { t } = useTranslation()
   const [showResults, setShowResults] = useState(false)
+  const dummyResults = [
+    { id: "r1", price: "1,250", currency: "USD" },
+    { id: "r2", price: null, currency: "USD" },
+    { id: "r3", price: "980", currency: "USD" },
+  ]
 
   const handleFormComplete = () => {
     setShowResults(true)
@@ -22,7 +27,20 @@ export default function CompareOptions() {
       {!showResults ? (
         <ShipmentForm onFormComplete={handleFormComplete} enableServicePopup={false} />
       ) : (
-        <CompareResults ctaLabel="Request a Quote" enableBookingPopup={false} />
+        <div className="flex flex-col gap-3">
+          {dummyResults.map((res) => (
+            <CompareResults
+              key={res.id}
+              ctaLabel="Request a Quote"
+              enableBookingPopup={true}
+              popupVariant="quote"
+              priceOverride={res.price ?? undefined}
+              resultMeta={res}
+              headerOnly={true}
+              toggle_button = {false}
+            />
+          ))}
+        </div>
       )}
     </div>
   )

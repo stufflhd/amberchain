@@ -55,7 +55,7 @@ function BookingForm() {
   return (
     <div className="bg-card rounded-xl border border-border shadow-sm p-6 space-y-6">
       <div className="border-b border-border/50 pb-3">
-        <h3 className="text-lg font-semibold text-foreground">Booking Details</h3>
+        <h3 className="text-lg font-semibold text-foreground">Quotation Details</h3>
         <p className="text-xs text-muted-foreground mt-0.5">Configure your shipment settings</p>
       </div>
 

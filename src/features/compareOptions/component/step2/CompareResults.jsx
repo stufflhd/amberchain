@@ -26,12 +26,12 @@ import BookingRoute from "@/features/bookings/components/BookingRoute";
 
 
 
-export default function CompareResults({ onBack, ctaLabel = "Book Now", enableBookingPopup = true, onCtaClick, priceOverride, resultMeta }) {
+export default function CompareResults({ onBack, ctaLabel = "Book Now", enableBookingPopup = true, onCtaClick, priceOverride, resultMeta, headerOnly = false, toggle_button = true, popupVariant = "booking" }) {
   const { data } = useShipmentStore()
   const [expanded, setExpanded] = React.useState(false)
   const [activeTab, setActiveTab] = React.useState("cost")
   const [showConfirmationPopup, setShowConfirmationPopup] = React.useState(false)
-  const price = priceOverride ?? data.price ?? (data.mode === "Air" ? "1,200" : "450")
+  const price = priceOverride ?? data.price ?? (data.mode === "Air" ? "1,200" : "-")
 
   // Geocode the locations for the map
   const { coordinates: originCoords, isLoading: originLoading, error: originError } = useGeocoding(data.pol)
@@ -116,7 +116,7 @@ export default function CompareResults({ onBack, ctaLabel = "Book Now", enableBo
   return (
     <Card
       className="mx-auto my-2 border shadow-sm transition-all duration-300 bg-card text-card-foreground w-full max-w-[95vw] 2xl:max-w-[1600px] cursor-pointer hover:shadow-md"
-      onClick={() => setExpanded(!expanded)}
+      onClick={() => !headerOnly && setExpanded(!expanded)}
     >
       {onBack && (
         <div className="px-8 pt-4 flex justify-start">
@@ -135,11 +135,14 @@ export default function CompareResults({ onBack, ctaLabel = "Book Now", enableBo
           enableBookingPopup={enableBookingPopup}
           onCtaClick={onCtaClick}
           resultMeta={resultMeta}
+          toggle_button={toggle_button}
+          popupVariant={popupVariant}
         />
       </CardHeader>
 
-      <CardContent className="p-0 w-full">
-        {expanded && (
+      {!headerOnly && (
+        <CardContent className="p-0 w-full">
+          {expanded && (
           <div className="p-6 space-y-6 w-full" onClick={(e) => e.stopPropagation()}>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-[420px] w-full">
               <div className="lg:col-span-5 flex flex-col h-full min-w-0">
@@ -250,11 +253,13 @@ export default function CompareResults({ onBack, ctaLabel = "Book Now", enableBo
                 isOpen={showConfirmationPopup}
                 onClose={() => setShowConfirmationPopup(false)}
                 bookingData={data}
+                popupVariant={popupVariant}
               />
             )}
           </div>
-        )}
-      </CardContent>
+          )}
+        </CardContent>
+      )}
     </Card>
   )
 }

@@ -26,7 +26,7 @@ import { useShipmentStore } from "@/store/shipmentStore"
 import { BookingConfirmationPopup } from "@/components/ui/booking-confirmation-popup"
 import TransportationIcon from "@/components/icons/TransportationIcon"
 
-export default function CompareResultsHeader({ data, expanded, setExpanded, price, ctaLabel = "Book Now", enableBookingPopup = true, onCtaClick }) {
+export default function CompareResultsHeader({ data, expanded, setExpanded, price, ctaLabel = "Book Now", enableBookingPopup = true, onCtaClick , toggle_button=true, popupVariant = "booking" }) {
   const [showConfirmationPopup, setShowConfirmationPopup] = useState(false)
   const shipmentData = useShipmentStore((s) => s.data)
   const setField = useShipmentStore((s) => s.setField)
@@ -154,7 +154,7 @@ export default function CompareResultsHeader({ data, expanded, setExpanded, pric
           {/* Price */}
           <div className="px-4 py-2 rounded-lg bg-muted/50 dark:bg-muted/30 border">
             <div className="text-3xl font-bold text-foreground leading-none whitespace-nowrap">
-              ${price}
+              {price ? `$${price}` : '—'}
             </div>
           </div>
 
@@ -168,6 +168,7 @@ export default function CompareResultsHeader({ data, expanded, setExpanded, pric
           </Button>
 
           {/* Toggle Button */}
+          { toggle_button &&
           <Button
             variant="outline"
             size="icon"
@@ -180,6 +181,7 @@ export default function CompareResultsHeader({ data, expanded, setExpanded, pric
           >
             <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${expanded ? "rotate-180" : "rotate-0"}`} />
           </Button>
+          }
         </div>
       </div>
 
@@ -189,6 +191,7 @@ export default function CompareResultsHeader({ data, expanded, setExpanded, pric
           isOpen={showConfirmationPopup}
           onClose={() => setShowConfirmationPopup(false)}
           bookingData={shipmentData}
+          popupVariant={popupVariant}
         />
       )}
     </>
