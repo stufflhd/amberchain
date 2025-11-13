@@ -42,7 +42,7 @@ function BookingForm() {
     const shipmentType = data.shipmentType;
     const cargoType = data.cargoType;
 
-    if (mode === "combined") return true;
+    // if (mode === "combined") return true;
 
     const isRoadFCLCase = mode === "road" && shipmentType === "FCL" && ["General", "Hazardous", "Liquid", "Perishable"].includes(cargoType);
     const isRoadFTLCase = mode === "road" && shipmentType === "FTL" && ["Perishable", "General", "Liquid", "Hazardous"].includes(cargoType);

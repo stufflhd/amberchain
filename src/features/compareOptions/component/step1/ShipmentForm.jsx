@@ -247,7 +247,7 @@ const completeSubmission = () => {
             </m.div>
           )}
         </AnimatePresence>
-        {(data.cargoType)   && (<BookingForm /> ) }
+        {(data.cargoType && mode !== "combined") && (<BookingForm />)}
         { (data.mode || data.pol && data.pod)  && (
           <motion.section ref={submitRef} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={transition} className="flex justify-center ">
             <Button type="submit" size="lg" className="px-12 py-4 text-lg  bg-primary hover:bg-primary text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300">

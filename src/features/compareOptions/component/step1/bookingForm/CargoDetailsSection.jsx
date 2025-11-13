@@ -90,7 +90,7 @@ function CargoDetailsSection({ data, setField }) {
 
         {((data.shipmentType == "LCL" && ["sea", "rail"].includes(data.mode)) ||
           (data.shipmentType == "LTL" && data.mode == "road") ||
-          ["air", "ecommerce"].includes(data.mode)) && (
+          ["air", "ecommerce"].includes(data.mode) ) && (
           <>
             <FormField label="Package Type">
               <Input
@@ -126,10 +126,10 @@ function CargoDetailsSection({ data, setField }) {
                 className="h-9"
               />
             </FormField>
-            <FormField label="Truck Type">
+            <FormField label="Package Type">
               <Input
-                value={data.cargo?.truckType || ""}
-                onChange={(e) => setField("cargo", { ...data.cargo, truckType: e.target.value })}
+                value={data.cargo?.packageType || ""}
+                onChange={(e) => setField("cargo", { ...data.cargo, packageType: e.target.value })}
                 className="h-9"
               />
             </FormField>

@@ -68,13 +68,13 @@ export function BookingConfirmationPopup({ isOpen, onClose, bookingData, popupVa
               </div>
 
               <DialogTitle className="text-3xl font-bold text-primary mb-2">
-                {popupVariant === "quote" ? "Quote Requested!" : "Booking Confirmed!"}
+                {popupVariant === "quote" ? "Quote Requested!" : "Quote Confirmed!"}
               </DialogTitle>
 
               <DialogDescription className="text-sm text-muted-foreground dark:text-muted-foreground/80 mb-6 max-w-[90%]">
                 {popupVariant === "quote"
                   ? "Your quote request was submitted successfully. Redirecting to your quotations..."
-                  : "Your booking has been successfully submitted. You can now view and manage your quotations."}
+                  : "Your Quote has been successfully submitted. You can now view and manage your quotations."}
               </DialogDescription>
 
               <div className="flex flex-col sm:flex-row gap-3 w-full">

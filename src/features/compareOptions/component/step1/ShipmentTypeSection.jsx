@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Boxes, Container, Truck, Package } from "lucide-react"
 import ContainerTypeSearchSelect from "./ContainerTypeSearchSelect"
+import TruckTypeSearchSelect from "./TruckTypeSearchSelect"
 import { useShipmentStore } from "@/store/shipmentStore"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
@@ -86,6 +87,16 @@ export default function ShipmentTypeSection({ mode, shipmentType, setField, erro
                       value={data.containerType || ""}
                       onChange={(v) => setField("containerType", v)}
                       placeholder="Search container types"
+                    />
+                  </div>
+                )}
+                {mode === "road" && (shipmentType === "FTL" || shipmentType === "LTL") && (
+                  <div>
+                    <TruckTypeSearchSelect
+                      label="Truck Type"
+                      value={data.cargo?.truckType || ""}
+                      onChange={(v) => setField("cargo", { ...data.cargo, truckType: v })}
+                      placeholder="Search truck types"
                     />
                   </div>
                 )}

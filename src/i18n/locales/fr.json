@@ -457,7 +457,8 @@
       "insights": "Aperçus",
       "bookings-view": "Vue Réservations",
       "containers-view": "Vue Conteneurs",
-      "compare-options": "Comparer les Options"
+      "compare-options": "Comparer les Options",
+      "quote": "Devis"
     },
     "cargoNav": {
       "deliveryOrder": "Bon de livraison",
@@ -965,7 +966,7 @@
       }
     },
     "quote": {
-    "pageTitle": "Créer  vote devis",
+    "pageTitle": "Créer  votre devis",
      "success": "Demande de devis soumise avec succès !",
       "steps": {
         "selectTransportMode": "Sélectionnez le mode de transport",

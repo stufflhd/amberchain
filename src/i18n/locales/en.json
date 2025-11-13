@@ -466,7 +466,8 @@
       "bookings-view": "Bookings Overview",
       "containers-view": "Containers Overview",
       "quotations-view": "Quotations Overview",
-      "compare-options": "Compare Options"
+      "compare-options": "Compare Options",
+      "quote": "Quote"
     },
     "quotations": {
       "pageTitle": "Quotations",
