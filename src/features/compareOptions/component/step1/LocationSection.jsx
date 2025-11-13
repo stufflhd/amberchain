@@ -43,6 +43,7 @@ export default function LocationSection({ data, setField, labels, errors = {}, f
           onChange={(v) => setField("pol", v)}
           placeholder={`Enter ${polLabel}`}
           error={errors.pol}
+          mode={data.mode}
         />
         <LocationInput
           id="pod"
@@ -51,6 +52,8 @@ export default function LocationSection({ data, setField, labels, errors = {}, f
           onChange={(v) => setField("pod", v)}
           placeholder={`Enter ${podLabel}`}
           error={errors.pod}
+          mode={data.mode}
+
         />
       </div>
 
@@ -85,6 +88,7 @@ export default function LocationSection({ data, setField, labels, errors = {}, f
                     onChange={(v) => setField(field, v)}
                     placeholder={`Enter ${label}`}
                     error={errors[field]}
+                    mode={data.mode}
                   />
                 )}
               </div>

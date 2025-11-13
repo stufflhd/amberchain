@@ -2,6 +2,21 @@ import { useState, useEffect, useRef } from "react"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { MapPin, Search } from "lucide-react"
+import { Ship, Train, Plane, Truck } from "lucide-react"
+
+// choose icon based on mode
+const getModeIcon = (mode) => {
+  switch (mode) {
+    case "sea":
+      return <Ship className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
+    case "rail":
+      return <Train className="h-4 w-4 text-amber-500 mt-0.5 flex-shrink-0" />
+    case "air":
+      return <Plane className="h-4 w-4 text-sky-500 mt-0.5 flex-shrink-0" />
+    default:
+      return <MapPin className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+  }
+}
 
 const LocationInput = ({ 
   id,
@@ -10,7 +25,8 @@ const LocationInput = ({
   onChange, 
   placeholder = "Enter location",
   className = "",
-  error
+  error,
+  mode
 }) => {
   const [suggestions, setSuggestions] = useState([])
   const [showSuggestions, setShowSuggestions] = useState(false)
@@ -26,12 +42,57 @@ const LocationInput = ({
     }
 
     setIsLoading(true)
+
     try {
-      const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=5&addressdetails=1&countrycodes=`
-      )
-      const data = await response.json()
-      setSuggestions(data)
+      let url, response, data, transformedResults
+
+      if (mode === "sea") {
+        // Search for ports using Nominatim with port keyword
+        url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query + " port")}&format=json&limit=10&addressdetails=1`
+        response = await fetch(url)
+        data = await response.json()
+        transformedResults = (data || []).map(item => ({
+          display_name: item.display_name,
+          name: item.name || item.display_name.split(',')[0],
+          lat: item.lat,
+          lng: item.lon
+        }))
+      } else if (mode === "air") {
+        // Search for airports using Nominatim with airport keyword
+        url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query + " airport")}&format=json&limit=10&addressdetails=1`
+        response = await fetch(url)
+        data = await response.json()
+        transformedResults = (data || []).map(item => ({
+          display_name: item.display_name,
+          name: item.name || item.display_name.split(',')[0],
+          lat: item.lat,
+          lng: item.lon
+        }))
+      } else if (mode === "rail") {
+        // Search for train stations using Nominatim with station keyword
+        url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query + " station")}&format=json&limit=10&addressdetails=1`
+        response = await fetch(url)
+        data = await response.json()
+        transformedResults = (data || []).map(item => ({
+          display_name: item.display_name,
+          name: item.name || item.display_name.split(',')[0],
+          lat: item.lat,
+          lng: item.lon
+        }))
+      } else {
+        // Default: search for general addresses/places
+        url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=10&addressdetails=1`
+        response = await fetch(url)
+        data = await response.json()
+        transformedResults = (data || []).map(item => ({
+          display_name: item.display_name,
+          name: item.name || item.display_name.split(',')[0],
+          lat: item.lat,
+          lng: item.lon
+        }))
+      }
+      
+      setSuggestions(transformedResults)
     } catch (error) {
       console.error("Error fetching locations:", error)
       setSuggestions([])
@@ -48,7 +109,7 @@ const LocationInput = ({
       } else {
         setSuggestions([])
       }
-    }, 300)
+    }, 200)
 
     return () => clearTimeout(timeoutId)
   }, [value])
@@ -87,7 +148,7 @@ const LocationInput = ({
 
   return (
     <div className={`relative space-y-2 ${className}`}>
-  <Label className="text-sm font-medium text-foreground">{label}</Label>
+      <Label className="text-sm font-medium text-foreground">{label}</Label>
       <div className="relative">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <MapPin className="h-4 w-4 text-muted-foreground" />
@@ -128,7 +189,7 @@ const LocationInput = ({
                 <MapPin className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-foreground truncate">
-                    {suggestion.display_name.split(',')[0]}
+                    {suggestion.name}
                   </p>
                   <p className="text-xs text-muted-foreground truncate">
                     {suggestion.display_name}
@@ -146,6 +207,7 @@ const LocationInput = ({
           {error}
         </p>
       )}
+      
       {/* No results message */}
       {showSuggestions && suggestions.length === 0 && value && value.length >= 3 && !isLoading && (
         <div className="absolute z-50 w-full mt-1 bg-card border border-border rounded-lg shadow-lg p-4">
