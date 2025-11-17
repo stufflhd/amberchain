@@ -11,7 +11,7 @@ import CargoTypeSection from "@/features/compareOptions/component/step1/CargoTyp
 import BookingForm from "@/features/compareOptions/component/step1/bookingForm/BookingForm"
 import PopUp from "@/features/compareOptions/component/step1/PopUp"
 import QuoteHelperCard from "@/features/book/QuoteHelperCard"
-
+import TemperatureControlSection from '@/features/compareOptions/component/step1/bookingForm/TemperatureControlSection'
 export default function BookBookingForm({ enableServicePopup = true, onComplete }) {
   const { data, setField } = useShipmentStore()
   const { mode, shipmentType, cargoType } = data
@@ -377,6 +377,9 @@ export default function BookBookingForm({ enableServicePopup = true, onComplete 
                         errors={fieldErrors}
                         forwardedRef={cargoTypeRef}
                       />
+                    {data.cargoType == "Perishable" && ["sea", "rail", "road", "air"].includes(data.mode) && (
+                  <TemperatureControlSection data={data} setField={setField} />
+                )}
                     </div>
                   )}
 

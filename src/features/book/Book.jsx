@@ -3,15 +3,18 @@ import { useTranslation } from "react-i18next"
 import DashNav from "@/components/dashboard/DashNav"
 import BookBookingForm from "@/features/book/BookBookingForm"
 import QuoteHelperCard from "@/features/book/QuoteHelperCard"
+import { useShipmentStore } from "@/store/shipmentStore"
 
 export default function Book() {
   const { t } = useTranslation()
   const [showNewBooking, setShowNewBooking] = useState(false)
+  const { reset } = useShipmentStore()
   const handleUseQuote = () => {
     setShowNewBooking(true)
   }
 
   const handleCreateNew = () => {
+    // reset()
     setShowNewBooking(true)
   }
 
