@@ -3,7 +3,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import LocationInput from "./LocationInput";
 
-export default function LocationSection({ data, setField, labels, errors = {}, forwardedRef }) {
+export default function LocationSection({ data, setField, labels, errors = {}, forwardedRef, showPlorPlod = true }) {
   const [polLabel, podLabel] = labels;
 
   // Define full labels for PLOR & PLOD based on mode
@@ -58,7 +58,7 @@ export default function LocationSection({ data, setField, labels, errors = {}, f
       </div>
 
       {/* PLOR & PLOD (hidden for combined mode) */}
-      {data.mode !== "combined" && (
+      {(data.mode !== "combined" && showPlorPlod) && (
         <div className="grid md:grid-cols-2 gap-6 mt-6">
           {["plor", "plod"].map((field) => {
             const checked = data[`${field}Checked`] || false;

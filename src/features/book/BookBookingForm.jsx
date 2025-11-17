@@ -10,12 +10,15 @@ import ShipmentTypeSection from "@/features/compareOptions/component/step1/Shipm
 import CargoTypeSection from "@/features/compareOptions/component/step1/CargoTypeSection"
 import BookingForm from "@/features/compareOptions/component/step1/bookingForm/BookingForm"
 import PopUp from "@/features/compareOptions/component/step1/PopUp"
+import QuoteHelperCard from "@/features/book/QuoteHelperCard"
 
 export default function BookBookingForm({ enableServicePopup = true, onComplete }) {
   const { data, setField } = useShipmentStore()
   const { mode, shipmentType, cargoType } = data
 
   const [activeStep, setActiveStep] = useState(1)
+  const [initializedFromStore, setInitializedFromStore] = useState(false)
+
   const [showSuccessPopup, setShowSuccessPopup] = useState(false)
   const [error, setError] = useState("")
   const [showError, setShowError] = useState(false)
@@ -27,32 +30,75 @@ export default function BookBookingForm({ enableServicePopup = true, onComplete 
   const locationsRef = useRef(null)
   const cargoTypeRef = useRef(null)
 
+  const applyQuoteToStore = (quote) => {
+    setField("mode", quote.mode)
+    setField("shipmentType", quote.shipmentType || "")
+    setField("containerType", quote.containerType || "")
+    setField("pol", quote.pol)
+    setField("pod", quote.pod)
+    setField("cargoType", quote.cargoType)
+    setField("commodity", quote.commodity)
+    setField("grossWeight", quote.grossWeight)
+  }
+
+  // When the form first mounts, if the store already has data (e.g. from a quote
+  // selected on the Book page), jump once to the first incomplete step.
   useEffect(() => {
-    if (!mode) {
-      setField("mode", "combined")
-      setField("shipmentType", "")
-      setField("cargoType", "")
+    if (initializedFromStore) return
+
+    const hasRoute = !!(data.pol && data.pod)
+    const hasMode = !!mode
+    const needsShipmentType = hasMode && !["air", "ecommerce", "combined"].includes(mode)
+    const hasShipmentType = !!shipmentType
+    const hasCargo = !!(cargoType && data.commodity && data.grossWeight)
+
+    let nextStep = 1
+    if (!hasRoute) {
+      nextStep = 1
+    } else if (!hasMode || (needsShipmentType && !hasShipmentType)) {
+      nextStep = 2
+    } else if (!hasCargo) {
+      nextStep = 3
+    } else {
+      nextStep = 4
     }
-  }, [mode, setField])
 
-  const [polLabel, podLabel] = locationLabels[mode] || ["Place of origin", "Port of destination"]
+    setActiveStep(nextStep)
+    setInitializedFromStore(true)
+  }, [initializedFromStore, data.pol, data.pod, data.commodity, data.grossWeight, mode, shipmentType, cargoType])
 
-  const plorLabel = mode
-    ? `${polLabel} — Place/Return of Loading (PLOR)`
-    : "Place of Loading (PLOR)"
-  const plodLabel = mode
-    ? `${podLabel} — Place/Return of Discharge (PLOD)`
-    : "Place of Discharge (PLOD)"
+  const handleUseQuote = (quote) => {
+    applyQuoteToStore(quote)
+
+    // Decide next step based on quote contents (not store timing)
+    const hasRoute = !!(quote.data?.pol || quote.pol) && !!(quote.data?.pod || quote.pod)
+    const hasMode = !!quote.mode
+    const needsShipmentType = hasMode && !["air", "ecommerce", "combined"].includes(quote.mode)
+    const hasShipmentType = !!quote.shipmentType
+    const hasCargo = !!(quote.cargoType && quote.commodity && quote.grossWeight)
+
+    let nextStep = 1
+    if (!hasRoute) {
+      nextStep = 1
+    } else if (!hasMode || (needsShipmentType && !hasShipmentType)) {
+      nextStep = 2
+    } else if (!hasCargo) {
+      nextStep = 3
+    } else {
+      nextStep = 4
+    }
+
+    setDirection(1)
+    setActiveStep(nextStep)
+  }
 
   const validateStep = (step) => {
     const errors = {}
 
     // Step 1: Route details
     if (step === 1) {
-      if (!data.pol) errors.pol = `Please enter a valid ${polLabel || "POL"}.`
-      if (!data.pod) errors.pod = `Please enter a valid ${podLabel || "POD"}.`
-      if (data.plorChecked && !data.plor) errors.plor = `Please enter a valid ${plorLabel}.`
-      if (data.plodChecked && !data.plod) errors.plod = `Please enter a valid ${plodLabel}.`
+      if (!data.pol) errors.pol = `Please enter a valid ${locationLabels[mode] ? locationLabels[mode][0] : "POL"}.`
+      if (!data.pod) errors.pod = `Please enter a valid ${locationLabels[mode] ? locationLabels[mode][1] : "POD"}.`
       if (data.pickupChecked && !data.pickupLocation) errors.pickupLocation = "Please enter a valid Pickup location."
       if (data.returnChecked && !data.returnLocation) errors.returnLocation = "Please enter a valid Return location."
     }
@@ -63,6 +109,15 @@ export default function BookBookingForm({ enableServicePopup = true, onComplete 
 
       if (mode && mode !== "air" && mode !== "ecommerce" && mode !== "combined" && !shipmentType) {
         errors.shipmentType = "Please select a shipment type."
+      }
+
+      // PLOR/PLOD are rendered under ModeSelector in this step in BookBookingForm,
+      // so enforce their requirement here when checked.
+      if (data.plorChecked && !data.plor) {
+        errors.plor = `Please enter a valid ${mode ? `${locationLabels[mode] ? locationLabels[mode][0] : "POL"} — Place/Return of Loading (PLOR)` : "Place of Loading (PLOR)"}.`
+      }
+      if (data.plodChecked && !data.plod) {
+        errors.plod = `Please enter a valid ${mode ? `${locationLabels[mode] ? locationLabels[mode][1] : "POD"} — Place/Return of Discharge (PLOD)` : "Place of Discharge (PLOD)"}.`
       }
     }
 
@@ -78,11 +133,11 @@ export default function BookBookingForm({ enableServicePopup = true, onComplete 
   const validateForm = () => {
     const errors = {}
 
-    if (!data.pol) errors.pol = `Please enter a valid ${polLabel || "POL"}.`
-    if (!data.pod) errors.pod = `Please enter a valid ${podLabel || "POD"}.`
+    if (!data.pol) errors.pol = `Please enter a valid ${locationLabels[mode] ? locationLabels[mode][0] : "POL"}.`
+    if (!data.pod) errors.pod = `Please enter a valid ${locationLabels[mode] ? locationLabels[mode][1] : "POD"}.`
 
-    if (data.plorChecked && !data.plor) errors.plor = `Please enter a valid ${plorLabel}.`
-    if (data.plodChecked && !data.plod) errors.plod = `Please enter a valid ${plodLabel}.`
+    if (data.plorChecked && !data.plor) errors.plor = `Please enter a valid ${mode ? `${locationLabels[mode] ? locationLabels[mode][0] : "POL"} — Place/Return of Loading (PLOR)` : "Place of Loading (PLOR)"}.`
+    if (data.plodChecked && !data.plod) errors.plod = `Please enter a valid ${mode ? `${locationLabels[mode] ? locationLabels[mode][1] : "POD"} — Place/Return of Discharge (PLOD)` : "Place of Discharge (PLOD)"}.`
     if (data.pickupChecked && !data.pickupLocation) errors.pickupLocation = "Please enter a valid Pickup location."
     if (data.returnChecked && !data.returnLocation) errors.returnLocation = "Please enter a valid Return location."
 
@@ -240,160 +295,168 @@ export default function BookBookingForm({ enableServicePopup = true, onComplete 
         </div>
 
         {/* Main Content Area */}
-        <div className="relative min-h-[500px]">
-          <AnimatePresence initial={false} custom={direction} mode="wait">
-            <motion.div
-              key={activeStep}
-              custom={direction}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { type: "spring", stiffness: 300, damping: 30 },
-                opacity: { duration: 0.2 }
-              }}
-              className="rounded-xl border bg-card p-8 shadow-lg"
-            >
-              {/* Step Header */}
-              <div className="mb-6 pb-4 border-b">
-                <div className="flex items-center gap-3 mb-2">
-                  {(() => {
-                    const Icon = steps[activeStep - 1].icon
-                    return <Icon className="h-6 w-6" />
-                  })()}
-                  <h3 className="text-xl font-semibold">{steps[activeStep - 1].title}</h3>
+        <div className="relative min-h-[500px] grid gap-6 lg:grid-cols-[3fr_1fr]">
+          <div>
+            <AnimatePresence initial={false} custom={direction} mode="wait">
+              <motion.div
+                key={activeStep}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: "spring", stiffness: 300, damping: 30 },
+                  opacity: { duration: 0.2 }
+                }}
+                className="rounded-xl border bg-card p-8 shadow-lg"
+              >
+                {/* Step Header */}
+                <div className="mb-6 pb-4 border-b">
+                  <div className="flex items-center gap-3 mb-2">
+                    {(() => {
+                      const Icon = steps[activeStep - 1].icon
+                      return <Icon className="h-6 w-6" />
+                    })()}
+                    <h3 className="text-xl font-semibold">{steps[activeStep - 1].title}</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground ml-9">{steps[activeStep - 1].subtitle}</p>
                 </div>
-                <p className="text-sm text-muted-foreground ml-9">{steps[activeStep - 1].subtitle}</p>
-              </div>
 
-              {/* Step Content */}
-              <div className="space-y-6">
-                {/* Step 1: Route Details */}
-                {activeStep === 1 && (
-                  <div className="space-y-4">
-                    <LocationSection
-                      data={data}
-                      setField={setField}
-                      labels={[polLabel, podLabel]}
-                      plorPlodLabels={[plorLabel, plodLabel]}
-                      errors={fieldErrors}
-                      forwardedRef={locationsRef}
-                    />
-                  </div>
-                )}
-
-                {/* Step 2: Transport Mode */}
-                {activeStep === 2 && (
-                  <div className="space-y-4">
-                    <ModeSelector
-                      mode={mode}
-                      setField={setField}
-                      error={fieldErrors.mode}
-                      forwardedRef={modeRef}
-                      showPlorPlod
-                      data={data}
-                      errors={fieldErrors}
-                    />
-
-                    {mode && mode !== "air" && mode !== "ecommerce" && mode !== "combined" && (
-                      <div className="pt-4">
-                        <ShipmentTypeSection
-                          mode={mode}
-                          shipmentType={shipmentType}
-                          setField={setField}
-                          error={fieldErrors.shipmentType}
-                          forwardedRef={shipmentTypeRef}
-                        />
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* Step 3: Cargo Information */}
-                {activeStep === 3 && (
-                  <div className="space-y-4">
-                    <CargoTypeSection
-                      cargoType={cargoType}
-                      data={data}
-                      setField={setField}
-                      errors={fieldErrors}
-                      forwardedRef={cargoTypeRef}
-                    />
-                  </div>
-                )}
-
-                {/* Step 4: Services & Book */}
-                {activeStep === 4 && (
-                  <div className="space-y-4">
-                    {(data.cargoType && mode !== "combined") ? (
-                      <BookingForm />
-                    ) : (
-                      <div className="flex h-32 items-center justify-center">
-                        <p className="text-center text-sm text-muted-foreground">
-                          Complete previous steps to see available services
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-
-              {/* Error Message */}
-              <AnimatePresence>
-                {showError && error && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="mt-6 overflow-hidden"
-                  >
-                    <div className="rounded-lg bg-destructive/10 p-3 text-center text-sm font-medium text-destructive">
-                      {error}
+                {/* Step Content */}
+                <div className="space-y-6">
+                  {/* Step 1: Route Details */}
+                  {activeStep === 1 && (
+                    <div className="space-y-4">
+                      <LocationSection
+                        data={data}
+                        setField={setField}
+                        labels={[locationLabels[mode] ? locationLabels[mode][0] : "POL", locationLabels[mode] ? locationLabels[mode][1] : "POD"]}
+                        plorPlodLabels={[mode ? `${locationLabels[mode] ? locationLabels[mode][0] : "POL"} — Place/Return of Loading (PLOR)` : "Place of Loading (PLOR)", mode ? `${locationLabels[mode] ? locationLabels[mode][1] : "POD"} — Place/Return of Discharge (PLOD)` : "Place of Discharge (PLOD)"]}
+                        errors={fieldErrors}
+                        forwardedRef={locationsRef}
+                        showPlorPlod={false}
+                      />
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                  )}
 
-              {/* Navigation Buttons */}
-              <div className="mt-8 flex items-center justify-between gap-4 pt-6 border-t">
-                <Button
-                  onClick={handleBack}
-                  variant="outline"
-                  size="lg"
-                  disabled={activeStep === 1}
-                  className="gap-2"
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                  Back
-                </Button>
+                  {/* Step 2: Transport Mode */}
+                  {activeStep === 2 && (
+                    <div className="space-y-4">
+                      <ModeSelector
+                        mode={mode}
+                        setField={setField}
+                        error={fieldErrors.mode}
+                        forwardedRef={modeRef}
+                        showPlorPlod
+                        data={data}
+                        errors={fieldErrors}
+                      />
 
-                <div className="text-xs text-muted-foreground">
-                  Step {activeStep} of {steps.length}
+                      {mode && mode !== "air" && mode !== "ecommerce" && mode !== "combined" && (
+                        <div className="pt-4">
+                          <ShipmentTypeSection
+                            mode={mode}
+                            shipmentType={shipmentType}
+                            setField={setField}
+                            error={fieldErrors.shipmentType}
+                            forwardedRef={shipmentTypeRef}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Step 3: Cargo Information */}
+                  {activeStep === 3 && (
+                    <div className="space-y-4">
+                      <CargoTypeSection
+                        cargoType={cargoType}
+                        data={data}
+                        setField={setField}
+                        errors={fieldErrors}
+                        forwardedRef={cargoTypeRef}
+                      />
+                    </div>
+                  )}
+
+                  {/* Step 4: Services & Book */}
+                  {activeStep === 4 && (
+                    <div className="space-y-4">
+                      {(data.cargoType && mode !== "combined") ? (
+                        <BookingForm />
+                      ) : (
+                        <div className="flex h-32 items-center justify-center">
+                          <p className="text-center text-sm text-muted-foreground">
+                            Complete previous steps to see available services
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
 
-                {activeStep < 4 ? (
+                {/* Error Message */}
+                <AnimatePresence>
+                  {showError && error && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="mt-6 overflow-hidden"
+                    >
+                      <div className="rounded-lg bg-destructive/10 p-3 text-center text-sm font-medium text-destructive">
+                        {error}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Navigation Buttons */}
+                <div className="mt-8 flex items-center justify-between gap-4 pt-6 border-t">
                   <Button
-                    onClick={handleNext}
+                    onClick={handleBack}
+                    variant="outline"
                     size="lg"
-                    className="gap-2 min-w-[120px]"
+                    disabled={activeStep === 1}
+                    className="gap-2"
                   >
-                    Next
-                    <ArrowRight className="h-4 w-4" />
+                    <ArrowLeft className="h-4 w-4" />
+                    Back
                   </Button>
-                ) : (
-                  <Button
-                    onClick={handleSubmit}
-                    size="lg"
-                    className="gap-2 min-w-[180px] bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
-                  >
-                    Book shipment
-                    <CheckCircle className="h-4 w-4" />
-                  </Button>
-                )}
-              </div>
-            </motion.div>
-          </AnimatePresence>
+
+                  <div className="text-xs text-muted-foreground">
+                    Step {activeStep} of {steps.length}
+                  </div>
+
+                  {activeStep < 4 ? (
+                    <Button
+                      onClick={handleNext}
+                      size="lg"
+                      className="gap-2 min-w-[120px]"
+                    >
+                      Next
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={handleSubmit}
+                      size="lg"
+                      className="gap-2 min-w-[180px] bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
+                    >
+                      Book shipment
+                      <CheckCircle className="h-4 w-4" />
+                    </Button>
+                  )}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Quote helper card on the right */}
+          <div className="hidden lg:block">
+            <QuoteHelperCard onSelectQuote={handleUseQuote} />
+          </div>
         </div>
       </div>
 
