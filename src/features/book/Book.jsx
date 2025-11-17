@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import DashNav from "@/components/dashboard/DashNav"
+import BookBookingForm from "@/features/book/BookBookingForm"
 
 export default function Book() {
   const { t } = useTranslation()
@@ -11,8 +12,7 @@ export default function Book() {
       <h2 className="text-base font-semibold">
         {t("book.pageTitle")}
       </h2>
-
-     
+      <BookBookingForm />
     </div>
   )
 }
