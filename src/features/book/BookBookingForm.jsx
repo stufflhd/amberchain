@@ -47,18 +47,20 @@ export default function BookBookingForm({ enableServicePopup = true, onComplete 
   const validateStep = (step) => {
     const errors = {}
 
+    // Step 1: Route details
     if (step === 1) {
-      if (!mode) errors.mode = "Please select a mode of transport."
-    }
-
-    if (step === 2) {
       if (!data.pol) errors.pol = `Please enter a valid ${polLabel || "POL"}.`
       if (!data.pod) errors.pod = `Please enter a valid ${podLabel || "POD"}.`
       if (data.plorChecked && !data.plor) errors.plor = `Please enter a valid ${plorLabel}.`
       if (data.plodChecked && !data.plod) errors.plod = `Please enter a valid ${plodLabel}.`
       if (data.pickupChecked && !data.pickupLocation) errors.pickupLocation = "Please enter a valid Pickup location."
       if (data.returnChecked && !data.returnLocation) errors.returnLocation = "Please enter a valid Return location."
-      
+    }
+
+    // Step 2: Mode and shipment type
+    if (step === 2) {
+      if (!mode) errors.mode = "Please select a mode of transport."
+
       if (mode && mode !== "air" && mode !== "ecommerce" && mode !== "combined" && !shipmentType) {
         errors.shipmentType = "Please select a shipment type."
       }
@@ -154,8 +156,8 @@ export default function BookBookingForm({ enableServicePopup = true, onComplete 
   }
 
   const steps = [
-    { number: 1, title: "Transport Mode", icon: Truck, subtitle: "Choose your shipping method" },
-    { number: 2, title: "Route Details", icon: MapPin, subtitle: "Set pickup and delivery locations" },
+    { number: 1, title: "Route Details", icon: MapPin, subtitle: "Set pickup and delivery locations" },
+    { number: 2, title: "Transport Mode", icon: Truck, subtitle: "Choose your shipping method" },
     { number: 3, title: "Cargo Information", icon: Package, subtitle: "Specify your cargo details" },
     { number: 4, title: "Services & Book", icon: Settings, subtitle: "Additional services and confirmation" },
   ]
@@ -267,20 +269,8 @@ export default function BookBookingForm({ enableServicePopup = true, onComplete 
 
               {/* Step Content */}
               <div className="space-y-6">
-                {/* Step 1: Transport Mode */}
+                {/* Step 1: Route Details */}
                 {activeStep === 1 && (
-                  <div className="space-y-4">
-                    <ModeSelector
-                      mode={mode}
-                      setField={setField}
-                      error={fieldErrors.mode}
-                      forwardedRef={modeRef}
-                    />
-                  </div>
-                )}
-
-                {/* Step 2: Route Details */}
-                {activeStep === 2 && (
                   <div className="space-y-4">
                     <LocationSection
                       data={data}
@@ -289,6 +279,21 @@ export default function BookBookingForm({ enableServicePopup = true, onComplete 
                       plorPlodLabels={[plorLabel, plodLabel]}
                       errors={fieldErrors}
                       forwardedRef={locationsRef}
+                    />
+                  </div>
+                )}
+
+                {/* Step 2: Transport Mode */}
+                {activeStep === 2 && (
+                  <div className="space-y-4">
+                    <ModeSelector
+                      mode={mode}
+                      setField={setField}
+                      error={fieldErrors.mode}
+                      forwardedRef={modeRef}
+                      showPlorPlod
+                      data={data}
+                      errors={fieldErrors}
                     />
 
                     {mode && mode !== "air" && mode !== "ecommerce" && mode !== "combined" && (
