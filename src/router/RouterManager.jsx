@@ -21,7 +21,7 @@ const ContainersOverview = lazy(() => import("@/features/containers/ContainersOv
 const CompareOptions = lazy(() => import("@/features/compareOptions/CompareOptions"));
 const Quote = lazy(() => import("@/features/quote/Quote"));
 const EmailVerify = lazy(() => import("@/features/auth/pages/EmailVerify"));
-
+const Book = lazy(()=> import('@/features/book/Book'));
 const router = createBrowserRouter([
   {
     path: "/",
@@ -95,6 +95,7 @@ const router = createBrowserRouter([
               { path: "active-shipments", element: <ActiveShipmentsOverview /> },
               { path: "compare-options", element: <CompareOptions /> },
               { path: "quote", element: <Quote /> },
+              { path: "book", element: <Book /> },
               {
                 path: "admin",
                 element: (

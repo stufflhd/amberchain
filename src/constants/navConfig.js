@@ -95,7 +95,7 @@ export const sidebarNav = (t) => [
     items: [
       { label: t("sidebar.compareOptions"), path: "/compare-options", icon: Compass },
       { label: t("sidebar.instantQuote"), path: "/quote", icon: FileText },
-      { label: t("sidebar.book"), path: "/dashboard/plan/book", icon: Send },
+      { label: t("sidebar.book"), path: "/book", icon: Send },
       { label: t("sidebar.smartHelpers"), path: "/dashboard/plan/smart-helpers", icon: ScanSearch },
       { label: t("sidebar.readyLoad"), path: "/dashboard/plan/readyload", icon: Truck },
       { label: t("sidebar.trokeTrace"), path: "/dashboard/plan/troketrace", icon: FolderKanban },
