@@ -4,14 +4,19 @@ import { CheckCircle, ArrowRight, ArrowLeft, Package, MapPin, Truck, Settings } 
 import { Button } from "@/components/ui/button"
 import { useShipmentStore } from "@/store/shipmentStore"
 import { locationLabels } from "@/features/compareOptions/utils/modeLabels"
-import ModeSelector from "@/features/compareOptions/component/step1/ModeSelector"
+// import ModeSelector from "@/features/compareOptions/component/step1/ModeSelector"
 import LocationSection from "@/features/compareOptions/component/step1/LocationSection"
-import ShipmentTypeSection from "@/features/compareOptions/component/step1/ShipmentTypeSection"
-import CargoTypeSection from "@/features/compareOptions/component/step1/CargoTypeSection"
+// import ShipmentTypeSection from "@/features/compareOptions/component/step1/ShipmentTypeSection"
+// import CargoTypeSection from "@/features/book/bookComponent/CargoTypeSection"
+import BookModeCargoShipmentForm from "@/features/book/bookComponent/bookModeCargoShipmentForm"
 import BookingForm from "@/features/compareOptions/component/step1/bookingForm/BookingForm"
 import PopUp from "@/features/compareOptions/component/step1/PopUp"
 import QuoteHelperCard from "@/features/book/QuoteHelperCard"
-import TemperatureControlSection from '@/features/compareOptions/component/step1/bookingForm/TemperatureControlSection'
+import ServiceAddonsSection from "@/features/compareOptions/component/step1/bookingForm/ServiceAddonsSection"
+
+
+
+import BookQuotationDetails from "@/features/book/BookQuotationDetails"
 export default function BookBookingForm({ enableServicePopup = true, onComplete }) {
   const { data, setField } = useShipmentStore()
   const { mode, shipmentType, cargoType } = data
@@ -41,8 +46,7 @@ export default function BookBookingForm({ enableServicePopup = true, onComplete 
     setField("grossWeight", quote.grossWeight)
   }
 
-  // When the form first mounts, if the store already has data (e.g. from a quote
-  // selected on the Book page), jump once to the first incomplete step.
+
   useEffect(() => {
     if (initializedFromStore) return
 
@@ -119,12 +123,16 @@ export default function BookBookingForm({ enableServicePopup = true, onComplete 
       if (data.plodChecked && !data.plod) {
         errors.plod = `Please enter a valid ${mode ? `${locationLabels[mode] ? locationLabels[mode][1] : "POD"} — Place/Return of Discharge (PLOD)` : "Place of Discharge (PLOD)"}.`
       }
-    }
 
-    if (step === 3) {
+      // Validate commodity and grossWeight since they are rendered in this step
       if (!cargoType) errors.cargoType = "Please select a cargo type."
       if (!data.commodity) errors.commodity = "Please select a commodity."
       if (!data.grossWeight) errors.grossWeight = "Please enter gross weight."
+    }
+
+    // Step 3: Additional cargo information
+    if (step === 3) {
+      if (!cargoType) errors.cargoType = "Please select a cargo type."
     }
 
     return errors
@@ -343,7 +351,7 @@ export default function BookBookingForm({ enableServicePopup = true, onComplete 
                   {/* Step 2: Transport Mode */}
                   {activeStep === 2 && (
                     <div className="space-y-4">
-                      <ModeSelector
+                      {/* <ModeSelector
                         mode={mode}
                         setField={setField}
                         error={fieldErrors.mode}
@@ -351,9 +359,14 @@ export default function BookBookingForm({ enableServicePopup = true, onComplete 
                         showPlorPlod
                         data={data}
                         errors={fieldErrors}
-                      />
+                      /> */}
+                      <BookModeCargoShipmentForm  
+                            data={data}
+                            setField={setField}
+                            errors={fieldErrors}
+                            forwardedRef={shipmentTypeRef}/>
 
-                      {mode && mode !== "air" && mode !== "ecommerce" && mode !== "combined" && (
+                      {/* {mode && mode !== "air" && mode !== "ecommerce" && mode !== "combined" && (
                         <div className="pt-4">
                           <ShipmentTypeSection
                             mode={mode}
@@ -363,23 +376,14 @@ export default function BookBookingForm({ enableServicePopup = true, onComplete 
                             forwardedRef={shipmentTypeRef}
                           />
                         </div>
-                      )}
+                      )} */}
                     </div>
                   )}
 
                   {/* Step 3: Cargo Information */}
                   {activeStep === 3 && (
                     <div className="space-y-4">
-                      <CargoTypeSection
-                        cargoType={cargoType}
-                        data={data}
-                        setField={setField}
-                        errors={fieldErrors}
-                        forwardedRef={cargoTypeRef}
-                      />
-                    {data.cargoType == "Perishable" && ["sea", "rail", "road", "air"].includes(data.mode) && (
-                  <TemperatureControlSection data={data} setField={setField} />
-                )}
+                        <BookQuotationDetails />
                     </div>
                   )}
 
@@ -387,7 +391,7 @@ export default function BookBookingForm({ enableServicePopup = true, onComplete 
                   {activeStep === 4 && (
                     <div className="space-y-4">
                       {(data.cargoType && mode !== "combined") ? (
-                        <BookingForm />
+                        <ServiceAddonsSection data={data} setField={setField} errors={fieldErrors}/>
                       ) : (
                         <div className="flex h-32 items-center justify-center">
                           <p className="text-center text-sm text-muted-foreground">
