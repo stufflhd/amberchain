@@ -74,14 +74,25 @@ export default function BookModeCargoShipmentForm({ data = {}, setField, errors 
     setQuery("")
   }
 
-  // Keyboard helpers
+  // Keyboard helpers and click outside handler
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "Escape") setOpen(false)
     }
+    const onClickOutside = (e) => {
+      if (open && !e.target.closest('.mode-select-dropdown')) {
+        setOpen(false)
+      }
+    }
+    
     window.addEventListener("keydown", onKey)
-    return () => window.removeEventListener("keydown", onKey)
-  }, [])
+    window.addEventListener("mousedown", onClickOutside)
+    
+    return () => {
+      window.removeEventListener("keydown", onKey)
+      window.removeEventListener("mousedown", onClickOutside)
+    }
+  }, [open])
 
   // Render helpers for labels used in PLOR/PLOD
   const modeLabels = {
@@ -114,55 +125,123 @@ export default function BookModeCargoShipmentForm({ data = {}, setField, errors 
 
   return (
     <section ref={forwardedRef} className="space-y-6">
-      {/* --- Combined searchable select --- */}
-      <div className="max-w-3xl mx-auto">
-        <h2 className="text-2xl font-semibold text-center pt-4">Mode & Shipment</h2>
+      {/* --- Combined searchable select - Modern Design --- */}
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-6">
+          <h2 className="text-2xl font-bold text-foreground mb-2">Select Transport Mode</h2>
+          <p className="text-sm text-muted-foreground">Choose your shipping method and cargo type</p>
+        </div>
 
-        <div className="relative mt-4">
+        <div className="relative group mode-select-dropdown">
           <button
             type="button"
             aria-expanded={open}
             onClick={() => { setOpen(v => !v); setQuery(""); inputRef.current?.focus() }}
-            className="w-full text-left border-2 rounded-lg p-3 flex items-center justify-between gap-3 bg-card hover:shadow-sm"
+            className="w-full text-left bg-gradient-to-r from-card to-card/95 border-2 border-border hover:border-primary/50 rounded-xl p-4 flex items-center justify-between gap-4 transition-all duration-200 hover:shadow-lg group-hover:shadow-xl backdrop-blur-sm"
           >
-            <span className="text-sm text-foreground/80">{selectedCompositeLabel}</span>
-            <span className="text-xs opacity-70">Search…</span>
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                {(() => {
+                  if (!data?.mode) {
+                    return <ArrowRightLeft className="w-5 h-5 text-muted-foreground" />
+                  }
+                  const modeData = modes.find(m => m.key === data.mode)
+                  if (modeData && modeData.icon) {
+                    const IconComponent = modeData.icon
+                    return <IconComponent className="w-5 h-5 text-primary" />
+                  }
+                  return <Ship className="w-5 h-5 text-primary" />
+                })()}
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="text-sm font-medium text-foreground truncate">
+                  {selectedCompositeLabel}
+                </div>
+                <div className="text-xs text-muted-foreground mt-0.5">
+                  {data?.mode ? "Click to change selection" : "Search and select from options below"}
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary font-medium">
+                {open ? "Close" : "Search"}
+              </span>
+              <motion.div
+                animate={{ rotate: open ? 180 : 0 }}
+                transition={{ duration: 0.2 }}
+                className="text-muted-foreground"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </motion.div>
+            </div>
           </button>
 
-          <div className={`absolute left-0 right-0 mt-2 z-40 ${open ? "block" : "hidden"}`}>
-            <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} transition={transition} className="bg-popover border rounded-lg shadow-lg">
-              <div className="p-3">
-                <input
-                  ref={inputRef}
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search mode or shipment type — e.g. sea fcl, road ftl"
-                  className="w-full px-3 py-2 rounded-md border focus:outline-none"
-                />
+          <div className={`absolute left-0 right-0 mt-3 z-50 ${open ? "block" : "hidden"}`}>
+            <motion.div initial={{ opacity: 0, y: -10, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={transition} className="bg-popover/95 backdrop-blur-lg border border-border/50 rounded-xl shadow-2xl overflow-hidden">
+              <div className="p-4 bg-gradient-to-r from-muted/30 to-muted/20 border-b border-border/30">
+                <div className="relative">
+                  <input
+                    ref={inputRef}
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search mode or shipment type — e.g. sea fcl, road ftl"
+                    className="w-full pl-10 pr-4 py-3 bg-background border border-border/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
+                  />
+                  <div className="absolute left-3 top-3.5 text-muted-foreground">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </div>
+                </div>
               </div>
 
-              <div className="max-h-56 overflow-auto">
+              <div className="max-h-64 overflow-auto">
                 {filtered.length === 0 && (
-                  <div className="p-3 text-sm text-muted-foreground">No matches</div>
+                  <div className="p-6 text-center">
+                    <div className="w-12 h-12 rounded-full bg-muted/50 flex items-center justify-center mx-auto mb-3">
+                      <svg className="w-6 h-6 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div className="text-sm text-muted-foreground font-medium">No matches found</div>
+                    <div className="text-xs text-muted-foreground mt-1">Try different search terms</div>
+                  </div>
                 )}
 
-                {filtered.map((o) => {
-                  const Icon = o.icon
-                  const active = data?.mode === o.mode && (data?.shipmentType || "") === (o.shipmentType || "")
-                  return (
-                    <button
-                      key={`${o.mode}-${o.shipmentType}`}
-                      onClick={() => selectComposite(o)}
-                      className={`w-full text-left px-4 py-3 flex items-center gap-3 hover:bg-accent/40 ${active ? "bg-primary/10" : ""}`}
-                    >
-                      <Icon className="w-5 h-5 flex-shrink-0" />
-                      <div className="flex-1">
-                        <div className="font-medium text-sm">{o.label}</div>
-                        <div className="text-xs opacity-80">{o.shipmentType ? `${o.shipmentType} — ${o.mode.toUpperCase()}` : `${o.mode.toUpperCase()}`}</div>
-                      </div>
-                    </button>
-                  )
-                })}
+                <div className="p-2">
+                  {filtered.map((o) => {
+                    const Icon = o.icon
+                    const active = data?.mode === o.mode && (data?.shipmentType || "") === (o.shipmentType || "")
+                    return (
+                      <button
+                        key={`${o.mode}-${o.shipmentType}`}
+                        onClick={() => selectComposite(o)}
+                        className={`w-full text-left p-3 rounded-lg flex items-center gap-3 transition-all duration-200 ${active ? "bg-primary/10 border border-primary/30 shadow-md" : "hover:bg-accent/50 hover:shadow-sm"}`}
+                      >
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${active ? "bg-primary/20" : "bg-muted/50"}`}>
+                          <Icon className={`w-5 h-5 ${active ? "text-primary" : "text-muted-foreground"}`} />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className={`font-medium text-sm truncate ${active ? "text-primary" : "text-foreground"}`}>
+                            {o.label}
+                          </div>
+                          <div className="text-xs text-muted-foreground mt-0.5">
+                            {o.shipmentType ? `${o.shipmentType} — ${o.mode.toUpperCase()}` : `${o.mode.toUpperCase()}`}
+                          </div>
+                        </div>
+                        {active && (
+                          <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+                            <svg className="w-3 h-3 text-primary-foreground" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                        )}
+                      </button>
+                    )
+                  })}
+                </div>
               </div>
             </motion.div>
           </div>
@@ -170,34 +249,44 @@ export default function BookModeCargoShipmentForm({ data = {}, setField, errors 
 
         {/* show error if present for mode/shipmentType */}
         {(errors.mode || errors.shipmentType) && (
-          <motion.p initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} className="text-destructive text-sm text-center mt-2" role="alert">
-            {errors.mode || errors.shipmentType}
-          </motion.p>
+          <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} className="mt-3">
+            <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-3 text-center">
+              <p className="text-destructive text-sm font-medium" role="alert">
+                {errors.mode || errors.shipmentType}
+              </p>
+            </div>
+          </motion.div>
         )}
       </div>
 
-      {/* --- Cargo type pills (single-select) --- */}
-      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={transition} className="max-w-3xl mx-auto">
-        <h3 className="text-lg font-medium text-center">Cargo Type</h3>
-        <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3 justify-center">
-          {cargoTypes.map((c) => {
-            const Icon = c.icon
-            const active = data?.cargoType === c.value
-            return (
-              <button
-                key={c.value}
-                type="button"
-                onClick={() => onCargoSelect(c.value)}
-                className={`flex items-center gap-3 p-3 rounded-lg border transition-colors min-h-[64px] ${active ? "bg-primary text-primary-foreground border-primary shadow-md" : "bg-card hover:bg-accent"}`}
-              >
-                <Icon className="w-6 h-6" />
-                <div className="text-sm font-medium">{c.label}</div>
-              </button>
-            )
-          })}
+      {/* --- Cargo type pills (single-select) - Horizontal Layout --- */}
+      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={transition} className="max-w-5xl mx-auto">
+        <div className="flex flex-col sm:flex items-start sm:items-center gap-4 sm:gap-6">
+          <h3 className="text-lg font-medium ">Cargo Type</h3>
+          <div className="flex flex-wrap gap-2 flex-1">
+            {cargoTypes.map((c) => {
+              const Icon = c.icon
+              const active = data?.cargoType === c.value
+              return (
+                <button
+                  key={c.value}
+                  type="button"
+                  onClick={() => onCargoSelect(c.value)}
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-full border transition-all duration-200 ${active ? "bg-primary text-primary-foreground border-primary shadow-lg scale-105" : "bg-card hover:bg-accent/80 border-border hover:border-primary/50 hover:shadow-md"}`}
+                >
+                  <Icon className={`w-4 h-4 ${active ? "text-primary-foreground" : "text-muted-foreground"}`} />
+                  <span className="text-sm font-medium">{c.label}</span>
+                </button>
+              )
+            })}
+          </div>
         </div>
 
-        {errors.cargoType && <p className="text-destructive text-sm mt-2 text-center">{errors.cargoType}</p>}
+        {errors.cargoType && (
+          <motion.p initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} className="text-destructive text-sm mt-3 text-center" role="alert">
+            {errors.cargoType}
+          </motion.p>
+        )}
       </motion.div>
 
       {/* --- PLOR & PLOD (hide for combined) --- */}
