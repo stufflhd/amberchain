@@ -14,7 +14,7 @@ export default function Book() {
   }
 
   const handleCreateNew = () => {
-    // reset()
+    reset()
     setShowNewBooking(true)
   }
 
