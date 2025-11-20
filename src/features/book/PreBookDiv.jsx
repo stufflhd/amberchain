@@ -2,7 +2,7 @@ import React from 'react';
 import QuoteHelperCard from './QuoteHelperCard';
 import { ArrowRight, Zap, Shield, CheckCircle } from 'lucide-react';
 
-export default function PreBookDiv() {
+export default function PreBookDiv({ onSelectQuote, onCreateNew }) {
   return (
     <section className="py-16 lg:py-24">
       <div className="container mx-auto px-6">
@@ -70,7 +70,11 @@ export default function PreBookDiv() {
               </p>
             </div>
 
-              <QuoteHelperCard />
+              <QuoteHelperCard 
+                showCreateNew
+                onCreateNew={onCreateNew}
+                onSelectQuote={onSelectQuote}
+              />
         
         
 
