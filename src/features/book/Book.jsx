@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import DashNav from "@/components/dashboard/DashNav"
 import BookBookingForm from "@/features/book/BookBookingForm"
-import QuoteHelperCard from "@/features/book/QuoteHelperCard"
+import PreBookDiv from "@/features/book/PreBookDiv"
 import { useShipmentStore } from "@/store/shipmentStore"
 
 export default function Book() {
@@ -27,7 +27,7 @@ export default function Book() {
 
       {!showNewBooking && (
         <div className="flex justify-center mt-2">
-          <QuoteHelperCard
+          <PreBookDiv
             showCreateNew
             onCreateNew={handleCreateNew}
             onSelectQuote={handleUseQuote}
