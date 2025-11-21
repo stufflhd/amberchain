@@ -19,7 +19,7 @@ export default function PreBookDiv({ onSelectQuote, onCreateNew }) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
               
               <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                <h1 className="text-4xl lg:text-5xl font-bold mb-4">
+                {/* <h1 className="text-4xl lg:text-5xl font-bold mb-4">
                   Know Your Price in Seconds
                 </h1>
                 <p className="text-xl opacity-95 max-w-md">
@@ -29,7 +29,7 @@ export default function PreBookDiv({ onSelectQuote, onCreateNew }) {
                 <div className="mt-8 flex items-center gap-3 text-lg">
                   <span>Chose Your Booking</span>
                   <ArrowRight className="w-6 h-6" />
-                </div>
+                </div> */}
               </div>
             </div>
             
