@@ -12,9 +12,9 @@ export default function PreBookDiv({ onSelectQuote, onCreateNew }) {
           <div className="order-2 lg:order-1">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl ring-1 ring-black/5">
               <img
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=80&fit=crop"
+                src="https://i.postimg.cc/WbNndR0Q/amberchain.jpg"
                 alt="Clean data flow and pricing"
-                className="w-full h-full min-h-[400px] object-cover"
+                className="w-full h-full max-h-[500px] min-h-[400px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
               
