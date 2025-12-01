@@ -3,19 +3,29 @@ import { useTranslation } from "react-i18next"
 import DashNav from "@/components/dashboard/DashNav"
 import BookBookingForm from "@/features/book/step1/BookBookingForm"
 import PreBookDiv from "@/features/book/step1/PreBookDiv"
+import BookResults from "@/features/book/step2/BookResults"
 import { useShipmentStore } from "@/store/shipmentStore"
 
 export default function Book() {
   const { t } = useTranslation()
-  const [showNewBooking, setShowNewBooking] = useState(false)
+  const [step, setStep] = useState("pre") // "pre" | "form" | "results"
   const { reset } = useShipmentStore()
+
   const handleUseQuote = () => {
-    setShowNewBooking(true)
+    setStep("form")
   }
 
   const handleCreateNew = () => {
     reset()
-    setShowNewBooking(true)
+    setStep("form")
+  }
+
+  const handleFormComplete = () => {
+    setStep("results")
+  }
+
+  const handleBackToBooking = () => {
+    setStep("form")
   }
 
   return (
@@ -25,7 +35,7 @@ export default function Book() {
         {t("book.pageTitle")}
       </h2>
 
-      {!showNewBooking && (
+      {step === "pre" && (
         <div className="flex justify-center mt-2">
           <PreBookDiv
             showCreateNew
@@ -35,7 +45,9 @@ export default function Book() {
         </div>
       )}
 
-      {showNewBooking && <BookBookingForm />}
+      {step === "form" && <BookBookingForm onComplete={handleFormComplete} />}
+
+      {step === "results" && <BookResults onBackToBooking={handleBackToBooking} />}
     </div>
   )
 }

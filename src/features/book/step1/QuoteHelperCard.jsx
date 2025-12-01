@@ -6,6 +6,7 @@ export default function QuoteHelperCard({ onSelectQuote, showCreateNew = false, 
   const { setField } = useShipmentStore()
   const [searchTerm, setSearchTerm] = useState("")
   const [showSuggestions, setShowSuggestions] = useState(false)
+  const [showAllLatest, setShowAllLatest] = useState(false)
 
   const filteredQuotes = dummyQuotes.filter((q) => {
     if (!searchTerm) return true
@@ -19,6 +20,8 @@ export default function QuoteHelperCard({ onSelectQuote, showCreateNew = false, 
   })
 
   const latestQuotes = [...dummyQuotes].sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1))
+  const visibleLatestQuotes = showAllLatest ? latestQuotes : latestQuotes.slice(0, 4)
+  const hasMoreLatest = latestQuotes.length > 4
 
   const applyQuoteToStore = (quote) => {
     setField("mode", quote.mode || "")
@@ -126,7 +129,7 @@ export default function QuoteHelperCard({ onSelectQuote, showCreateNew = false, 
         </p>
 
         <div className="space-y-2">
-          {latestQuotes.map((quote) => (
+          {visibleLatestQuotes.map((quote) => (
             <button
               key={quote.id}
               type="button"
@@ -151,6 +154,16 @@ export default function QuoteHelperCard({ onSelectQuote, showCreateNew = false, 
               </span>
             </button>
           ))}
+          {hasMoreLatest && !showAllLatest && (
+            <button
+              type="button"
+              onClick={() => setShowAllLatest(true)}
+              className="mx-auto flex h-7 w-10 items-center justify-center rounded-full border bg-background text-lg leading-none text-muted-foreground hover:bg-accent/60"
+              aria-label="Load more latest quotes"
+            >
+              …
+            </button>
+          )}
         </div>
       </div>
 
