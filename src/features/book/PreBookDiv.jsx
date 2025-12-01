@@ -45,10 +45,10 @@ export default function PreBookDiv({ onSelectQuote, onCreateNew }) {
             <div className="hidden lg:grid grid-cols-3 gap-6 mt-10">
               {[
                 { icon: Zap, text: 'Instant quote', color: 'emerald' },
-                { icon: Shield, text: 'Best price guaranteed', color: 'indigo' },
+                { icon: Shield, text: 'Price guaranteed', color: 'indigo' },
                 { icon: CheckCircle, text: 'No commitment', color: 'blue' },
               ].map(({ icon: Icon, text, color }) => (
-                <div key={text} className="flex items-center gap-4">
+                <div key={text} className="flex items-center text-nowrap ">
                   <div className={`w-12 h-12 bg-${color}-100 rounded-full flex items-center justify-center flex-shrink-0`}>
                     <Icon className={`w-6 h-6 text-${color}-600`} />
                   </div>

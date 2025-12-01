@@ -8,7 +8,7 @@ import LocationSection from "@/features/compareOptions/component/step1/LocationS
 import BookModeCargoShipmentForm from "@/features/book/bookComponent/BookModeCargoShipmentForm"
 import QuoteHelperCard from "@/features/book/QuoteHelperCard"
 import ServiceAddonsSection from "@/features/compareOptions/component/step1/bookingForm/ServiceAddonsSection"
-
+import PopUp from "../compareOptions/component/step1/PopUp"
 
 
 import BookQuotationDetails from "@/features/book/BookQuotationDetails"
