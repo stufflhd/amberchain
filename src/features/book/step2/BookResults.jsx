@@ -44,55 +44,77 @@ export default function BookResults({ onBackToBooking }) {
     }
 
     const matchesFilters = (quote) => {
-      // Only expose mode/cargo filters in UI for combined mode,
-      // but keep them here in case they are set programmatically.
-      if (isCombinedMode) {
-        if (filters.mode !== "all" && quote.mode !== filters.mode) return false
-        if (filters.cargoType !== "all" && quote.cargoType !== filters.cargoType) return false
+      // Only apply mode filter if explicitly set and not in combined mode
+      if (!isCombinedMode && filters.mode && filters.mode !== "all" && quote.mode !== filters.mode) {
+        return false;
       }
+      
+      // Only apply cargo type filter if explicitly set
+      if (filters.cargoType && filters.cargoType !== "all" && quote.cargoType !== filters.cargoType) {
+        return false;
+      }
+      
+      // If no filters are set (except mode/cargoType which are handled above), show all results
+      const hasActiveFilters = [
+        filters.pol,
+        filters.pod,
+        filters.maxTransit != null,
+        filters.etdFrom,
+        filters.etdTo,
+        filters.etaFrom,
+        filters.etaTo,
+        filters.search
+      ].some(Boolean);
+      
+      if (!hasActiveFilters) return true;
 
       // Free-text POL / POD contains filter
       if (filters.pol && quote.pol && !quote.pol.toLowerCase().includes(filters.pol.toLowerCase())) {
-        return false
+        return false;
       }
       if (filters.pod && quote.pod && !quote.pod.toLowerCase().includes(filters.pod.toLowerCase())) {
-        return false
+        return false;
       }
 
-      // Use real date diff for transit days (fallback to stored value)
-      let transitDays = null
-      const etdDate = parseDate(quote.etd)
-      const etaDate = parseDate(quote.eta)
-      if (etdDate && etaDate) {
-        const diffMs = etaDate.getTime() - etdDate.getTime()
-        transitDays = Math.round(diffMs / (1000 * 60 * 60 * 24))
-      } else if (typeof quote.transitTimeDays === "number") {
-        transitDays = quote.transitTimeDays
+      // Parse dates once for all date-based filters
+      const etdDate = parseDate(quote.etd);
+      const etaDate = parseDate(quote.eta);
+      
+      // Calculate transit days for filtering
+      if (filters.maxTransit != null) {
+        let transitDays = null;
+        
+        if (etdDate && etaDate) {
+          const diffMs = etaDate.getTime() - etdDate.getTime();
+          transitDays = Math.max(1, Math.round(diffMs / (1000 * 60 * 60 * 24)));
+        } else if (typeof quote.transitTimeDays === "number") {
+          transitDays = quote.transitTimeDays;
+        }
+
+        // Only filter if we have a valid transit time and the filter is set
+        if (transitDays != null && transitDays > filters.maxTransit) {
+          return false;
+        }
       }
 
-      if (filters.maxTransit != null && transitDays != null) {
-        if (transitDays > filters.maxTransit) return false
-      }
-
-      // ETD / ETA range filters
-      // (reuse parsed dates above)
-
+      // ETD date range filter
       if (filters.etdFrom) {
-        const from = parseDate(filters.etdFrom)
-        if (from && etdDate && etdDate < from) return false
+        const from = parseDate(filters.etdFrom);
+        if (from && etdDate && etdDate < from) return false;
       }
       if (filters.etdTo) {
-        const to = parseDate(filters.etdTo)
-        if (to && etdDate && etdDate > to) return false
+        const to = parseDate(filters.etdTo);
+        if (to && etdDate && etdDate > to) return false;
       }
 
+      // ETA date range filter
       if (filters.etaFrom) {
-        const from = parseDate(filters.etaFrom)
-        if (from && etaDate && etaDate < from) return false
+        const from = parseDate(filters.etaFrom);
+        if (from && etaDate && etaDate < from) return false;
       }
       if (filters.etaTo) {
-        const to = parseDate(filters.etaTo)
-        if (to && etaDate && etaDate > to) return false
+        const to = parseDate(filters.etaTo);
+        if (to && etaDate && etaDate > to) return false;
       }
 
       if (filters.search) {
@@ -170,8 +192,9 @@ const scoreQuote = (quote) => {
   return score;
 };
 
-// Always include ALL quotes, sorted by score
+// Filter and sort quotes based on filters and score
 let filtered = dummyQuotes
+  .filter(quote => matchesStore(quote) && matchesFilters(quote))
   .map((q) => ({ ...q, _score: scoreQuote(q) }))
   .sort((a, b) => b._score - a._score); // highest score first
 
@@ -181,7 +204,7 @@ let filtered = dummyQuotes
       availableModes: modes,
       availableCargoTypes: cargoTypes,
     }
-  }, [data.mode, data.shipmentType, data.cargoType, filters, isCombinedMode])
+  }, [data.mode, data.cargoType, filters, isCombinedMode])
 
   return (
     <div className="space-y-4">

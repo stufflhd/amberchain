@@ -1,5 +1,5 @@
 import React from "react"
-import { CalendarIcon } from "lucide-react"
+import { CalendarIcon, SearchIcon } from "lucide-react"
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
@@ -28,6 +28,18 @@ export default function Filter({ filters, onChange, modes, cargoTypes, showModeC
     <div className="space-y-3">
       {/* --- ORIGINAL CONTENT KEPT --- */}
       {/* I ONLY replaced the ETD / ETA date pickers */}
+
+      {/* General Search */}
+      <div className="relative">
+        <SearchIcon className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <input
+          type="text"
+          value={filters.search || ''}
+          onChange={(e) => onChange({ search: e.target.value })}
+          placeholder="Search quotes..."
+          className="h-9 w-full rounded-md border bg-background pl-8 pr-3 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
+        />
+      </div>
 
       <div className="grid gap-3 md:grid-cols-4">
 
@@ -132,7 +144,7 @@ export default function Filter({ filters, onChange, modes, cargoTypes, showModeC
         
         {/* POL */}
         <div>
-          <label className="mb-1 block text-xs font-medium text-muted-foreground">POL (text)</label>
+          <label className="mb-1 block text-xs font-medium text-muted-foreground">POL</label>
           <input
             type="text"
             value={filters.pol}
@@ -144,7 +156,7 @@ export default function Filter({ filters, onChange, modes, cargoTypes, showModeC
 
         {/* POD */}
         <div>
-          <label className="mb-1 block text-xs font-medium text-muted-foreground">POD (text)</label>
+          <label className="mb-1 block text-xs font-medium text-muted-foreground">POD</label>
           <input
             type="text"
             value={filters.pod}
@@ -154,7 +166,38 @@ export default function Filter({ filters, onChange, modes, cargoTypes, showModeC
           />
         </div>
 
-        
+        {/* Transit Time Filter */}
+        <div>
+          <label className="mb-1 block text-xs font-medium text-muted-foreground">
+            Max Transit Days
+          </label>
+          <div className="flex items-center gap-2">
+            <input
+              type="number"
+              min="1"
+              max="365"
+              value={filters.maxTransit || ''}
+              onChange={(e) => 
+                onChange({ 
+                  maxTransit: e.target.value ? parseInt(e.target.value, 10) : undefined 
+                })
+              }
+              placeholder="Any"
+              className="h-9 w-full rounded-md border bg-background px-2 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
+            />
+            {filters.maxTransit && (
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="h-7 px-2 text-[11px] text-muted-foreground"
+                onClick={() => onChange({ maxTransit: undefined })}
+              >
+                Clear
+              </Button>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   )

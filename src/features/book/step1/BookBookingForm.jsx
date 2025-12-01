@@ -390,7 +390,7 @@ export default function BookBookingForm({ enableServicePopup = true, onComplete 
                       ) : (
                         <div className="flex h-32 items-center justify-center">
                           <p className="text-center text-sm text-muted-foreground">
-                            Complete previous steps to see available services
+                            No Addons avaible for this mode and this selected details , you can click book shipment below
                           </p>
                         </div>
                       )}
