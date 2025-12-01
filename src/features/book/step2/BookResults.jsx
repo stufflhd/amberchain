@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from "react"
 import { useShipmentStore } from "@/store/shipmentStore"
 import { dummyQuotes } from "@/features/book/utils/quotesDummyData"
+import { ArrowLeft } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import Filter from "./Filter"
 import ResultsBody from "./ResultsBody"
 
@@ -229,15 +231,18 @@ let filtered = dummyQuotes
 
       {onBackToBooking && (
         <div className="pt-2">
-          <button
-            type="button"
+          <Button
             onClick={onBackToBooking}
-            className="text-sm font-medium text-primary hover:underline"
+            variant="outline"
+            size="lg"
+            className="gap-2"
           >
-            ← Back to booking
-          </button>
+            <ArrowLeft className="h-4 w-4" />
+            Back to booking
+          </Button>
         </div>
       )}
+     
     </div>
   )
 }

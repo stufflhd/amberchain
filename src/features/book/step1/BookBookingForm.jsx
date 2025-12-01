@@ -12,7 +12,7 @@ import PopUp from "../../compareOptions/component/step1/PopUp"
 
 
 import BookQuotationDetails from "@/features/book/step1/BookQuotationDetails"
-export default function BookBookingForm({ enableServicePopup = true, onComplete }) {
+export default function BookBookingForm({ enableServicePopup = true, onComplete, onBack }) {
   const { data, setField } = useShipmentStore()
   const { mode, shipmentType, cargoType } = data
 
@@ -417,10 +417,9 @@ export default function BookBookingForm({ enableServicePopup = true, onComplete 
                 {/* Navigation Buttons */}
                 <div className="mt-8 flex items-center justify-between gap-4 pt-6 border-t">
                   <Button
-                    onClick={handleBack}
+                    onClick={activeStep === 1 ? onBack : handleBack}
                     variant="outline"
                     size="lg"
-                    disabled={activeStep === 1}
                     className="gap-2"
                   >
                     <ArrowLeft className="h-4 w-4" />

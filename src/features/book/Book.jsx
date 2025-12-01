@@ -28,6 +28,10 @@ export default function Book() {
     setStep("form")
   }
 
+  const handleBackToPre = () => {
+    setStep("pre")
+  }
+
   return (
     <div className="gap-4 flex flex-col">
       <DashNav DashTitle={t("pageTitles.book")} />
@@ -45,7 +49,12 @@ export default function Book() {
         </div>
       )}
 
-      {step === "form" && <BookBookingForm onComplete={handleFormComplete} />}
+      {step === "form" && (
+        <BookBookingForm 
+          onComplete={handleFormComplete} 
+          onBack={handleBackToPre}
+        />
+      )}
 
       {step === "results" && <BookResults onBackToBooking={handleBackToBooking} />}
     </div>
