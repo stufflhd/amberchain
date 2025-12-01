@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useShipmentStore } from "@/store/shipmentStore"
-import { dummyQuotes } from "./utils/quotesDummyData"
+import { dummyQuotes } from "../utils/quotesDummyData"
 
 export default function QuoteHelperCard({ onSelectQuote, showCreateNew = false, onCreateNew }) {
   const { setField } = useShipmentStore()

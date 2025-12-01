@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import DashNav from "@/components/dashboard/DashNav"
-import BookBookingForm from "@/features/book/BookBookingForm"
-import PreBookDiv from "@/features/book/PreBookDiv"
+import BookBookingForm from "@/features/book/step1/BookBookingForm"
+import PreBookDiv from "@/features/book/step1/PreBookDiv"
 import { useShipmentStore } from "@/store/shipmentStore"
 
 export default function Book() {

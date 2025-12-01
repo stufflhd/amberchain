@@ -6,12 +6,12 @@ import { useShipmentStore } from "@/store/shipmentStore"
 import { locationLabels } from "@/features/compareOptions/utils/modeLabels"
 import LocationSection from "@/features/compareOptions/component/step1/LocationSection"
 import BookModeCargoShipmentForm from "@/features/book/bookComponent/BookModeCargoShipmentForm"
-import QuoteHelperCard from "@/features/book/QuoteHelperCard"
+import QuoteHelperCard from "@/features/book/step1/QuoteHelperCard"
 import ServiceAddonsSection from "@/features/compareOptions/component/step1/bookingForm/ServiceAddonsSection"
-import PopUp from "../compareOptions/component/step1/PopUp"
+import PopUp from "../../compareOptions/component/step1/PopUp"
 
 
-import BookQuotationDetails from "@/features/book/BookQuotationDetails"
+import BookQuotationDetails from "@/features/book/step1/BookQuotationDetails"
 export default function BookBookingForm({ enableServicePopup = true, onComplete }) {
   const { data, setField } = useShipmentStore()
   const { mode, shipmentType, cargoType } = data
