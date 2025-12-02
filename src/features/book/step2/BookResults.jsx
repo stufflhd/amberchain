@@ -3,7 +3,7 @@ import { useShipmentStore } from "@/store/shipmentStore"
 import { dummyQuotes } from "@/features/book/utils/quotesDummyData"
 import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import Filter from "./Filter"
+import FilterPopup from "./FilterPopup"
 import ResultsBody from "./ResultsBody"
 
 export default function BookResults({ onBackToBooking }) {
@@ -218,13 +218,21 @@ let filtered = dummyQuotes
           </p>
         </div>
 
-        <Filter
+        {/* <Filter
           filters={filters}
           onChange={handleFiltersChange}
           modes={availableModes}
           cargoTypes={availableCargoTypes}
           showModeCargoFilters={isCombinedMode}
+        /> */}
+        <FilterPopup
+          filters={filters}
+          onChange={setFilters}
+          modes={availableModes}
+          cargoTypes={availableCargoTypes}
+          showModeCargoFilters={isCombinedMode}
         />
+
       </div>
 
       <ResultsBody quotes={filteredQuotes} />

@@ -2,75 +2,51 @@ import { useTranslation } from "react-i18next";
 import { DataTable } from "@/components/tables/DataTable";
 import { getColumns } from "./columns";
 import BookingDetails from "./BookingDetails.jsx";
-import { useMemo, useState, useCallback, useEffect } from "react";
+import { useMemo, useState, useCallback, useEffect, useRef } from "react";
 import { useBookingsQuery } from "@/queries/useBookingsQuery";
 import DashNav from "@/components/dashboard/DashNav.jsx";
 import DashboardSearch from "@/components/dashboard/DashboardSearch.jsx";
 import { buildStatusFilterOptions, buildTabsFilterConfig } from "./utils/filters";
 import SuccessBanner from "@/components/ui/SuccessBanner";
+import { useSubmittedBookingBanner } from "@/hooks/useSubmittedBookingBanner";
+import { useLocation } from "react-router-dom";
 
 export default function BookingsOverview({ data: propData }) {
   const { t } = useTranslation();
   const [columnFilters, setColumnFilters] = useState([]);
-  const [showSuccessBanner, setShowSuccessBanner] = useState(false);
-  const [countdown, setCountdown] = useState(30);
+  const location = useLocation();
+  const { show: showSuccessBanner, dismiss } = useSubmittedBookingBanner();
+  const [expandedRow, setExpandedRow] = useState({});
+  const [shouldScroll, setShouldScroll] = useState(false);
+  const expandedRowRef = useRef(null);
 
-  // ✅ Success banner logic (same as QuotationsOverview)
+  // Handle expandRowId from navigation state
   useEffect(() => {
-    const raw = localStorage.getItem("submittedBooking");
-    if (!raw) return;
-
-    let parsed = null;
-    try {
-      parsed = JSON.parse(raw);
-    } catch (e) {
-      localStorage.removeItem("submittedBooking");
-      return;
+    if (location.state?.expandRowId !== undefined) {
+        if (tableData?.length) {
+    const firstId = tableData[0].id;
+    setExpandedRow({ [firstId]: true });
+    setShouldScroll(true);
+  }
     }
-
-    const expiresAt = parsed?.expiresAt ? Number(parsed.expiresAt) : Date.now() + 30 * 1000;
-    const remainingMs = expiresAt - Date.now();
-    if (remainingMs <= 0) {
-      localStorage.removeItem("submittedBooking");
-      return;
+  }, [location.state]);
+  
+  // Handle scrolling to expanded row
+  useEffect(() => {
+    if (shouldScroll && expandedRowRef.current) {
+      const timer = setTimeout(() => {
+        expandedRowRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+        setShouldScroll(false);
+      }, 100);
+      return () => clearTimeout(timer);
     }
+  }, [shouldScroll, expandedRow]);
 
-    setShowSuccessBanner(true);
-    setCountdown(Math.ceil(remainingMs / 1000));
 
-    const timerId = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          clearInterval(timerId);
-          setShowSuccessBanner(false);
-          try {
-            localStorage.removeItem("submittedBooking");
-          } catch (e) {
-            void e;
-          }
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
 
-    return () => clearInterval(timerId);
-  }, []);
-
-  const formatTime = (s) => {
-    const mm = String(Math.floor(s / 60)).padStart(2, "0");
-    const ss = String(s % 60).padStart(2, "0");
-    return `${mm}:${ss}`;
-  };
-
-  const handleDismissBanner = () => {
-    setShowSuccessBanner(false);
-    try {
-      localStorage.removeItem("submittedBooking");
-    } catch (e) {
-      void e;
-    }
-  };
 
   const { data: fetchedData, isLoading: isFetching } = useBookingsQuery({
     enabled: !propData,
@@ -107,8 +83,18 @@ export default function BookingsOverview({ data: propData }) {
   );
 
   const renderExpandedRow = useCallback(
-    (bookingObj) => <BookingDetails booking={bookingObj} />,
-    []
+    (bookingObj) => {
+      const isExpanded = expandedRow[bookingObj.id];
+      return (
+        <div 
+          ref={isExpanded ? expandedRowRef : null}
+          className="expanded-row-content"
+        >
+          <BookingDetails booking={bookingObj} />
+        </div>
+      );
+    },
+    [expandedRow]
   );
 
   return (
@@ -116,7 +102,7 @@ export default function BookingsOverview({ data: propData }) {
       {showSuccessBanner && (
         <SuccessBanner
           title="Your booking has been successfully submitted!"
-          onClose={handleDismissBanner}
+          onClose={dismiss}
           className="animate-slideDown"
         >
           <p>
@@ -145,10 +131,12 @@ export default function BookingsOverview({ data: propData }) {
           columns={columns}
           data={tableData || []}
           isLoading={isLoading}
-          expandable={true}
-          renderExpandedRow={renderExpandedRow}
           columnFilters={columnFilters}
           setColumnFilters={handleSetColumnFilters}
+          expanded={expandedRow}
+          onExpandedChange={setExpandedRow}
+          renderExpandedRow={renderExpandedRow}
+          expandable={true}
           tabsFilter={tabsFilterConfig}
           dropdownFilters={dropdownFilters}
           initialColumnVisibility={{ mode: false }}

@@ -1,5 +1,6 @@
 import React from "react"
 import { Button } from "@/components/ui/button"
+import { useNavigate } from "react-router-dom"   // ✅ FIXED
 
 const parseDate = (value) => {
   if (!value) return null
@@ -19,7 +20,14 @@ const getTransitDays = (quote) => {
 }
 
 export default function Result({ quote }) {
+  const navigate = useNavigate()        // ✅ MUST be inside the component
+
+const handleBookNow = (bookingId) => {
+  navigate("/bookings", { state: { expandRowId: '1' } });
+}
+
   const transitDays = getTransitDays(quote)
+
   return (
     <div className="rounded-lg border bg-card p-3 space-y-1.5 w-full">
       {/* Top row: ID, customer, commodity */}
@@ -33,7 +41,7 @@ export default function Result({ quote }) {
           <span className="h-1 w-1 rounded-full bg-muted-foreground/40" />
           <span className="truncate max-w-[120px] text-sm">{quote.commodity}</span>
         </div>
-        
+
         {/* Status badges */}
         <div className="flex items-center gap-2">
           <span className="rounded-full bg-primary/10 px-3 py-1 font-medium text-primary text-xs leading-none">
@@ -79,16 +87,16 @@ export default function Result({ quote }) {
         </div>
       </div>
 
-      {/* Cut-off info - More compact version */}
+      {/* Cut-off info */}
       {quote.cutOff && (
         <div className="flex items-center gap-2 text-xs text-muted-foreground/80 border-t border-muted-foreground/10 pt-1.5">
           <div className="flex items-center gap-1">
-            <span className="font-medium">Doc:</span>
+            <span className="font-medium">Doc Cut-Off:</span>
             <span className="truncate max-w-[90px]">{quote.cutOff.documentation}</span>
           </div>
           <div className="h-3 w-px bg-muted-foreground/20"></div>
           <div className="flex items-center gap-1">
-            <span className="font-medium">Cargo:</span>
+            <span className="font-medium">Cargo Cut-Off:</span>
             <span className="truncate max-w-[90px]">{quote.cutOff.cargo}</span>
           </div>
         </div>
@@ -100,9 +108,7 @@ export default function Result({ quote }) {
           type="button"
           size="lg"
           className="h-9 px-6 text-sm font-medium rounded-md"
-          onClick={() => {
-            console.log("Book now clicked for quote:", quote.id)
-          }}
+          onClick={() => handleBookNow(quote.id)}
         >
           Book now
         </Button>
