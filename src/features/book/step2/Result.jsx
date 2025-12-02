@@ -20,11 +20,16 @@ const getTransitDays = (quote) => {
 }
 
 export default function Result({ quote }) {
-  const navigate = useNavigate()        // ✅ MUST be inside the component
+  const navigate = useNavigate() // must be inside the component
 
-const handleBookNow = (bookingId) => {
-  navigate("/bookings", { state: { expandRowId: '1' } });
-}
+  const handleBookNow = () => {
+    // Pass the selected quote along so the bookings screen can build a booking from it
+    navigate("/bookings", {
+      state: {
+        fromQuote: quote,
+      },
+    })
+  }
 
   const transitDays = getTransitDays(quote)
 
@@ -108,7 +113,7 @@ const handleBookNow = (bookingId) => {
           type="button"
           size="lg"
           className="h-9 px-6 text-sm font-medium rounded-md"
-          onClick={() => handleBookNow(quote.id)}
+          onClick={handleBookNow}
         >
           Book now
         </Button>

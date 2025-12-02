@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { DataTable } from "@/components/tables/DataTable";
 import { getColumns } from "./columns";
 import BookingDetails from "./BookingDetails.jsx";
-import { useMemo, useState, useCallback, useEffect, useRef } from "react";
+import { useMemo, useState, useCallback, useEffect } from "react";
 import { useBookingsQuery } from "@/queries/useBookingsQuery";
 import DashNav from "@/components/dashboard/DashNav.jsx";
 import DashboardSearch from "@/components/dashboard/DashboardSearch.jsx";
@@ -16,44 +16,111 @@ export default function BookingsOverview({ data: propData }) {
   const [columnFilters, setColumnFilters] = useState([]);
   const location = useLocation();
   const { show: showSuccessBanner, dismiss } = useSubmittedBookingBanner();
-  const [expandedRow, setExpandedRow] = useState({});
-  const [shouldScroll, setShouldScroll] = useState(false);
-  const expandedRowRef = useRef(null);
-
-  // Handle expandRowId from navigation state
-  useEffect(() => {
-    if (location.state?.expandRowId !== undefined) {
-        if (tableData?.length) {
-    const firstId = tableData[0].id;
-    setExpandedRow({ [firstId]: true });
-    setShouldScroll(true);
-  }
-    }
-  }, [location.state]);
-  
-  // Handle scrolling to expanded row
-  useEffect(() => {
-    if (shouldScroll && expandedRowRef.current) {
-      const timer = setTimeout(() => {
-        expandedRowRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-        });
-        setShouldScroll(false);
-      }, 100);
-      return () => clearTimeout(timer);
-    }
-  }, [shouldScroll, expandedRow]);
-
-
-
+  const [autoExpandFirstRow, setAutoExpandFirstRow] = useState(false);
 
   const { data: fetchedData, isLoading: isFetching } = useBookingsQuery({
     enabled: !propData,
   });
 
-  const tableData = propData || fetchedData;
+  const baseData = propData || fetchedData || [];
+
+  // If we came here from the booking results, build a lightweight booking
+  // object from the selected quote and prepend it to the bookings list.
+  const quoteFromState = location.state?.fromQuote;
+
+  const quoteBooking = quoteFromState
+    ? {
+        id: `Q-${quoteFromState.id}`,
+        number: quoteFromState.id,
+        status: "Pending",
+        mode: (quoteFromState.mode || "").charAt(0).toUpperCase() + (quoteFromState.mode || "").slice(1),
+        readinessDate: quoteFromState.etd || quoteFromState.createdAt || new Date().toISOString(),
+        por: quoteFromState.pol || "",
+        origin: quoteFromState.pol || "",
+        destination: quoteFromState.pod || "",
+        finalPod: quoteFromState.pod || "",
+        etd: quoteFromState.etd || "",
+        eta: quoteFromState.eta || "",
+        carrier: quoteFromState.customer || "Amber Chains",
+        smartTool: "Used",
+        terminal: "Port",
+        task: "Pending",
+        originCoord: [0, 0],
+        destinationCoord: [0, 0],
+        timeline: [
+          { step: "New", status: "completed" },
+          { step: "Pending", status: "active" },
+          { step: "Confirmed", status: "pending" },
+        ],
+        route: [
+          `POL - ${quoteFromState.pol || ""}`,
+          `POD - ${quoteFromState.pod || ""}`,
+        ],
+        equipmentIds: [],
+        documentIds: [],
+        evgmIds: [],
+        shippingInstructionIds: [],
+        paymentIds: [],
+        participantIds: [],
+        actions: [],
+        details: {
+          info: {
+            container: quoteFromState.containerType || "",
+            serviceAgreement: "",
+            creationDate: quoteFromState.createdAt || "",
+            por: quoteFromState.pol || "",
+            pol: quoteFromState.pol || "",
+            pod: quoteFromState.pod || "",
+            numberOfContainers: 1,
+            cutoffDate: quoteFromState.cutOff?.cargo || "",
+            shippingInstructionsDeadline: "",
+            evgmDeadline: "",
+            gateInDeadline: "",
+          },
+          shipping: {
+            shippingLine: "",
+            service: "",
+            vesselName: "",
+            terminalOrigin: quoteFromState.pol || "",
+            terminalDestination: quoteFromState.pod || "",
+            etd: quoteFromState.etd || "",
+            eta: quoteFromState.eta || "",
+            commodity: quoteFromState.commodity || "",
+            grossWeight: quoteFromState.grossWeight || "",
+          },
+          general: {
+            servicesRequested: "",
+            comment: "",
+            additionalInfo: "",
+            terms: "",
+          },
+        },
+      }
+    : null;
+
+  const tableData = quoteBooking ? [quoteBooking, ...baseData] : baseData;
   const isLoading = propData ? false : isFetching;
+
+  // When navigated with state from Result.jsx, auto-expand the first row
+  useEffect(() => {
+    const fromResults = !!quoteFromState;
+    if (fromResults && tableData?.length) {
+      setAutoExpandFirstRow(true);
+    }
+  }, [quoteFromState, tableData]);
+
+  // Scroll to the expanded row container when auto expanding
+  useEffect(() => {
+    if (!autoExpandFirstRow) return;
+    const timer = setTimeout(() => {
+      const el = document.querySelector(".expanded-row-content");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }, 200);
+
+    return () => clearTimeout(timer);
+  }, [autoExpandFirstRow, tableData]);
 
   const activeMode = useMemo(() => {
     const modeFilter = columnFilters.find((filterItem) => filterItem.id === "mode");
@@ -83,18 +150,12 @@ export default function BookingsOverview({ data: propData }) {
   );
 
   const renderExpandedRow = useCallback(
-    (bookingObj) => {
-      const isExpanded = expandedRow[bookingObj.id];
-      return (
-        <div 
-          ref={isExpanded ? expandedRowRef : null}
-          className="expanded-row-content"
-        >
-          <BookingDetails booking={bookingObj} />
-        </div>
-      );
-    },
-    [expandedRow]
+    (bookingObj) => (
+      <div className="expanded-row-content">
+        <BookingDetails booking={bookingObj} />
+      </div>
+    ),
+    []
   );
 
   return (
@@ -133,13 +194,12 @@ export default function BookingsOverview({ data: propData }) {
           isLoading={isLoading}
           columnFilters={columnFilters}
           setColumnFilters={handleSetColumnFilters}
-          expanded={expandedRow}
-          onExpandedChange={setExpandedRow}
           renderExpandedRow={renderExpandedRow}
           expandable={true}
           tabsFilter={tabsFilterConfig}
           dropdownFilters={dropdownFilters}
           initialColumnVisibility={{ mode: false }}
+          initialExpandedRowIndex={autoExpandFirstRow ? 0 : undefined}
         />
       </div>
     </>

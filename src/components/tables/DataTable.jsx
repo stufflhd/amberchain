@@ -31,6 +31,7 @@ export function DataTable({
     actionTitle,
     setSelectedRows,
     externalRowSelectionResetKey,
+    initialExpandedRowIndex,
 }) {
     const [sorting, setSorting] = useState([]);
     const [rowSelection, setRowSelection] = useState({});
@@ -72,6 +73,14 @@ export function DataTable({
             setExpanded({});
         }
     }, [data, searchTerm]);
+
+    // Allow parent to request an initial expanded row (by row index)
+    useEffect(() => {
+        if (!expandable) return;
+        if (initialExpandedRowIndex === undefined || initialExpandedRowIndex === null) return;
+        if (!data.length) return;
+        setExpanded({ [String(initialExpandedRowIndex)]: true });
+    }, [initialExpandedRowIndex, expandable, data]);
 
     // Expose selected rows to parent when requested
     useEffect(() => {
