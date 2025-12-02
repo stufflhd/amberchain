@@ -16,18 +16,21 @@ const getActiveFilterCount = (filters) => {
   }).length;
 };
 
-export default function FilterPopup({ filters, onChange, modes, cargoTypes, showModeCargoFilters }) {
+export default function FilterPopup({ filters, onChange, modes, cargoTypes, showModeCargoFilters, onClearAll }) {
   const activeFilterCount = getActiveFilterCount(filters);
   
-  const clearAllFilters = () => {
-    const clearedFilters = { ...filters };
-    Object.keys(clearedFilters).forEach(key => {
-      if (['etdFrom', 'etdTo', 'etaFrom', 'etaTo', 'pol', 'pod', 'maxTransit'].includes(key)) {
-        clearedFilters[key] = '';
-      }
+  const clearAllFilters = onClearAll || (() => {
+    onChange({
+      ...filters,
+      etdFrom: "",
+      etdTo: "",
+      etaFrom: "",
+      etaTo: "",
+      pol: "",
+      pod: "",
+      maxTransit: undefined,
     });
-    onChange(clearedFilters);
-  };
+  });
 
   return (
     <div className="flex flex-col gap-2">

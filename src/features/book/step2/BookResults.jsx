@@ -26,6 +26,20 @@ export default function BookResults({ onBackToBooking }) {
     setFilters((prev) => ({ ...prev, ...partial }))
   }
 
+  const clearAllFilters = () => {
+    setFilters(prev => ({
+      ...prev,
+      pol: "",
+      pod: "",
+      maxTransit: undefined,
+      etdFrom: "",
+      etdTo: "",
+      etaFrom: "",
+      etaTo: "",
+      search: ""
+    }))
+  }
+
   const { filteredQuotes, availableModes, availableCargoTypes } = useMemo(() => {
     // Use constant option lists rather than deriving from dummy data,
     // so filters are stable even if data changes.

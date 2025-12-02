@@ -30,7 +30,7 @@ const countActiveFilters = (filters) => {
   return keys.filter((k) => filters[k] !== "" && filters[k] !== undefined).length
 }
 
-export default function Filter({ filters, onChange }) {
+export default function Filter({ filters, onChange, onClearAll }) {
   
   // Single source of truth for changing filters
   const handleFilterChange = (newValues) => {
@@ -53,15 +53,19 @@ export default function Filter({ filters, onChange }) {
   const activeFiltersCount = countActiveFilters(filters)
 
   const clearAll = () => {
-    handleFilterChange({
-      etdFrom: "",
-      etdTo: "",
-      etaFrom: "",
-      etaTo: "",
-      pol: "",
-      pod: "",
-      maxTransit: undefined,
-    })
+    if (onClearAll) {
+      onClearAll();
+    } else {
+      handleFilterChange({
+        etdFrom: "",
+        etdTo: "",
+        etaFrom: "",
+        etaTo: "",
+        pol: "",
+        pod: "",
+        maxTransit: undefined,
+      });
+    }
   }
 
   return (
@@ -91,7 +95,29 @@ export default function Filter({ filters, onChange }) {
 
       {/* SCROLLABLE FILTER ROW */}
       <div className="flex flex-nowrap gap-3 overflow-x-auto pb-2 -mx-4 px-4">
+{/* POL */}
+        <div className="flex-shrink-0 w-48">
+          <label className="mb-1 block text-xs font-medium text-muted-foreground">POL</label>
+          <input
+            type="text"
+            value={filters.pol}
+            onChange={(e) => handleFilterChange({ pol: e.target.value })}
+            placeholder="e.g. Rotterdam"
+            className="h-9 w-full rounded-md border px-2 text-sm"
+          />
+        </div>
 
+        {/* POD */}
+        <div className="flex-shrink-0 w-48">
+          <label className="mb-1 block text-xs font-medium text-muted-foreground">POD</label>
+          <input
+            type="text"
+            value={filters.pod}
+            onChange={(e) => handleFilterChange({ pod: e.target.value })}
+            placeholder="e.g. New York"
+            className="h-9 w-full rounded-md border px-2 text-sm"
+          />
+        </div>
         {/* ETD RANGE */}
         <div className="flex-shrink-0 w-48">
           <label className="mb-1 block text-xs font-medium text-muted-foreground">ETD range</label>
@@ -133,29 +159,7 @@ export default function Filter({ filters, onChange }) {
           </Popover>
         </div>
 
-        {/* POL */}
-        <div className="flex-shrink-0 w-48">
-          <label className="mb-1 block text-xs font-medium text-muted-foreground">POL</label>
-          <input
-            type="text"
-            value={filters.pol}
-            onChange={(e) => handleFilterChange({ pol: e.target.value })}
-            placeholder="e.g. Rotterdam"
-            className="h-9 w-full rounded-md border px-2 text-sm"
-          />
-        </div>
-
-        {/* POD */}
-        <div className="flex-shrink-0 w-48">
-          <label className="mb-1 block text-xs font-medium text-muted-foreground">POD</label>
-          <input
-            type="text"
-            value={filters.pod}
-            onChange={(e) => handleFilterChange({ pod: e.target.value })}
-            placeholder="e.g. New York"
-            className="h-9 w-full rounded-md border px-2 text-sm"
-          />
-        </div>
+        
 
         {/* ETA RANGE */}
         <div className="flex-shrink-0 w-48">
@@ -207,7 +211,7 @@ export default function Filter({ filters, onChange }) {
               type="number"
               min="1"
               max="365"
-              value={filters.maxTransit ?? ""}
+              value={filters.maxTransit !== undefined ? filters.maxTransit : ''}
               onChange={(e) =>
                 handleFilterChange({
                   maxTransit: e.target.value ? Number(e.target.value) : undefined,
